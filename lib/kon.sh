@@ -19,7 +19,7 @@ case $CONTEXT in
 		;;
 	b_recon)
 		BACKUPS="true"
-		VERBOSITY=$LEV_V
+		VERBOSITY=$LEV_N
 		;;
 	b_start)
 		BACKUPS="true"
