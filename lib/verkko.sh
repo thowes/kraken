@@ -10,7 +10,7 @@ if [ -f ~/$KR_DIR_HOST/nets.sh ]; then
 	case $KAYTTIS in
 		cygwin)
 			VERKKO_IP=$(ipconfig|grep IPv4)
-			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(netsh wlan show networks|grep SSID); else VERKKO_ESSID=nada; fi
+			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID); else VERKKO_ESSID=nada; fi
 			#VERKKO_MAC=$(arp -a|grep dynamic)
 			;;
 		ubuntu)
@@ -35,6 +35,7 @@ verkko() {
 				ip) ipconfig|grep IPv4;;
 				lan) netsh lan show interfaces;;
 				mac) getmac /v;;
+				ssid) netsh wlan show interfaces|grep SSID;;
 				wlan) netsh wlan show interfaces;;
 				*) ipconfig /all;;
        esac;;
