@@ -25,6 +25,10 @@ case $CONTEXT in
 		BACKUPS="true"
 		VERBOSITY=$LEV_N
 		;;
+	b_verbose)
+		BACKUPS="true"
+		VERBOSITY=$LEV_V
+		;;
 	*)
 		BACKUPS="false"
 		VERBOSITY=$LEV_P

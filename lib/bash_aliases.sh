@@ -22,7 +22,6 @@ alias pull='git pull'
 alias push='git push'
 alias r=rails
 alias remote='git remote'
-#alias restart='sudo shutdown -r now'
 alias rev='make rev'
 alias sad='svn add'
 alias st='if [ -f makefile ]; then make st; else svn st; fi'

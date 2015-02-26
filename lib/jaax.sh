@@ -3,7 +3,8 @@
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "JAAX"; fi
 
 jaax_fl() {
-	debug "JAAX/FL" "$1 $2"; tynnyri "f-$1"
+	debug "JAAX/FL" "$1 $2"
+	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "f-$1"; fi
 	case $1 in
 		clr) rm ~/$KR_DIR_FLZ/*.lnk; rm ~/$KR_DIR_FLZ/*.url;;
 		l) if [ -d ~/$KR_DIR_LNK/LOC.FL/$2 ]; then cp ~/$KR_DIR_LNK/LOC.FL/$2/*.* ~/$KR_DIR_FLZ/; else virhe JAAX FL $1 $2; fi;;
@@ -13,7 +14,8 @@ jaax_fl() {
 }
 
 jaax_ql() {
-	debug "JAAX/QL" "$1 $2"; tynnyri "$1-$2"
+	debug "JAAX/QL" "$1 $2"
+	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "$1-$2"; fi
 	case $1 in
 		clr) rm ~/$KR_DIR_QL/*.lnk;;
 		c) if [ -d ~/$KR_DIR_LNK/COMPU/$2 ]; then cp ~/$KR_DIR_LNK/COMPU/$2/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
@@ -25,7 +27,8 @@ jaax_ql() {
 }
 
 jaax_sendto() {
-	debug "JAAX/SENDTO" "$1 $2"; tynnyri "S2-$1"
+	debug "JAAX/SENDTO" "$1 $2"
+	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "S2-$1"; fi
 	case $1 in
 		clr) rm ~/$KR_DIR_SENDTO/*.lnk;;
 		def) cp ~/$KR_DIR_LNK/SENDTO/default/*.lnk ~/$KR_DIR_SENDTO/;;
@@ -34,7 +37,8 @@ jaax_sendto() {
 }
 
 jaax_startup() {
-	debug "JAAX/STU" "$1 $2"; tynnyri "SU-$1"
+	debug "JAAX/STU" "$1 $2"
+	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "SU-$1"; fi
 	case $1 in
 		clr) rm ~/$KR_DIR_STARTUP/*.lnk;;
 		def) cp ~/$KR_DIR_LNK/STARTUP/default/*.lnk ~/$KR_DIR_STARTUP/;;
@@ -43,12 +47,14 @@ jaax_startup() {
 }
 
 jaax() {
-	debug "JAAX/MAIN"; tynnyri $1-$2-$3
+	debug "JAAX/MAIN"
+	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $1-$2-$3; fi
 	case $1 in
 		air) jaax_main clr; jaax_ql air;;
-		clr) tynnyri new JAAX/CLR; jaax_fl clr; jaax_ql clr ql; jaax_startup clr; tynnyri kick;;
-		fl) tynnyri new JAAX/FL; jaax_fl l $2; jaax_fl p $3; tynnyri kick;;
-		ql) tynnyri new JAAX/QL; jaax_ql c $HOSTNAME; jaax_ql l $2; jaax_ql p $3; jaax_ql u $USER; tynnyri kick;;
-		st) tynnyri new JAAX/ST; jaax_sendto win7; jaax_sendto $HOSTNAME; jaax_startup $HOSTNAME; tynnyri kick;;
+		clr) tynnyri new JAAX/CLR; jaax_fl clr; jaax_ql clr ql; jaax_startup clr;;
+		fl) tynnyri new JAAX/FL; jaax_fl l $2; jaax_fl p $3;;
+		ql) tynnyri new JAAX/QL; jaax_ql c $HOSTNAME; jaax_ql l $2; jaax_ql p $3; jaax_ql u $USER;;
+		st) tynnyri new JAAX/ST; jaax_sendto win7; jaax_sendto $HOSTNAME; jaax_startup $HOSTNAME;;
 	esac
+	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 }
