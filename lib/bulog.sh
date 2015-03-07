@@ -4,15 +4,8 @@ if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "BULOG"; fi
 
 bulog() {
 	if [ -d $1 ]; then
-		#if [ -f $1/backup.log ]; then touch $1/backup.log; fi
-		echo DIR $1 TO $2 FROM $3
-	} else {
-		echo "$1 NOT A DIRECTORY!"
-	}
+		if [ -f $1/backup.log ]; then touch $1/backup.log; fi
+		KR_AIKA=$(date +"%F %R")
+		echo $KR_AIKA TO $2 FROM $3 >> $1/backup.log
+	fi
 }
-
-
-
-
-
-
