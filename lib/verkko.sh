@@ -22,6 +22,7 @@ if [ -f ~/$KR_DIR_HOST/nets.sh ]; then
 	esac
 	source ~/$KR_DIR_HOST/nets.sh
 fi
+
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $VERKKO; tynnyri kick; fi
 
 verkko() {

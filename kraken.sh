@@ -1,7 +1,7 @@
 #!/bin/bash
 #kraken.sh, L 17.8.2010
 kraken() {
-  echo "[[ KRAKEN "$USER"@"$HOSTNAME" via "$VERKKO" ]]"
+	echo "[[ KRAKEN "$USER"@"$HOSTNAME" via "$VERKKO" ]]"
 	compu_terminal $VERKKO
 }
 

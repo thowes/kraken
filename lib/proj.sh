@@ -32,7 +32,7 @@ projekti() {
 				up) make upd;;
 				upd) make upd;;
 				update) make upd;;
-				*) kaiku PROJ status $1; make st; kaiku PROJ todo $1; make tls;;
+				*) kaiku PROJ $1; if [ -f makefile ]; then compu_proj; fi;;
 			esac
 		else 
 			if [ "$1" != "" ] && [ "$2" != "" ]; then

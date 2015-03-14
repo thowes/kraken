@@ -2,7 +2,7 @@
 #ymp.sh, L 2.4.2013
 KAYTTIS=$(uname)
 
-if [ KR_HOSTED == "true" ]; then KAYTTIS="hosted"
+if [ $HOSTED == "true" ]; then KAYTTIS="hosted"
 else
 	case $KAYTTIS in
 		*Darwin*)
