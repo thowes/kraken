@@ -1,15 +1,13 @@
 #!/bin/bash
 #kraken.sh, L 17.8.2010
 kraken() {
-  echo "[[ KRAKEN "$USER"@"$HOSTNAME""$HOME" via "$VERKKO" ]]"
-	todos_kon $VERKKO
+  echo "[[ KRAKEN "$USER"@"$HOSTNAME" via "$VERKKO" ]]"
+	compu_terminal $VERKKO
 }
 
-if [ -d $KR_DIR_HOST ]; then
-	BACKUPS="false"
+if [ -f ~/$2 ]; then
+	. ~/$2
 	CONTEXT=$1"_"$USECONTEXT
-	VERBOSITY="1"
-	VERKKO="NADA"
 
 	# CONTEXT & ENVIRONMENT
 	if [ -f $KR_DIR_LIB/kon.sh ]; then . $KR_DIR_LIB/kon.sh; fi
@@ -45,7 +43,7 @@ if [ -d $KR_DIR_HOST ]; then
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 
 	#TOIMENPITEET
-	if [ $BACKUPS == "true" ]; then compu_toimpide $CONTEXT; fi
+	if [ $BACKUPS == "true" ]; then compu_tasks $CONTEXT; fi
 	if [ $VERBOSITY -ge $LEV_N ]; then kraken; fi
 fi
 cd
