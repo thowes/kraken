@@ -27,7 +27,7 @@ case $CONTEXT in
 		;;
 	b_terminal)
 		BACKUPS="false"
-		VERBOSITY=$LEV_S
+		VERBOSITY=$LEV_N
 		;;
 	b_verbose)
 		BACKUPS="true"
