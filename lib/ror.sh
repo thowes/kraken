@@ -16,10 +16,10 @@ ror_rails() {
 
 ror_bundle() {
 	case $1 in
+		ass) bundle exec rake asset:precompile;;
 		db) kaiku ROR rake db migrate; ror_bundle dbmig; kaiku ROR rake test prepare; ror_bundle testprep;;
 		dbmig) bundle exec rake db:migrate;;
 		indev) bundle install --without production;;
-		inst) bundle install;;
 		iprod) bundle install --without development;;
 		mig) ror_bundle db;;
 		rake) bundle exec rake $2 $3;;

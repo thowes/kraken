@@ -13,10 +13,10 @@ synk_real() {
 			kaiku) echo "[[ KIR_SYNK ERR1 ]] "$SYNK_PARAM" "$SYNK_USERNAME"@"$SYNK_HOSTNAME":"$SYNK_DDIR" "$SYNK_LDIR" --exclude-from "$SYNK_EXCLUDE ;;  
 			local) echo rsync $SYNK_PARAM $SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_CFG'/exclude/'$SYNK_EXCLUDE;;
 			SSH) ssh $SYNK_USERNAME"@"$SYNK_HOSTNAME;;
-			SYN) rsync $SYNK_PARAM $SYNK_USERNAME@$SYNK_HOSTNAME:$SYNK_DDIR $SYNK_LDIR --exclude-from /sites/exclude/$2;;
+			SYN) rsync $SYNK_PARAM $SYNK_USERNAME@$SYNK_HOSTNAME:$SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_EXCL/$2;;
 			scp) echo WinSCP;;
 			sftp) echo SFTP;;
-			upl) rsync $SYNK_PARAM $SYNK_LDIR $SYNK_USERNAME'@'$SYNK_HOSTNAME':'$SYNK_DDIR --exclude-from /sites/exclude/$SYNK_EXCLUDE;;
+			upl) rsync $SYNK_PARAM $SYNK_LDIR $SYNK_USERNAME'@'$SYNK_HOSTNAME':'$SYNK_DDIR --exclude-from ~/$KR_DIR_EXCL/$SYNK_EXCLUDE;;
 			wget) echo WGET;;
 			winscp) echo WinSCP;;
 			*) virhe SYNK real "-" "ei protokollaa!";;
