@@ -3,7 +3,7 @@
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri VAL; fi
 
 valitse() {
-	cat ~/$KR_DIR_CFG/loc/proj/$1.lst
+	cat ~/$KR_DIR_HOST/proj.lst|grep $1|awk '{ print $1"\t" $2 }'
 	KR_PROJ="def"
 	read -p "PROJECT " -r KR_PROJ
 	if [ $KR_PROJ != "" ]; then PROJECT=$KR_PROJ; else  virhe PROJ $KR_PROJ; fi

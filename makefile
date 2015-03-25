@@ -13,11 +13,8 @@ info:
 orig:
 	@git remote show origin
 
-pull:
-	git pull
-
 push:
-	git push
+	@git push
 
 repo:
 	@git remote -v
@@ -29,4 +26,4 @@ tls:
 	@todo.sh ls +krn
 
 upd:
-	git pull
+	@git pull
