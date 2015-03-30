@@ -41,3 +41,18 @@ projekti() {
 		fi
 	fi
 }
+
+# Eventually this is going to replace projekti(), but it has some quirks still.
+projekti_go() {
+	KR_DIRPO=$(cat ~/$KR_DIR_HOST/proj.csv|grep $1|awk -F, '{ print $4 }')
+	if [ $KR_DIRPO != "" ]; then 
+		if [ -d $KR_DIRPO ]; then
+			kaiku PROJ $1 $KR_DIRPO
+			cd $KR_DIRPO
+		else
+			virhe PROJ $1 $KR_DIRPO "not a directory!"
+		fi
+	else
+		virhe PROJ $1 $KR_DIRPO "just error!"
+	fi
+}
