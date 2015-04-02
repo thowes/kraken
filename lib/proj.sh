@@ -49,10 +49,15 @@ projekti_go() {
 		if [ -d $KR_DIRPO ]; then
 			kaiku PROJ $1 $KR_DIRPO
 			cd $KR_DIRPO
+			jaax clr
+			jaax st win7
+			jaax ql $VERKKO $1
+			jaax fl $VERKKO $1
 		else
 			virhe PROJ $1 $KR_DIRPO "not a directory!"
 		fi
 	else
 		virhe PROJ $1 $KR_DIRPO "just error!"
 	fi
+
 }
