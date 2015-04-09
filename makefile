@@ -5,7 +5,7 @@ info:
 	@git remote show origin
 
 orig:
-	@git remote show origin
+	@git remote -v| grep origin
 
 repo:
 	@git remote -v
