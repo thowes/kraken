@@ -1,6 +1,7 @@
 alias asenna='sudo apt-get install'
-alias buuttaa='sudo shutdown -r now'
+alias buut='sudo shutdown -r now'
 alias rt='cd /'
-alias sammuta='sudo shutdown -h now'
+alias sammu='sudo shutdown -h now'
+alias X='startx'
 alias v=verkko
 alias yh='synkronoi yh'
