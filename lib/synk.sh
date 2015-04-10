@@ -14,6 +14,7 @@ synk_real() {
 			local) echo rsync $SYNK_PARAM $SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_CFG'/exclude/'$SYNK_EXCLUDE;;
 			SSH) ssh $SYNK_USERNAME"@"$SYNK_HOSTNAME;;
 			SYN)
+				#if [ -f $1/backup.log ]; then tail -n 1 $1/backup.log; fi
 				bulog $SYNK_LDIR $HOSTNAME $SYNK_HOSTNAME
 				rsync $SYNK_PARAM $SYNK_USERNAME@$SYNK_HOSTNAME:$SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_EXCL/$2
 				;;

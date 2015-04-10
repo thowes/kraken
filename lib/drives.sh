@@ -12,5 +12,5 @@ ker_usb_drives() {
 			if [ $N == 5 ]; then N=0; tynnyri kick; tynnyri new DRV; fi
 		fi
 	done
-	tynnyri kick
+	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 }
