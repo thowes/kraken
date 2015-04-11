@@ -3,6 +3,7 @@
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri VAL; fi
 
 valitse() {
+	#prints to screen list projects valid for current location
 	cat ~/$KR_DIR_HOST/proj.csv|grep $1|awk -F, '{ print " "$1"\t" $2 }'
 	KR_PROJ="def"
 	read -p "PROJECT " -r KR_PROJ
