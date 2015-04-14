@@ -15,7 +15,7 @@ tccm() {
 		dm) tc /q /s /d $2;;
 		dis) tccm d $2;;
 		info) tcc_kr_info;;
-		key) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_PASSU;;
+		key) tynnyri $3; echo tc /l$2 /q /s /v $3 /p $KR_PASSU /k $KR_DIR_KEYS/$4;;
 		m) tccm mt $2 $3;;
 		mnt) tccm mt $2 $3;;
 		mt) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_PASSU;;
