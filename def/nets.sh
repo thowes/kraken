@@ -1,6 +1,6 @@
 #!/bin/bash
 #def/nets.sh, L 2.4.2013
-if [ $VERBOOSI == "true" ]; then tynnyri NETS; fi
+if [ $VERBOSITY -ge $LEV_V ]; then tynnyri NETS; fi
 
 case "$VERKKO_IP" in
 	*192.197.0.1*) VERKKO="HOME";;
