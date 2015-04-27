@@ -11,14 +11,12 @@ if [ -f ~/$KR_DIR_HOST/nets.sh ]; then
 		cygwin)
 			VERKKO_IP=$(ipconfig|grep IPv4)
 			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID); else VERKKO_ESSID=nada; fi
-			#VERKKO_MAC=$(arp -a|grep dynamic)
 			;;
 		ubuntu)
 			VERKKO_IP=$(ifconfig eth0|grep Bcast)
 			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(iwlist wlan0 scan|grep ESSID); else VERKKO_ESSID=nada; fi
-			#VERKKO_MAC=$(arp -a|grep dynamic)
 			;;
-		*) echo "[[ KRAKEN/VERKKO err1: $KAYTTIS ei tunnistettu/tuettu! ]]";;
+		*) virhe VERKKO "$KAYTTIS not supported or recognized!";;
 	esac
 	source ~/$KR_DIR_HOST/nets.sh
 fi
