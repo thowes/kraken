@@ -2,26 +2,6 @@
 #install.sh, L 11.6.2013, L 10.7.2013
 echo "[[ install for kraken shell script collection ]]"
 
-install_create_cfg_dir() {
-	if [ -d $1 ]; then
-		echo "[[ " $1 " is a directory ]]"
-		KR_DIR_CFG=$1
-		install_create_files
-		install_kraken_cfg
-	else
-		if [ -f $1 ]; then 
-			echo "[[ " $1 " is a file ]]"
-			exit
-		else 
-			echo "[[ Creating " $1 " directory ]]"
-			mkdir $1
-			KR_DIR_CFG=$1
-			install_create_files
-			install_kraken_cfg
-		fi	
-	fi
-}
-
 install_kraken_cfg_settings() {
 	kaiku "KRAKEN/COMPU" kirjoita $1
 	HAKEMISTO=$KR_DIR_CFG
@@ -47,21 +27,24 @@ install_kraken_cfg_settings() {
 	fi
 }
 
-if [ $1 == '' ]; then
-	virhe INSTALL "no CFG directory defined"
-	if [ -f 'kraken.sh' ]; then
-		if [ -d 'cfg' ]; then
-			virhe INSTALL "directory CFG exists already!"
-		else
-			mkdir cfg
-			cp def/*.sh cfg/
-			if [ -f def/kraken.cfg ]; then cp cfg/kraken.cfg; fi
-			if [ -f def/proj.csv ]; then cp cfg/proj.csv; fi
-		fi
+if [ -f 'kraken.sh' ]; then
+	FROM_DIR="def"
+else
+	FROM_DIR="~/proj/kraken/def"
+fi
+
+TESTATTR=$1.
+if [ $TESTATTR == "." ]; then
+	if [ -d 'cfg' ]; then
+		echo "[[ ERR INSTALL directory CFG exists already! ]]"
 	else
-		virhe INSTALL "not in kraken directory."
+		mkdir cfg
+		cp $FROM_DIR/*.sh cfg/
+		if [ -f $FROM_DIR/kraken.cfg ]; then cp $FROM_DIR/kraken.cfg cfg/kraken.cfg; fi
+		if [ -f $FROM_DIR/proj.csv ]; then cp $FROM_DIR/proj.csv cfg/proj.csv; fi
 	fi
 else
 	if [ -d $1 ]; then
-		virhe 
+		echo "[[ ERR INSTALL directory CFG exists already! ]]"
+	fi
 fi
