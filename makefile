@@ -4,6 +4,9 @@ clone:
 info:
 	@git remote show origin
 
+install:
+	. ./install.sh
+
 orig:
 	@git remote -v| grep origin
 

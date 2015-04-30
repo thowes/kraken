@@ -2,13 +2,6 @@
 #install.sh, L 11.6.2013, L 10.7.2013
 echo "[[ install for kraken shell script collection ]]"
 
-install_create_files() {
-	if [ -f ~/$KR_DIR_CFG/alias.sh ]; then echo "[[ file exists ]]"; else cp def/alias.sh ~/$KR_DIR_CFG/alias.sh; fi
-	if [ -f ~/$KR_DIR_CFG/compu.sh ]; then echo "[[ file exists ]]"; else cp def/compu.sh ~/$KR_DIR_CFG/compu.sh; fi
-	if [ -f ~/$KR_DIR_CFG/kerain.sh ]; then echo "[[ file exists ]]"; else cp def/kerain.sh ~/$KR_DIR_CFG/kerain.sh; fi
-	if [ -f ~/$KR_DIR_CFG/nets.sh ]; then echo "[[ file exists ]]"; else cp def/nets.sh ~/$KR_DIR_CFG/nets.sh; fi
-}
-
 install_create_cfg_dir() {
 	if [ -d $1 ]; then
 		echo "[[ " $1 " is a directory ]]"
@@ -53,3 +46,22 @@ install_kraken_cfg_settings() {
 		mv $TIEDOSTO $HAKEMISTO/$1/$1.sh
 	fi
 }
+
+if [ $1 == '' ]; then
+	virhe INSTALL "no CFG directory defined"
+	if [ -f 'kraken.sh' ]; then
+		if [ -d 'cfg' ]; then
+			virhe INSTALL "directory CFG exists already!"
+		else
+			mkdir cfg
+			cp def/*.sh cfg/
+			if [ -f def/kraken.cfg ]; then cp cfg/kraken.cfg; fi
+			if [ -f def/proj.csv ]; then cp cfg/proj.csv; fi
+		fi
+	else
+		virhe INSTALL "not in kraken directory."
+	fi
+else
+	if [ -d $1 ]; then
+		virhe 
+fi
