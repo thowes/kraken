@@ -48,3 +48,5 @@ else
 		echo "[[ ERR INSTALL directory CFG exists already! ]]"
 	fi
 fi
+
+#echo if [ -f $FROM_DIR/kraken.cfg ] then . $FROM_DIR/kraken.sh b $FROM_DIR/kraken.cfg fi
