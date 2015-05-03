@@ -5,7 +5,7 @@ info:
 	@git remote show origin
 
 install:
-	. ./install.sh
+	. install.sh
 
 orig:
 	@git remote -v| grep origin
