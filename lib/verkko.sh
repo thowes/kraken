@@ -7,12 +7,16 @@ if [ -f ~/$KR_DIR_HOST/nets.sh ]; then
 	VERKKO_IP="NADA"
 	VERKKO_ESSID="NADA"
 	VERKKO_MAC="NADA"
+	# Contents of KAYTTIS variable are defined in ymp.sh, to recognize the OS.
+	# Different network commands are available in different OSes.
 	case $KAYTTIS in
 		cygwin)
+			# Using windows (w7) networks commands
 			VERKKO_IP=$(ipconfig|grep IPv4)
 			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID); else VERKKO_ESSID=nada; fi
 			;;
 		ubuntu)
+			# Using unix/linux/ubuntu networks commands.
 			VERKKO_IP=$(ifconfig eth0|grep Bcast)
 			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(iwlist wlan0 scan|grep ESSID); else VERKKO_ESSID=nada; fi
 			;;
@@ -23,6 +27,7 @@ fi
 
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $VERKKO; tynnyri kick; fi
 
+# not working properly in some cases
 verkko() {
 	case $KAYTTIS in
 		cygwin)

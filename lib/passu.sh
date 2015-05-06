@@ -5,3 +5,7 @@ if [ $VERBOSITY -ge $LEV_V ]; then tynnyri PASSU; fi
 passu() {
 	read -p "PAUSE, PRESS ENTER " -r KR_PASSU
 }
+
+salis() {
+	read -p "PRESS ENTER " -r KR_SALIS
+}

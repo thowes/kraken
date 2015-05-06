@@ -4,4 +4,5 @@ alias rt='cd /'
 alias sammu='sudo shutdown -h now'
 alias X='startx'
 alias v=verkko
+alias y='synkronoi yh'
 alias yh='synkronoi yh'

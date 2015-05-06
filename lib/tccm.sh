@@ -2,6 +2,7 @@
 #tccm.sh. L 2.4.2013
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri TCCM; fi
 KR_PASSU=passu1
+KR_SALIS=passu2
 
 tccm() {
 	debug TTCM $1 $2 $3
@@ -15,15 +16,15 @@ tccm() {
 		dm) tc /q /s /d $2;;
 		dis) tccm d $2;;
 		info) tcc_kr_info;;
-		key) tynnyri $3; echo tc /l$2 /q /s /v $3 /p $KR_PASSU /k $KR_DIR_KEYS/$4;;
+		key) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_PASSU /k $KR_DIR_KEYS/$4;;
 		m) tccm mt $2 $3;;
 		mnt) tccm mt $2 $3;;
-		mt) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_PASSU;;
+		mt) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_SALIS;;
 		n) tccm new $2 $3;;
 		new) echo tc /new /v $2 $3;;
 		pwd) tcc_passu;;
-		vault) tccm mt $2 $3;;
-		wipe) KR_PASSU=passu1;;
+		vault) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_PASSU;;
+		wipe) KR_PASSU=passu1; KR_SALIS=passu2;;
 		*) tccm all;;
 	esac
 }

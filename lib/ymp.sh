@@ -2,6 +2,8 @@
 #ymp.sh, L 2.4.2013
 KAYTTIS=$(uname)
 
+# Based on the contents of the uname ouput string, recognizes the OS.
+# Only cygwin and ubuntu are tested to work properly.
 if [ $HOSTED == "true" ]; then KAYTTIS="hosted"
 else
 	case $KAYTTIS in
@@ -17,7 +19,6 @@ else
 		*Linux*)
 			KAYTTIS_FULL=$(uname -a)
 			case $KAYTTIS_FULL in
-				*kapsi*) KAYTTIS=linux;;
 				*Mint*) KAYTTIS=mint;;
 				*Ubuntu*) KAYTTIS=ubuntu;;
 				*) KAYTTIS=linux;;
