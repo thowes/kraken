@@ -12,7 +12,10 @@ TESTATTR=$1.
 if [ $TESTATTR == "." ]; then
 	KR_TO_DIR=$(pwd)/cfg
 	if [ -d 'cfg' ]; then
-		echo "[[ ERR INSTALL directory CFG exists already! ]]"
+		if [ -f $KR_FROM_DIR/cfg/compu.sh ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/compu.sh cfg/compu.sh; fi
+		if [ -f $KR_FROM_DIR/cfg/nets.sh ]; then echo "[[ ERR INSTALL nets.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/nets.sh cfg/nets.sh; fi
+		if [ -f $KR_FROM_DIR/cfg/kraken.cfg ]; then echo "[[ ERR INSTALL directory CFG exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/kraken.cfg cfg/kraken.cfg; fi
+		if [ -f $KR_FROM_DIR/cfg/proj.csv ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/proj.csv cfg/proj.csv; fi
 	else
 		mkdir cfg
 		cp $KR_FROM_DIR/def/*.sh cfg/
