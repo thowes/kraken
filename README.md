@@ -19,18 +19,18 @@ Installation
 
 First, clone the repository to your local environment:
 
-'git clone https://github.com/thowes/kraken.git'
+		git clone https://github.com/thowes/kraken.git
 
 
 Go to the kraken.sh directory:
 
-'cd kraken'
+		cd kraken
 
 
 Then run the install command:
 
-'. install.sh'
+		. install.sh
 
-That command copies default configuration files from def/ driectory to cfg/ directory under kraken/ directory. If you want to use another directory for configuration files, use instead:
+That command copies default configuration files from 'def/'' directory to 'cfg/'' directory under 'kraken/'' directory. If you want to use another directory for configuration files, use instead:
 
-'. install.sh /your/directory'
+		. install.sh /your/directory

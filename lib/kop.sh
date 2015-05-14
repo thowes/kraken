@@ -8,7 +8,7 @@ kopioi() {
 		KR_LATEST_TODAY="today_maybe"
 		bulog $1 $2.zip original_dir
 		debug KOP $KR_LATEST_TODAY
-		#doesn't do backup runs if already backed up today (checkup happens in bulog)
+		# doesn't do backup runs if already backed up today (checkup happens in bulog)
 		if [ $KR_LATEST_TODAY == "today_false" ]; then
 			rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.old
 			mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $KR_DIR_BUT/$2.$USER.$HOSTNAME.old
