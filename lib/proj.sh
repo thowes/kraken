@@ -3,7 +3,6 @@
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri new "KRAKEN/PROJ /w"; fi
 if [ -f $KR_DIR_LIB/val.sh ]; then . $KR_DIR_LIB/val.sh; fi
 if [ -f $KR_DIR_LIB/ror.sh ]; then . $KR_DIR_LIB/ror.sh; fi
-if [ -f $KR_DIR_LIB/vs.sh ]; then . $KR_DIR_LIB/vs.sh; fi
 #if [ -f ~/$KR_DIR_LIB/vir.sh ]; then . ~/$KR_DIR_LIB/vir.sh; fi
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 
