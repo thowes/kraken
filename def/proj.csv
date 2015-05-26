@@ -1,5 +1,5 @@
-cfg,kraken config,HOME,~/proj/kraken/def/
-def,kraken default config,HOME,~/proj/kraken/def/
-krn,kraken.sh,HOME,~/proj/kraken/
-lib,krakenlib,HOME,~/proj/kraken/lib/
-tmpl,kraken templates,HOME,~/proj/kraken/tmpl/
+cfg,kraken config,HOME,/home/user/proj/kraken/cfg/
+def,kraken default config,HOME,/home/user/proj/kraken/def/
+krn,kraken.sh,HOME,/home/user/proj/kraken/
+lib,krakenlib,HOME,/home/user/proj/kraken/lib/
+tmpl,kraken templates,HOME,/home/user/proj/kraken/tmpl/
