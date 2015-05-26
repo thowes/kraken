@@ -13,7 +13,6 @@ To fully use kraken.sh, it is assumed that your command line environment has at 
 * rsync
 * wget
 
-
 Installation
 ------------
 
@@ -21,11 +20,9 @@ First, clone the repository to your local environment:
 
 		git clone https://github.com/thowes/kraken.git
 
-
 Go to the kraken.sh directory:
 
 		cd kraken
-
 
 Then run the install command:
 
@@ -34,3 +31,15 @@ Then run the install command:
 That command copies default configuration files from 'def/'' directory to 'cfg/'' directory under 'kraken/'' directory. If you want to use another directory for configuration files, use instead:
 
 		. install.sh /your/directory
+
+
+Configuration
+-------------
+
+In the cfg-directory you just created, there are five files for configuration:
+
+* compu.sh
+* kerain.sh
+* kraken.cfg
+* nets.sh
+* proj.csv
