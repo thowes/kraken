@@ -13,6 +13,7 @@ varko() {
 		# collect md5 checksums of old and new
 		KR_MD5_OLD=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.old)
 		KR_MD5_NEW=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip)
+		echo $KR_MD5_OLD vs $KR_MD5_NEW
 		# add a comment to backup.log
 		bulog $1 $2.zip original_dir
 		debug KOP $KR_LATEST_TODAY
