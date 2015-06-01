@@ -1,5 +1,5 @@
 #!/bin/bash
-#passu.sh, L 25.3.2013
+#passu.sh, L 7.5.2008/25.3.2013/24.8.2013
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri PASSU; fi
 
 passu() {

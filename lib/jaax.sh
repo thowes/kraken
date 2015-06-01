@@ -1,5 +1,5 @@
 #!/bin/bash
-#jaax.sh, L 11.6.2013/31.3.2013
+#jaax.sh, L 7.5.2005/11.6.2013/31.3.2013/24.8.2013
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "JAAX"; fi
 
 jaax_fl() {

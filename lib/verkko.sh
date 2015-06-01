@@ -1,5 +1,5 @@
 #!/bin/bash
-#verkko.sh, L 2.4.2013
+#verkko.sh, L 21.5.2011/2.4.2013
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri new "KRAKEN/VERKKO /w"; fi
 
 if [ -f ~/$KR_DIR_HOST/nets.sh ]; then
