@@ -54,7 +54,7 @@ jaax() {
 		clr) tynnyri new JAAX/CLR; jaax_fl clr; jaax_ql clr ql; jaax_startup clr;;
 		fl) tynnyri new JAAX/FL; jaax_fl l $2; jaax_fl p $3;;
 		ql) tynnyri new JAAX/QL; jaax_ql c $HOSTNAME; jaax_ql l $2; jaax_ql p $3; jaax_ql u $USER;;
-		st) tynnyri new JAAX/ST; jaax_sendto win7; jaax_sendto $HOSTNAME; jaax_startup $HOSTNAME;;
+		st) tynnyri new JAAX/ST; jaax_sendto $HOSTNAME; jaax_sendto $2; jaax_startup $HOSTNAME;;
 	esac
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 }

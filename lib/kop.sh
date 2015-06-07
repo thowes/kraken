@@ -19,10 +19,12 @@ varko() {
 			# collect md5 checksums of old backup
 			KR_MD5_OLD=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip)
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $KR_DIR_BUT/$2.$USER.$HOSTNAME.old; fi
-			zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x "backup.log"
+			zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x *backup.log*
 			# collect md5 checksums of new and comparing it to old
 			KR_MD5_NEW=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip)
-			echo $KR_MD5_OLD vs $KR_MD5_NEW
+			if [ $KR_MD5_OLD == $KR_MD5_NEW ]; then echo YEE $2; fi
+			#echo "O:" $KR_MD5_OLD
+			#echo "N:" $KR_MD5_NEW
 			# encrypting the backup file
 			gpg --encrypt -a -r $RECIPIENT $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip
 			mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.asc $KR_DIR_BUC/$2.$USER.$HOSTNAME.cbc
