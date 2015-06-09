@@ -22,7 +22,7 @@ varko() {
 			zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x *backup.log*
 			# collect md5 checksums of new and comparing it to old
 			KR_MD5_NEW=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip)
-			if [ $KR_MD5_OLD == $KR_MD5_NEW ]; then
+			if [ "$KR_MD5_OLD" == "$KR_MD5_NEW" ]; then
 				echo YES $2
 			else echo NO $2; fi
 			#echo "O:" $KR_MD5_OLD
