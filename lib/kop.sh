@@ -24,12 +24,12 @@ varko() {
 			KR_MD5_NEW=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip)
 			if [ "$KR_MD5_OLD" == "$KR_MD5_NEW" ]; then
 				echo YES $2
-			else echo NO $2; fi
-			#echo "O:" $KR_MD5_OLD
-			#echo "N:" $KR_MD5_NEW
-			# encrypting the backup file
-			gpg --encrypt -a -r $RECIPIENT $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip
-			mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.asc $KR_DIR_BUC/$2.$USER.$HOSTNAME.cbc
+			else
+				# encrypting the backup file
+				gpg --encrypt -a -r $RECIPIENT $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip
+				mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.asc $KR_DIR_BUC/$2.$USER.$HOSTNAME.cbc
+				#echo NO $2;
+			fi
 		else
 			debug KOP $2
 		fi
