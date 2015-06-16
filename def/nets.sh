@@ -3,6 +3,7 @@
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri NETS; fi
 
 case "$VERKKO_IP" in
+	*0.0.0.0*) VERKKO="NADA";;
 	*192.168.109.*) VERKKO="HOME";;
 	*192.168.1.*) VERKKO="OFFICE";;
 esac
@@ -10,6 +11,7 @@ esac
 case "$VERKKO_SSID" in
         *cafe_ssid*) VERKKO="CAFE";;
         *mobile_ssid*) VERKKO="MOB";;
+				*nada*) VERKKO="NADA";;
         *home_ssid*) VERKKO="HOME";;
         *office_ssid*) VERKKO="WORK";;
 esac

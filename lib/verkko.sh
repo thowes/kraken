@@ -15,6 +15,10 @@ if [ -f ~/$KR_DIR_HOST/nets.sh ]; then
 			VERKKO_IP=$(ipconfig|grep IPv4)
 			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID); else VERKKO_ESSID=nada; fi
 			;;
+		hosted)
+			VERKKO_IP="0.0.0.0"
+			VERKKO_ESSID="NADA"
+			;;
 		ubuntu)
 			# Using unix/linux/ubuntu networks commands.
 			VERKKO_IP=$(ifconfig eth0|grep Bcast)
