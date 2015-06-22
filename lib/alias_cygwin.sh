@@ -9,4 +9,4 @@ alias syn=synkronoi
 alias synk=synkronoi
 alias tl=tasklist
 alias v=verkko
-alias yh='synkronoi yh'
+alias y='synkronoi ssh'
