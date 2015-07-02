@@ -2,7 +2,7 @@
 #verkko.sh, L 21.5.2011/2.4.2013
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri new "KRAKEN/VERKKO /w"; fi
 
-if [ -f ~/$KR_DIR_HOST/nets.sh ]; then
+if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 	VERKKO_DNS="NADA"
 	VERKKO_IP="NADA"
 	VERKKO_ESSID="NADA"

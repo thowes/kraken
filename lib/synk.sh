@@ -4,7 +4,7 @@ if [ $VERBOSITY -ge $LEV_V ]; then tynnyri SYNK; fi
 
 synk_real() {
 	debug SYNK real $1 $2
-	if [ -f ~/$KR_DIR_HOST/../loc/sites/$2 ]; then . ~/$KR_DIR_HOST/../loc/sites/$2
+	if [ -f ~/$KR_DIR_CFG/../loc/sites/$2 ]; then . ~/$KR_DIR_CFG/../loc/sites/$2
 		kaiku $1 $2
 		#if [ $SYNK_PROTOCOL == "ssh" ]; then kaiku SYNK $SYNK_PROTOCOL; fi
 		case $1 in
@@ -31,8 +31,8 @@ synk_real() {
 			*) virhe SYNK real "-" "ei protokollaa!";;
 		esac
 	else
-		if [ -f ~/$KR_DIR_HOST/../loc/sites/$2.sh ]; then
-			. ~/$KR_DIR_HOST/../loc/sites/$2.sh $1
+		if [ -f ~/$KR_DIR_CFG/../loc/sites/$2.sh ]; then
+			. ~/$KR_DIR_CFG/../loc/sites/$2.sh $1
 		else
 			virhe SYNK $1 $2 "-" "yhteyttä ei tunnistettu!"
   	fi

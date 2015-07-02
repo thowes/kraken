@@ -7,7 +7,7 @@ kerain() {
   cd
   case $1 in
 	web)
-		cp ~/public_html/index.html ~/$KR_DIR_HOST/index.html
+		cp ~/public_html/index.html ~/$KR_DIR_CFG/index.html
 		;;
 	*)
 		if [ $HOSTNAME == "hostname" ]; then
