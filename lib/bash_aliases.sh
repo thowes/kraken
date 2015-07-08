@@ -23,6 +23,7 @@ alias push='git push'
 alias r=rails
 alias remote='git remote'
 alias rev='make rev'
+alias ru=screen
 alias sad='svn add'
 alias st='if [ -f makefile ]; then make st; else svn st; fi'
 alias tst='ror_tst'
