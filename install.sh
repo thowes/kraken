@@ -14,6 +14,7 @@ if [ $TESTATTR == "." ]; then
 	if [ -d 'cfg' ]; then
 		if [ -f cfg/compu.sh ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/compu.sh cfg/compu.sh; fi
 		if [ -f cfg/nets.sh ]; then echo "[[ ERR INSTALL nets.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/nets.sh cfg/nets.sh; fi
+		if [ -f cfg/vker.sh ]; then echo "[[ ERR INSTALL vker.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/vker.sh cfg/vker.sh; fi
 		if [ -f cfg/kraken.cfg ]; then echo "[[ ERR INSTALL directory CFG exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/kraken.cfg cfg/kraken.cfg; fi
 		if [ -f cfg/proj.csv ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/proj.csv cfg/proj.csv; fi
 	else
@@ -27,6 +28,7 @@ else
 	if [ -d $1 ]; then
 		if [ -f $KR_TO_DIR/compu.sh ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/compu.sh $KR_TO_DIR/compu.sh; fi
 		if [ -f $KR_TO_DIR/nets.sh ]; then echo "[[ ERR INSTALL nets.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/nets.sh $KR_TO_DIR/nets.sh; fi
+		if [ -f $KR_TO_DIR/vker.sh ]; then echo "[[ ERR INSTALL vker.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/vker.sh $KR_TO_DIR/vker.sh; fi
 		if [ -f $KR_TO_DIR/kraken.cfg ]; then echo "[[ ERR INSTALL directory CFG exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/kraken.cfg $KR_TO_DIR/kraken.cfg; fi
 		if [ -f $KR_TO_DIR/proj.csv ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/proj.csv $KR_TO_DIR/proj.csv; fi
 	fi
