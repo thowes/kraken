@@ -19,10 +19,10 @@ varko() {
 			# collect md5 checksums of old backup
 			KR_MD5_OLD=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip)
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $KR_DIR_BUT/$2.$USER.$HOSTNAME.old; fi
-			if [ -f ~/$KR_DIR_EXCL/$2.zip-lst ]; then 
-				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@~/$KR_DIR_EXCL/$2.zip-lst
+			if [ -f ~/$KR_DIR_EXCL/$2.lst ]; then
+				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/$2.lst -x *backup.log*
 			else
-				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@~/$KR_DIR_EXCL/default.zip-lst
+				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log*
 			fi
 			# collect md5 checksums of new and comparing it to old
 			KR_MD5_NEW=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip)
