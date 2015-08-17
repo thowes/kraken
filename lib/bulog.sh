@@ -23,3 +23,11 @@ bulog() {
 	fi
 	debug BULOG 24 $KR_LATEST_TODAY
 }
+
+bulog_latest() {
+	debug BULOG latest
+}
+
+bulog_add() {
+	debug BULOG add
+}
