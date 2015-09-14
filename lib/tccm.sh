@@ -19,7 +19,7 @@ tccm() {
 		key) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_PASSU /k $4;;
 		m) tccm mt $2 $3;;
 		mnt) tccm mt $2 $3;;
-		mt) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_SALIS;;
+		mt) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_SALIS /k $4;;
 		n) tccm new $2 $3;;
 		new) echo tc /new /v $2 $3;;
 		pwd) tcc_passu;;
