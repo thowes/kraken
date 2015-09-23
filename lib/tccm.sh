@@ -16,13 +16,15 @@ tccm() {
 		dm) tc /q /s /d $2;;
 		dis) tccm d $2;;
 		info) tcc_kr_info;;
-		key) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_PASSU /k $4;;
+		key) tynnyri $3; tc /l$2 /q /s /m ts /v $3 /p $KR_PASSU /k $4;;
 		m) tccm mt $2 $3;;
 		mnt) tccm mt $2 $3;;
-		mt) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_SALIS /k $4;;
+		mt) tynnyri $3; tc /l$2 /q /s /m ts /v $3 /p $KR_SALIS /k $4;;
 		n) tccm new $2 $3;;
 		new) echo tc /new /v $2 $3;;
 		pwd) tcc_passu;;
+		ro) tynnyri $3; tc /l$2 /q /s /m ro /v $3 /p $KR_PASSU /k $4;;
+		v2) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_SALIS;;
 		vault) tynnyri $3; tc /l$2 /q /s /v $3 /p $KR_PASSU;;
 		wipe) KR_PASSU=passu1; KR_SALIS=passu2;;
 		*) tccm all;;
