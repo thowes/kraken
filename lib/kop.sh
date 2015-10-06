@@ -2,7 +2,7 @@
 #kop.sh, L 27.6.2013/29.6.2013
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri KOP; fi
 
-kopioi() {
+xvarko() {
 	varko $1 $2
 }
 

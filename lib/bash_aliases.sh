@@ -10,6 +10,7 @@ alias go='projekti_go'
 alias hst='cat ~/.bash_history'
 alias k9='kill -9'
 alias l='ls -la'
+alias levy='df -h'
 alias ll='ls -la|less'
 alias m=less
 alias mk=make
