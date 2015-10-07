@@ -7,9 +7,9 @@ jaax_fl() {
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "f-$1"; fi
 	case $1 in
 		clr) rm ~/$KR_DIR_FLZ/*.lnk; rm ~/$KR_DIR_FLZ/*.url;;
-		l) if [ -d ~/$KR_DIR_LNK/LOC.FL/$2 ]; then cp ~/$KR_DIR_LNK/LOC.FL/$2/*.* ~/$KR_DIR_FLZ/; else virhe JAAX FL $1 $2; fi;;
-		p) if [ -d ~/$KR_DIR_LNK/PROJ.FL/$2 ]; then cp ~/$KR_DIR_LNK/PROJ.FL/$2/*.* ~/$KR_DIR_FLZ/; else virhe JAAX FL $1 $2; fi;;
-		*) if [ -d ~/$KR_DIR_LNK/PROJ.FL/$1 ]; then cp ~/$KR_DIR_LNK/PROJ.FL/$1/*.* ~/$KR_DIR_FLZ/; else virhe JAAX FL $1 $2; fi;;
+		l) if [ -d $KR_DIR_LNK/LFL/$2 ]; then cp $KR_DIR_LNK/LFL/$2/*.* ~/$KR_DIR_FLZ/; else virhe JAAX FL $1 $2; fi;;
+		p) if [ -d $KR_DIR_LNK/PFL/$2 ]; then cp $KR_DIR_LNK/PFL/$2/*.* ~/$KR_DIR_FLZ/; else virhe JAAX FL $1 $2; fi;;
+		*) if [ -d $KR_DIR_LNK/PFL/$1 ]; then cp $KR_DIR_LNK/PFL/$1/*.* ~/$KR_DIR_FLZ/; else virhe JAAX FL $1 $2; fi;;
 	esac
 }
 
@@ -18,11 +18,11 @@ jaax_ql() {
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "$1-$2"; fi
 	case $1 in
 		clr) rm ~/$KR_DIR_QL/*.lnk;;
-		c) if [ -d ~/$KR_DIR_LNK/COMPU/$2 ]; then cp ~/$KR_DIR_LNK/COMPU/$2/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
-		l) if [ -d ~/$KR_DIR_LNK/LOC.QL/$2 ]; then cp ~/$KR_DIR_LNK/LOC.QL/$2/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
-		p) if [ -d ~/$KR_DIR_LNK/PQL/$2 ]; then cp ~/$KR_DIR_LNK/PQL/$2/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
-		u) if [ -d ~/$KR_DIR_LNK/USER/$2 ]; then cp ~/$KR_DIR_LNK/USER/$2/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
-		*) if [ -d ~/$KR_DIR_LNK/PQL/$1 ]; then cp ~/$KR_DIR_LNK/PQL/$1/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
+		c) if [ -d $KR_DIR_LNK/COMPU/$2 ]; then cp $KR_DIR_LNK/COMPU/$2/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
+		l) if [ -d $KR_DIR_LNK/LQL/$2 ]; then cp $KR_DIR_LNK/LQL/$2/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
+		p) if [ -d $KR_DIR_LNK/PQL/$2 ]; then cp $KR_DIR_LNK/PQL/$2/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
+		u) if [ -d $KR_DIR_LNK/USER/$2 ]; then cp $KR_DIR_LNK/USER/$2/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
+		*) if [ -d $KR_DIR_LNK/PQL/$1 ]; then cp $KR_DIR_LNK/PQL/$1/*.lnk ~/$KR_DIR_QL/; else virhe JAAX ql $1 $2; fi;;
 	esac
 }
 
@@ -31,8 +31,8 @@ jaax_sendto() {
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "S2-$1"; fi
 	case $1 in
 		clr) rm ~/$KR_DIR_SENDTO/*.lnk;;
-		def) cp ~/$KR_DIR_LNK/SENDTO/default/*.lnk ~/$KR_DIR_SENDTO/;;
-		*) if [ -d ~/$KR_DIR_LNK/SENDTO/$1 ]; then cp ~/$KR_DIR_LNK/SENDTO/$1/*.lnk ~/$KR_DIR_SENDTO/; else virhe JAAX/SENDTO $1 $2; fi
+		def) cp $KR_DIR_LNK/SENDTO/default/*.lnk ~/$KR_DIR_SENDTO/;;
+		*) if [ -d $KR_DIR_LNK/SENDTO/$1 ]; then cp $KR_DIR_LNK/SENDTO/$1/*.lnk ~/$KR_DIR_SENDTO/; else virhe JAAX/SENDTO $1 $2; fi
 	esac
 }
 
@@ -41,8 +41,8 @@ jaax_startup() {
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "SU-$1"; fi
 	case $1 in
 		clr) rm ~/$KR_DIR_STARTUP/*.lnk;;
-		def) cp ~/$KR_DIR_LNK/STARTUP/default/*.lnk ~/$KR_DIR_STARTUP/;;
-		*) if [ -d ~/$KR_DIR_LNK/STARTUP/$1 ]; then cp ~/$KR_DIR_LNK/STARTUP/$1/*.lnk ~/$KR_DIR_STARTUP/; else virhe JAAX/STARTUP $1 $2; fi;;
+		def) cp $KR_DIR_LNK/STARTUP/default/*.lnk ~/$KR_DIR_STARTUP/;;
+		*) if [ -d $KR_DIR_LNK/STARTUP/$1 ]; then cp $KR_DIR_LNK/STARTUP/$1/*.lnk ~/$KR_DIR_STARTUP/; else virhe JAAX/STARTUP $1 $2; fi;;
 	esac
 }
 
