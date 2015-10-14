@@ -16,6 +16,7 @@ alias m=less
 alias mk=make
 alias more=less
 alias n='nano -w -T 2'
+alias op=projekti_avaa
 alias p=projekti
 alias proj=projekti
 alias psf='ps fu'

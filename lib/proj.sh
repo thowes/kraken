@@ -21,3 +21,19 @@ projekti() {
 		virhe PROJ $1 $KR_DIRPO "just error!"
 	fi
 }
+
+# reads list projects (proj.csv) and jumps to the project folder.
+projekti_avaa() {
+	KR_DIRPO=$(cat ~/$KR_DIR_CFG/proj.csv|grep $1|awk -F, '{ print $4 }')
+	if [ $KR_DIRPO != "" ]; then 
+		if [ -d $KR_DIRPO ]; then
+			kaiku PROJ $1 $KR_DIRPO
+			cd $KR_DIRPO
+			open .
+		else
+			virhe PROJ $1 $KR_DIRPO "not a directory!"
+		fi
+	else
+		virhe PROJ $1 $KR_DIRPO "just error!"
+	fi
+}
