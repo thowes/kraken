@@ -5,7 +5,7 @@ if [ -f ~/$KR_DIR_CFG/kerain.sh ]; then . ~/$KR_DIR_CFG/kerain.sh; fi
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 
 compu_proj() {
-	make st
+	if [ -f makefile ]; then make st; fi
 }
 
 compu_start() {

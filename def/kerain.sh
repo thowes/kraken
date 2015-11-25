@@ -11,9 +11,9 @@ kerain() {
 		;;
 	*)
 		if [ $HOSTNAME == "hostname" ]; then
-			kaiku new KERAIN
+			tynnyri new KERAIN
 			kerain web
-			kaiku dump $1
+			tynnyri kick $1
 		fi;;
   esac
 }
