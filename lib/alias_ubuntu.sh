@@ -1,13 +1,7 @@
 alias asenna='sudo apt-get install'
 alias buut='sudo shutdown -r now'
-alias k='kill'
-alias l='ls -la'
-alias m=less
-alias n='nano -w -T 2'
-alias r=rails
 alias rt='cd /'
 alias sammu='sudo shutdown -h now'
-alias X='startx'
 alias v=verkko
-alias x=exit
+alias X='startx'
 alias y='synkronoi ssh'
