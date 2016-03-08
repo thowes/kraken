@@ -52,11 +52,10 @@ jaax() {
 	if [ -d $KR_DIR_LNK ]; then
 		if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $1-$2-$3; fi
 		case $1 in
-			air) jaax_main clr; jaax_ql air;;
-			clr) tynnyri new JAAX/CLR; jaax_ql clr ql; jaax_startup clr;;
+			clr) tynnyri new JAAX/CLR; jaax_ql clr ql;;
 			fl) tynnyri new JAAX/FL; jaax_fl c $HOSTNAME; jaax_fl l $2; jaax_fl p $3;;
 			ql) tynnyri new JAAX/QL; jaax_ql c $HOSTNAME; jaax_ql l $2; jaax_ql p $3; jaax_ql u $USER;;
-			st) tynnyri new JAAX/ST; jaax_sendto $HOSTNAME; jaax_sendto $2; jaax_startup $HOSTNAME;;
+			st) tynnyri new JAAX/ST; jaax_sendto $HOSTNAME; jaax_sendto $2;;
 		esac
 		if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 	else
