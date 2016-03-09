@@ -2,28 +2,20 @@
 #jaax.sh, L 7.5.2005/11.6.2013/31.3.2013/24.8.2013
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "JAAX"; fi
 
-jaax_fl() {
-	debug "JAAX/FL" "$1 $2"
-	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "f-$1"; fi
-	case $1 in
-		clr) rm ~/$KR_DIR_FAV/*.url; rm ~/$KR_DIR_FAV/*.lnk;;
-		c) if [ -d $KR_DIR_LNK/CFL/$2 ]; then cp $KR_DIR_LNK/CFL/$2/*.* ~/$KR_DIR_FAV/; else virhe JAAX FL $1 $2; fi;;
-		l) if [ -d $KR_DIR_LNK/LFL/$2 ]; then cp $KR_DIR_LNK/LFL/$2/*.* ~/$KR_DIR_FAV/; else virhe JAAX FL $1 $2; fi;;
-		p) if [ -d $KR_DIR_LNK/PFL/$2 ]; then cp $KR_DIR_LNK/PFL/$2/*.* ~/$KR_DIR_FAV/; else virhe JAAX FL $1 $2; fi;;
-		*) if [ -d $KR_DIR_LNK/PFL/$1 ]; then cp $KR_DIR_LNK/PFL/$1/*.* ~/$KR_DIR_FAV/; else virhe JAAX FL $1 $2; fi;;
-	esac
-}
-
 jaax_ql() {
-	debug "JAAX/QL" "$1 $2"
+	debug "JAAX/DT" "$1 $2"
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "$1-$2"; fi
 	case $1 in
-		clr) rm ~/$KR_DIR_QL/*.url; rm ~/$KR_DIR_QL/*.lnk;;
-		c) if [ -d $KR_DIR_LNK/CQL/$2 ]; then cp $KR_DIR_LNK/CQL/$2/*.* ~/$KR_DIR_DT/; else virhe JAAX ql $1 $2; fi;;
-		l) if [ -d $KR_DIR_LNK/LQL/$2 ]; then cp $KR_DIR_LNK/LQL/$2/*.* ~/$KR_DIR_DT/; else virhe JAAX ql $1 $2; fi;;
-		p) if [ -d $KR_DIR_LNK/PQL/$2 ]; then cp $KR_DIR_LNK/PQL/$2/*.* ~/$KR_DIR_DT/; else virhe JAAX ql $1 $2; fi;;
-		u) if [ -d $KR_DIR_LNK/USR/$2 ]; then cp $KR_DIR_LNK/USR/$2/*.* ~/$KR_DIR_DT/; else virhe JAAX ql $1 $2; fi;;
-		*) if [ -d $KR_DIR_LNK/PQL/$1 ]; then cp $KR_DIR_LNK/PQL/$1/*.* ~/$KR_DIR_DT/; else virhe JAAX ql $1 $2; fi;;
+		clr)
+			if [ -f ~/$KR_DIR_DT/desktop.ini ]; then
+			cp ~/$KR_DIR_DT/*.url $KR_DIR_LNK/BU.$HOSTNAME/DESKTOP/; rm ~/$KR_DIR_DT/*.url
+			cp ~/$KR_DIR_DT/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/DESKTOP/; rm ~/$KR_DIR_DT/*.lnk
+			fi;;
+		c) if [ -d $KR_DIR_LNK/COMP/$2 ]; then cp $KR_DIR_LNK/COMP/$2/*.* ~/$KR_DIR_DT/; else virhe JAAX dt $1 $2; fi;;
+		l) if [ -d $KR_DIR_LNK/KTXT/$2 ]; then cp $KR_DIR_LNK/KTXT/$2/*.* ~/$KR_DIR_DT/; else virhe JAAX dt $1 $2; fi;;
+		p) if [ -d $KR_DIR_LNK/PROJ/$2 ]; then cp $KR_DIR_LNK/PROJ/$2/*.* ~/$KR_DIR_DT/; else virhe JAAX dt $1 $2; fi;;
+		u) if [ -d $KR_DIR_LNK/USER/$2 ]; then cp $KR_DIR_LNK/USER/$2/*.* ~/$KR_DIR_DT/; else virhe JAAX dt $1 $2; fi;;
+		*) if [ -d $KR_DIR_LNK/PROJ/$1 ]; then cp $KR_DIR_LNK/PROJ/$1/*.* ~/$KR_DIR_DT/; else virhe JAAX dt $1 $2; fi;;
 	esac
 }
 
@@ -41,7 +33,7 @@ jaax_startup() {
 	debug "JAAX/STU" "$1 $2"
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "SU-$1"; fi
 	case $1 in
-		clr) rm ~/$KR_DIR_STARTUP/*.lnk;;
+		clr) cp ~/$KR_DIR_STARTUP/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/STARTUP/; rm ~/$KR_DIR_STARTUP/*.lnk;;
 		def) cp $KR_DIR_LNK/STARTUP/default/*.lnk ~/$KR_DIR_STARTUP/;;
 		*) if [ -d $KR_DIR_LNK/STARTUP/$1 ]; then cp $KR_DIR_LNK/STARTUP/$1/*.lnk ~/$KR_DIR_STARTUP/; else virhe JAAX/STARTUP $1 $2; fi;;
 	esac
@@ -52,8 +44,8 @@ jaax() {
 	if [ -d $KR_DIR_LNK ]; then
 		if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $1-$2-$3; fi
 		case $1 in
-			clr) tynnyri new JAAX/CLR; jaax_ql clr ql;;
-			fl) tynnyri new JAAX/FL; jaax_fl c $HOSTNAME; jaax_fl l $2; jaax_fl p $3;;
+			clr) tynnyri new JAAX/CLR; jaax_ql clr;;
+			dt) tynnyri new JAAX/DT; jaax_ql c $HOSTNAME; jaax_ql l $2; jaax_ql p $3; jaax_ql u $USER;;
 			ql) tynnyri new JAAX/QL; jaax_ql c $HOSTNAME; jaax_ql l $2; jaax_ql p $3; jaax_ql u $USER;;
 			st) tynnyri new JAAX/ST; jaax_sendto $HOSTNAME; jaax_sendto $2;;
 		esac

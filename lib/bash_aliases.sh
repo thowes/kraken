@@ -1,5 +1,6 @@
 alias ..='cd ..'
 alias add='git add -A; git commit -m'
+alias branch='git branch'
 alias bu=bundle
 alias bx='bundle exec'
 alias cd..='cd ..'
@@ -48,7 +49,6 @@ alias up='make upd'
 alias upd='make upd'
 alias update='make upd'
 alias x=exit
-alias xx='rm ~/.bash_history; touch ~/.bash_history; exit'
 
 if [ -f ~/proj/config/$HOSTNAME/alias.sh ]; then
     . ~/proj/config/$HOSTNAME/alias.sh
