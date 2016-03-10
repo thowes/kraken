@@ -47,16 +47,20 @@ varko() {
 		# doesn't do backup runs if already backed up today (checkup happens in bulog)
 		if [ $KR_LATEST_TODAY == "today_false" ]; then
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.old ]; then rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.old; fi
-			# collect md5 checksums of old backup
-			KR_MD5_OLD=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip)
+			# collect md5 checksums of old backup (default is "nada", in case old backup does not exist.)
+			KR_MD5_OLD="nada"
+			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then 
+				KR_MD5_OLD=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip); fi
+			# move the old backup file .old file
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $KR_DIR_BUT/$2.$USER.$HOSTNAME.old; fi
 			if [ -f ~/$KR_DIR_EXCL/$2.lst ]; then
 				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/$2.lst -x *backup.log*
 			else
 				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log*
 			fi
-			# collect md5 checksums of new and comparing it to old
-			KR_MD5_NEW=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip)
+			# collect md5 checksums of new and comparing it to old (defualt in case there is no file) 
+			KR_MD5_NEW="ei mit"
+			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then KR_MD5_NEW=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip); fi
 			if [ "$KR_MD5_OLD" != "$KR_MD5_NEW" ]; then
 				# encrypting the backup file
 				gpg --encrypt -r $RECIPIENT $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip

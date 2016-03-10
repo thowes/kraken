@@ -2,7 +2,7 @@
 #jaax.sh, L 7.5.2005/11.6.2013/31.3.2013/24.8.2013
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "JAAX"; fi
 
-jaax_ql() {
+jaax_dt() {
 	debug "JAAX/DT" "$1 $2"
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "$1-$2"; fi
 	case $1 in
@@ -45,8 +45,8 @@ jaax() {
 		if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $1-$2-$3; fi
 		case $1 in
 			clr) tynnyri new JAAX/CLR; jaax_ql clr;;
-			dt) tynnyri new JAAX/DT; jaax_ql c $HOSTNAME; jaax_ql l $2; jaax_ql p $3; jaax_ql u $USER;;
-			ql) tynnyri new JAAX/QL; jaax_ql c $HOSTNAME; jaax_ql l $2; jaax_ql p $3; jaax_ql u $USER;;
+			dt) tynnyri new JAAX/DT; jaax_dt c $HOSTNAME; jaax_dt l $2; jaax_dt p $3; jaax_dt u $USER;;
+			ql) tynnyri new JAAX/QL; jaax_dt c $HOSTNAME; jaax_dt l $2; jaax_dt p $3; jaax_dt u $USER;;
 			st) tynnyri new JAAX/ST; jaax_sendto $HOSTNAME; jaax_sendto $2;;
 		esac
 		if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi

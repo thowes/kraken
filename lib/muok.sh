@@ -4,7 +4,7 @@ if [ $VERBOSITY -ge $LEV_V ]; then tynnyri MUOK; fi
 EDITOR='nano -w -T 2'
 
 muokkaa() {
-  EDITOR='nano -w -T 2'
+	EDITOR='nano -w -T 2'
 	case $1 in
 		em) EDITOR=emacs; . ~/$KR_DIR_CFG/eds.sh $2 $3;;
 		emacs) EDITOR=emacs; . ~/$KR_DIR_CFG/eds.sh $2 $3;;
