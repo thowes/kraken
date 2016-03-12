@@ -44,7 +44,7 @@ jaax() {
 	if [ -d $KR_DIR_LNK ]; then
 		if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $1-$2-$3; fi
 		case $1 in
-			clr) tynnyri new JAAX/CLR; jaax_ql clr;;
+			clr) tynnyri new JAAX/CLR; jaax_dt clr;;
 			dt) tynnyri new JAAX/DT; jaax_dt c $HOSTNAME; jaax_dt l $2; jaax_dt p $3; jaax_dt u $USER;;
 			ql) tynnyri new JAAX/QL; jaax_dt c $HOSTNAME; jaax_dt l $2; jaax_dt p $3; jaax_dt u $USER;;
 			st) tynnyri new JAAX/ST; jaax_sendto $HOSTNAME; jaax_sendto $2;;
