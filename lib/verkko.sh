@@ -15,6 +15,11 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 			VERKKO_IP=$(ipconfig|grep IPv4)
 			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID); else VERKKO_ESSID=nada; fi
 			;;
+		darwin)
+			# Using osx networks commands.
+			VERKKO_IP=$(ifconfig eth0|grep Bcast)
+			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(iwlist wlan0 scan|grep ESSID); else VERKKO_ESSID=nada; fi
+			;;
 		hosted)
 			VERKKO_IP="0.0.0.0"
 			VERKKO_ESSID="NADA"
