@@ -19,7 +19,7 @@ if [ -f ~/$2 ]; then
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri new "KRAKEN/FLM /w"; fi
 	if [ -f $KR_DIR_LIB/vers.sh ]; then . $KR_DIR_LIB/vers.sh; fi
 	if [ -f $KR_DIR_LIB/tccm.sh ]; then . $KR_DIR_LIB/tccm.sh; fi
-	if [ -f $KR_DIR_LIB/jaax.sh ]; then . $KR_DIR_LIB/jaax.sh; fi
+	if [ -f $KR_DIR_LIB/shorts.sh ]; then . $KR_DIR_LIB/shorts.sh; fi
 	if [ -f $KR_DIR_LIB/uus.sh ]; then . $KR_DIR_LIB/uus.sh; fi
 	if [ -f $KR_DIR_LIB/bulog.sh ]; then . $KR_DIR_LIB/bulog.sh; fi
 	if [ -f $KR_DIR_LIB/kop.sh ]; then . $KR_DIR_LIB/kop.sh; fi
