@@ -1,6 +1,6 @@
 #!/bin/bash
 #jaax.sh, L 7.5.2005/11.6.2013/31.3.2013/24.8.2013
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "JAAX"; fi
+if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "SHORTS"; fi
 
 jaax_dt() {
 	debug "JAAX/DT" "$1 $2"
@@ -19,8 +19,19 @@ jaax_dt() {
 	esac
 }
 
-jaax_sendto() {
-	debug "JAAX/SENDTO" "$1 $2"
+shorts_menu() {
+	debug "SHORTS/MENU" "$1"
+	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "MENU-$1"; fi
+	case $1 in
+		clr)
+			cp $KR_DIR_AMENU/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/MENU/
+			cp $KR_DIR_UMENU/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/MENU/
+			;;
+	esac
+}
+
+shorts_sendto() {
+	debug "SHORTS/SENDTO" "$1 $2"
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "S2-$1"; fi
 	case $1 in
 		clr) rm ~/$KR_DIR_SENDTO/*.lnk;;
@@ -29,8 +40,8 @@ jaax_sendto() {
 	esac
 }
 
-jaax_startup() {
-	debug "JAAX/STU" "$1 $2"
+shorts_startup() {
+	debug "SHORTS/STU" "$1 $2"
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "SU-$1"; fi
 	case $1 in
 		clr) cp ~/$KR_DIR_STARTUP/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/STARTUP/; rm ~/$KR_DIR_STARTUP/*.lnk;;
@@ -40,14 +51,14 @@ jaax_startup() {
 }
 
 jaax() {
-	debug "JAAX/MAIN"
+	debug "SHORTS/MAIN"
 	if [ -d $KR_DIR_LNK ]; then
 		if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $1-$2-$3; fi
 		case $1 in
-			clr) tynnyri new JAAX/CLR; jaax_dt clr;;
-			dt) tynnyri new JAAX/DT; jaax_dt c $HOSTNAME; jaax_dt l $2; jaax_dt p $3; jaax_dt u $USER;;
-			ql) tynnyri new JAAX/QL; jaax_dt c $HOSTNAME; jaax_dt l $2; jaax_dt p $3; jaax_dt u $USER;;
-			st) tynnyri new JAAX/ST; jaax_sendto $HOSTNAME; jaax_sendto $2;;
+			clr) tynnyri new SHORTS/CLR; shorts_menu clr; jaax_dt clr;;
+			dt) tynnyri new SHORTS/DT; jaax_dt c $HOSTNAME; jaax_dt l $2; jaax_dt p $3; jaax_dt u $USER;;
+			ql) tynnyri new SHORTS/QL; jaax_dt c $HOSTNAME; jaax_dt l $2; jaax_dt p $3; jaax_dt u $USER;;
+			st) tynnyri new SHORTS/ST; shorts_sendto $HOSTNAME; shorts_sendto $2;;
 		esac
 		if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 	else
