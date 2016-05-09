@@ -17,8 +17,8 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 			;;
 		darwin)
 			# Using osx networks commands.
-			VERKKO_IP=$(ifconfig eth0|grep Bcast)
-			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(iwlist wlan0 scan|grep ESSID); else VERKKO_ESSID=nada; fi
+			VERKKO_IP=$(ifconfig|grep broadcast)
+			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(airport -I|grep SSID|grep -v BSSID); else VERKKO_ESSID=nada; fi
 			;;
 		hosted)
 			VERKKO_IP="0.0.0.0"
@@ -45,18 +45,32 @@ verkko() {
 				arp) arp -a;;
 				dns) ipconfig|grep "DNS Suffix Search List";;
 				eth) netsh lan show interfaces;;
+				ext) curl whatismyip.org;;
 				ip) ipconfig|grep IPv4;;
 				lan) netsh lan show interfaces;;
 				mac) getmac /v;;
 				ssid) netsh wlan show interfaces|grep SSID;;
 				wlan) netsh wlan show interfaces;;
 				*) ipconfig /all;;
-       esac;;
+			esac;;
+		darwin)
+			case $1 in
+				ap) airport -I|grep SSID|grep -v BSSID;;
+				eth) ifconfig eth0;;
+				ext) curl whatismyip.org;;
+				ip) ifconfig|grep broadcast;;
+				lan) ifconfig eth0;;
+				mac) ifconfig -a|grep HWaddr;;
+				wlan) ifconfig wlan0;;
+				*) ifconfig -a;;
+			esac
+			;;
 		ubuntu)
 			case $1 in
 				ap) iwlist wlan0 scan|grep ESSID;;
 				arp) arp -a;;
 				eth) ifconfig eth0;;
+				ext) curl whatismyip.org;;
 				ip) ifconfig -a|grep IP;;
 				lan) ifconfig eth0;;
 				mac) ifconfig -a|grep HWaddr;;

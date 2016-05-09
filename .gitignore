@@ -1,3 +1,4 @@
 /cfg
+.DS_Store
 *.sublime*
 /temp
