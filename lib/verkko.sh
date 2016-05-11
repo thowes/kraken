@@ -31,7 +31,7 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 			;;
 		*) virhe VERKKO "$KAYTTIS not supported or recognized!";;
 	esac
-	source ~/$KR_DIR_HOST/nets.sh
+	source $KR_DIR_CFG/nets.sh
 fi
 
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $VERKKO; tynnyri kick; fi
@@ -45,7 +45,7 @@ verkko() {
 				arp) arp -a;;
 				dns) ipconfig|grep "DNS Suffix Search List";;
 				eth) netsh lan show interfaces;;
-				ext) curl whatismyip.org;;
+				ext) curl http://ipinfo.io/ip;;
 				ip) ipconfig|grep IPv4;;
 				lan) netsh lan show interfaces;;
 				mac) getmac /v;;
@@ -57,7 +57,7 @@ verkko() {
 			case $1 in
 				ap) airport -I|grep SSID|grep -v BSSID;;
 				eth) ifconfig eth0;;
-				ext) curl whatismyip.org;;
+				ext) curl http://ipinfo.io/ip;;
 				ip) ifconfig|grep broadcast;;
 				lan) ifconfig eth0;;
 				mac) ifconfig -a|grep HWaddr;;
@@ -70,7 +70,7 @@ verkko() {
 				ap) iwlist wlan0 scan|grep ESSID;;
 				arp) arp -a;;
 				eth) ifconfig eth0;;
-				ext) curl whatismyip.org;;
+				ext) curl http://ipinfo.io/ip;;
 				ip) ifconfig -a|grep IP;;
 				lan) ifconfig eth0;;
 				mac) ifconfig -a|grep HWaddr;;
