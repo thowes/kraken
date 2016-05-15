@@ -26,7 +26,7 @@ if [ -f ~/$2 ]; then
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 
 	# LOCAL
-	if [ -f $KR_DIR_HOST/compu.sh ]; then . $KR_DIR_HOST/compu.sh; fi
+	if [ -f $KR_DIR_CFG/compu.sh ]; then . $KR_DIR_CFG/compu.sh; fi
 
 	#KIRJASTOT
 	if [ -f $KR_DIR_LIB/ymp.sh ]; then . $KR_DIR_LIB/ymp.sh; fi

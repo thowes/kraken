@@ -1,12 +1,14 @@
 kraken.sh
 =========
 
-kraken.sh is my shell script collection. The collection existed first in private svn repository for 100+ revisions, then it was migrated to github. It doesn't quite work out of the box yet, although I'm working on it. Use at your own risk.
+kraken.sh is a collection of my shell scripts. I use these shell scripts to automate tasks (such as backup) and to increase contextual awareness of my laptop. The collection existed first in private svn repository for 100+ revisions, then it was migrated to github. It doesn't quite work out of the box yet, although I'm working on it. Use at your own risk.
+
+NOTE: This project has _nothing_ todo with Mozilla's kraken JS benchmark tool. My project got it's name before I knew about Mozilla's kraken project. I'll eventually get to renaming this project to something else when I get an inspiration for a good name. 
 
 Requirements
 ------------
 
-To fully use kraken.sh, it is assumed that your command line environment has at least the following:
+To fully use kraken.sh, it is assumed that your command line environment has at least the following tools:
 
 * git
 * ssh
