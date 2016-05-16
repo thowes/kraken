@@ -5,7 +5,7 @@ TYNNYRI=""
 
 debug() {
 	if [ $VERBOSITY -ge $LEV_D ]; then 
-		echo -e "[[\e[e33 DEBUG $1 $2 $3 $4\e[0m ]]"
+		echo -e "[[ DEBUG $1 $2 $3 $4 ]]"
 	fi 
 }
 
@@ -33,6 +33,6 @@ verboosi() {
 }
 
 virhe() {
-	echo -e "[[\e[91m ERR $1 $2 $3 $4\e[0m ]]" 
+	echo -e "[[ ERR $1 $2 $3 $4 ]]" 
 }
 

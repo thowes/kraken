@@ -2,8 +2,9 @@
 #alias_darwin.sh, L 10.5.2016
 alias k=kill
 alias n=nano
-alias op=projekti_avaa
+alias op=open
 alias p=projekti
+alias pa=projekti_avaa
 alias r=rails
 alias rev='make rev'
 alias rt='cd /'
