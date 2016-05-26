@@ -54,7 +54,7 @@ shorts_startup() {
 			else virhe NO $KR_NAME_STARTUP found in $KR_DIR_STARTUP 
 			fi;;
 		def) cp $KR_DIR_LNK/STARTUP/default/*.lnk $KR_DIR_STARTUP/;;
-		*) if [ -d $KR_DIR_LNK/STARTUP/$1 ]; then cp $KR_DIR_LNK/STARTUP/$1/*.lnk $KR_DIR_STARTUP/; else virhe SHORTS/STARTUP $1 $2; fi;;
+		*) if [ -d $KR_DIR_LNK/STARTUP/$1 ]; then cp $KR_DIR_LNK/STARTUP/$1/*.lnk $KR_DIR_STARTUP/; fi;;
 	esac
 }
 
