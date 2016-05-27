@@ -77,19 +77,24 @@ varko() {
 }
 
 varko_new() {
-	echo NEWVARKO
-	# 1 Tsekkaa backup.log viimeisin rivi (tail / bulog_latest)
-	# LATEST=$(bulog_latest $BULOG_POLKU) 
-	# LATEST_MD5=(awk LATEST)
-	#LATEST_DATE=(awk LATEST)
-	#2. Pilko (awk) viimeinen rivi osiin: päivä/aika, md5 sum, kohde
-	#3. Vrt. Onko backup.log viimeisin päivä sama kuin tänään, jos on lopeta varko (if-then-else)
-	#4. Luo uusi zip hakemiston sisällöstä (ilman backup.log -tiedostoa)
-	#5. Tarkista onko luodun zip-tiedoston md5 sama kuin backup.log tiedoston viimeisimmällä rivillä
-	#6. Jos on, keskeytä, muutoin jatka (if-then-else)
-	#7. Päivitä backup.log tiedosto ja Kopioi backup.log tiedosto backup.logs -hakemistoon zip-tiedoston nimellä (kaikille vs vain jos uusi cbc?)
-	#8. Luo uusi kryptotiedosto (gpg) luodusta zip tiedostosta
-	#9. Poista luotu zip-tiedosto
-	# rm BUPATH/HOSTNAME.USER.zip
-	#10. Siirrä luotu gpg oC / talentless-backups -hekmistoon ja muuta tiedosto pääte muotoon .cbc  
+	if [ -d $1 ] && [ $ != "" ]; then
+		debug KOP $1 $2
+		# Checking the last row of backup.log (tail / bulog_latest)
+		# LATEST_TODAY=$(bulog_latest $BULOG_POLKU)
+		# Splitting LATEST_TODAY the retrieve the parts of the string. päivä/aika, md5 sum, kohde
+		# LATEST_MD5=(awk LATEST_TODAY)
+		# LATEST_DATE=(awk LATEST_TODAY)
+		# LATEST_DATE=(awk LATEST_TODAY)
+		#3. Vrt. Onko backup.log viimeisin päivä sama kuin tänään, jos on lopeta varko (if-then-else)
+		#4. Luo uusi zip hakemiston sisällöstä (ilman backup.log -tiedostoa)
+		#5. Tarkista onko luodun zip-tiedoston md5 sama kuin backup.log tiedoston viimeisimmällä rivillä
+		#6. Jos on, keskeytä, muutoin jatka (if-then-else)
+		#7. Päivitä backup.log tiedosto ja Kopioi backup.log tiedosto backup.logs -hakemistoon zip-tiedoston nimellä (kaikille vs vain jos uusi cbc?)
+		#8. Luo uusi kryptotiedosto (gpg) luodusta zip tiedostosta
+		#9. Poista luotu zip-tiedosto
+		# rm BUPATH/HOSTNAME.USER.zip
+		#10. Siirrä luotu gpg oC / talentless-backups -hekmistoon ja muuta tiedosto pääte muotoon .cbc  
+	else
+		virhe KOP "Arguments " $1 $2 "not valid!"
+	fi
 }
