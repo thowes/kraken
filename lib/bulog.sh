@@ -25,7 +25,6 @@ bulog() {
 }
 
 bulog_latest() {
-	debug BULOG latest
 	KR_LATEST_TODAY="today_false"
 	if [ -f $1/backup.log ]; then
 		KR_TODAY=$(date +"%F")
@@ -35,6 +34,7 @@ bulog_latest() {
 		#if already backed up today, saving that to LATEST_TODAY
 	fi
 	debug BULOG 24 $KR_LATEST_TODAY
+	echo $KR_LATEST_BACKUP_LINE
 }
 
 bulog_add() {
