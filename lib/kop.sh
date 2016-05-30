@@ -58,7 +58,7 @@ varko() {
 			else
 				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log*
 			fi
-			# collect md5 checksums of new and comparing it to old (defualt in case there is no file) 
+			# collect md5 checksums of new and comparing it to old (default in case there is no file) 
 			KR_MD5_NEW="ei mit"
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then KR_MD5_NEW=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip); fi
 			if [ "$KR_MD5_OLD" != "$KR_MD5_NEW" ]; then
@@ -83,7 +83,7 @@ varko_new() {
 		if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.old ]; then rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.old; fi
 		BU_LATEST_MD5="nada"
 		if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then
-			BU_TODAY_MD5=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $1}')
+			BU_LATEST_MD5=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $1}')
 			mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $KR_DIR_BUT/$2.$USER.$HOSTNAME.old
 		fi
 		# Getting the last row of backup.log
@@ -102,12 +102,20 @@ varko_new() {
 			fi
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then BU_TODAY_MD5=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $1}'); fi
 			# Checking if md5 sum is the same between the latest backup in backup.log and current backup. If not, continue.
-			echo $BU_LATEST_MD5 vs. $BU_TODAY_MD5
-			#7. Päivitä backup.log tiedosto ja Kopioi backup.log tiedosto backup.logs -hakemistoon zip-tiedoston nimellä (kaikille vs vain jos uusi cbc?)
-			#8. Luo uusi kryptotiedosto (gpg) luodusta zip tiedostosta
-			#9. Poista luotu zip-tiedosto
-			# rm BUPATH/HOSTNAME.USER.zip
-			#10. Siirrä luotu gpg oC / talentless-backups -hekmistoon ja muuta tiedosto pääte muotoon .cbc
+			echo $BU_LATEST_MD5 "\n" $BU_TODAY_MD5
+			if [ $BU_LATEST_MD5 != $BU_TODAY_MD5 ]; then
+				# Update the backup.log file and copy it to the backup.logs directory.
+				bulog_add $1 $2 $BU_TODAY_MD5
+				#cp $1/backup.log $KR_DIR_LOGS/backup/$2.log
+				# Create new encrypted file from the created zip file.
+				gpg --encrypt -r $RECIPIENT $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip
+			else
+				echo VKNEW-IFT
+			fi
+			# Removing the created zip file.
+			# rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip
+			# Moving the created gpg file to the backup directory.
+			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg ]; then mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.$USER.$HOSTNAME.cbc; fi
 		else
 			echo $BU_LATEST_DATE vs. $BU_TODAY_DATE and $BU_LATEST_MD5
 		fi
