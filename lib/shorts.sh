@@ -51,7 +51,7 @@ shorts_startup() {
 		clr)
 			if [ -f $KR_DIR_STARTUP/$KR_NAME_STARTUP ]; then 
 				cp $KR_DIR_STARTUP/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/STARTUP/; rm $KR_DIR_STARTUP/*.lnk
-			else virhe NO $KR_NAME_STARTUP found in $KR_DIR_STARTUP 
+			#else virhe NO $KR_NAME_STARTUP found in $KR_DIR_STARTUP 
 			fi;;
 		def) cp $KR_DIR_LNK/STARTUP/default/*.lnk $KR_DIR_STARTUP/;;
 		*) if [ -d $KR_DIR_LNK/STARTUP/$1 ]; then cp $KR_DIR_LNK/STARTUP/$1/*.lnk $KR_DIR_STARTUP/; fi;;

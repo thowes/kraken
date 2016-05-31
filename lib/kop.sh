@@ -102,22 +102,19 @@ varko_new() {
 			fi
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then BU_TODAY_MD5=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $1}'); fi
 			# Checking if md5 sum is the same between the latest backup in backup.log and current backup. If not, continue.
-			echo $BU_LATEST_MD5 "\n" $BU_TODAY_MD5
 			if [ $BU_LATEST_MD5 != $BU_TODAY_MD5 ]; then
 				# Update the backup.log file and copy it to the backup.logs directory.
 				bulog_add $1 $2 $BU_TODAY_MD5
-				#cp $1/backup.log $KR_DIR_LOGS/backup/$2.log
+				cp $1/backup.log $KR_DIR_LOGS/$2.log
 				# Create new encrypted file from the created zip file.
 				gpg --encrypt -r $RECIPIENT $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip
-			else
-				echo VKNEW-IFT
 			fi
 			# Removing the created zip file.
-			# rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip
+			rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip
 			# Moving the created gpg file to the backup directory.
-			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg ]; then mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.$USER.$HOSTNAME.cbc; fi
+			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg ]; then mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.$USER.$HOSTNAME.cbc; else virhe NO CBC; fi
 		else
-			echo $BU_LATEST_DATE vs. $BU_TODAY_DATE and $BU_LATEST_MD5
+			debug VKNEW $BU_LATEST_DATE vs. $BU_TODAY_DATE
 		fi
 	else
 		virhe KOP "Arguments " $1 $2 "not valid!"
