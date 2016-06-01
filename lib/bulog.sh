@@ -39,6 +39,7 @@ bulog_add() {
 		KR_NEW_BACKUP=$(date +"%F %R")
 		echo $KR_NEW_BACKUP $2 ver $3 >> $1/backup.log
 	else
+		#touch $1/backup.log
 		virhe $1/backup.log is not a valid file.
 	fi
 }
