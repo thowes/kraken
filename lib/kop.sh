@@ -2,7 +2,7 @@
 #kop.sh, L 27.6.2013/29.6.2013
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri KOP; fi
 
-varko_new() {
+varko() {
 	debug KOP $1 $2
 	if [ -d $1 ] && [ $2 != "" ]; then
 		# Delete and rename old backups, if they exist.
