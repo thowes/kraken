@@ -1,19 +1,3 @@
-info:
-	@svn info
-
-orig:
-	@svn info|grep "Repository Root"
-
-rev:
-	@svn info|grep Revision
-
 st:
-	@svn status
+	@git st
 
-tls:
-	@todo.sh ls +kraken
-
-up:
-	@svn update
-
-	
