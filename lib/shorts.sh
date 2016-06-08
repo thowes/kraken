@@ -24,9 +24,11 @@ shorts_menu() {
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "MENU-$1"; fi
 	case $1 in
 		clr)
-			cp $KR_DIR_AMENU/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/MENU/
-			cp $KR_DIR_UMENU/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/MENU/
-			;;
+			if [ -d $KR_DIR_LNK/BU.$HOSTNAME/MENU/ ]; then
+				cp $KR_DIR_AMENU/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/MENU/
+				cp $KR_DIR_UMENU/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/MENU/
+			else virhe No backup directory for menu.
+			fi;;
 	esac
 }
 
