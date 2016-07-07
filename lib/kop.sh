@@ -21,8 +21,9 @@ varko() {
 		# Compare the date in latest line of backup.log, if not today, then continue.
 		if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
 			# Creating new zip from the directory without backup.log file
-			if [ -f ~/$KR_DIR_EXCL/$2.lst ]; then
-				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/$2.lst -x *backup.log*
+			if [ -f ~/$KR_DIR_INCL/$2.lst ]; then
+				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -i@~/$KR_DIR_INCL/$2.lst
+				debug zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -i@~/$KR_DIR_INCL/$2.lst
 			else
 				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log*
 			fi

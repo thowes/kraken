@@ -70,6 +70,6 @@ shorts() {
 			st) tynnyri new SHORTS/ST; shorts_sendto $HOSTNAME; shorts_sendto $2;;
 		esac
 		if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
-	else virhe no APPLNK directory
+	else debug no APPLNK directory
 	fi
 }
