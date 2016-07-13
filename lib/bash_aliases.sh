@@ -30,7 +30,6 @@ alias origin='git remote -v|grep origin'
 alias proj=projekti
 alias psf='ps fu'
 alias pull='git pull'
-alias proj=projekti
 alias remote='git remote'
 alias reset='rake db:migrate:reset'
 alias rk=rake
@@ -42,10 +41,7 @@ alias seed='rake db:seed RAILS_ENV=development'
 alias server='rails server -p $PORT -b $IP'
 alias st='if [ -f makefile ]; then make st; else git st; fi'
 alias test='rake test'
-alias up='make upd'
-alias upd='make upd'
-alias update='make upd'
 
-if [ -f ~/proj/config/$HOSTNAME/alias.sh ]; then
-    . ~/proj/config/$HOSTNAME/alias.sh
+if [ -f ~/Projects/config/$HOSTNAME/alias.sh ]; then
+    . ~/Projects/config/$HOSTNAME/alias.sh
 fi
