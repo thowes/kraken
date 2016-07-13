@@ -14,6 +14,7 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias hst='cat ~/.bash_history'
+alias k80=kaiku80
 alias k9='kill -9'
 alias levy='df -h'
 alias l='ls -la'
