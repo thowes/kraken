@@ -1,4 +1,6 @@
 alias ..='cd ..'
+alias ...='cd ..;cd ..'
+alias ....='cd ..;cd ..;cd ..'
 alias add='git add -A; git commit -m'
 alias branch='git branch'
 alias bu=bundle
@@ -9,7 +11,6 @@ alias cd3='cd ..;cd ..;cd ..'
 alias cim='svn commit -m'
 alias co='git co'
 alias ed=muokkaa
-alias gm='git add .; git commit -m'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -25,10 +26,11 @@ alias migrate='rake db:migrate'
 alias mk=make
 alias more=less
 alias n2='nano -w -T 2'
+alias origin='git remote -v|grep origin'
 alias proj=projekti
 alias psf='ps fu'
 alias pull='git pull'
-alias push='git push'
+alias proj=projekti
 alias remote='git remote'
 alias reset='rake db:migrate:reset'
 alias rk=rake
