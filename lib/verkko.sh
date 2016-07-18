@@ -11,7 +11,7 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 	# Different network commands are available in different OSes.
 	case $KAYTTIS in
 		cygwin)
-			# Using windows (w7) networks commands
+			# Using windows networks commands
 			VERKKO_IP=$(ipconfig|grep IPv4)
 			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID); else VERKKO_ESSID=nada; fi
 			;;
@@ -31,7 +31,8 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 			;;
 		*) virhe VERKKO "$KAYTTIS not supported or recognized!";;
 	esac
-	source $KR_DIR_CFG/nets.sh
+	. ~/$KR_DIR_CFG/nets.sh
+else virhe nets.sh not found
 fi
 
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $VERKKO; tynnyri kick; fi
@@ -41,7 +42,6 @@ verkko() {
 	case $KAYTTIS in
 		cygwin)
 			case $1 in
-				ap) netsh wlan show networks;;
 				arp) arp -a;;
 				dns) ipconfig|grep "DNS Suffix Search List";;
 				eth) netsh lan show interfaces;;
@@ -55,25 +55,25 @@ verkko() {
 			esac;;
 		darwin)
 			case $1 in
-				ap) airport -I|grep SSID|grep -v BSSID;;
 				eth) ifconfig eth0;;
 				ext) curl http://ipinfo.io/ip;;
 				ip) ifconfig|grep broadcast;;
 				lan) ifconfig eth0;;
 				mac) ifconfig -a|grep HWaddr;;
+				ssid) airport -I|grep -v BSSID|grep SSID;;
 				wlan) ifconfig wlan0;;
 				*) ifconfig -a;;
 			esac
 			;;
 		ubuntu)
 			case $1 in
-				ap) iwlist wlan0 scan|grep ESSID;;
 				arp) arp -a;;
 				eth) ifconfig eth0;;
 				ext) curl http://ipinfo.io/ip;;
 				ip) ifconfig -a|grep IP;;
 				lan) ifconfig eth0;;
 				mac) ifconfig -a|grep HWaddr;;
+				ssid) iwlist wlan0 scan|grep ESSID;;
 				wlan) ifconfig wlan0;;
 				*) ifconfig -a;;
 			esac
