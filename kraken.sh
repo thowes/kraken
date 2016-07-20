@@ -1,8 +1,15 @@
 #!/bin/bash
 #kraken.sh, L 17.8.2010
 kraken() {
-	echo "[[ KRAKEN "$USER"@"$HOSTNAME" via "$VERKKO" ]]"
-	compu_terminal $VERKKO
+	case  $1 in
+		l) echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$VERKKO" ]]";;
+		s) echo $VERKKO;;
+		v) echo $VERKKO;;
+		*) 
+			echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$VERKKO" ]]"
+			compu_terminal $VERKKO
+			;;
+	esac
 }
 
 if [ -f ~/$2 ]; then
@@ -44,6 +51,6 @@ if [ -f ~/$2 ]; then
 
 	#TOIMENPITEET
 	if [ $BACKUPS == "true" ]; then compu_tasks $CONTEXT; fi
-	if [ $VERBOSITY -ge $LEV_N ]; then kraken; fi
+	if [ $VERBOSITY -ge $LEV_V ]; then kraken; fi
 fi
 cd
