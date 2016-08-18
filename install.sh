@@ -34,4 +34,6 @@ else
 	fi
 fi
 
-echo -e "\nif [ -f $KR_TO_DIR/kraken.cfg ]; then . $KR_FROM_DIR/kraken.sh b '$KR_TO_DIR/kraken.cfg'; fi" >> ~/.bashrc
+echo -e "\nif [ -f $KR_TO_DIR/kraken.cfg ]; then" >> ~/.bashrc
+echo -e "\t. $KR_FROM_DIR/kraken.sh b '$KR_TO_DIR/kraken.cfg'" >> ~/.bashrc
+echo -e "fi" >> ~/.bashrc
