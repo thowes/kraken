@@ -8,6 +8,7 @@ alias pa=projekti_avaa
 alias r=rails
 alias rev='make rev'
 alias rt='cd /'
+alias sammu='sudo shutdown -h now'
 alias syn=synkronoi
 alias synk=synkronoi
 alias t=touch

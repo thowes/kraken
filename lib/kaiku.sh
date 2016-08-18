@@ -26,7 +26,7 @@ tynnyri() {
 		del) TYNNYRI="";;
 		k) tynnyri kick;;
 		dump) TYNNYRI="$TYNNYRI$2"; tynnyri kick;;
-		kick) echo "[[ $TYNNYRI ]]"; tynnyri del;;
+		kick) if [ $VERBOSITY -ge $LEV_V ]; then echo "[[ $TYNNYRI ]]"; fi; tynnyri del;;
 		new) TYNNYRI="$2";;
 		pr) echo "[[ $TYNNYRI ]]";;
 		*) tynnyri add $1;;
