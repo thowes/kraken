@@ -34,6 +34,7 @@ else
 	fi
 fi
 
+echo -e "\nKR_DIR_ALIAS=Projects/kraken/cfg" >> ~/.bashrc
 echo -e "\nif [ -f $KR_FROM_DIR/lib/bash_aliases.cfg ]; then" >> ~/.bashrc
 echo -e "\t. $KR_FROM_DIR/lib/bash_aliases.sh" >> ~/.bashrc
 echo -e "fi" >> ~/.bashrc
