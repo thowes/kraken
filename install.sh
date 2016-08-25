@@ -5,7 +5,7 @@ echo "[[ install for kraken shell script collection ]]"
 if [ -f 'kraken.sh' ]; then
 	KR_FROM_DIR=$(pwd)
 else
-	KR_FROM_DIR="~/proj/kraken"
+	KR_FROM_DIR="~/Projects/kraken"
 fi
 
 TESTATTR=$1.
