@@ -23,8 +23,6 @@ synk_real() {
 				else
 					debug KOP $2
 				fi;;
-			scp) echo WinSCP;;
-			sftp) echo SFTP;;
 			upl) rsync $SYNK_PARAM $SYNK_LDIR $SYNK_USERNAME'@'$SYNK_HOSTNAME':'$SYNK_DDIR --exclude-from ~/$KR_DIR_EXCL/$SYNK_EXCLUDE;;
 			wget) echo WGET;;
 			winscp) echo WinSCP;;
