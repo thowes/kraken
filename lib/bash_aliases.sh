@@ -41,4 +41,5 @@ alias test='rake test'
 
 if [ -f ~/Projects/config/$HOSTNAME/alias.sh ]; then
     . ~/Projects/config/$HOSTNAME/alias.sh
+else echo HOSTNAME ALIAS NOT FOUND
 fi
