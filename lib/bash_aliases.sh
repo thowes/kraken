@@ -7,7 +7,7 @@ alias bu=bundle
 alias bx='bundle exec'
 alias cd..='cd ..'
 alias cim='svn commit -m'
-alias co='git co'
+alias co='git checkout'
 alias ed=muokkaa
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
@@ -36,7 +36,7 @@ alias rs=rspec
 alias ru=screen
 alias seed='rake db:seed RAILS_ENV=development'
 alias server='rails server -p $PORT -b $IP'
-alias st='if [ -f makefile ]; then make st; else git st; fi'
+alias st='if [ -f makefile ]; then make st; else git status; fi'
 alias test='rake test'
 
 if [ -f ~/Projects/config/$HOSTNAME/alias.sh ]; then
