@@ -50,7 +50,7 @@ if [ -f ~/$2 ]; then
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 
 	#TOIMENPITEET
-	if [ $BACKUPS == "true" ]; then compu_tasks $CONTEXT; fi
+	if [ $BACKUPS == "true" ]; then compu_start $CONTEXT; fi
 	if [ $VERBOSITY -ge $LEV_V ]; then kraken; fi
 fi
 cd
