@@ -6,33 +6,35 @@ synk_real() {
 	debug SYNK real $1 $2
 	if [ -f ~/$KR_DIR_CFG/../loc/sites/$2 ]; then . ~/$KR_DIR_CFG/../loc/sites/$2
 		kaiku $1 $2
-		#if [ $SYNK_PROTOCOL == "ssh" ]; then kaiku SYNK $SYNK_PROTOCOL; fi
 		case $1 in
-			ftp) echo "[[ KIR_SYNK ERR2 ]] ftp "$SYNK_PARAM" "$SYNK_USERNAME"@"$SYNK_HOSTNAME":"$SYNK_DDIR" "$SYNK_LDIR ;;
-			ftp_upl) echo "[[ KIR_SYNK ERR2 ]] ftp "$SYNK_PARAM" "$SYNK_USERNAME"@"$SYNK_HOSTNAME":"$SYNK_DDIR" "$SYNK_LDIR ;;
-			kaiku) echo "[[ KIR_SYNK ERR1 ]] "$SYNK_PARAM" "$SYNK_USERNAME"@"$SYNK_HOSTNAME":"$SYNK_DDIR" "$SYNK_LDIR" --exclude-from "$SYNK_EXCLUDE ;;  
 			local) echo rsync $SYNK_PARAM $SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_EXCL'/'$SYNK_EXCLUDE;;
 			SSH) ssh $SYNK_USERNAME"@"$SYNK_HOSTNAME;;
 			SYN)
-				#if [ -f $1/backup.log ]; then tail -n 1 $1/backup.log; fi
-				KR_LATEST_TODAY="today_maybe"
-				bulog $SYNK_LDIR $HOSTNAME $SYNK_HOSTNAME
-				#doesn't do backup runs if already backed up today (checkup happens in bulog)
-				if [ $KR_LATEST_TODAY == "today_false" ]; then
-					rsync $SYNK_PARAM $SYNK_USERNAME@$SYNK_HOSTNAME:$SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_EXCL/$2
-				else
-					debug KOP $2
+				if [ -f ~/$KR_DIR_EXCL/$2 ]; then
+					#if [ -f $1/backup.log ]; then tail -n 1 $1/backup.log; fi
+					echo F0
+					KR_LATEST_TODAY="today_maybe"
+					echo F1
+					bulog $SYNK_LDIR $HOSTNAME $SYNK_HOSTNAME
+					#doesn't do backup runs if already backed up today (checkup happens in bulog)
+					echo F2
+					if [ $KR_LATEST_TODAY == "today_false" ]; then
+						rsync $SYNK_PARAM $SYNK_USERNAME@$SYNK_HOSTNAME:$SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_EXCL/$2
+					else
+						debug KOP $2
+					fi
+				else virhe Exclude file missing
 				fi;;
 			upl) rsync $SYNK_PARAM $SYNK_LDIR $SYNK_USERNAME'@'$SYNK_HOSTNAME':'$SYNK_DDIR --exclude-from ~/$KR_DIR_EXCL/$SYNK_EXCLUDE;;
 			wget) echo WGET;;
 			winscp) echo WinSCP;;
-			*) virhe SYNK real "-" "ei protokollaa!";;
+			*) virhe SYNK real "-" "no protocol!";;
 		esac
 	else
 		if [ -f ~/$KR_DIR_CFG/../loc/sites/$2.sh ]; then
 			. ~/$KR_DIR_CFG/../loc/sites/$2.sh $1
 		else
-			virhe SYNK $1 $2 "-" "yhteyttä ei tunnistettu!"
+			virhe SYNK $1 $2 "-" "connection not recognized!"
   	fi
   fi
 }
