@@ -3,12 +3,10 @@
 kraken() {
 	case  $1 in
 		l) echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$VERKKO" ]]";;
-		s) echo $VERKKO;;
-		v) echo $VERKKO;;
-		*) 
-			echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$VERKKO" ]]"
+		s) echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$VERKKO" ]]"
 			compu_terminal $VERKKO
 			;;
+		*) echo $VERKKO;;
 	esac
 }
 
@@ -55,6 +53,6 @@ if [ -f ~/$2 ]; then
 
 	#TOIMENPITEET
 	if [ $BACKUPS == "true" ]; then compu_start $CONTEXT; fi
-	if [ $VERBOSITY -ge $LEV_V ]; then kraken; fi
+	if [ $VERBOSITY -ge $LEV_V ]; then kraken s; fi
 fi
 cd
