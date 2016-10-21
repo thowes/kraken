@@ -25,9 +25,9 @@ shorts_menu() {
 	case $1 in
 		clr)
 			if [ -d $KR_DIR_LNK/BU.$HOSTNAME/MENU/ ]; then
-				cp $KR_DIR_AMENU/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/MENU/
-				cp $KR_DIR_UMENU/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/MENU/
-			else virhe No backup directory for menu.
+				if [ -d $KR_DIR_AMENU ]; then cp $KR_DIR_AMENU/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/MENU/; else virhe shorts.sh:28 dir $KR_DIR_AMENU missing; fi
+				if [ -d $KR_DIR_UMENU ]; then cp $KR_DIR_UMENU/*.lnk $KR_DIR_LNK/BU.$HOSTNAME/MENU/; else virhe shorts.sh:29 dir $KR_DIR_UMENU missing; fi
+			else virhe shorts.sh:30 dir $KR_DIR_LNK/BU.$HOSTNAME/MENU/ missing
 			fi;;
 	esac
 }
