@@ -20,21 +20,21 @@ varko() {
 		BU_TODAY_DATE=$(date +"%F")
 		# Compare the date in latest line of backup.log, if not today, then continue.
 		if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
-			virhe A1 ~/$KR_DIR_INCL/$2.lst
+			#virhe A1 ~/$KR_DIR_INCL/$2.lst
 			# Creating new zip from the directory without backup.log file
 			if [ -f ~/$KR_DIR_INCL/$2.lst ]; then
 				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -i@~/$KR_DIR_INCL/$2.lst
 				debug zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -i@~/$KR_DIR_INCL/$2.lst
 			else
-				virhe A2 $1
+				#virhe A2 $1
 				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log*
-				virhe A3 $HOME/$KR_DIR_EXCL/default.lst
+				#virhe A3 $HOME/$KR_DIR_EXCL/default.lst
 			fi
-			virhe A6
+			#virhe A6
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then
 				BU_TODAY_MD5=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $1}')
 			fi
-			virhe A7 $BU_LATEST_MD5 is/not $BU_TODAY_MD5
+			#virhe A7 $BU_LATEST_MD5 is/not $BU_TODAY_MD5
 			# Checking if md5 sum is the same between the latest backup in backup.log and current backup. If not, continue.
 			if [ $BU_LATEST_MD5 != $BU_TODAY_MD5 ]; then
 				# Update the backup.log file and copy it to the backup.logs directory.
@@ -43,7 +43,7 @@ varko() {
 				# Create new encrypted file from the created zip file.
 				if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then gpg --encrypt -r $RECIPIENT $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip; fi
 			fi
-			virhe A8
+			#virhe A8
 			# Removing the created zip file.
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip; fi
 			# Moving the created gpg file to the backup directory.
