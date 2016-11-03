@@ -45,7 +45,7 @@ varko() {
 			fi
 			#virhe A8
 			# Removing the created zip file.
-			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip; fi
+			#if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip; fi
 			# Moving the created gpg file to the backup directory.
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg ]; then mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.$USER.$HOSTNAME.cbc; fi
 		else
