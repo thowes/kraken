@@ -67,7 +67,7 @@ shorts() {
 		case $1 in
 			clr) tynnyri new SHORTS/CLR; shorts_menu clr; shorts_dt clr; shorts_startup clr;;
 			dt) tynnyri new SHORTS/DT; shorts_dt c $HOSTNAME; shorts_dt l $2; shorts_dt p $3; shorts_dt u $USER;;
-			st) tynnyri new SHORTS/ST; shorts_sendto $HOSTNAME; shorts_sendto $2;;
+			st) tynnyri new SHORTS/ST; shorts_sendto $HOSTNAME; shorts_startup $HOSTNAME; shorts_startup $2;;
 		esac
 		if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 	else debug no APPLNK directory
