@@ -7,6 +7,7 @@ alias bu=bundle
 alias bx='bundle exec'
 alias cd..='cd ..'
 alias cim='svn commit -m'
+alias clone='git clone'
 alias co='git checkout'
 alias ed=muokkaa
 alias grep='grep --color=auto'
