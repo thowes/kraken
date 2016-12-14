@@ -10,14 +10,13 @@ alias cim='svn commit -m'
 alias clone='git clone'
 alias co='git checkout'
 alias ed=muokkaa
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'              # show differences in colour
+alias fgrep='fgrep --color=auto'              # show differences in colour
+alias grep='grep --color'                     # show differences in colour
 alias hst='cat ~/.bash_history'
 alias k80=kaiku80
 alias k9='kill -9'
 alias levy='df -h'
-alias m=less
 alias merge='git merge'
 alias migrate='rake db:migrate'
 alias mk=make
