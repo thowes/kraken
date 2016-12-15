@@ -38,6 +38,7 @@ alias seed='rake db:seed RAILS_ENV=development'
 alias server='rails server -p $PORT -b $IP'
 alias st='if [ -f makefile ]; then make st; else git status; fi'
 alias test='rake test'
+alias upd=projekti_update
 
 if [ -f ~/Projects/config/$HOSTNAME/alias.sh ]; then
     . ~/Projects/config/$HOSTNAME/alias.sh
