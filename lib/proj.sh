@@ -14,7 +14,6 @@ projekti() {
 		~*) KR_DIRPO=$KR_DIRPO_HOME$(echo $KR_DIRPO_TEMP|awk -F~ '{ print$2 }');;
 	esac
 	if [ $KR_DIRPO != '' ]; then
-		echo $KR_DIRPO
 		if [ -d $KR_DIRPO ]; then
 			kaiku PROJ $1 $KR_DIRPO
 			cd $KR_DIRPO
