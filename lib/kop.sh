@@ -7,9 +7,12 @@ varko() {
 	if [ -d $1 ] && [ $2 != "" ]; then
 		# Delete and rename old backups, if they exist.
 		if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.old ]; then rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.old; fi
-		BU_LATEST_MD5="nada"
+		BU_LATEST_MD5="nada"; BU_TODAY_MD5=md5
 		if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then
-			BU_LATEST_MD5=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $1}')
+			case $KAYTTIS in
+				cygwin) BU_LATEST_MD5=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
+				darwin) BU_LATEST_MD5=$(md5 $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
+			esac
 			mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $KR_DIR_BUT/$2.$USER.$HOSTNAME.old
 		fi
 		# Getting the last row of backup.log
@@ -28,7 +31,10 @@ varko() {
 				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log*
 			fi
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then
-				BU_TODAY_MD5=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $1}')
+				case $KAYTTIS in
+					cygwin) BU_TODAY_MD5=$(md5sum $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
+					darwin) BU_TODAY_MD5=$(md5 $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
+				esac
 			fi
 			# Checking if md5 sum is the same between the latest backup in backup.log and current backup. If not, continue.
 			if [ $BU_LATEST_MD5 != $BU_TODAY_MD5 ]; then
@@ -39,11 +45,11 @@ varko() {
 				if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then gpg --encrypt -r $RECIPIENT $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip; fi
 			fi
 			# Removing the created zip file.
-			#if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip; fi
+			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip; fi
 			# Moving the created gpg file to the backup directory.
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg ]; then mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.$USER.$HOSTNAME.cbc; fi
 		else
-			debug VKNEW $BU_LATEST_DATE vs. $BU_TODAY_DATE
+			debug varko.sh:52 $BU_LATEST_DATE vs. $BU_TODAY_DATE
 		fi
 	else
 		virhe KOP "Arguments " $1 $2 "not valid!"
