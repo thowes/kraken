@@ -13,9 +13,15 @@ shorts_dt() {
 			fi;;
 		c) if [ -d $KR_DIR_LNK/COMP/$2 ]; then cp $KR_DIR_LNK/COMP/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
 		l) if [ -d $KR_DIR_LNK/KTXT/$2 ]; then cp $KR_DIR_LNK/KTXT/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
-		p) if [ -d $KR_DIR_LNK/PROJ/$2 ]; then cp $KR_DIR_LNK/PROJ/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
+		p)
+			if [ -d $KR_DIR_LNK/PROG/$2 ]; then cp $KR_DIR_LNK/PROG/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt-prog $1 $2; fi
+			if [ -d $KR_DIR_LNK/PROJ/$2 ]; then cp $KR_DIR_LNK/PROJ/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt-proj $1 $2; fi
+			;;
 		u) if [ -d $KR_DIR_LNK/USER/$2 ]; then cp $KR_DIR_LNK/USER/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
-		*) if [ -d $KR_DIR_LNK/PROJ/$1 ]; then cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
+		*)
+			if [ -d $KR_DIR_LNK/PROG/$1 ]; then cp $KR_DIR_LNK/PROG/$1/*.* $KR_DIR_DT/; else virhe SHORTS dt-prog $1 $2; fi
+			if [ -d $KR_DIR_LNK/PROJ/$1 ]; then cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/; else virhe SHORTS dt-proj $1 $2; fi
+			;;
 	esac
 }
 
@@ -27,7 +33,7 @@ shorts_menu() {
 			if [ -d $KR_DIR_BUA/BU.$HOSTNAME/MENU/ ]; then
 				if [ -d $KR_DIR_AMENU ]; then cp $KR_DIR_AMENU/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/MENU/; else virhe shorts.sh:28 dir $KR_DIR_AMENU missing; fi
 				if [ -d $KR_DIR_UMENU ]; then cp $KR_DIR_UMENU/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/MENU/; else virhe shorts.sh:29 dir $KR_DIR_UMENU missing; fi
-			else virhe shorts.sh:30 dir $KR_DIR_LNK/BU.$HOSTNAME/MENU/ missing
+			else virhe shorts.sh:30 dir $KR_DIR_BUA/BU.$HOSTNAME/MENU/ missing
 			fi;;
 	esac
 }
