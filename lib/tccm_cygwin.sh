@@ -1,5 +1,5 @@
 #!/bin/bash
-#tccm.sh. L 2.4.2013
+#tccm.sh, L 2.4.2013
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri TCCM; fi
 KR_PASSU=passu1
 KR_SALIS=passu2
@@ -30,8 +30,6 @@ tccm() {
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			if [ -f /cygdrive/$2/$KR_TC_NAME.sh ]; then . /cygdrive/$2/$KR_TC_NAME.sh; else echo NO: /cygdrive/$2/$KR_TC_NAME.sh; fi
 			;;
-		n) tccm new $2 $3;;
-		new) echo tc /new /v $2 $3;;
 		pwd) tcc_passu;;
 		ro)
 			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
@@ -39,6 +37,7 @@ tccm() {
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			if [ -f /cygdrive/$2/$KR_TC_NAME.sh ]; then . /cygdrive/$2/$KR_TC_NAME.sh; else echo NO: /cygdrive/$2/$KR_TC_NAME.sh; fi
 			;;
+		rw) tccm key $2 $3 $4;;
 		v2)
 			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc /l$2 /q /s /v $3 /p $KR_SALIS
