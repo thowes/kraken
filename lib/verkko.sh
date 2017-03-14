@@ -13,7 +13,7 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 		cygwin)
 			# Using windows networks commands
 			VERKKO_IP=$(ipconfig|grep IPv4)
-			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID); else VERKKO_ESSID=nada; fi
+			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID|grep -v BSSID); else VERKKO_ESSID=nada; fi
 			;;
 		darwin)
 			# Using osx networks commands.
@@ -49,7 +49,7 @@ verkko() {
 				ip) ipconfig|grep IPv4;;
 				lan) netsh lan show interfaces;;
 				mac) getmac /v;;
-				ssid) netsh wlan show interfaces|grep SSID;;
+				ssid) netsh wlan show interfaces|grep SSID|grep -v BSSID;;
 				wlan) netsh wlan show interfaces;;
 				*) ipconfig /all;;
 			esac;;
