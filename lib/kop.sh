@@ -48,7 +48,7 @@ varko() {
 			# Removing the created zip file.
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then rm $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip; fi
 			# Moving the created gpg file to the backup directory.
-			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg ]; then mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.$USER.$HOSTNAME.cbc; fi
+			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg ]; then mv $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.cbc; fi
 		else
 			debug varko.sh:52 $BU_LATEST_DATE vs. $BU_TODAY_DATE
 		fi
