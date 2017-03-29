@@ -22,8 +22,8 @@ varko() {
 		if [ $BU_LATEST_MD5 == "nada" ]; then BU_LATEST_MD5=$(echo $BU_LATEST_LOGLINE|awk '{print $5}'); fi
 		BU_TODAY_DATE=$(date +"%F")
 		# Compare the date in latest line of backup.log, if not today, then continue.
-		kaiku $BU_LATEST_DATE "LvT" $BU_TODAY_DATE $2
 		if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
+			kaiku $BU_LATEST_DATE "LvT" $BU_TODAY_DATE $2
 			# Creating new zip from the directory without backup.log file
 			if [ -f ~/$KR_DIR_INCL/$2.lst ]; then
 				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -i@~/$KR_DIR_INCL/$2.lst
