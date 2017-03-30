@@ -2,6 +2,7 @@
 #alias_ubuntu.sh
 alias asenna='sudo apt-get install'
 alias buut='sudo shutdown -r now'
+alias here='open .'
 alias k=kill
 alias n=nano
 alias r=rails

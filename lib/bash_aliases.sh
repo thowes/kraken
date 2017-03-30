@@ -40,6 +40,8 @@ alias ru=screen
 alias seed='rake db:seed RAILS_ENV=development'
 alias srv='rails server -b $IP -p $PORT'
 alias st='if [ -f makefile ]; then make st; else git status; fi'
+alias syn=synkronoi
+alias synk=synkronoi
 alias tst='rails test'
 alias upd=projekti_update
 
