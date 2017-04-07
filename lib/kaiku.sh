@@ -4,7 +4,7 @@ if [ $VERBOSITY -ge $LEV_V ]; then echo "[[ KRAKEN/KAIKU ]]"; fi
 TYNNYRI=""
 
 debug() {
-	if [ $VERBOSITY -ge $LEV_D ]; then 
+	if [ $KR_DEBUG == "true" ]; then 
 		echo -e "[[ DEBUG $1 $2 $3 $4 ]]"
 	fi 
 }
