@@ -29,20 +29,23 @@ projekti() {
 
 # update (pull) project if in master branch, if working dir is clean and if there are no commits to push.
 projekti_update() {
-	KR_PROJ_BRANCH=$(git status|grep "On branch")
-	case $KR_PROJ_BRANCH in
-		*master*)
-			KR_PROJ_UPDATE=$(git status|grep origin)
-			case $KR_PROJ_UPDATE in
-				*up-to-date*)
-					KR_PROJ_COMMITS=$(git status|grep commit|grep to)
-					case $KR_PROJ_COMMITS in
-						*nothing*) git pull;;
-						*) virhe You have changes "to commit";;
-					esac;;
-				*ahead*) virhe You are "ahead of master" "in commits";;
-				*) virhe NOT up to date with master;;
-			esac;;
-		*) virhe You are NOT in master branch;;
-	esac
+	if [ $VERKKO != "NADA" ]; then
+		KR_PROJ_BRANCH=$(git status|grep "On branch")
+		case $KR_PROJ_BRANCH in
+			*master*)
+				KR_PROJ_UPDATE=$(git status|grep origin)
+				case $KR_PROJ_UPDATE in
+					*up-to-date*)
+						KR_PROJ_COMMITS=$(git status|grep commit|grep to)
+						case $KR_PROJ_COMMITS in
+							*nothing*) git pull;;
+							*) virhe You have changes "to commit";;
+						esac;;
+					*ahead*) virhe You are "ahead of master" "in commits";;
+					*) virhe NOT up to date with master;;
+				esac;;
+			*) virhe You are NOT in master branch;;
+		esac
+	else virhe Internet not available
+	fi 
 }
