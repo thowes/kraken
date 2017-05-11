@@ -6,7 +6,7 @@ if [ -f $KR_DIR_LIB/ror.sh ]; then . $KR_DIR_LIB/ror.sh; fi
 if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 
 # reads list projects (proj.csv) and jumps to the project folder.
-projekti() {
+projekti_go() {
 	KR_DIRPO_TEMP=$(cat ~/$KR_DIR_CFG/proj.csv|grep $1|awk -F, '{ print $4 }')
 	KR_DIRPO=$KR_DIRPO_TEMP
 	KR_DIRPO_HOME=~
