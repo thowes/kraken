@@ -13,6 +13,10 @@ case $CONTEXT in
 		BACKUPS="false"
 		VERBOSITY=$LEV_N
 		;;
+	b_app)
+		BACKUPS="false"
+		VERBOSITY=$LEV_V
+		;;
 	b_proj)
 		BACKUPS="true"
 		VERBOSITY=$LEV_V
