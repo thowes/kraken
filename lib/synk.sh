@@ -12,12 +12,9 @@ synk_real() {
 			SYN)
 				if [ -f ~/$KR_DIR_EXCL/$2 ]; then
 					#if [ -f $1/backup.log ]; then tail -n 1 $1/backup.log; fi
-					echo F0
-					KR_LATEST_TODAY="today_maybe"
-					echo F1
-					bulog $SYNK_LDIR $HOSTNAME $SYNK_HOSTNAME
+					KR_LATEST_TODAY="today_false"
+					#bulog_add $SYNK_LDIR $HOSTNAME $SYNK_HOSTNAME
 					#doesn't do backup runs if already backed up today (checkup happens in bulog)
-					echo F2
 					if [ $KR_LATEST_TODAY == "today_false" ]; then
 						rsync $SYNK_PARAM $SYNK_USERNAME@$SYNK_HOSTNAME:$SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_EXCL/$2
 					else
