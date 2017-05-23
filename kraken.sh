@@ -3,9 +3,7 @@
 kraken() {
 	case  $1 in
 		l) echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$VERKKO" ]]";;
-		s) echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$VERKKO" ]]"
-			compu_terminal $VERKKO
-			;;
+		s) echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$VERKKO" ]]"; compu_terminal $VERKKO;;
 		*) echo $VERKKO;;
 	esac
 }
@@ -52,7 +50,15 @@ if [ -f ~/$2 ]; then
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
 
 	#TOIMENPITEET
-	if [ $BACKUPS == "true" ]; then compu_start $CONTEXT; fi
+	if [ $BACKUPS == "true" ]; then kaiku $1 $CONTEXT
+		case $CONTEXT in
+			b_app) debug kontext verbose;;
+			b_recon) debug kontext verbose;;
+			b_start) compu_start $CONTEXT;;
+			b_shutdown) debug kontext verbose;;
+			b_verbose) debug kontext verbose;;
+		esac 
+	fi
 	if [ $VERBOSITY -ge $LEV_V ]; then kraken s; fi
 fi
 cd
