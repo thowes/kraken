@@ -19,7 +19,7 @@ if [ -f ~/$2 ]; then
 	if [ -f $KR_DIR_LIB/kaiku.sh ]; then . $KR_DIR_LIB/kaiku.sh; fi
 
 	# MODULES, FILE MANAGEMENT & BACKUP FUNCTIONS
-	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri new "KRAKEN/FLM /w"; fi
+	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FLM /w"; fi
 	if [ -f $KR_DIR_LIB/vers.sh ]; then . $KR_DIR_LIB/vers.sh; fi
 	if [ -f $KR_DIR_LIB/ymp.sh ]; then . $KR_DIR_LIB/ymp.sh; fi
 	case $KAYTTIS in
@@ -31,7 +31,7 @@ if [ -f ~/$2 ]; then
 	if [ -f $KR_DIR_LIB/uus.sh ]; then . $KR_DIR_LIB/uus.sh; fi
 	if [ -f $KR_DIR_LIB/bulog.sh ]; then . $KR_DIR_LIB/bulog.sh; fi
 	if [ -f $KR_DIR_LIB/kop.sh ]; then . $KR_DIR_LIB/kop.sh; fi
-	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
+	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
 	# LOCAL
 	if [ -f $KR_DIR_CFG/compu.sh ]; then . $KR_DIR_CFG/compu.sh; fi
@@ -41,22 +41,19 @@ if [ -f ~/$2 ]; then
 	if [ -f $KR_DIR_LIB/proj.sh ]; then . $KR_DIR_LIB/proj.sh; fi
 
 	#OTHER FUNCTIONS
-	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri new "KRAKEN/FUNK /w"; fi
+	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FUNK /w"; fi
 	if [ -f $KR_DIR_LIB/drives.sh ]; then . $KR_DIR_LIB/drives.sh; fi
 	if [ -f $KR_DIR_LIB/passu.sh ]; then . $KR_DIR_LIB/passu.sh; fi
 	if [ -f $KR_DIR_LIB/synk.sh ]; then . $KR_DIR_LIB/synk.sh; fi
 	if [ -f $KR_DIR_LIB/muok.sh ]; then . $KR_DIR_LIB/muok.sh; fi
 	if [ -f $KR_DIR_LIB/reader.sh ]; then . $KR_DIR_LIB/reader.sh; fi
-	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
+	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
 	#TOIMENPITEET
-	if [ $BACKUPS == "true" ]; then kaiku $1 $CONTEXT
+	if [ $BACKUPS == "true" ]; then
 		case $CONTEXT in
-			b_app) debug kontext verbose;;
-			b_recon) debug kontext verbose;;
 			b_start) compu_start $CONTEXT;;
-			b_shutdown) debug kontext verbose;;
-			b_verbose) debug kontext verbose;;
+			*) kaiku KONTEXT $1 $CONTEXT;;
 		esac 
 	fi
 	if [ $VERBOSITY -ge $LEV_V ]; then kraken s; fi
