@@ -1,6 +1,6 @@
 #!/bin/bash
 #synk.sh, L 24.3.2013
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri SYNK; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri SYNK; fi
 
 synk_real() {
 	debug SYNK real $1 $2
