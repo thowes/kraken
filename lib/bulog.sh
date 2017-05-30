@@ -1,6 +1,6 @@
 #!/bin/bash
 #bulog.sh, L 27.2.2015
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "BULOG"; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri "BULOG"; fi
 
 bulog() {
 	KR_LATEST_TODAY="today_false"
