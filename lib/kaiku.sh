@@ -1,6 +1,6 @@
 #!/bin/bash
 #kaiku.sh, L 14.1.2014
-if [ $VERBOSITY -ge $LEV_V ]; then echo "[[ KRAKEN/KAIKU ]]"; fi
+if [ $KR_DEBUG == "true" ]; then echo "[[ KRAKEN/KAIKU ]]"; fi
 TYNNYRI=""
 
 debug() {
@@ -34,7 +34,7 @@ tynnyri() {
 }
 
 verboosi() {
-	if [ $VERBOSITY -ge $LEV_V ]; then echo "[[ $1 $2 $3 $4 ]]"; fi
+	if [ $KR_DEBUG == "true" ]; then echo "[[ $1 $2 $3 $4 ]]"; fi
 }
 
 virhe() {
