@@ -28,4 +28,4 @@ else
 	esac
 fi
 
-if [ $VERBOSITY -ge $LEV_V ]; then kaiku KRAKEN/YMP $KAYTTIS; fi
+if [ $KR_DEBUG == "true" ]; then kaiku KRAKEN/YMP $KAYTTIS; fi
