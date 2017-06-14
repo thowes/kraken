@@ -1,6 +1,6 @@
 #!/bin/bash
 #verkko.sh, L 21.5.2011/2.4.2013
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri new "KRAKEN/VERKKO /w"; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/VERKKO /w"; fi
 
 if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 	VERKKO_DNS="NADA"
@@ -35,7 +35,7 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 else virhe nets.sh not found
 fi
 
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $VERKKO; tynnyri kick; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri $VERKKO; tynnyri kick; fi
 
 # not working properly in some cases
 verkko() {
