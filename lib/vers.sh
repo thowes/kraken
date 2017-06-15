@@ -1,6 +1,6 @@
 #!/bin/bash
 #vers.sh, L 14.1.2014
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri VERS; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri VERS; fi
 
 vers_w() {
 	if [ -d ~/$KR_DIR_CFG/versions/ ]; then
