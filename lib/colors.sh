@@ -1,6 +1,6 @@
 #!/bin/bash
 #colors.sh, 11.2.2014
-if [ $VERBOSITY -ge $LEV_V ]; then echo "[[ KRAKEN/COLORS ]]"; fi
+if [ $KR_DEBUG == "true" ]; then echo "[[ KRAKEN/COLORS ]]"; fi
 
 if [ "true" == "true" ]; then
 	BLACK=30m
