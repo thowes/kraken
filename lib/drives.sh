@@ -1,6 +1,6 @@
 #!/bin/bash
 #drives.sh, L 24.5.2007
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri DRIVES; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri DRIVES; fi
 
 ker_usb_drives() {
 	if [ $VERBOSITY -ge $LEV_V ]; then tynnyri new DRV; fi
