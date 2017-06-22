@@ -1,6 +1,6 @@
 #!/bin/bash
 #val.sh, L 11.6.2013/20.7.2014
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri VAL; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri VAL; fi
 
 valitse() {
 	#prints to screen list projects valid for current location
