@@ -1,6 +1,6 @@
 #!/bin/bash
 #uus.sh, L 11.6.2013/11.11.2013
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri "UUS"; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri "UUS"; fi
 
 uus() {
 	case "$1" in
