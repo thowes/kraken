@@ -42,4 +42,4 @@ case $CONTEXT in
 		VERBOSITY=$LEV_P
 		;;
 esac
-if [ $VERBOSITY -ge $LEV_V ]; then echo "[[ KRAKEN/KON $CONTEXT ($LEV_V) bu:$BACKUPS ]]"; fi
+if [ $KR_DEBUG == "true" ]; then echo "[[ KRAKEN/KON $CONTEXT ($LEV_V) bu:$BACKUPS ]]"; fi
