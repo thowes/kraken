@@ -1,6 +1,6 @@
 #!/bin/bash
 #unpak.sh, L 6.3.2015
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri UNPAK; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri UNPAK; fi
 
 unpak_main() {
 	case $1 in
