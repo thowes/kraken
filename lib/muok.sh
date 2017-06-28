@@ -1,6 +1,6 @@
 #!/bin/bash
 #muok.sh, L 25.3.2013
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri MUOK; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri MUOK; fi
 EDITOR='nano -w -T 2'
 
 muokkaa() {
