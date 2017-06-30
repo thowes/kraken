@@ -1,6 +1,6 @@
 #!/bin/bash
 #tccm.sh, L 2.4.2013
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri TCCM; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri TCCM; fi
 KR_PASSU=passu1
 KR_SALIS=passu2
 
