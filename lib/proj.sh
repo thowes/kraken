@@ -1,9 +1,9 @@
 #!/bin/bash
 #proj.sh, L 26.6.2013
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri new "KRAKEN/PROJ /w"; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/PROJ /w"; fi
 if [ -f $KR_DIR_LIB/val.sh ]; then . $KR_DIR_LIB/val.sh; fi
 #if [ -f $KR_DIR_LIB/ror.sh ]; then . $KR_DIR_LIB/ror.sh; fi
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri kick; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
 # reads list projects (proj.csv) and jumps to the project folder.
 projekti_go() {
