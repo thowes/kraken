@@ -28,7 +28,10 @@ varko() {
 				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -i@~/$KR_DIR_INCL/$2.lst
 				debug zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -i@~/$KR_DIR_INCL/$2.lst
 			else
-				zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log*
+				case $KAYTTIS in
+					cygwin) zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db*;;
+					darwin) zip -qr $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log* -x "*.DS_Store";;
+				esac
 			fi
 			if [ -f $KR_DIR_BUT/$2.$USER.$HOSTNAME.zip ]; then
 				case $KAYTTIS in
