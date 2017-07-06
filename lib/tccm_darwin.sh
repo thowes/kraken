@@ -17,7 +17,6 @@ tccm() {
 		dis) tccm d $2;;
 		info) tcc_kr_info;;
 		key)
-			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc -m ts $3 -p $KR_PASSU -k $4 /Volumes/l$2
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			#if [ -f /Volumes/$2/$KR_TC_NAME.sh ]; then . /Volumes/$2/$KR_TC_NAME.sh; else echo NO: /Volumes/l$2/$KR_TC_NAME.sh; fi
@@ -25,7 +24,6 @@ tccm() {
 		m) tccm mt $2 $3;;
 		mnt) tccm mt $2 $3;;
 		mt)
-			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc -m ts $3 -p $KR_SALIS -k $4 /Volumes/l$2
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			#if [ -f /Volumes/$2/$KR_TC_NAME.sh ]; then . /Volumes/$2/$KR_TC_NAME.sh; else echo NO: /Volumes/l$2/$KR_TC_NAME.sh; fi
@@ -34,19 +32,16 @@ tccm() {
 		new) echo tc /new /v $2 $3;;
 		pwd) tcc_passu;;
 		ro)
-			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc -m ro $3 -p $KR_PASSU -k $4 /Volumes/l$2
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			#if [ -f /Volumes/$2/$KR_TC_NAME.sh ]; then . /Volumes/$2/$KR_TC_NAME.sh; else echo NO: /Volumes/l$2/$KR_TC_NAME.sh; fi
 			;;
 		v1)
-			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc -m ts $3 -p $KR_PASSU /Volumes/l$2
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			#if [ -f /Volumes/$2/$KR_TC_NAME.sh ]; then . /Volumes/$2/$KR_TC_NAME.sh; else echo NO: /Volumes/l$2/$KR_TC_NAME.sh; fi
 			;;
 		v2)
-			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc -m ts $3 -p $KR_SALIS /Volumes/l$2
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			#if [ -f /Volumes/$2/$KR_TC_NAME.sh ]; then . /Volumes/$2/$KR_TC_NAME.sh; else echo NO: /Volumes/l$2/$KR_TC_NAME.sh; fi

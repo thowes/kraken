@@ -17,7 +17,6 @@ tccm() {
 		dis) tccm d $2;;
 		info) tcc_kr_info;;
 		key)
-			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc /l$2 /q /s /m ts /v $3 /p $KR_PASSU /k $4
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			if [ -f /cygdrive/$2/$KR_TC_NAME.sh ]; then . /cygdrive/$2/$KR_TC_NAME.sh; else echo NO: /cygdrive/$2/$KR_TC_NAME.sh; fi
@@ -25,27 +24,23 @@ tccm() {
 		m) tccm mt $2 $3;;
 		mnt) tccm mt $2 $3;;
 		mt)
-			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc /l$2 /q /s /m ts /v $3 /p $KR_SALIS /k $4
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			if [ -f /cygdrive/$2/$KR_TC_NAME.sh ]; then . /cygdrive/$2/$KR_TC_NAME.sh; else echo NO: /cygdrive/$2/$KR_TC_NAME.sh; fi
 			;;
 		pwd) tcc_passu;;
 		ro)
-			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc /l$2 /q /s /m ro /v $3 /p $KR_PASSU /k $4
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			if [ -f /cygdrive/$2/$KR_TC_NAME.sh ]; then . /cygdrive/$2/$KR_TC_NAME.sh; else echo NO: /cygdrive/$2/$KR_TC_NAME.sh; fi
 			;;
 		rw) tccm key $2 $3 $4;;
 		v2)
-			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc /l$2 /q /s /v $3 /p $KR_SALIS
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			if [ -f /cygdrive/$2/$KR_TC_NAME.sh ]; then . /cygdrive/$2/$KR_TC_NAME.sh; else echo NO: /cygdrive/$2/$KR_TC_NAME.sh; fi
 			;;
 		vault)
-			if [ $VERBOSITY -ge $LEV_V ]; then tynnyri $3; fi
 			tc /l$2 /q /s /v $3 /p $KR_PASSU
 			KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
 			if [ -f /cygdrive/$2/$KR_TC_NAME.sh ]; then . /cygdrive/$2/$KR_TC_NAME.sh; else echo NO: /cygdrive/$2/$KR_TC_NAME.sh; fi
