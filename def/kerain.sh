@@ -1,6 +1,6 @@
 #!/bin/bash
 #def/kerain.sh, L 24.5.2007
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri KERAIN; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri KERAIN; fi
 
 kerain() {
   kaiku $1

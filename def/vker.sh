@@ -1,6 +1,6 @@
 #!/bin/bash
 #vker.sh, L 24.5.2007/8.7.2015
-if [ $VERBOSITY -ge $LEV_V ]; then tynnyri VKER; fi
+if [ $KR_DEBUG == "true" ]; then tynnyri VKER; fi
 
 vker() {
 	cd
