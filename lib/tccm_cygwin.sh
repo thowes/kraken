@@ -16,14 +16,13 @@ tccm() {
 				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KR_PASSU /k $4;;
 				darwin) tc -m ts $3 -p $KR_PASSU -k $4 /Volumes/l$2;;
 			esac;;
-		#m) tccm mt $2 $3;;
-		#mnt) tccm mt $2 $3;;
 		mt) case $KAYTTIS in
 				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KR_SALIS /k $4;;
 				darwin) tc -m ts $3 -p $KR_SALIS -k $4 /Volumes/l$2;;
 			esac;;
 		nk) case $KAYTTIS in
 				cygwin) tc /l$2 /q /s /v $3 /p $KR_SALIS;;
+				darwin) tc -m ts $3 -p $KR_SALIS /Volumes/l$2;;
 			esac;;
 		pwd) tcc_passu;;
 		ro) case $KAYTTIS in
