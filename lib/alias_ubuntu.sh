@@ -5,6 +5,7 @@ alias buut='sudo shutdown -r now'
 alias here='open .'
 alias k=kill
 alias n=nano
+alias p=projekti
 alias r=rails
 alias rev='make rev'
 alias rt='cd /'
