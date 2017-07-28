@@ -56,6 +56,6 @@ if [ -f ~/$2 ]; then
 			*) kaiku KONTEXT $1 $CONTEXT;;
 		esac 
 	fi
-	if [ $VERBOSITY -ge $LEV_V ]; then kraken s; fi
+	if [ $KR_DEBUG == "true" ]; then kraken s; fi
 fi
 cd
