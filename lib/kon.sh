@@ -14,7 +14,7 @@ case $CONTEXT in
 		#VERBOSITY=$LEV_N
 		;;
 	b_app)
-		BACKUPS="false"
+		BACKUPS="true"
 		#VERBOSITY=$LEV_V
 		;;
 	b_proj)
