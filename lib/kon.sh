@@ -11,35 +11,27 @@ LEV_F="9"
 case $CONTEXT in
 	b_)
 		BACKUPS="false"
-		#VERBOSITY=$LEV_N
 		;;
 	b_app)
 		BACKUPS="true"
-		#VERBOSITY=$LEV_V
 		;;
 	b_proj)
 		BACKUPS="true"
-		#VERBOSITY=$LEV_V
 		;;
 	b_recon)
 		BACKUPS="true"
-		#VERBOSITY=$LEV_N
 		;;
 	b_start)
 		BACKUPS="true"
-		#VERBOSITY=$LEV_N
 		;;
 	b_terminal)
 		BACKUPS="false"
-		#VERBOSITY=$LEV_N
 		;;
 	b_verbose)
 		BACKUPS="true"
-		#VERBOSITY=$LEV_V
 		;;
 	*)
 		BACKUPS="false"
-		#VERBOSITY=$LEV_P
 		;;
 esac
-if [ $KR_DEBUG == "true" ]; then echo "[[ KRAKEN/KON $CONTEXT ($LEV_V) bu:$BACKUPS ]]"; fi
+if [ $KR_DEBUG == "true" ]; then echo "[[ KRAKEN/KON $CONTEXT bu:$BACKUPS ]]"; fi
