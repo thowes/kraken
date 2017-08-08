@@ -52,7 +52,7 @@ if [ -f ~/$2 ]; then
 	#TOIMENPITEET
 	if [ $BACKUPS == "true" ]; then
 		case $CONTEXT in
-			b_app) kaiku compu_app $APPNAME;;
+			b_app) compu_app $APPNAME;;
 			b_start) compu_start $CONTEXT;;
 			*) kaiku KONTEXT $1 $CONTEXT;;
 		esac 
