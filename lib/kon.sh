@@ -10,28 +10,28 @@ LEV_F="9"
 
 case $CONTEXT in
 	b_)
-		BACKUPS="false"
+		debug BACKUPS="false"
 		;;
 	b_app)
-		BACKUPS="true"
+		debug BACKUPS="true"
 		;;
 	b_proj)
-		BACKUPS="true"
+		debug BACKUPS="true"
 		;;
 	b_recon)
-		BACKUPS="true"
+		debug BACKUPS="true"
 		;;
 	b_start)
-		BACKUPS="true"
+		debug BACKUPS="true"
 		;;
 	b_terminal)
-		BACKUPS="false"
+		debug BACKUPS="false"
 		;;
 	b_verbose)
-		BACKUPS="true"
+		debug BACKUPS="true"
 		;;
 	*)
-		BACKUPS="false"
+		debug BACKUPS="false"
 		;;
 esac
 if [ $KR_DEBUG == "true" ]; then echo "[[ KRAKEN/KON $CONTEXT bu:$BACKUPS ]]"; fi
