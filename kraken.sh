@@ -11,7 +11,7 @@ kraken() {
 if [ -f ~/$2 ]; then
 	. ~/$2
 	CONTEXT=$1"_"$USECONTEXT
-
+	
 	# CONTEXT & ENVIRONMENT
 	if [ -f $KR_DIR_LIB/kon.sh ]; then . $KR_DIR_LIB/kon.sh; fi
 
@@ -54,7 +54,7 @@ if [ -f ~/$2 ]; then
 		case $CONTEXT in
 			b_app) compu_app $APPNAME;;
 			b_start) compu_start $CONTEXT;;
-			*) kaiku KONTEXT $1 $CONTEXT;;
+			*) debug KONTEXT $1 $CONTEXT;;
 		esac 
 	fi
 	if [ $KR_DEBUG == "true" ]; then kraken s; fi
