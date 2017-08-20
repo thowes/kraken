@@ -33,13 +33,13 @@ tccm() {
 				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KR_PASSU /k $4;;
 				darwin) tc -m ts $3 -p $KR_PASSU -k $4 /Volumes/l$2;;
 			esac;;
+		v1) case $KAYTTIS in
+				cygwin) tc /l$2 /q /s /v $3 /p $KR_PASSU;;
+				darwin) tc -m ts $3 -p $KR_PASSU /Volumes/l$2;;
+			esac;;
 		v2) case $KAYTTIS in
 				cygwin) tc /l$2 /q /s /v $3 /p $KR_SALIS;;
 				darwin) tc -m ts $3 -p $KR_SALIS /Volumes/l$2;;
-			esac;;
-		vault) case $KAYTTIS in
-				cygwin) tc /l$2 /q /s /v $3 /p $KR_PASSU;;
-				darwin) tc -m ts $3 -p $KR_PASSU /Volumes/l$2;;
 			esac;;
 		wipe) KR_PASSU=passu1; KR_SALIS=passu2;;
 		*)  case $KAYTTIS in
