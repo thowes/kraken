@@ -21,7 +21,6 @@ alias k9='kill -9'
 alias levy='df -h'
 alias merge='git merge'
 alias migrate='rails db:migrate'
-alias migrate='rails db:migrate'
 alias mk=make
 alias more=less
 alias n2='nano -w -T 2'
@@ -37,15 +36,16 @@ alias rollback='rails db:rollback'
 alias routes='rake routes'
 alias rs=rspec
 alias ru=screen
+alias rv='git remote -v'
 alias seed='rake db:seed RAILS_ENV=development'
 alias srv='rails server -b $IP -p $PORT'
-alias st='if [ -f makefile ]; then make st; else git status; fi'
+alias st='if [ -f makefile ]; then make st; else if [ -d .git ]; then git status; fi; fi'
 alias syn=synkronoi
 alias synk=synkronoi
 alias tst='rails test'
 alias upd=projekti_update
 
-if [ -f ~/Projects/config/$HOSTNAME/alias.sh ]; then
-    . ~/Projects/config/$HOSTNAME/alias.sh
-else echo HOSTNAME ALIAS NOT FOUND
-fi
+#if [ -f ~/Projects/config/$HOSTNAME/alias.sh ]; then
+#    . ~/Projects/config/$HOSTNAME/alias.sh
+#else echo HOSTNAME ALIAS NOT FOUND
+#fi

@@ -1,11 +1,16 @@
 #!/bin/bash
-#alias_darwin.sh, L 10.5.2016
+if [ -f ~/Projects/kraken/lib/bash_aliases.sh ]; then
+    . ~/Projects/kraken/lib/bash_aliases.sh
+else echo ALIAS FILE NOT FOUND; fi
+
 alias b=bundle
+alias g=git
+alias h=heroku
 alias here='open .'
 alias k=kill
 alias n=nano
 alias op=open
-alias p=projekti
+alias p=projekti_go
 alias pa=projekti_avaa
 alias r=rails
 alias rev='make rev'

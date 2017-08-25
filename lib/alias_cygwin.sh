@@ -1,9 +1,14 @@
 #!/bin/bash
-#alias_cygwin.sh, L 20.5.2011
+if [ -f ~/Projects/kraken/lib/bash_aliases.sh ]; then
+    . ~/Projects/kraken/lib/bash_aliases.sh
+else echo ALIAS FILE NOT FOUND; fi
+
 #alias d2u=dos2unix
 alias b=bundle
 alias cdr='cd /cygdrive; cd'
 alias edr=muokkaa_drives
+alias g=git
+alias h=heroku
 alias here='open .'
 alias ip=ipconfig
 alias k=kill
@@ -12,7 +17,7 @@ alias n=nano
 alias np=notepad
 alias op=cygstart
 alias open=cygstart
-alias p=projekti
+alias p=projekti_go
 alias pa=projekti_avaa
 alias r=rails
 alias rev='make rev'

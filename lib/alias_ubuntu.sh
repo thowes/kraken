@@ -1,15 +1,23 @@
 #!/bin/bash
-#alias_ubuntu.sh
+if [ -f ~/Projects/kraken/lib/bash_aliases.sh ]; then
+    . ~/Projects/kraken/lib/bash_aliases.sh
+else echo ALIAS FILE NOT FOUND; fi
+
 alias asenna='sudo apt-get install'
+alias b=bundle
 alias buut='sudo shutdown -r now'
+alias g=git
+alias h=heroku
 alias here='open .'
 alias k=kill
 alias n=nano
-alias p=projekti
+alias op=open
+alias p=projekti_go
 alias r=rails
 alias rev='make rev'
 alias rt='cd /'
 alias sammu='sudo shutdown -h now'
+alias t=touch
 alias v=verkko
 alias x=exit
 alias X='startx'
