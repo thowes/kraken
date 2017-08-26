@@ -11,9 +11,6 @@ kraken() {
 if [ -f ~/$2 ]; then
 	. ~/$2
 	CONTEXT=$1"_"$USECONTEXT
-	
-	# CONTEXT & ENVIRONMENT
-	#if [ -f $KR_DIR_LIB/kon.sh ]; then . $KR_DIR_LIB/kon.sh; fi
 
 	#FUNCTIONS
 	if [ -f $KR_DIR_LIB/kaiku.sh ]; then . $KR_DIR_LIB/kaiku.sh; fi
