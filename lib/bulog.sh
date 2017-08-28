@@ -5,7 +5,11 @@ if [ $KR_DEBUG == "true" ]; then tynnyri "BULOG"; fi
 bulog() {
 	KR_LATEST_TODAY="today_false"
 	if [ -d $1 ]; then
-		if [ -f $1/backup.log ]; then debug BULOG CR; else touch $1/backup.log; fi
+		if [ -f $1/backup.log ]; then
+			debug BULOG CR
+		else 
+			touch $1/backup.log
+		fi
 		KR_TODAY=$(date +"%F")
 		KR_LATEST_BACKUP_LINE=$(tail -n 1 $1/backup.log)
 		KR_LATEST_BACKUP_DATE=$(echo $KR_LATEST_BACKUP_LINE|awk '{print $1}')
