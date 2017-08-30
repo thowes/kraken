@@ -5,11 +5,7 @@ if [ $KR_DEBUG == "true" ]; then tynnyri "BULOG"; fi
 bulog() {
 	KR_LATEST_TODAY="today_false"
 	if [ -d $1 ]; then
-		if [ -f $1/backup.log ]; then
-			debug BULOG CR
-		else 
-			touch $1/backup.log
-		fi
+		if [ -f $1/backup.log ]; then debug BULOG CR; else touch $1/backup.log; fi
 		KR_TODAY=$(date +"%F")
 		KR_LATEST_BACKUP_LINE=$(tail -n 1 $1/backup.log)
 		KR_LATEST_BACKUP_DATE=$(echo $KR_LATEST_BACKUP_LINE|awk '{print $1}')
@@ -33,6 +29,14 @@ bulog_latest() {
 	if [ -f $1/backup.log ]; then
 		KR_LATEST_BACKUP_LINE=$(tail -n 1 $1/backup.log)
 		echo $KR_LATEST_BACKUP_LINE
+	else
+		touch $1/backup.log
+		if [ -f $1/backup.log ]; then
+			KR_NEW_BACKUP=$(date +"%F %R")
+			echo $KR_NEW_BACKUP $2 ver $3 > $1/backup.log
+		else
+			virhe $1/backup.log cannot exist.
+		fi
 	fi
 }
 
@@ -43,7 +47,12 @@ bulog_add() {
 		KR_NEW_BACKUP=$(date +"%F %R")
 		echo $KR_NEW_BACKUP $2 ver $3 >> $1/backup.log
 	else
-		#touch $1/backup.log
-		virhe $1/backup.log is not a valid file.
+		touch $1/backup.log
+		if [ -f $1/backup.log ]; then
+			KR_NEW_BACKUP=$(date +"%F %R")
+			echo $KR_NEW_BACKUP $2 ver $3 > $1/backup.log
+		else
+			virhe $1/backup.log is not a valid file.
+		fi
 	fi
 }
