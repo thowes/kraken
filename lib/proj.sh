@@ -27,6 +27,7 @@ projekti_go() {
 	fi
 }
 
+# this is a tool for keeping projects automatically updated if they use git.
 # update (pull) project if in master branch, if working dir is clean and if there are no commits to push.
 projekti_update() {
 	if [ $VERKKO != "NADA" ]; then
@@ -40,13 +41,13 @@ projekti_update() {
 						KR_PROJ_COMMITS=$(echo $KR_PROJ_STATUS | grep commit | grep to)
 						case $KR_PROJ_COMMITS in
 							*nothing*) git pull;;
-							*) virhe You have changes "to commit";;
+							*) virhe "Can't pull," "You have changes" "to commit";;
 						esac;;
-					*ahead*) virhe You are "ahead of master" "in commits";;
+					*ahead*) virhe "Can't pull," "You are" "ahead of master" "in commits";;
 					*) virhe NOT up to date with master;;
 				esac;;
-			*) virhe You are NOT in master branch;;
+			*) virhe "Can't pull," "you are" NOT "in master branch";;
 		esac
-	else virhe Internet not available
-	fi 
+	else virhe "Can't pull," "Internet not available"
+	fi
 }
