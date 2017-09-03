@@ -8,8 +8,8 @@ kraken() {
 	esac
 }
 
-if [ -f ~/$2 ]; then
-	. ~/$2
+if [ -f $2 ]; then
+	. $2
 	CONTEXT=$1"_"$USECONTEXT
 
 	#FUNCTIONS
