@@ -15,6 +15,7 @@ alias ed=muokkaa
 alias egrep='egrep --color=auto'              # show differences in colour
 alias fgrep='fgrep --color=auto'              # show differences in colour
 alias grep='grep --color'                     # show differences in colour
+alias g2=gpg2
 alias hst='cat ~/.bash_history'
 alias k80=kaiku80
 alias k9='kill -9'
@@ -44,8 +45,3 @@ alias syn=synkronoi
 alias synk=synkronoi
 alias tst='rails test'
 alias upd=projekti_update
-
-#if [ -f ~/Projects/config/$HOSTNAME/alias.sh ]; then
-#    . ~/Projects/config/$HOSTNAME/alias.sh
-#else echo HOSTNAME ALIAS NOT FOUND
-#fi
