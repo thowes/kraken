@@ -9,6 +9,7 @@ alias buut='sudo shutdown -r now'
 alias g=git
 alias h=heroku
 alias here='open .'
+alias ipf=ifconfig
 alias k=kill
 alias n=nano
 alias op=open

@@ -6,6 +6,7 @@ else echo ALIAS FILE NOT FOUND; fi
 alias b=bundle
 alias g=git
 alias h=heroku
+alias ipf=ifconfig
 alias k=kill
 alias n=nano
 alias p=projekti_go
