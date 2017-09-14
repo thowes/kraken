@@ -34,10 +34,10 @@ else
 	fi
 fi
 
-echo -e "\nKR_DIR_ALIAS=$KR_TO_DIR" >> ~/.bashrc
-echo -e "if [ -f $KR_FROM_DIR/alias.sh ]; then" >> ~/.bashrc
-echo -e "\t. $KR_FROM_DIR/alias.sh" >> ~/.bashrc
-echo -e "fi" >> ~/.bashrc
-echo -e "\nif [ -f $KR_TO_DIR/kraken.cfg ]; then" >> ~/.bashrc
-echo -e "\t. $KR_FROM_DIR/../kraken.sh b '$KR_TO_DIR/kraken.cfg'" >> ~/.bashrc
-echo -e "fi" >> ~/.bashrc
+KR_INSTALL_OUTPUT_FILE=~/.bashrc
+echo -e "\nKR_DIR_ALIAS=$KR_TO_DIR" >> $KR_INSTALL_OUTPUT_FILE
+echo '#export PS1="\n\t \u@\h via \$(kraken): \w\n$ "' >> $KR_INSTALL_OUTPUT_FILE
+echo -e "if [ -f $KR_TO_DIR/alias.sh ]; then" >> $KR_INSTALL_OUTPUT_FILE
+echo -e "\t. $KR_TO_DIR/alias.sh\nfi" >> $KR_INSTALL_OUTPUT_FILE
+echo -e "\nif [ -f $KR_TO_DIR/kraken.cfg ]; then" >> $KR_INSTALL_OUTPUT_FILE
+echo -e "\t. $KR_FROM_DIR/kraken.sh b '$KR_TO_DIR/kraken.cfg'\nfi" >> $KR_INSTALL_OUTPUT_FILE
