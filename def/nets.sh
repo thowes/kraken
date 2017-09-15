@@ -11,9 +11,9 @@ esac
 
 # When you connect to networks via WLAN
 case "$VERKKO_SSID" in
-        *cafe_ssid*) VERKKO="CAFE";;
-        *mobile_ssid*) VERKKO="MOB";;
-				*nada*) VERKKO="NADA";;
-        *home_ssid*) VERKKO="HOME";;
-        *office_ssid*) VERKKO="WORK";;
+	*cafe_ssid*) VERKKO="CAFE";;
+	*mobile_ssid*) VERKKO="MOB";;
+	*nada*) VERKKO="NADA";;
+	*home_ssid*) VERKKO="HOME";;
+	*office_ssid*) VERKKO="WORK";;
 esac
