@@ -4,7 +4,7 @@ KAYTTIS=$(uname)
 
 # Based on the contents of the uname ouput string, recognizes the OS.
 # Only cygwin and ubuntu are tested to work properly.
-if [ $HOSTED == "true" ]; then KAYTTIS="hosted"
+if [ $KR_HOSTED == "true" ]; then KAYTTIS="hosted"
 else
 	case $KAYTTIS in
 		*Darwin*)
