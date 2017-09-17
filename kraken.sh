@@ -47,7 +47,7 @@ if [ -f $2 ]; then
 	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
 	#TOIMENPITEET
-	if [ $BACKUPS == "true" ]; then
+	if [ $KR_BACKUPS == "true" ]; then
 		case $CONTEXT in
 			b_app) compu_app $APPNAME;;
 			b_start) compu_start $CONTEXT;;
