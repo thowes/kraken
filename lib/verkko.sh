@@ -13,12 +13,12 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 		cygwin)
 			# Using windows networks commands
 			VERKKO_IP=$(ipconfig|grep IPv4)
-			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID|grep -v BSSID); else VERKKO_ESSID=nada; fi
+			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID|grep -v BSSID); else VERKKO_ESSID=nada; fi
 			;;
 		darwin)
 			# Using osx networks commands.
 			VERKKO_IP=$(ifconfig|grep broadcast)
-			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(airport -I|grep SSID|grep -v BSSID); else VERKKO_ESSID=nada; fi
+			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(airport -I|grep SSID|grep -v BSSID); else VERKKO_ESSID=nada; fi
 			;;
 		hosted)
 			VERKKO_IP="0.0.0.0"
@@ -27,7 +27,7 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 		ubuntu)
 			# Using unix/linux/ubuntu networks commands.
 			VERKKO_IP=$(ifconfig eth0|grep Bcast)
-			if [ $LANGATON == "true" ]; then VERKKO_ESSID=$(iwlist wlan0 scan|grep ESSID); else VERKKO_ESSID=nada; fi
+			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(iwlist wlan0 scan|grep ESSID); else VERKKO_ESSID=nada; fi
 			;;
 		*) virhe VERKKO "$KAYTTIS not supported or recognized!";;
 	esac
