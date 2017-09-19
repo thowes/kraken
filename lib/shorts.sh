@@ -31,6 +31,8 @@ shorts_menu() {
 			if [ -d $KR_DIR_BUA/BU.$HOSTNAME/MENU/ ]; then
 				if [ -d $KR_DIR_AMENU ]; then cp $KR_DIR_AMENU/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/MENU/; else virhe shorts.sh:28 dir $KR_DIR_AMENU missing; fi
 				if [ -d $KR_DIR_UMENU ]; then cp $KR_DIR_UMENU/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/MENU/; else virhe shorts.sh:29 dir $KR_DIR_UMENU missing; fi
+				if [ -d $KR_DIR_CMENU ]; then cp $KR_DIR_CMENU/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/CMENU/; else virhe shorts.sh:29 dir $KR_DIR_CMENU missing; fi
+				if [ -d $KR_DIR_PMENU ]; then cp $KR_DIR_PMENU/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/PMENU/; else virhe shorts.sh:29 dir $KR_DIR_PMENU missing; fi
 			else virhe shorts.sh:30 dir $KR_DIR_BUA/BU.$HOSTNAME/MENU/ missing
 			fi;;
 	esac
