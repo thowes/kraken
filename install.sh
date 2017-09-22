@@ -8,10 +8,19 @@ else
 	KR_FROM_DIR="~/Projects/kraken"
 fi
 
+KR_SYSTEM_TYPE=$(uname -a)
+case $KR_SYSTEM_TYPE in
+	*Cygwin*) KR_INSTALL_ALIAS_FILE="alias_cygwin.sh";;
+	*Darwin*) KR_INSTALL_ALIAS_FILE="alias_darwin.sh";;
+	*Linux*) KR_INSTALL_ALIAS_FILE="alias_ubuntu.sh";;
+	*) KR_INSTALL_ALIAS_FILE="alias_hosted.sh";;
+esac
+
 TESTATTR=$1.
 if [ $TESTATTR == "." ]; then
 	KR_TO_DIR=$(pwd)/cfg
 	if [ -d 'cfg' ]; then
+		if [ -f cfg/alias.sh ]; then echo "[[ ERR INSTALL alias.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/lib/$KR_INSTALL_ALIAS_FILE cfg/alias.sh; fi
 		if [ -f cfg/compu.sh ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/compu.sh cfg/compu.sh; fi
 		if [ -f cfg/nets.sh ]; then echo "[[ ERR INSTALL nets.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/nets.sh cfg/nets.sh; fi
 		if [ -f cfg/vker.sh ]; then echo "[[ ERR INSTALL vker.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/vker.sh cfg/vker.sh; fi
@@ -26,6 +35,7 @@ if [ $TESTATTR == "." ]; then
 else
 	KR_TO_DIR=$1
 	if [ -d $1 ]; then
+		if [ -f $KR_TO_DIR/alias.sh ]; then echo "[[ ERR INSTALL alias.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/lib/$KR_INSTALL_ALIAS_FILE $KR_TO_DIR/alias.sh; fi
 		if [ -f $KR_TO_DIR/compu.sh ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/compu.sh $KR_TO_DIR/compu.sh; fi
 		if [ -f $KR_TO_DIR/nets.sh ]; then echo "[[ ERR INSTALL nets.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/nets.sh $KR_TO_DIR/nets.sh; fi
 		if [ -f $KR_TO_DIR/vker.sh ]; then echo "[[ ERR INSTALL vker.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/vker.sh $KR_TO_DIR/vker.sh; fi
