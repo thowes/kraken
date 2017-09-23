@@ -1,5 +1,4 @@
 #!/bin/bash
-#kop.sh, L 27.6.2013/29.6.2013
 if [ $KR_DEBUG == "true" ]; then tynnyri KOP; fi
 
 varko() {
@@ -40,7 +39,8 @@ varko() {
 			fi
 			# Checking if md5 sum is the same between the latest backup in backup.log and current backup. If not, continue.
 			if [ $BU_LATEST_MD5 != $BU_TODAY_MD5 ]; then
-				kaiku $BU_LATEST_DATE $BU_LATEST_MD5 "LvT" $BU_TODAY_DATE $BU_TODAY_MD5 $2
+				#kaiku "$2 K44" "$BU_LATEST_DATE $BU_LATEST_MD5" "LvT" "$BU_TODAY_DATE $BU_TODAY_MD5"
+				tynnyri $2
 				# Update the backup.log file and copy it to the backup.logs directory.
 				bulog_add $1 $2 $BU_TODAY_MD5
 				cp $1/backup.log $KR_DIR_LOGS/$2.log
