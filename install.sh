@@ -9,15 +9,16 @@ else
 fi
 
 KR_SYSTEM_TYPE=$(uname -a)
+KR_INSTALL_ALIAS_FILE="alias_hosted.sh"
 case $KR_SYSTEM_TYPE in
 	*Cygwin*) KR_INSTALL_ALIAS_FILE="alias_cygwin.sh";;
 	*Darwin*) KR_INSTALL_ALIAS_FILE="alias_darwin.sh";;
 	*Linux*) KR_INSTALL_ALIAS_FILE="alias_ubuntu.sh";;
-	*) KR_INSTALL_ALIAS_FILE="alias_hosted.sh";;
 esac
 
-TESTATTR=$1.
-if [ $TESTATTR == "." ]; then
+TESTATTR=_$1_
+#echo $TESTATTR $KR_SYSTEM_TYPE
+if [ $TESTATTR == "__" ]; then
 	KR_TO_DIR=$(pwd)/cfg
 	if [ -d 'cfg' ]; then
 		if [ -f cfg/alias.sh ]; then echo "[[ ERR INSTALL alias.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/lib/$KR_INSTALL_ALIAS_FILE cfg/alias.sh; fi
