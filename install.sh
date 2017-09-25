@@ -1,5 +1,4 @@
 #!/bin/bash
-#install.sh, L 11.6.2013, L 10.7.2013
 echo "[[ install for kraken shell script collection ]]"
 
 if [ -f 'kraken.sh' ]; then
@@ -11,13 +10,12 @@ fi
 KR_SYSTEM_TYPE=$(uname -a)
 KR_INSTALL_ALIAS_FILE="alias_hosted.sh"
 case $KR_SYSTEM_TYPE in
-	*Cygwin*) KR_INSTALL_ALIAS_FILE="alias_cygwin.sh";;
-	*Darwin*) KR_INSTALL_ALIAS_FILE="alias_darwin.sh";;
-	*Linux*) KR_INSTALL_ALIAS_FILE="alias_ubuntu.sh";;
+	CYGWIN*) KR_INSTALL_ALIAS_FILE="alias_cygwin.sh";;
+	Darwin*) KR_INSTALL_ALIAS_FILE="alias_darwin.sh";;
+	Linux*) KR_INSTALL_ALIAS_FILE="alias_ubuntu.sh";;
 esac
 
 TESTATTR=_$1_
-#echo $TESTATTR $KR_SYSTEM_TYPE
 if [ $TESTATTR == "__" ]; then
 	KR_TO_DIR=$(pwd)/cfg
 	if [ -d 'cfg' ]; then
@@ -25,11 +23,12 @@ if [ $TESTATTR == "__" ]; then
 		if [ -f cfg/compu.sh ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/compu.sh cfg/compu.sh; fi
 		if [ -f cfg/nets.sh ]; then echo "[[ ERR INSTALL nets.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/nets.sh cfg/nets.sh; fi
 		if [ -f cfg/vker.sh ]; then echo "[[ ERR INSTALL vker.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/vker.sh cfg/vker.sh; fi
-		if [ -f cfg/kraken.cfg ]; then echo "[[ ERR INSTALL directory CFG exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/kraken.cfg cfg/kraken.cfg; fi
+		if [ -f cfg/kraken.cfg ]; then echo "[[ ERR INSTALL kraken.cfg exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/kraken.cfg cfg/kraken.cfg; fi
 		if [ -f cfg/proj.csv ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/proj.csv cfg/proj.csv; fi
 	else
 		mkdir cfg
 		cp $KR_FROM_DIR/def/*.sh cfg/
+		if [ -f $KR_FROM_DIR/lib/$KR_INSTALL_ALIAS_FILE ]; then cp $KR_FROM_DIR/lib/$KR_INSTALL_ALIAS_FILE cfg/alias.sh; fi
 		if [ -f $KR_FROM_DIR/def/kraken.cfg ]; then cp $KR_FROM_DIR/def/kraken.cfg cfg/kraken.cfg; fi
 		if [ -f $KR_FROM_DIR/def/proj.csv ]; then cp $KR_FROM_DIR/def/proj.csv cfg/proj.csv; fi
 	fi
@@ -40,7 +39,7 @@ else
 		if [ -f $KR_TO_DIR/compu.sh ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/compu.sh $KR_TO_DIR/compu.sh; fi
 		if [ -f $KR_TO_DIR/nets.sh ]; then echo "[[ ERR INSTALL nets.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/nets.sh $KR_TO_DIR/nets.sh; fi
 		if [ -f $KR_TO_DIR/vker.sh ]; then echo "[[ ERR INSTALL vker.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/vker.sh $KR_TO_DIR/vker.sh; fi
-		if [ -f $KR_TO_DIR/kraken.cfg ]; then echo "[[ ERR INSTALL directory CFG exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/kraken.cfg $KR_TO_DIR/kraken.cfg; fi
+		if [ -f $KR_TO_DIR/kraken.cfg ]; then echo "[[ ERR INSTALL kraken.cfg exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/kraken.cfg $KR_TO_DIR/kraken.cfg; fi
 		if [ -f $KR_TO_DIR/proj.csv ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/proj.csv $KR_TO_DIR/proj.csv; fi
 	fi
 fi
@@ -48,7 +47,7 @@ fi
 KR_INSTALL_OUTPUT_FILE=~/.bashrc
 echo -e "\nKR_DIR_ALIAS=$KR_TO_DIR" >> $KR_INSTALL_OUTPUT_FILE
 echo '#export PS1="\n\t \u@\h via \$(kraken): \w\n$ "' >> $KR_INSTALL_OUTPUT_FILE
-echo -e "if [ -f $KR_TO_DIR/alias.sh ]; then" >> $KR_INSTALL_OUTPUT_FILE
-echo -e "\t. $KR_TO_DIR/alias.sh\nfi" >> $KR_INSTALL_OUTPUT_FILE
-echo -e "\nif [ -f $KR_TO_DIR/kraken.cfg ]; then" >> $KR_INSTALL_OUTPUT_FILE
-echo -e "\t. $KR_FROM_DIR/kraken.sh b '$KR_TO_DIR/kraken.cfg'\nfi" >> $KR_INSTALL_OUTPUT_FILE
+echo -e "if [ -f \$KR_DIR_ALIAS/alias.sh ]; then" >> $KR_INSTALL_OUTPUT_FILE
+echo -e "\t. \$KR_DIR_ALIAS/alias.sh\nfi" >> $KR_INSTALL_OUTPUT_FILE
+echo -e "\nif [ -f \$KR_DIR_ALIAS/kraken.cfg ]; then" >> $KR_INSTALL_OUTPUT_FILE
+echo -e "\t. $KR_FROM_DIR/kraken.sh b \$KR_DIR_ALIAS/kraken.cfg\nfi" >> $KR_INSTALL_OUTPUT_FILE
