@@ -1,10 +1,9 @@
 #!/bin/bash
-#kraken.sh, L 17.8.2010
 kraken() {
 	case  $1 in
-		l) echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$VERKKO" ]]";;
-		s) echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$VERKKO" ]]"; compu_terminal $VERKKO;;
-		*) echo $VERKKO;;
+		l) echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$KR_NETWORK" ]]";;
+		s) echo "[[ KRAKEN "$USERNAME"@"$HOSTNAME" via "$KR_NETWORK" ]]"; compu_terminal $KR_NETWORK;;
+		*) echo $KR_NETWORK;;
 	esac
 }
 
