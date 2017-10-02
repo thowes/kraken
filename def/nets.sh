@@ -1,5 +1,4 @@
 #!/bin/bash
-#def/nets.sh, L 2.4.2013
 if [ $KR_DEBUG == "true" ]; then tynnyri NETS; fi
 
 # When you connect to networks via ethernet cable
