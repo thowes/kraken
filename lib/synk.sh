@@ -4,7 +4,7 @@ if [ $KR_DEBUG == "true" ]; then tynnyri SYNK; fi
 
 synk_real() {
 	debug SYNK real $1 $2
-	if [ -f ~/$KR_DIR_CFG/../loc/sites/$2 ]; then . ~/$KR_DIR_CFG/../loc/sites/$2
+	if [ -f $KR_DIR_CFG/../loc/sites/$2 ]; then . $KR_DIR_CFG/../loc/sites/$2
 		kaiku $1 $2
 		case $1 in
 			local) echo rsync $SYNK_PARAM $SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_EXCL'/'$SYNK_EXCLUDE;;
@@ -28,8 +28,8 @@ synk_real() {
 			*) virhe SYNK real "-" "no protocol!";;
 		esac
 	else
-		if [ -f ~/$KR_DIR_CFG/../loc/sites/$2.sh ]; then
-			. ~/$KR_DIR_CFG/../loc/sites/$2.sh $1
+		if [ -f $KR_DIR_CFG/../loc/sites/$2.sh ]; then
+			. $KR_DIR_CFG/../loc/sites/$2.sh $1
 		else
 			virhe SYNK $1 $2 "-" "connection not recognized!"
   	fi
