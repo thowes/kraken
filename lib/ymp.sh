@@ -1,12 +1,11 @@
 #!/bin/bash
-#ymp.sh, L 2.4.2013
-KAYTTIS=$(uname)
+KAYTTIS="hosted"
+KAYTTIS_FULL=$(uname -a)
 
 # Based on the contents of the uname ouput string, recognizes the OS.
-# Only cygwin and ubuntu are tested to work properly.
-if [ $KR_HOSTED == "true" ]; then KAYTTIS="hosted"
-else
-	case $KAYTTIS in
+# Only cygwin, darwin and ubuntu are tested to work properly.
+if [ $KR_HOSTED == "false" ]; then
+	case $KAYTTIS_FULL in
 		*Darwin*)
 			KAYTTIS=darwin
 			;;
@@ -17,8 +16,9 @@ else
 			KAYTTIS=bsd
 			;;
 		*Linux*)
-			KAYTTIS_FULL=$(uname -a)
+			#KAYTTIS_FULL=$(uname -a)
 			case $KAYTTIS_FULL in
+				*debian*) KAYTTIS=debian;;
 				*Mint*) KAYTTIS=mint;;
 				*Ubuntu*) KAYTTIS=ubuntu;;
 				*) KAYTTIS=linux;;
