@@ -1,8 +1,7 @@
 #!/bin/bash
-#verkko.sh, L 21.5.2011/2.4.2013
 if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/VERKKO /w"; fi
 
-if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
+if [ -f $KR_DIR_CFG/nets.sh ]; then
 	VERKKO_DNS="NADA"
 	VERKKO_IP="NADA"
 	VERKKO_ESSID="NADA"
@@ -16,7 +15,7 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|grep SSID|grep -v BSSID); else VERKKO_ESSID=nada; fi
 			;;
 		darwin)
-			# Using osx networks commands.
+			# Using macos networks commands.
 			VERKKO_IP=$(ifconfig|grep broadcast)
 			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(airport -I|grep SSID|grep -v BSSID); else VERKKO_ESSID=nada; fi
 			;;
@@ -31,7 +30,7 @@ if [ -f ~/$KR_DIR_CFG/nets.sh ]; then
 			;;
 		*) virhe VERKKO "$KAYTTIS not supported or recognized!";;
 	esac
-	. ~/$KR_DIR_CFG/nets.sh
+	. $KR_DIR_CFG/nets.sh
 else virhe nets.sh not found
 fi
 
