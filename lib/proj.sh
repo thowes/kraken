@@ -5,25 +5,26 @@ if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
 # reads list projects (proj.csv) and jumps to the project folder.
 projekti_go() {
-	cd
-	KR_DIRPO_TEMP=$(cat $KR_DIR_CFG/proj.csv|grep $1|awk -F, '{ print $4 }')
-	KR_DIRPO=$KR_DIRPO_TEMP
-	KR_DIRPO_HOME=~
-	case $KR_DIRPO_TEMP in
-		~*) KR_DIRPO=$KR_DIRPO_HOME$(echo $KR_DIRPO_TEMP|awk -F~ '{ print$2 }');;
+	\cd
+	KR_PROJECTS_COUNT=$(cat $KR_DIR_CFG/proj.csv | grep $1 | wc -l) 
+	case $KR_PROJECTS_COUNT in
+		0) virhe "Project keyword" $1 "not found" "in project file";;
+		1)
+			KR_DIRPO_LINE=$(cat $KR_DIR_CFG/proj.csv | grep $1 )
+			KR_DIRPO=$(echo $KR_DIRPO_LINE | awk -F, '{ print $4 }')
+			KR_DIRPO_TEMP=$KR_DIRPO; KR_DIRPO_HOME=~
+			case $KR_DIRPO_TEMP in
+				~*) KR_DIRPO=$KR_DIRPO_HOME$(echo $KR_DIRPO_TEMP | awk -F~ '{ print$2 }');;
+			esac
+			if [ -d $KR_DIRPO ]; then
+				\cd $KR_DIRPO
+				compu_proj $1
+				#open .
+			else 
+				virhe PROJ $1 $KR_DIRPO "is not a directory!"
+			fi;;
+		*) virhe "Project keyword" $1 "found multiple times in project file.";;
 	esac
-	if [ $KR_DIRPO != '' ]; then
-		if [ -d $KR_DIRPO ]; then
-			debug PROJ $1 $KR_DIRPO
-			cd $KR_DIRPO
-			compu_proj $1
-			#open .
-		else
-			virhe PROJ $1 $KR_DIRPO "is not a directory!"
-		fi
-	else
-		virhe PROJ $1 $KR_DIRPO "just error!"
-	fi
 }
 
 # this is a tool for keeping projects automatically updated if they use git.
