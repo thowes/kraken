@@ -30,6 +30,10 @@ tccm() {
 				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KR_PASSU /k $4; if [ -f /cygdrive/$2/$KR_TC_NAME.sh ]; then . /cygdrive/$2/$KR_TC_NAME.sh; else echo NO: /cygdrive/$2/$KR_TC_NAME.sh; fi;;
 				darwin) tc -m ts $3 -p $KR_PASSU -k $4 /Volumes/l$2; if [ -f /Volumes/l$2/$KR_TC_NAME.sh ]; then . /Volumes/l$2/$KR_TC_NAME.sh; else echo NO: /Volumes/l$2/$KR_TC_NAME.sh; fi;;
 			esac;;
+		rx) case $KAYTTIS in
+				cygwin) tc /l$2 /q /s /m ro /v $3 /p $KR_SALIS; if [ -f /cygdrive/$2/$KR_TC_NAME.sh ]; then . /cygdrive/$2/$KR_TC_NAME.sh; else echo NO: /cygdrive/$2/$KR_TC_NAME.sh; fi;;
+				darwin) tc -m ro $3 -p $KR_SALIS /Volumes/l$2; if [ -f /Volumes/l$2/$KR_TC_NAME.sh ]; then . /Volumes/l$2/$KR_TC_NAME.sh; else echo NO: /Volumes/l$2/$KR_TC_NAME.sh; fi;;
+			esac;;
 		v1) case $KAYTTIS in
 				cygwin) tc /l$2 /q /s /v $3 /p $KR_PASSU; if [ -f /cygdrive/$2/$KR_TC_NAME.sh ]; then . /cygdrive/$2/$KR_TC_NAME.sh; else echo NO: /cygdrive/$2/$KR_TC_NAME.sh; fi;;
 				darwin) tc -m ts $3 -p $KR_PASSU /Volumes/l$2; if [ -f /Volumes/l$2/$KR_TC_NAME.sh ]; then . /Volumes/l$2/$KR_TC_NAME.sh; else echo NO: /Volumes/l$2/$KR_TC_NAME.sh; fi;;
