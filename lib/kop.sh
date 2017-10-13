@@ -22,7 +22,7 @@ varko() {
 		BU_TODAY_DATE=$(date +"%F")
 		# Compare the date in latest line of backup.log, if not today, then continue.
 		if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
-			debug "kop.sh:25 $2" "L: $BU_LATEST_DATE T: $BU_TODAY_DATE"
+			debug "kop.sh:25c" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
 			# Creating new zip from the directory without backup.log file
 			if [ -f ~/$KR_DIR_INCL/$2.lst ]; then
 				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -i@~/$KR_DIR_INCL/$2.lst
@@ -46,16 +46,17 @@ varko() {
 				cp $1/backup.log $KR_DIR_LOGS/$2.log
 				# Create new encrypted file from the created zip file.
 				if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
-					debug "kop.sh:49 $2 copied" "$BU_LATEST_MD5" "LvT" "$BU_TODAY_MD5"
+					debug "kop.sh:49c" $2 "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
 					gpg --encrypt -r $RECIPIENT $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip
 				fi
+			else debug "kop.sh:52nc" $2 "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
 			fi
 			# Removing the created zip file.
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip; fi
 			# Moving the created gpg file to the backup directory.
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg ]; then mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.cbc; fi
 		else
-			debug "kop.sh:55 $2 not copied" "$BU_LATEST_MD5" "LvT" "$BU_TODAY_MD5"
+			debug "kop.sh:59nc" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
 		fi
 	else
 		virhe KOP "Arguments " $1 $2 "not valid!"
