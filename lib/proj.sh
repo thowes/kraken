@@ -6,7 +6,7 @@ if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 # reads list projects (proj.csv) and jumps to the project folder.
 projekti_go() {
 	\cd
-	KR_PROJECTS_COUNT=$(cat $KR_DIR_CFG/proj.csv | grep $1 | wc -l) 
+	KR_PROJECTS_COUNT=$(cat $KR_DIR_CFG/proj.csv | grep $1 | wc -l | awk '{ print $1 }')
 	case $KR_PROJECTS_COUNT in
 		0) virhe "Project keyword" $1 "not found" "in project file";;
 		1)
