@@ -46,7 +46,7 @@ varko() {
 				cp $1/backup.log $KR_DIR_LOGS/$2.log
 				# Create new encrypted file from the created zip file.
 				if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
-					debug "kop.sh:49c" $2 "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
+					debug "$BU_LATEST_MD5" "v" "$BU_TODAY_MD5"
 					gpg --encrypt -r $RECIPIENT $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip
 				fi
 			else debug "kop.sh:52nc" $2 "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
