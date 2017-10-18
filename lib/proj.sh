@@ -30,7 +30,7 @@ projekti_go() {
 # this is a tool for keeping projects automatically updated if they use git.
 # update (pull) project if in master branch, if working dir is clean and if there are no commits to push.
 projekti_update() {
-	if [ $VERKKO != "NADA" ]; then
+	if [ $KR_NETWORK != "NADA" ]; then
 		KR_PROJ_STATUS=$(git status)
 		KR_PROJ_BRANCH=$(echo $KR_PROJ_STATUS | grep 'On branch')
 		case $KR_PROJ_BRANCH in
