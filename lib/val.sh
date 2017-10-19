@@ -18,4 +18,5 @@ valitse() {
 		PROJECT="def"
 		debug PROJ $KR_PROJ_TEST is "empty." 
 	fi
+	KR_DIRPO_LINE=$(cat $KR_DIR_CFG/proj.csv | grep $PROJECT )
 }
