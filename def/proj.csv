@@ -1,5 +1,8 @@
 cfg,kraken config,HOME,~/Projects/kraken/cfg/
 def,kraken default config,HOME,~/Projects/kraken/def/
+docs,Documents,HOME,~/Documents/
+dt,Desktop,HOME,~/Desktop/
+dwl,Downloads,HOME,~/Downloads/
 krn,kraken.sh,HOME,~/Projects/kraken/
 lib,krakenlib,HOME,~/Projects/kraken/lib/
 prj,Projects,HOME,~/Projects/
