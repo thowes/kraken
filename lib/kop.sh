@@ -39,7 +39,7 @@ varko() {
 				esac
 			fi
 			# Checking if md5 sum is the same between the latest backup in backup.log and current backup. If not, continue.
-			if [ $BU_LATEST_MD5 != $BU_TODAY_MD5 ]; then
+			if [ "$BU_LATEST_MD5" != "$BU_TODAY_MD5" ]; then
 				tynnyri $2
 				# Update the backup.log file and copy it to the backup.logs directory.
 				bulog_add $1 $2 $BU_TODAY_MD5
