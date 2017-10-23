@@ -1,5 +1,4 @@
 #!/bin/bash
-#synk.sh, L 24.3.2013
 if [ $KR_DEBUG == "true" ]; then tynnyri SYNK; fi
 
 synk_real() {
@@ -7,7 +6,7 @@ synk_real() {
 	if [ -f $KR_DIR_CFG/../loc/sites/$2 ]; then . $KR_DIR_CFG/../loc/sites/$2
 		kaiku $1 $2
 		case $1 in
-			local) echo rsync $SYNK_PARAM $SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_EXCL'/'$SYNK_EXCLUDE;;
+			local) echo rsync $SYNK_PARAM $SYNK_DDIR $SYNK_LDIR --exclude-from $KR_DIR_EXCL'/'$SYNK_EXCLUDE;;
 			SSH) ssh $SYNK_USERNAME"@"$SYNK_HOSTNAME;;
 			SYN)
 				if [ -f ~/$KR_DIR_EXCL/$2 ]; then
@@ -16,15 +15,13 @@ synk_real() {
 					#bulog_add $SYNK_LDIR $HOSTNAME $SYNK_HOSTNAME
 					#doesn't do backup runs if already backed up today (checkup happens in bulog)
 					if [ $KR_LATEST_TODAY == "today_false" ]; then
-						rsync $SYNK_PARAM $SYNK_USERNAME@$SYNK_HOSTNAME:$SYNK_DDIR $SYNK_LDIR --exclude-from ~/$KR_DIR_EXCL/$2
+						rsync $SYNK_PARAM $SYNK_USERNAME@$SYNK_HOSTNAME:$SYNK_DDIR $SYNK_LDIR --exclude-from $KR_DIR_EXCL/$2
 					else
 						debug KOP $2
 					fi
 				else virhe Exclude file missing
 				fi;;
-			upl) rsync $SYNK_PARAM $SYNK_LDIR $SYNK_USERNAME'@'$SYNK_HOSTNAME':'$SYNK_DDIR --exclude-from ~/$KR_DIR_EXCL/$SYNK_EXCLUDE;;
-			wget) echo WGET;;
-			winscp) echo WinSCP;;
+			upl) rsync $SYNK_PARAM $SYNK_LDIR $SYNK_USERNAME'@'$SYNK_HOSTNAME':'$SYNK_DDIR --exclude-from $KR_DIR_EXCL/$SYNK_EXCLUDE;;
 			*) virhe SYNK real "-" "no protocol!";;
 		esac
 	else
