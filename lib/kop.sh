@@ -24,12 +24,12 @@ varko() {
 		if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
 			debug "kop.sh:25c" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
 			# Creating new zip from the directory without backup.log file
-			if [ -f ~/$KR_DIR_INCL/$2.lst ]; then
-				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -i@~/$KR_DIR_INCL/$2.lst
+			if [ -f $KR_DIR_INCL/$2.lst ]; then
+				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -i@$KR_DIR_INCL/$2.lst
 			else
 				case $KAYTTIS in
-					cygwin) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db*;;
-					darwin) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$HOME/$KR_DIR_EXCL/default.lst -x *backup.log* -x "*.DS_Store";;
+					cygwin) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db*;;
+					darwin) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x "*.DS_Store";;
 				esac
 			fi
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
@@ -47,7 +47,7 @@ varko() {
 				# Create new encrypted file from the created zip file.
 				if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
 					debug "$BU_LATEST_MD5" "v" "$BU_TODAY_MD5"
-					gpg --encrypt -r $RECIPIENT $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip
+					gpg --encrypt -r $KR_RECIPIENT $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip
 				fi
 			else debug "kop.sh:52nc" $2 "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
 			fi
