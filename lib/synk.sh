@@ -6,10 +6,8 @@ synk_real() {
 	if [ -f $KR_DIR_SITES/$2 ]; then . $KR_DIR_SITES/$2
 		kaiku $1 $2
 		case $1 in
-			#local) echo rsync $SYNK_PARAM $SYNK_DDIR $SYNK_LDIR --exclude-from $KR_DIR_EXCL'/'$SYNK_EXCLUDE;;
 			ssh) ssh $SYNK_USERNAME"@"$SYNK_HOSTNAME;;
-			SYN)
-				if [ -f $KR_DIR_EXCL/$2 ]; then
+			syn) if [ -d $SYNK_LDIR ]; then if [ -f $KR_DIR_EXCL/$2 ]; then
 					#if [ -f $1/backup.log ]; then tail -n 1 $1/backup.log; fi
 					KR_LATEST_TODAY="today_false"
 					#bulog_add $SYNK_LDIR $HOSTNAME $SYNK_HOSTNAME
@@ -19,10 +17,9 @@ synk_real() {
 					else
 						debug KOP $2
 					fi
-				else virhe Exclude file missing
-				fi;;
+				else virhe NOT FOUND exclude file; fi; else virhe NOT FOUND local dir; fi;;
 			upl) rsync $SYNK_PARAM $SYNK_L_UP $SYNK_USERNAME'@'$SYNK_HOSTNAME':'$SYNK_D_UP --exclude-from $KR_DIR_EXCL/$2;;
-			*) virhe SYNK real "-" "no protocol!";;
+			*) synk_real syn $2;; #virhe SYNK real "-" "no protocol!";;
 		esac
 	else
 		if [ -f $KR_DIR_SITES/$2.sh ]; then
@@ -34,21 +31,18 @@ synk_real() {
 }
 
 synkronoi() {
-	debug SYNK main $1 $2
+	kaiku SYNK main $1 $2
 	case $1 in
-		#ftp) synk_real SYN $2;;
-		rsync) synk_real SYN $2;;
-		#sftp) synk_real SYN $2;;
+		#rsync) synk_real SYN $2;;
 		syn) synk_real SYN $2;;
 		SYN) synk_real SYN $2;;
-		sync) synk_real SYN $2;;
-		SYNC) synk_real SYN $2;;
-		synk) synk_real SYN $2;;
-		SYNK) synk_real SYN $2;;
+		#sync) synk_real SYN $2;;
+		#SYNC) synk_real SYN $2;;
+		#synk) synk_real SYN $2;;
+		#SYNK) synk_real SYN $2;;
 		ssh) synk_real ssh $2;;
-		SSH) synk_real ssh $2;;
+		#SSH) synk_real ssh $2;;
 		upl) synk_real upl $2;;
-		#yh) synk_real SSH $2;;
 		*) synk_real SYN $1;;
 	esac
 }
