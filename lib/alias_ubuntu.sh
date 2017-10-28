@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -f ~/Projects/kraken/lib/bash_aliases.sh ]; then
     . ~/Projects/kraken/lib/bash_aliases.sh
-else echo ALIAS FILE NOT FOUND; fi
+else echo NOT FOUND bash_aliases.sh; fi
 
 alias a='git add -A; git commit -m'
 alias asenna='sudo apt-get install'
@@ -17,10 +17,10 @@ alias n=nano
 alias op=open
 alias p=projekti_go
 alias r=rails
-alias rev='make rev'
-alias rt='cd /'
+alias s='synkronoi syn'
 alias sammu='sudo shutdown -h now'
 alias t=touch
+alias tl='ps aux'
 alias v=verkko
 alias x=exit
 alias X='startx'

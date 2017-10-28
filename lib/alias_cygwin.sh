@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -f ~/Projects/kraken/lib/bash_aliases.sh ]; then
     . ~/Projects/kraken/lib/bash_aliases.sh
-else echo ALIAS FILE NOT FOUND; fi
+else echo NOT FOUND bash_aliases.sh; fi
 
 alias a='git add -A; git commit -m'
 alias b=bundle
@@ -20,10 +20,10 @@ alias np=notepad
 alias op=cygstart
 alias open=cygstart
 alias p=projekti_go
-alias pa=projekti_avaa
+#alias pa=projekti_avaa
 alias r=rails
-alias rev='make rev'
 alias rt='cd /'
+alias s='synkronoi syn'
 alias t=touch
 alias tl=tasklist
 alias v=verkko
