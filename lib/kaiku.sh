@@ -26,7 +26,7 @@ tynnyri() {
 		del) TYNNYRI="";;
 		k) tynnyri kick;;
 		dump) TYNNYRI="$TYNNYRI$2"; tynnyri kick;;
-		kick) if [ $KR_DEBUG == "true" ]; then echo "[[ $TYNNYRI ]]"; fi; tynnyri del;;
+		kick) echo "[[ $TYNNYRI ]]"; tynnyri del;;
 		new) TYNNYRI="$2";;
 		pr) echo "[[ $TYNNYRI ]]";;
 		*) tynnyri add $1;;
