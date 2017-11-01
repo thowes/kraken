@@ -52,7 +52,9 @@ varko() {
 			# Removing the created zip file.
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then \rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip; fi
 			# Moving the created gpg file to the backup directory.
-			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg ]; then tynnyri $2; \mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.cbc; fi
+			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg ]; then tynnyri $2
+				\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.cbc 
+			fi
 		else
 			debug "kop.sh:59nc" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
 		fi
