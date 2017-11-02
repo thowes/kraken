@@ -41,9 +41,6 @@ varko() {
 			if [ "$BU_LATEST_MD5" != "$BU_TODAY_MD5" ]; then
 				# Create new encrypted file from the created zip file.
 				if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
-					# Update the backup.log file and copy it to the backup.logs directory.
-					bulog_add $1 $2 $BU_TODAY_MD5
-					\cp $1/backup.log $KR_DIR_LOGS/$2.log
 					debug "$BU_LATEST_MD5" "v" "$BU_TODAY_MD5"
 					gpg --encrypt -r $KR_RECIPIENT $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip
 				fi
@@ -53,7 +50,10 @@ varko() {
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then \rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip; fi
 			# Moving the created gpg file to the backup directory.
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg ]; then tynnyri $2
-				\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.cbc 
+				# Update the backup.log file and copy it to the backup.logs directory.
+				bulog_add $1 $2 $BU_TODAY_MD5
+				\cp $1/backup.log $KR_DIR_LOGS/$2.log
+				\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.cbc
 			fi
 		else
 			debug "kop.sh:59nc" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
