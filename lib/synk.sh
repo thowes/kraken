@@ -2,8 +2,8 @@
 if [ $KR_DEBUG == "true" ]; then tynnyri SYNK; fi
 
 synk_real() {
-	kaiku SYNK real $1 $2
 	if [ -f $KR_DIR_SITES/$2 ]; then . $KR_DIR_SITES/$2
+		kaiku SYNK real $1 $2
 		case $1 in
 			ssh) ssh $SYNK_USERNAME"@"$SYNK_HOSTNAME;;
 			syn) if [ -d $SYNK_LDIR ]; then if [ -f $KR_DIR_EXCL/$2 ]; then
