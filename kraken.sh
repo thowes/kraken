@@ -19,9 +19,9 @@ if [ -f $2 ]; then
 	if [ -f $KR_DIR_LIB/vers.sh ]; then . $KR_DIR_LIB/vers.sh; fi
 	if [ -f $KR_DIR_LIB/ymp.sh ]; then . $KR_DIR_LIB/ymp.sh; fi
 	case $KAYTTIS in
-		cygwin) if [ -f $KR_DIR_LIB/tccm_cygwin.sh ]; then . $KR_DIR_LIB/tccm_cygwin.sh; fi;;
-		darwin) if [ -f $KR_DIR_LIB/tccm_darwin.sh ]; then . $KR_DIR_LIB/tccm_darwin.sh; fi;;
-		ubuntu) if [ -f $KR_DIR_LIB/tccm_ubuntu.sh ]; then . $KR_DIR_LIB/tccm_ubuntu.sh; fi;;
+		*) if [ -f $KR_DIR_LIB/tccm_cygwin.sh ]; then . $KR_DIR_LIB/tccm_cygwin.sh; fi;;
+		#darwin) if [ -f $KR_DIR_LIB/tccm_darwin.sh ]; then . $KR_DIR_LIB/tccm_darwin.sh; fi;;
+		#ubuntu) if [ -f $KR_DIR_LIB/tccm_ubuntu.sh ]; then . $KR_DIR_LIB/tccm_ubuntu.sh; fi;;
 	esac
 	if [ -f $KR_DIR_LIB/shorts.sh ]; then . $KR_DIR_LIB/shorts.sh; fi
 	if [ -f $KR_DIR_LIB/uus.sh ]; then . $KR_DIR_LIB/uus.sh; fi
@@ -48,7 +48,7 @@ if [ -f $2 ]; then
 	#TOIMENPITEET
 	if [ $KR_BACKUPS == "true" ]; then
 		case $CONTEXT in
-			b_app) compu_app $APPNAME;;
+			b_app) compu_app $APPNAME; exit;;
 			b_start) compu_start $CONTEXT;;
 			*) debug KONTEXT $1 $CONTEXT;;
 		esac 
