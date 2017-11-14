@@ -31,6 +31,7 @@ bulog_latest() {
 		echo $KR_LATEST_BACKUP_LINE
 	else
 		touch $1/backup.log
+		KR_MD5_ZERO=
 		if [ -f $1/backup.log ]; then
 			KR_NEW_BACKUP=$(date +"%F %R")
 			echo $KR_NEW_BACKUP $2 ver $3 > $1/backup.log
@@ -50,7 +51,7 @@ bulog_add() {
 		touch $1/backup.log
 		if [ -f $1/backup.log ]; then
 			KR_NEW_BACKUP=$(date +"%F %R")
-			echo $KR_NEW_BACKUP $2 ver $3 > $1/backup.log
+			echo $KR_NEW_BACKUP new ver 0 > $1/backup.log
 		else
 			virhe $1/backup.log is not a valid file.
 		fi
