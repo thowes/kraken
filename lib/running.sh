@@ -1,12 +1,16 @@
 #!/bin/bash
 running() {
 	if [ -f $KR_DIR_TEMP/tl.lst ]; then
-		KR_APPCHECKER_RUNNING=$(cat -v $KR_DIR_TEMP/tl.lst | grep $1.exe)
 		KR_OUTPUT="false"
-		case $KR_APPCHECKER_RUNNING in
-			*Console*) KR_OUTPUT="true";;
-			*Session*) KR_OUTPUT="true";;
-			*Services*) KR_OUTPUT="true";;
+		case $KAYTTIS in
+			cygwin)
+				KR_APPCHECKER_RUNNING=$(cat -v $KR_DIR_TEMP/tl.lst | grep $1.exe)
+				case $KR_APPCHECKER_RUNNING in
+					*Console*) KR_OUTPUT="true";;
+					*Session*) KR_OUTPUT="true";;
+					*Services*) KR_OUTPUT="true";;
+				esac;;
+			*) KR_OUTPUT="true";;
 		esac
 		echo $KR_OUTPUT
 	else
