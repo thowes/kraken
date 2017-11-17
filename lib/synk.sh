@@ -19,9 +19,14 @@ synk_real() {
 						virhe "ALREADY done backup today" $2
 					fi
 				else virhe "NOT FOUND" exclude file; fi; else virhe "NOT FOUND" local dir $SYNK_LDIR; fi;;
-			upl) if [ -d $SYNK_L_UPL_DIR ]; then if [ -f $KR_DIR_EXCL/$2 ]; then
-					rsync $SYNK_PARAM $SYNK_L_UPL_DIR $SYNK_USERNAME'@'$SYNK_HOSTNAME':'$SYNK_R_UPL_DIR --exclude-from $KR_DIR_EXCL/$2
-				else virhe "NOT FOUND" exclude file; fi; else virhe "NOT FOUND" local dir $SYNK_L_UPL_DIR; fi;;
+			upl) 
+					if [ -d $SYNK_L_UPL_DIR ]; then 
+						if [ -f $KR_DIR_EXCL/$2 ]; then
+							rsync $SYNK_PARAM $SYNK_L_UPL_DIR $SYNK_USERNAME'@'$SYNK_HOSTNAME':'$SYNK_R_UPL_DIR --exclude-from $KR_DIR_EXCL/$2
+						else virhe "NOT FOUND" exclude file; 
+						fi; 
+					else virhe "NOT FOUND" "local dir" $SYNK_L_UPL_DIR; 
+					fi;;
 			*) synk_real syn $2;; #virhe SYNK real "-" "no protocol!";;
 		esac
 	else
