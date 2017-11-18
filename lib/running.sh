@@ -10,7 +10,10 @@ running() {
 					*Session*) KR_OUTPUT="true";;
 					*Services*) KR_OUTPUT="true";;
 				esac;;
-			*) KR_OUTPUT="true";;
+			*) # not functional yet
+				KR_APPCHECKER_NUMBER=$(cat -v $KR_DIR_TEMP/tl.lst | grep $1 | wc -l)
+				kaiku $KR_APPCHECKER_NUMBER
+				KR_OUTPUT="true";;
 		esac
 		echo $KR_OUTPUT
 	else
