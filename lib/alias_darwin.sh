@@ -6,6 +6,7 @@ else echo NOT FOUND bash_aliases.sh; fi
 alias a='git add -A; git commit -m'
 alias asenna='brew install'
 alias b=bundle
+alias doctor='brew doctor'
 alias g=git
 alias h=heroku
 alias here='open .'
