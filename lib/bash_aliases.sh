@@ -1,5 +1,5 @@
 alias ..='cd ..'
-#alias add='git add'
+alias add='git add'
 alias bi='bundle install'
 alias biw='bundle install --without'
 alias branch='git branch'
@@ -40,6 +40,7 @@ alias seed='rake db:seed RAILS_ENV=development'
 alias srv='rails server -b $IP -p $PORT'
 alias st='if [ -d .git ]; then git status; else if [ -d ../.git ]; then git status; fi; fi'
 alias syn='synkronoi syn'
+alias todo=todo.sh
 alias tst='rails test'
 alias upd=projekti_update
 alias upl='synkronoi upl'
