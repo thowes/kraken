@@ -41,7 +41,7 @@ synk_real() {
 synkronoi() {
 	case $1 in
 		syn) synk_real syn $2;;
-		SYN) synk_real SYN $2;;
+		#SYN) synk_real SYN $2;;
 		ssh) synk_real ssh $2;;
 		upl) synk_real upl $2;;
 		*) synk_real syn $1;;
