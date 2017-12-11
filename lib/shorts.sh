@@ -1,5 +1,4 @@
 #!/bin/bash
-#shorts.sh, L 7.5.2005/11.6.2013/31.3.2013/24.8.2013
 if [ $KR_DEBUG == "true" ]; then tynnyri "SHORTS"; fi
 
 shorts_dt() {
