@@ -32,8 +32,12 @@ synk_real() {
 	else
 		if [ -f $KR_DIR_SITES/$2.sh ]; then
 			. $KR_DIR_SITES/$2.sh $1
-		else
-			virhe SYNK $1 $2 "connection not recognized!"
+		else 
+			if [ -f $KR_DIR_SITES/$1.sh ]; then
+				. $KR_DIR_SITES/$1.sh
+			else
+				virhe SYNK $1 $2 "connection not recognized!"
+			fi
 		fi
 	fi
 }
