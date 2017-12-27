@@ -1,5 +1,4 @@
 #!/bin/bash
-#bulog.sh, L 27.2.2015
 if [ $KR_DEBUG == "true" ]; then tynnyri "BULOG"; fi
 
 #bulog() {
