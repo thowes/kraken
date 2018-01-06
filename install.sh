@@ -19,7 +19,7 @@ TESTATTR=_$1_
 if [ $TESTATTR == "__" ]; then
 	KR_TO_DIR=$(pwd)/cfg
 	if [ -d 'cfg' ]; then
-		if [ -f cfg/alias.sh ]; then echo "[[ ERR INSTALL alias.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/lib/$KR_INSTALL_ALIAS_FILE cfg/alias.sh; fi
+		if [ -f cfg/alias.sh ]; then echo "[[ ERR INSTALL alias.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/$KR_INSTALL_ALIAS_FILE cfg/alias.sh; fi
 		if [ -f cfg/compu.sh ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/compu.sh cfg/compu.sh; fi
 		if [ -f cfg/nets.sh ]; then echo "[[ ERR INSTALL nets.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/nets.sh cfg/nets.sh; fi
 		if [ -f cfg/vker.sh ]; then echo "[[ ERR INSTALL vker.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/vker.sh cfg/vker.sh; fi
@@ -28,14 +28,14 @@ if [ $TESTATTR == "__" ]; then
 	else
 		mkdir cfg
 		cp $KR_FROM_DIR/def/*.sh cfg/
-		if [ -f $KR_FROM_DIR/lib/$KR_INSTALL_ALIAS_FILE ]; then cp $KR_FROM_DIR/lib/$KR_INSTALL_ALIAS_FILE cfg/alias.sh; fi
+		if [ -f $KR_FROM_DIR/def/$KR_INSTALL_ALIAS_FILE ]; then cp $KR_FROM_DIR/def/$KR_INSTALL_ALIAS_FILE cfg/alias.sh; fi
 		if [ -f $KR_FROM_DIR/def/kraken.cfg ]; then cp $KR_FROM_DIR/def/kraken.cfg cfg/kraken.cfg; fi
 		if [ -f $KR_FROM_DIR/def/proj.csv ]; then cp $KR_FROM_DIR/def/proj.csv cfg/proj.csv; fi
 	fi
 else
 	KR_TO_DIR=$1
 	if [ -d $1 ]; then
-		if [ -f $KR_TO_DIR/alias.sh ]; then echo "[[ ERR INSTALL alias.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/lib/$KR_INSTALL_ALIAS_FILE $KR_TO_DIR/alias.sh; fi
+		if [ -f $KR_TO_DIR/alias.sh ]; then echo "[[ ERR INSTALL alias.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/$KR_INSTALL_ALIAS_FILE $KR_TO_DIR/alias.sh; fi
 		if [ -f $KR_TO_DIR/compu.sh ]; then echo "[[ ERR INSTALL compu.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/compu.sh $KR_TO_DIR/compu.sh; fi
 		if [ -f $KR_TO_DIR/nets.sh ]; then echo "[[ ERR INSTALL nets.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/nets.sh $KR_TO_DIR/nets.sh; fi
 		if [ -f $KR_TO_DIR/vker.sh ]; then echo "[[ ERR INSTALL vker.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/vker.sh $KR_TO_DIR/vker.sh; fi
