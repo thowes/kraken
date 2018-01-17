@@ -16,8 +16,8 @@ case $KR_SYSTEM_TYPE in
 esac
 
 TESTATTR=_$1_
+KR_TO_DIR=$(pwd)/cfg
 if [ $TESTATTR == "__" ]; then
-	KR_TO_DIR=$(pwd)/cfg
 	if [ -d 'cfg' ]; then echo cfg/ already exists.; else mkdir cfg; fi
 else KR_TO_DIR=$1; fi
 
