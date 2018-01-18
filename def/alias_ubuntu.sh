@@ -21,6 +21,7 @@ alias s='synkronoi syn'
 alias sammu='sudo shutdown -h now'
 alias t=touch
 alias tl='ps aux'
+alias u='synkronoi upl'
 alias v=verkko
 alias x=exit
 alias X='startx'

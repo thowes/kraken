@@ -26,6 +26,7 @@ alias rt='cd /'
 alias s='synkronoi syn'
 alias t=touch
 alias tl=tasklist
+alias u='synkronoi upl'
 alias v=verkko
 alias x=exit
 alias y='synkronoi ssh'
