@@ -10,6 +10,10 @@ compu_proj() {
 	if [ -d .git ]; then git status --short; else if [ -d ../.git ]; then git status --short; else ls; fi; fi
 }
 
+compu_secu() {
+	debug COMPU secu $1 $2
+}
+
 compu_start() {
 	debug COMPU start $1 $KR_NETWORK
 	#if [ -f $KR_DIR_CFG/kerain.sh ]; then . $KR_DIR_CFG/kerain.sh; fi
