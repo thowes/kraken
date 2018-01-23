@@ -6,7 +6,7 @@ shorts_dt() {
 	case $1 in
 		clr)
 			if [ -d $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/ ]; then
-				#if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi
+				#if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi
 				if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi
 				if [ -f $KR_DIR_DT/$KR_NAME_URL ]; then \cp $KR_DIR_DT/*.url $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/; \rm $KR_DIR_DT/*.url; fi
 			fi;;
