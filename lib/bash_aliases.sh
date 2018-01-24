@@ -34,6 +34,7 @@ alias remote='git remote'
 alias reset='rake db:migrate:reset'
 alias rollback='rails db:rollback'
 alias routes='rake routes'
+alias rl='screen -list'
 alias ru=screen
 alias rv='git remote -v'
 alias seed='rake db:seed RAILS_ENV=development'
