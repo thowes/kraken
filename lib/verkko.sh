@@ -1,6 +1,4 @@
 #!/bin/bash
-if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/VERKKO /w"; fi
-
 if [ -f $KR_DIR_CFG/nets.sh ]; then
 	VERKKO_IP="0.0.0.0"
 	VERKKO_ESSID="NADA"
@@ -26,8 +24,6 @@ if [ -f $KR_DIR_CFG/nets.sh ]; then
 	esac
 	. $KR_DIR_CFG/nets.sh
 else virhe FILE nets.sh not found; fi
-
-if [ $KR_DEBUG == "true" ]; then tynnyri $VERKKO; tynnyri kick; fi
 
 # not working properly in some cases
 verkko() {
