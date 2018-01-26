@@ -10,6 +10,7 @@ varko() {
 			case $KAYTTIS in
 				cygwin) BU_LATEST_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 				darwin) BU_LATEST_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
+				*) BU_LATEST_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 			esac
 			mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old
 		fi
@@ -29,12 +30,14 @@ varko() {
 				case $KAYTTIS in
 					cygwin) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db*;;
 					darwin) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x "*.DS_Store";;
+					*) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log*;;
 				esac
 			fi
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
 				case $KAYTTIS in
 					cygwin) BU_TODAY_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 					darwin) BU_TODAY_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
+					*) BU_TODAY_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 				esac
 			fi
 			# Checking if md5 sum is the same between the latest backup in backup.log and current backup. If not, continue.
