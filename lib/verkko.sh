@@ -31,7 +31,7 @@ verkko() {
 		cygwin)
 			case $1 in
 				eth) netsh lan show interfaces;;
-				ext) curl http://ipinfo.io/ip;;
+				ext) \curl $KRN_EXT_IP_ADDRESS;;
 				ip) ipconfig|\grep IPv4;;
 				mac) getmac /v;;
 				ssid) netsh wlan show interfaces|\grep SSID|\grep -v BSSID;;
@@ -41,7 +41,7 @@ verkko() {
 		darwin)
 			case $1 in
 				eth) ifconfig eth0;;
-				ext) curl http://ipinfo.io/ip;;
+				ext) \curl $KRN_EXT_IP_ADDRESS;;
 				ip) ifconfig|\grep broadcast;;
 				mac) ifconfig -a|\grep HWaddr;;
 				ssid) airport -I|\grep -v BSSID|\grep SSID;;
@@ -52,7 +52,7 @@ verkko() {
 		ubuntu)
 			case $1 in
 				eth) ifconfig eth0;;
-				ext) curl http://ipinfo.io/ip;;
+				ext) \curl $KRN_EXT_IP_ADDRESS;;
 				ip) ifconfig -a|\grep IP;;
 				mac) ifconfig -a|\grep HWaddr;;
 				ssid) iwlist wlan0 scan|\grep ESSID;;
