@@ -39,7 +39,7 @@ if [ -f $2 ]; then
 	if [ -f $KR_DIR_LIB/passu.sh ]; then . $KR_DIR_LIB/passu.sh; fi
 	if [ -f $KR_DIR_LIB/synk.sh ]; then . $KR_DIR_LIB/synk.sh; fi
 	#if [ -f $KR_DIR_LIB/muok.sh ]; then . $KR_DIR_LIB/muok.sh; fi
-	if [ -f $KR_DIR_LIB/reader.sh ]; then . $KR_DIR_LIB/reader.sh; fi
+	#if [ -f $KR_DIR_LIB/reader.sh ]; then . $KR_DIR_LIB/reader.sh; fi
 	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
 	#TOIMENPITEET
