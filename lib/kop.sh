@@ -8,7 +8,6 @@ varko() {
 		BU_LATEST_MD5="nada"; BU_TODAY_MD5=md5
 		if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
 			case $KAYTTIS in
-				#cygwin) BU_LATEST_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 				darwin) BU_LATEST_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
 				*) BU_LATEST_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 			esac
@@ -35,7 +34,6 @@ varko() {
 			fi
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
 				case $KAYTTIS in
-					#cygwin) BU_TODAY_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 					darwin) BU_TODAY_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
 					*) BU_TODAY_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 				esac
