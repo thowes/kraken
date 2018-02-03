@@ -53,7 +53,7 @@ verkko() {
 			case $1 in
 				eth) ifconfig eth0;;
 				ext) \curl $KRN_EXT_IP_ADDRESS;;
-				ip) ifconfig -a|\grep IP;;
+				ip) ifconfig -a|\grep Bcast;;
 				mac) ifconfig -a|\grep HWaddr;;
 				ssid) iwlist wlan0 scan|\grep ESSID;;
 				wlan) ifconfig wlan0;;
