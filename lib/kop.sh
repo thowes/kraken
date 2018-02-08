@@ -29,7 +29,7 @@ varko() {
 				case $KAYTTIS in
 					cygwin) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db*;;
 					darwin) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x "*.DS_Store";;
-					*) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log*;;
+					*) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store";;
 				esac
 			fi
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
