@@ -1,5 +1,4 @@
 #!/bin/bash
-#kaiku.sh, L 14.1.2014
 if [ $KR_DEBUG == "true" ]; then echo "[[ KRAKEN/KAIKU ]]"; fi
 TYNNYRI=""
 
