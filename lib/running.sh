@@ -18,7 +18,7 @@ running() {
 	else
 		case $KAYTTIS in
 			cygwin) tasklist | tr -s " " | awk '{print $1 " " $3}' > $KR_DIR_TEMP/tl.lst;;
-			*) ps aux | tr -s " " | awk '{print $11}' > $KR_DIR_TEMP/tl.lst;;
+			*) ps aux | tr -s " " | awk '{print $11 $12}' > $KR_DIR_TEMP/tl.lst;;
 		esac
 		running $1
 		if [ -f $KR_DIR_TEMP/tl.lst ]; then rm $KR_DIR_TEMP/tl.lst; fi
