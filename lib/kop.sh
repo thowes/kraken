@@ -26,9 +26,9 @@ varko() {
 			if [ -f $KR_DIR_INCL/$2.lst ]; then
 				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -i@$KR_DIR_INCL/$2.lst
 			else
-				case $KAYTTIS in
-					*) zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store";;
-				esac
+				#case $KAYTTIS in
+					zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+				#esac
 			fi
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
 				case $KAYTTIS in
