@@ -5,6 +5,10 @@ KR_PASSU=passu1; KR_SALIS=passu2
 tccm() {
 	debug TTCM $1 $2 $3
 	KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
+	case $KAYTTIS in
+		darwin) KRN_TC_DIR="/Volumes";;
+		ubuntu) KRN_TC_DIR="/media/$USER";;
+	esac
 	case $1 in
 		dm) case $KAYTTIS in
 				cygwin) tc /q /s /d $2;;
