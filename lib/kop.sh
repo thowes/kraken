@@ -24,7 +24,7 @@ varko() {
 			debug "kop.sh:25c" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
 			# Creating new zip from the directory without backup.log file
 			if [ -f $KR_DIR_INCL/$2.lst ]; then
-				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -i@$KR_DIR_INCL/$2.lst
+				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -i@$KR_DIR_INCL/$2.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			else
 				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			fi
