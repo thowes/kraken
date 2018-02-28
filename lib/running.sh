@@ -11,8 +11,12 @@ running() {
 					*Services*) KR_OUTPUT=true;;
 				esac;;
 			*) # not functional yet
-				KR_APPCHECKER_NUMBER=$(cat -v $KR_DIR_TEMP/tl.lst | grep $1 | wc -l)
-				if [ $KR_APPCHECKER_NUMBER != 0 ]; then KR_OUTPUT=true; fi;;
+				KR_APPCHECKER_NUMBER=$(ps aux | grep -v grep | grep $1 | wc -l)
+				case $KR_APPCHECKER_NUMBER in
+					0) KR_OUTPUT=false;;
+					*) KR_OUTPUT=true;;
+				esac
+				#if [ $KR_APPCHECKER_NUMBER != 0 ]; then KR_OUTPUT=true; fi;;
 		esac
 		echo $KR_OUTPUT
 	else
