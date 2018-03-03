@@ -11,10 +11,10 @@ running() {
 					*Services*) KR_OUTPUT=true;;
 				esac;;
 			*) # not functional yet
-				KR_APPCHECKER_NUMBER=$(ps aux | grep -v grep | grep $1 | wc -l | tr -s " ")
+				KR_APPCHECKER_NUMBER=$(ps aux | grep -v grep | grep $1 | wc -l)
 				case "$KR_APPCHECKER_NUMBER" in
-					0) KR_OUTPUT=false;;
-					#*) KR_OUTPUT=true;;
+					*0) KR_OUTPUT=false;;
+					*) KR_OUTPUT=true;;
 				esac
 		esac
 		echo $KR_OUTPUT
