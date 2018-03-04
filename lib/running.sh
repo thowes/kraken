@@ -4,7 +4,7 @@ running() {
 		KR_OUTPUT=false
 		case $KAYTTIS in
 			cygwin)
-				KR_APPCHECKER_RUNNING=$(cat -v $KR_DIR_TEMP/tl.lst | grep $1.exe)
+				KR_APPCHECKER_RUNNING=$(tasklist | tr -s " " | awk '{print $1 " " $3}' | grep $1.exe)
 				case $KR_APPCHECKER_RUNNING in
 					*Console*) KR_OUTPUT=true;;
 					*Session*) KR_OUTPUT=true;;
