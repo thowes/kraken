@@ -6,8 +6,10 @@ shorts_dt() {
 	case $1 in
 		clr)
 			if [ -d $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/ ]; then
-				if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi
-				if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi
+				case $KAYTTIS in
+					cygwin) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
+					ubuntu) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi;;
+				esac
 				if [ -f $KR_DIR_DT/$KR_NAME_URL ]; then \cp $KR_DIR_DT/*.url $KR_DIR_BUA/BU.$HOSTNAME/DESKTOP/; \rm $KR_DIR_DT/*.url; fi
 			fi;;
 		c) if [ -d $KR_DIR_LNK/COMP/$2 ]; then \cp $KR_DIR_LNK/COMP/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
