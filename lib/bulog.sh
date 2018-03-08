@@ -1,6 +1,4 @@
 #!/bin/bash
-if [ $KR_DEBUG == "true" ]; then tynnyri "BULOG"; fi
-
 bulog_latest() {
 	#debug BULOG latest $1
 	if [ -f $1/backup.log ]; then
