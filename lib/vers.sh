@@ -1,6 +1,4 @@
 #!/bin/bash
-if [ $KR_DEBUG == "true" ]; then tynnyri VERS; fi
-
 vers_w() {
 	if [ -d $KR_DIR_CFG/versions/ ]; then
 		case $1 in
