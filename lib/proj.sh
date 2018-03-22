@@ -47,3 +47,11 @@ projekti_update() {
 		*) virhe "Can't update," "you are" NOT "in master branch";;
 	esac
 }
+
+projekti() {
+	case $1 in
+		go) projekti_go $2;;
+		op) projekti_go $2;;
+		st) projekti_go $2;;
+		upd) projekti_go $2; projekti_update;;
+}
