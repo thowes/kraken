@@ -54,4 +54,5 @@ projekti() {
 		op) projekti_go $2;;
 		st) projekti_go $2;;
 		upd) projekti_go $2; projekti_update;;
+	esac
 }
