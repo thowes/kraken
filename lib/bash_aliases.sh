@@ -13,7 +13,7 @@ alias ed=muokkaa
 alias egrep='egrep --color=auto'              # show differences in colour
 alias fgrep='fgrep --color=auto'              # show differences in colour
 alias grep='grep --color'                     # show differences in colour
-alias g2=gpg2
+#alias g2=gpg2
 alias hst='cat ~/.bash_history'
 alias k80=kaiku80
 alias k9='kill -9'
@@ -39,7 +39,8 @@ alias ru=screen
 alias rv='git remote -v'
 alias seed='rake db:seed RAILS_ENV=development'
 alias srv='rails server -b $IP -p $PORT'
-alias st='if [ -d .git ]; then git status; else if [ -d ../.git ]; then git status; fi; fi'
+#alias st='if [ -d .git ]; then git status; else if [ -d ../.git ]; then git status; fi; fi'
+alias st='if [ -d .git ]; then git status; else if [ -d ../.git ]; then git status; else if [ -d ../../.git ]; then git status; fi; fi; fi'
 alias syn='synkronoi syn'
 alias todo=todo.sh
 alias tst='rails test'
