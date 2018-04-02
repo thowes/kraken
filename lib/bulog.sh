@@ -20,7 +20,7 @@ bulog_latest() {
 # returns the 2nd last row of the backup log file.
 bulog_2nd_latest() {
 	if [ -f $1/backup.log ]; then
-		KRN_2ND_LATEST_LINE=$(tail -n 2 $1/backup.log)
+		KRN_2ND_LATEST_LINE=$(tail -n 2 $1/backup.log|head -n 1)
 		echo $KRN_2ND_LATEST_LINE
 	else
 		virhe $1/backup.log "doesn't exist."
