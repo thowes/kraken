@@ -17,12 +17,10 @@ shorts_dt() {
 		p)
 			if [ -d $KR_DIR_LNK/PROG/$2 ]; then \cp $KR_DIR_LNK/PROG/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt-prog $1 $2; fi
 			if [ -d $KR_DIR_LNK/PROJ/$2 ]; then \cp $KR_DIR_LNK/PROJ/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt-proj $1 $2; fi
+			if [ -d .desktop_links ]; then kaiku DIR .desktop_links exists; else virhe DIR .desktop_links "not found"; fi
 			;;
 		u) if [ -d $KR_DIR_LNK/USER/$2 ]; then \cp $KR_DIR_LNK/USER/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
-		*)
-			if [ -d $KR_DIR_LNK/PROG/$1 ]; then \cp $KR_DIR_LNK/PROG/$1/*.* $KR_DIR_DT/; else virhe SHORTS dt-prog $1 $2; fi
-			if [ -d $KR_DIR_LNK/PROJ/$1 ]; then \cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/; else virhe SHORTS dt-proj $1 $2; fi
-			;;
+		*) shorts_dt p $1;;
 	esac
 }
 
