@@ -1,4 +1,5 @@
 /cfg
+.desktop_link
 .DS_Store
 *.sublime*
 /temp
