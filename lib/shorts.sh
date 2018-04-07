@@ -24,10 +24,12 @@ shorts_dt() {
 	esac
 }
 
-shorts_menu() {
-	debug "SHORTS/MENU" "$1"
+shorts_clear() {
+	debug "SHORTS/CLEAR" "$1"
 	case $1 in
-		clr)
+		sendto) if [ -d $KR_DIR_SENDTO/ ]; then \cp $KR_DIR_SENDTO/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/SENDTO/; \rm $KR_DIR_SENDTO/*.lnk; else virhe SHORTS no SENDTO directory; fi;;
+		startup) if [ -f $KR_DIR_STARTUP/$KR_NAME_STARTUP ]; then \cp $KR_DIR_STARTUP/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/STARTUP/; \rm $KR_DIR_STARTUP/*.lnk; fi;;
+		menu)
 			if [ -d $KR_DIR_BUA/BU.$HOSTNAME/MENU/ ]; then
 				if [ -d $KR_DIR_AMENU ]; then \cp $KR_DIR_AMENU/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/MENU/; else virhe shorts.sh:28 dir $KR_DIR_AMENU missing; fi
 				if [ -d $KR_DIR_UMENU ]; then \cp $KR_DIR_UMENU/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/MENU/; else virhe shorts.sh:29 dir $KR_DIR_UMENU missing; fi
@@ -35,6 +37,7 @@ shorts_menu() {
 				if [ -d $KR_DIR_PMENU ]; then \cp $KR_DIR_PMENU/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/PMENU/; else virhe shorts.sh:29 dir $KR_DIR_PMENU missing; fi
 			else virhe shorts.sh:30 dir $KR_DIR_BUA/BU.$HOSTNAME/MENU/ missing
 			fi;;
+		*) shorts_clear menu; shorts_clear startup;;
 	esac
 }
 
@@ -42,7 +45,6 @@ shorts_sendto() {
 	debug "SHORTS/SENDTO" "$1 $2"
 	if [ -d $KR_DIR_SENDTO ]; then
 		case $1 in
-			clr) \rm $KR_DIR_SENDTO/*.lnk;;
 			def) \cp $KR_DIR_LNK/SENDTO/default/*.lnk $KR_DIR_SENDTO/;;
 			*) if [ -d $KR_DIR_BUA/BU.$HOSTNAME/SENDTO/$1 ]; then \cp $KR_DIR_BUA/SENDTO/$1/*.lnk $KR_DIR_SENDTO/; else virhe SHORTS/SENDTO $1 $2; fi;;
 		esac
@@ -54,10 +56,6 @@ shorts_sendto() {
 shorts_startup() {
 	debug "SHORTS/STARTUP" "$1 $2"
 	case $1 in
-		clr)
-			if [ -f $KR_DIR_STARTUP/$KR_NAME_STARTUP ]; then 
-				\cp $KR_DIR_STARTUP/*.lnk $KR_DIR_BUA/BU.$HOSTNAME/STARTUP/; \rm $KR_DIR_STARTUP/*.lnk
-			fi;;
 		def) \cp $KR_DIR_LNK/STARTUP/default/*.lnk $KR_DIR_STARTUP/;;
 		*) if [ -d $KR_DIR_LNK/STARTUP/$1 ]; then \cp $KR_DIR_LNK/STARTUP/$1/*.lnk $KR_DIR_STARTUP/; fi;;
 	esac
@@ -67,7 +65,7 @@ shorts() {
 	debug "SHORTS/MAIN"
 	if [ -d $KR_DIR_LNK ]; then
 		case $1 in
-			clr) tynnyri new SHORTS/CLR; shorts_menu clr; shorts_dt clr; shorts_startup clr;;
+			clr) tynnyri new SHORTS/CLR; shorts_clear; shorts_dt clr;;
 			dt) tynnyri new SHORTS/DT; shorts_dt c $HOSTNAME; shorts_dt l $2; shorts_dt p $3; shorts_dt u $USER;;
 			st) tynnyri new SHORTS/ST; debug shorts_sendto $HOSTNAME; shorts_startup $HOSTNAME; shorts_startup $2;;
 		esac
