@@ -18,7 +18,12 @@ projekti_go() {
 			if [ -d $KR_DIRPO ]; then
 				\cd $KR_DIRPO
 				compu_proj $1
+				#case $1 in
+					#o) ;;
 				#open .
+					#p) ;;
+					#u) ;;
+				#esac
 			else 
 				virhe PROJ $1 $KR_DIRPO "is not a directory!"
 			fi;;
