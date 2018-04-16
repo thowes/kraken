@@ -4,15 +4,6 @@ if [ $KR_DEBUG == "true" ]; then tynnyri "SHORTS"; fi
 shorts_dt() {
 	debug "SHORTS/DT" "$1 $2"
 	case $1 in
-		clr)
-			if [ -d $KR_DIR_BUA/DESKTOP/ ]; then
-				case $KAYTTIS in
-					cygwin) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
-					#darwin) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.app $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.app; fi;;
-					ubuntu) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi;;
-				esac
-				if [ -f $KR_DIR_DT/$KR_NAME_URL ]; then \cp $KR_DIR_DT/*.url $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.url; fi
-			fi;;
 		c) if [ -d $KR_DIR_LNK/COMP/$2 ]; then \cp $KR_DIR_LNK/COMP/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
 		l) if [ -d $KR_DIR_LNK/KTXT/$2 ]; then \cp $KR_DIR_LNK/KTXT/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
 		p)
@@ -28,6 +19,15 @@ shorts_dt() {
 shorts_clear() {
 	debug "SHORTS/CLEAR" "$1"
 	case $1 in
+		desktop)
+			if [ -d $KR_DIR_BUA/DESKTOP/ ]; then
+				case $KAYTTIS in
+					cygwin) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
+					#darwin) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.app $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.app; fi;;
+					ubuntu) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi;;
+				esac
+				if [ -f $KR_DIR_DT/$KR_NAME_URL ]; then \cp $KR_DIR_DT/*.url $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.url; fi
+			fi;;
 		sendto) if [ -d $KR_DIR_SENDTO/ ]; then \cp $KR_DIR_SENDTO/*.lnk $KR_DIR_BUA/SENDTO/; \rm $KR_DIR_SENDTO/*.lnk; else virhe SHORTS no SENDTO directory; fi;;
 		startup) if [ -f $KR_DIR_STARTUP/$KR_NAME_STARTUP ]; then \cp $KR_DIR_STARTUP/*.lnk $KR_DIR_BUA/STARTUP/; \rm $KR_DIR_STARTUP/*.lnk; fi;;
 		menu)
@@ -38,7 +38,7 @@ shorts_clear() {
 				if [ -d $KR_DIR_PMENU ]; then \cp $KR_DIR_PMENU/*.lnk $KR_DIR_BUA/PMENU/; else virhe shorts.sh:29 dir $KR_DIR_PMENU missing; fi
 			else virhe shorts.sh:30 dir $KR_DIR_BUA/MENU/ missing
 			fi;;
-		*) shorts_clear menu; shorts_clear startup;;
+		*) shorts_clear menu; shorts_clear startup; shorts_clear desktop;;
 	esac
 }
 
@@ -66,7 +66,7 @@ shorts() {
 	debug "SHORTS/MAIN"
 	if [ -d $KR_DIR_LNK ]; then
 		case $1 in
-			clr) tynnyri new SHORTS/CLR; shorts_clear; shorts_dt clr;;
+			clr) tynnyri new SHORTS/CLR; shorts_clear;;
 			dt) tynnyri new SHORTS/DT; shorts_dt c $HOSTNAME; shorts_dt l $2; shorts_dt p $3; shorts_dt u $USER;;
 			st) tynnyri new SHORTS/ST; debug shorts_sendto $HOSTNAME; shorts_startup $HOSTNAME; shorts_startup $2;;
 		esac
