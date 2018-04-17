@@ -4,16 +4,20 @@ if [ -f $KR_DIR_LIB/val.sh ]; then . $KR_DIR_LIB/val.sh; fi
 if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
 # reads list projects (proj.csv) and jumps to the project folder.
-projekti_go() {
+projekti() {
 	case $1 in
-		p) KRN_DIRPO_FUNCTION="p"; KRN_DIRPO_INPUT=$2;;
-		*) KRN_DIRPO_FUNCTION="p"; KRN_DIRPO_INPUT=$1;;
+		-o) KRN_PROJ_FUNCTION="-o"; KRN_PROJ_INPUT=$2;;
+		-p) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$2;;
+		-st) KRN_PROJ_FUNCTION="-st"; KRN_PROJ_INPUT=$2;;
+		-u) KRN_PROJ_FUNCTION="-u"; KRN_PROJ_INPUT=$2;;
+		p) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$2;;
+		*) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$1;;
 	esac
-	KR_PROJECTS_COUNT=$(cat $KR_DIR_CFG/proj.csv | \grep $1 | wc -l | awk '{ print $1 }')
+	KR_PROJECTS_COUNT=$(cat $KR_DIR_CFG/proj.csv | \grep $KRN_PROJ_INPUT | wc -l | awk '{ print $1 }')
 	case $KR_PROJECTS_COUNT in
-		0) virhe "Project keyword" $1 "not found" "in project file";;
+		0) virhe "Project keyword" $KRN_PROJ_INPUT "not found" "in project file.";;
 		1)
-			KR_DIRPO_LINE=$(cat $KR_DIR_CFG/proj.csv | \grep $1 )
+			KR_DIRPO_LINE=$(cat $KR_DIR_CFG/proj.csv | \grep $KRN_PROJ_INPUT )
 			KR_DIRPO=$(echo $KR_DIRPO_LINE | awk -F, '{ print $4 }')
 			KR_DIRPO_TEMP=$KR_DIRPO; KR_DIRPO_HOME=~
 			case $KR_DIRPO_TEMP in
@@ -21,17 +25,16 @@ projekti_go() {
 			esac
 			if [ -d $KR_DIRPO ]; then
 				\cd $KR_DIRPO
-				compu_proj $1
-				#case $1 in
-					#o) ;;
-				#open .
-					#p) ;;
-					#u) ;;
-				#esac
+				compu_proj $KRN_PROJ_INPUT
+				case $KRN_PROJ_FUNCTION in
+					-o) open .;;
+					-u) if [ -d .git/ ]; then projekti_update; fi;;
+					*) if [ -d .git/ ]; then git status --short; else if [ -d ../.git/ ]; then git status --short; else ls; fi; fi;;
+				esac
 			else 
-				virhe PROJ $1 $KR_DIRPO "is not a directory!"
+				virhe PROJ $KRN_PROJ_INPUT $KR_DIRPO "is not a directory!"
 			fi;;
-		*) virhe "Project keyword" $1 "found multiple times in project file.";;
+		*) virhe "Project keyword" $KRN_PROJ_INPUT "found multiple times in project file.";;
 	esac
 }
 
@@ -54,14 +57,5 @@ projekti_update() {
 				*) virhe NOT "up to date" with master;;
 			esac;;
 		*) virhe "Can't update," "you are" NOT "in master branch";;
-	esac
-}
-
-projekti() {
-	case $1 in
-		go) projekti_go $2;;
-		op) projekti_go $2;;
-		st) projekti_go $2;;
-		upd) projekti_go $2; projekti_update;;
 	esac
 }
