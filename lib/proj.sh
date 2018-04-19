@@ -25,7 +25,7 @@ projekti() {
 			esac
 			if [ -d $KR_DIRPO ]; then
 				\cd $KR_DIRPO
-				compu_proj $KRN_PROJ_INPUT
+				compu_proj $KRN_PROJ_FUNCTION $KRN_PROJ_INPUT
 				case $KRN_PROJ_FUNCTION in
 					-o) open .;;
 					-u) if [ -d .git/ ]; then projekti_update; fi;;
