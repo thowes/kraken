@@ -6,8 +6,16 @@ compu_app() {
 compu_proj() {
 	debug COMPU proj $1 $KR_NETWORK
 	#This is the default behaviour when accessing project dir with projekti_go command.
-	#In my own version I also call projekti_update if in the project main dir.
-	if [ -d .git ]; then git status --short; else if [ -d ../.git ]; then git status --short; else ls; fi; fi
+	if [ -d .git ]; then
+		git status --short
+		if [ "" == "-u" ]; then compu_secu; fi
+	else
+		if [ -d ../.git ]; then
+			git status --short
+		else
+			ls
+		fi
+	fi
 }
 
 compu_secu() {
