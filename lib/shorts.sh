@@ -1,6 +1,4 @@
 #!/bin/bash
-if [ $KR_DEBUG == "true" ]; then tynnyri "SHORTS"; fi
-
 shorts_dt() {
 	debug "SHORTS/DT" "$1 $2"
 	case $1 in
@@ -9,7 +7,7 @@ shorts_dt() {
 		p)
 			if [ -d $KR_DIR_LNK/PROG/$2 ]; then \cp $KR_DIR_LNK/PROG/$2/*.* $KR_DIR_DT/; else virhe SHORTS "dir dt-prog" $1 $2; fi
 			if [ -d $KR_DIR_LNK/PROJ/$2 ]; then \cp $KR_DIR_LNK/PROJ/$2/*.* $KR_DIR_DT/; else virhe SHORTS "dir dt-proj" $1 $2; fi
-			if [ -d .desktop_links ]; then \cp .desktop_links/*.* $KR_DIR_DT/; else virhe DIR .desktop_links "not found"; fi
+			if [ -d $KR_DIRPO/.desktop_links ]; then \cp $KR_DIRPO/.desktop_links/*.* $KR_DIR_DT/; else virhe DIR .desktop_links "not found"; fi
 			;;
 		u) if [ -d $KR_DIR_LNK/USER/$2 ]; then \cp $KR_DIR_LNK/USER/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
 		*) shorts_dt p $1;;
@@ -19,6 +17,7 @@ shorts_dt() {
 shorts_clear() {
 	debug "SHORTS/CLEAR" "$1"
 	case $1 in
+		all) shorts_clear menu; shorts_clear startup; shorts_clear desktop;;
 		desktop)
 			if [ -d $KR_DIR_BUA/DESKTOP/ ]; then
 				case $KAYTTIS in
@@ -38,7 +37,7 @@ shorts_clear() {
 				if [ -d $KR_DIR_PMENU ]; then \cp $KR_DIR_PMENU/*.lnk $KR_DIR_BUA/PMENU/; else virhe shorts.sh:29 dir $KR_DIR_PMENU missing; fi
 			else virhe shorts.sh:30 dir $KR_DIR_BUA/MENU/ missing
 			fi;;
-		*) shorts_clear menu; shorts_clear startup; shorts_clear desktop;;
+		*) shorts_clear menu; shorts_clear desktop;;
 	esac
 }
 
@@ -64,12 +63,9 @@ shorts_startup() {
 
 shorts() {
 	debug "SHORTS/MAIN"
-	if [ -d $KR_DIR_LNK ]; then
-		case $1 in
-			clr) tynnyri new SHORTS/CLR; shorts_clear;;
-			dt) tynnyri new SHORTS/DT; shorts_dt c $HOSTNAME; shorts_dt l $2; shorts_dt p $3; shorts_dt u $USER;;
-			st) tynnyri new SHORTS/ST; debug shorts_sendto $HOSTNAME; shorts_startup $HOSTNAME; shorts_startup $2;;
-		esac
-	else debug no APPLNK directory
-	fi
+	case $1 in
+		clr) if [ -d $KR_DIR_LNK ]; then tynnyri new SHORTS/CLR; shorts_clear; else debug no APPLNK directory; fi;;
+		dt) tynnyri new SHORTS/DT; shorts_dt c $HOSTNAME; shorts_dt l $2; shorts_dt p $3; shorts_dt u $USER;;
+		st) tynnyri new SHORTS/ST; debug shorts_sendto $HOSTNAME; shorts_startup $HOSTNAME; shorts_startup $2;;
+	esac
 }
