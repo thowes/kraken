@@ -45,13 +45,13 @@ projekti_status() {
 		*master*)
 			KR_PROJ_UPDATE=$(echo $KR_PROJ_STATUS | \grep origin)
 			case $KR_PROJ_UPDATE in
+				*ahead*) echo $KR_PROJ_UPDATE;;
 				*date*)
 					KR_PROJ_COMMITS=$(echo $KR_PROJ_STATUS | \grep commit | \grep to)
 					case $KR_PROJ_COMMITS in
 						*nothing*) echo "Up-to-date with origin/master";;
 						*) echo "You have changes not staged for commit.";;
 					esac;;
-				*ahead*) echo "Ahead of master in commits.";;
 			esac;;
 		*) echo "Not in master branch";;
 	esac
