@@ -67,7 +67,7 @@ shorts() {
 	debug "SHORTS/MAIN"
 	case $1 in
 		clr) if [ -d $KR_DIR_LNK ]; then tynnyri new SHORTS/CLR; shorts_clear; else debug no APPLNK directory; fi;;
-		dt) tynnyri new SHORTS/DT; shorts_dt c $HOSTNAME; shorts_dt l $2; shorts_dt p $3; shorts_dt u $USER;;
+		dt) tynnyri new SHORTS/DT; shorts_dt l $2; shorts_dt p $3;;
 		st) tynnyri new SHORTS/ST; debug shorts_sendto $HOSTNAME; shorts_startup $HOSTNAME; shorts_startup $2;;
 	esac
 }
