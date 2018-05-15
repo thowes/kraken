@@ -2,16 +2,15 @@
 shorts_dt() {
 	debug "SHORTS/DT" "$1 $2"
 	case $1 in
-		l) if [ -d $KR_DIR_LNK/KTXT/$2 ]; then \cp $KR_DIR_LNK/KTXT/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
-		p)
-			if [ -d $KR_DIR_LNK/ ]; then
+		#l) if [ -d $KR_DIR_LNK/KTXT/$2 ]; then \cp $KR_DIR_LNK/KTXT/$2/*.* $KR_DIR_DT/; else virhe SHORTS dt $1 $2; fi;;
+		p) if [ -d $KR_DIR_LNK/ ]; then
 				if [ -d $KR_DIR_LNK/COMP/$HOSTNAME ]; then \cp $KR_DIR_LNK/COMP/$HOSTNAME/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/COMP/$HOSTNAME "not found."; fi
 				if [ -d $KR_DIR_LNK/USER/$USER ]; then \cp $KR_DIR_LNK/USER/$USER/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/USER/$USER "not found."; fi
+				if [ -d $KR_DIR_LNK/KTXT/$KR_NETWORK/ ]; then \cp $KR_DIR_LNK/KTXT/$KR_NETWORK/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/KTXT/$KR_NETWORK "not found."; fi
 				if [ -d $KR_DIR_LNK/PROG/$2 ]; then \cp $KR_DIR_LNK/PROG/$2/*.* $KR_DIR_DT/; else virhe "SHORTS dir dt-prog" $1 $2 "not found."; fi
 				if [ -d $KR_DIR_LNK/PROJ/$2 ]; then \cp $KR_DIR_LNK/PROJ/$2/*.* $KR_DIR_DT/; else virhe "SHORTS dir dt-proj" $1 $2 "not found."; fi
 			else virhe "SHORTS/dt dir" $KR_DIR_LNK "not found."; fi
-			if [ -d $KR_DIRPO/.desktop_links ]; then \cp $KR_DIRPO/.desktop_links/*.* $KR_DIR_DT/; else virhe DIR .desktop_links "not found."; fi 
-			;;
+			if [ -d $KR_DIRPO/.desktop_links ]; then \cp $KR_DIRPO/.desktop_links/*.* $KR_DIR_DT/; else virhe DIR .desktop_links "not found."; fi;;
 		*) shorts_dt p $1;;
 	esac
 }
@@ -67,7 +66,7 @@ shorts() {
 	debug "SHORTS/MAIN"
 	case $1 in
 		clr) if [ -d $KR_DIR_LNK ]; then tynnyri new SHORTS/CLR; shorts_clear; else debug no APPLNK directory; fi;;
-		dt) tynnyri new SHORTS/DT; shorts_dt l $2; shorts_dt p $3;;
+		dt) tynnyri new SHORTS/DT; shorts_dt p $3 $2;;
 		st) tynnyri new SHORTS/ST; debug shorts_sendto $HOSTNAME; shorts_startup $HOSTNAME; shorts_startup $2;;
 	esac
 }
