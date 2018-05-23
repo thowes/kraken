@@ -54,7 +54,7 @@ synkronoi() {
 						KR_SYNK_PARAM=$(echo $KR_SYNK_LINE|awk -F\; '{print $4}')
 						KR_SYNK_LDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $5}')
 						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
-						echo ssh $KR_SYNK_USER@$KR_SYNK_SERVER
+						ssh $KR_SYNK_USER@$KR_SYNK_SERVER
 						;;
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file(s) not found."; fi;;
