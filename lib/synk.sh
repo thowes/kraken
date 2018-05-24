@@ -48,12 +48,8 @@ synkronoi() {
 				case $(cat $KR_DIR_CFG/*loads.csv | \grep $2 | wc -l) in
 					0) virhe "information not found.";;
 					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/*loads.csv | \grep $2)
-						KR_SYNK_EXCL=$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
 						KR_SYNK_USER=$(echo $KR_SYNK_LINE|awk -F\; '{print $3}')
-						KR_SYNK_PARAM=$(echo $KR_SYNK_LINE|awk -F\; '{print $4}')
-						KR_SYNK_LDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $5}')
-						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
 						ssh $KR_SYNK_USER@$KR_SYNK_SERVER
 						;;
 					*) virhe "found too many sites.";;
@@ -63,6 +59,7 @@ synkronoi() {
 					0) virhe "information not found.";;
 					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/downloads.csv | \grep $2)
 						KR_SYNK_EXCL=$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
+						if [ -f $KR_DIR_EXCL/$KR_SYNK_EXCL ]; then debug "file exists."; else KR_SYNK_EXCL=default.lst; fi
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
 						KR_SYNK_USER=$(echo $KR_SYNK_LINE|awk -F\; '{print $3}')
 						KR_SYNK_PARAM=$(echo $KR_SYNK_LINE|awk -F\; '{print $4}')
@@ -73,9 +70,23 @@ synkronoi() {
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found."; fi;;
 		syn) synk_real syn $2;;
-		#SYN) synk_real SYN $2;;
 		ssh) synk_real ssh $2;;
 		upl) synk_real upl $2;;
+		ups) if [ -f $KR_DIR_CFG/uploads.csv ]; then
+				case $(cat $KR_DIR_CFG/uploads.csv | \grep $2 | wc -l) in
+					0) virhe "information not found.";;
+					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/uploads.csv | \grep $2)
+						KR_SYNK_EXCL=$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
+						if [ -f $KR_DIR_EXCL/$KR_SYNK_EXCL ]; then debug "file exists."; else KR_SYNK_EXCL=default.lst; fi
+						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
+						KR_SYNK_USER=$(echo $KR_SYNK_LINE|awk -F\; '{print $3}')
+						KR_SYNK_PARAM=$(echo $KR_SYNK_LINE|awk -F\; '{print $4}')
+						KR_SYNK_LDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $5}')
+						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
+						rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_DIR_EXCL/$KR_SYNK_EXCL
+						;;
+					*) virhe "found too many sites.";;
+				esac; else virhe "csv file not found."; fi;;
 		*) synk_real syn $1;;
 	esac
 }
