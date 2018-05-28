@@ -44,17 +44,7 @@ synk_real() {
 
 synkronoi() {
 	case $1 in
-		csv) if [ -f $KR_DIR_CFG/downloads.csv ] && [ -f $KR_DIR_CFG/uploads.csv ]; then
-				case $(cat $KR_DIR_CFG/*loads.csv | \grep $2 | wc -l) in
-					0) virhe "information not found.";;
-					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/*loads.csv | \grep $2)
-						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
-						KR_SYNK_USER=$(echo $KR_SYNK_LINE|awk -F\; '{print $3}')
-						kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-						ssh $KR_SYNK_USER@$KR_SYNK_SERVER
-						;;
-					*) virhe "found too many sites.";;
-				esac; else virhe "csv file(s) not found."; fi;;
+		csv) synkronoi ssh $2;;
 		dwl) if [ -f $KR_DIR_CFG/downloads.csv ]; then
 				case $(cat $KR_DIR_CFG/downloads.csv | \grep $2 | wc -l) in
 					0) virhe "information not found.";;
@@ -71,8 +61,18 @@ synkronoi() {
 						;;
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found."; fi;;
+		ssh) if [ -f $KR_DIR_CFG/downloads.csv ] && [ -f $KR_DIR_CFG/uploads.csv ]; then
+				case $(cat $KR_DIR_CFG/*loads.csv | \grep $2 | wc -l) in
+					0) virhe "information not found.";;
+					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/*loads.csv | \grep $2)
+						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
+						KR_SYNK_USER=$(echo $KR_SYNK_LINE|awk -F\; '{print $3}')
+						kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
+						ssh $KR_SYNK_USER@$KR_SYNK_SERVER
+						;;
+					*) virhe "found too many sites.";;
+				esac; else virhe "csv file(s) not found."; fi;;
 		syn) synk_real syn $2;;
-		ssh) synkronoi csv $2;;
 		upl) synk_real upl $2;;
 		ups) if [ -f $KR_DIR_CFG/uploads.csv ]; then
 				case $(cat $KR_DIR_CFG/uploads.csv | \grep $2 | wc -l) in
