@@ -45,10 +45,10 @@ synk_real() {
 synkronoi() {
 	case $1 in
 		csv) synkronoi ssh $2;;
-		dwl) if [ -f $KR_DIR_CFG/downloads.csv ]; then
-				case $(cat $KR_DIR_CFG/downloads.csv | \grep $2 | wc -l) in
+		dwl) if [ -f $KR_DIR_CFG/dwl.csv ]; then
+				case $(cat $KR_DIR_CFG/dwl.csv | \grep $2 | wc -l) in
 					0) virhe "information not found.";;
-					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/downloads.csv | \grep $2)
+					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/dwl.csv | \grep $2)
 						KR_SYNK_EXCL=$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
 						if [ -f $KR_DIR_EXCL/$KR_SYNK_EXCL ]; then debug "file exists."; else KR_SYNK_EXCL=default.lst; fi
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
@@ -61,8 +61,8 @@ synkronoi() {
 						;;
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found."; fi;;
-		ssh) if [ -f $KR_DIR_CFG/downloads.csv ] && [ -f $KR_DIR_CFG/uploads.csv ]; then
-				case $(cat $KR_DIR_CFG/*loads.csv | \grep $2 | wc -l) in
+		ssh) if [ -f $KR_DIR_CFG/dwl.csv ] && [ -f $KR_DIR_CFG/upl.csv ]; then
+				case $(cat $KR_DIR_CFG/*l.csv | \grep $2 | wc -l) in
 					0) virhe "information not found.";;
 					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/*loads.csv | \grep $2)
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
@@ -74,10 +74,10 @@ synkronoi() {
 				esac; else virhe "csv file(s) not found."; fi;;
 		syn) synk_real syn $2;;
 		upl) synk_real upl $2;;
-		ups) if [ -f $KR_DIR_CFG/uploads.csv ]; then
-				case $(cat $KR_DIR_CFG/uploads.csv | \grep $2 | wc -l) in
+		ups) if [ -f $KR_DIR_CFG/upl.csv ]; then
+				case $(cat $KR_DIR_CFG/upl.csv | \grep $2 | wc -l) in
 					0) virhe "information not found.";;
-					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/uploads.csv | \grep $2)
+					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/upl.csv | \grep $2)
 						KR_SYNK_EXCL=$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
 						if [ -f $KR_DIR_EXCL/$KR_SYNK_EXCL ]; then debug "file exists."; else KR_SYNK_EXCL=default.lst; fi
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
