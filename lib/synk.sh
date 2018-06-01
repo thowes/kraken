@@ -57,7 +57,7 @@ synkronoi() {
 						KR_SYNK_LDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $5}')
 						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
 						kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-						echo rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $KR_SYNK_EXCL
+						rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $KR_SYNK_EXCL
 						;;
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found."; fi;;
@@ -86,7 +86,7 @@ synkronoi() {
 						KR_SYNK_LDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $5}')
 						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
 						kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-						echo rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_SYNK_EXCL
+						rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_SYNK_EXCL
 						;;
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found."; fi;;
