@@ -46,9 +46,10 @@ synkronoi() {
 	case $1 in
 		csv) synkronoi ssh $2;;
 		dwl) if [ -f $KR_DIR_CFG/dwl.csv ]; then
-				case $(cat $KR_DIR_CFG/dwl.csv | \grep $2 | wc -l) in
-					0) virhe "information not found.";;
-					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/dwl.csv | \grep $2)
+				KR_SYNK_N=_$(cat $KR_DIR_CFG/dwl.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
+				case $KR_SYNK_N in
+					*_0_) virhe "information not found.";;
+					*_1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/dwl.csv | \grep $2)
 						KR_SYNK_EXCL=$KR_DIR_EXCL/$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
 						if [ -f $KR_SYNK_EXCL ]; then debug "file exists."; else KR_SYNK_EXCL=$KR_DIR_EXCL/default.lst; fi
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
@@ -59,25 +60,26 @@ synkronoi() {
 						if [ -d $KR_SYNK_LDIR ]; then kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
 							rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $KR_SYNK_EXCL
 						else virhe DIR $KR_SYNK_LDIR not found.; fi;;
-					*) virhe "found too many sites.";;
+					*) virhe "found too many sites ($KR_SYNK_N) .";;
 				esac; else virhe "csv file not found."; fi;;
 		ssh) if [ -f $KR_DIR_CFG/dwl.csv ] && [ -f $KR_DIR_CFG/upl.csv ]; then
-				case $(cat $KR_DIR_CFG/*l.csv | \grep $2 | wc -l) in
-					0) virhe "information not found.";;
-					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/*l.csv | \grep $2)
+				KR_SYNK_N=_$(cat $KR_DIR_CFG/*l.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
+				case $KR_SYNK_N in
+					*_0_) virhe "information not found.";;
+					*_1_) KR_SYNK_LINE=$(cat $KR_DIR_CFG/*l.csv | \grep $2)
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
 						KR_SYNK_USER=$(echo $KR_SYNK_LINE|awk -F\; '{print $3}')
 						kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
 						ssh $KR_SYNK_USER@$KR_SYNK_SERVER
 						;;
-					*) virhe "found too many sites.";;
+					*) virhe "found too many sites (" "$KR_SYNK_N" ")." ;;
 				esac; else virhe "csv file(s) not found."; fi;;
 		syn) synk_real syn $2;;
-		upl) synk_real upl $2;;
-		ups) if [ -f $KR_DIR_CFG/upl.csv ]; then
-				case $(cat $KR_DIR_CFG/upl.csv | \grep $2 | wc -l) in
-					0) virhe "information not found.";;
-					1) KR_SYNK_LINE=$(cat $KR_DIR_CFG/upl.csv | \grep $2)
+		upl) if [ -f $KR_DIR_CFG/upl.csv ]; then
+				KR_SYNK_N=_$(cat $KR_DIR_CFG/upl.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
+				case $KR_SYNK_N in
+					*_0_) virhe "information not found.";;
+					*_1_) KR_SYNK_LINE=$(cat $KR_DIR_CFG/upl.csv | \grep $2)
 						KR_SYNK_EXCL=$KR_DIR_EXCL/$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
 						if [ -f $KR_SYNK_EXCL ]; then debug "file exists."; else KR_SYNK_EXCL=$KR_DIR_EXCL/default.lst; fi
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
@@ -89,7 +91,8 @@ synkronoi() {
 							rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_SYNK_EXCL
 						else virhe DIR $KR_SYNK_LDIR not found.; fi;;
 					*) virhe "found too many sites.";;
-				esac; else virhe "csv file not found."; fi;;
+				esac; else virhe "csv file not found" "($KR_SYNK_N)" "."; fi;;
+		ups) synkronoi upl $2;;
 		*) synk_real syn $1;;
 	esac
 }
