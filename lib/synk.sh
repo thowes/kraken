@@ -56,9 +56,9 @@ synkronoi() {
 						KR_SYNK_PARAM=$(echo $KR_SYNK_LINE|awk -F\; '{print $4}')
 						KR_SYNK_LDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $5}')
 						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
-						kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-						rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $KR_SYNK_EXCL
-						;;
+						if [ -d $KR_SYNK_LDIR ]; then kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
+							rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $KR_SYNK_EXCL
+						else virhe DIR $KR_SYNK_LDIR not found.; fi;;
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found."; fi;;
 		ssh) if [ -f $KR_DIR_CFG/dwl.csv ] && [ -f $KR_DIR_CFG/upl.csv ]; then
@@ -85,9 +85,9 @@ synkronoi() {
 						KR_SYNK_PARAM=$(echo $KR_SYNK_LINE|awk -F\; '{print $4}')
 						KR_SYNK_LDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $5}')
 						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
-						kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-						rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_SYNK_EXCL
-						;;
+						if [ -d $KR_SYNK_LDIR ]; then kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
+							rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_SYNK_EXCL
+						else virhe DIR $KR_SYNK_LDIR not found.; fi;;
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found."; fi;;
 		*) synk_real syn $1;;
