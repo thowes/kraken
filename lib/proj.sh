@@ -11,6 +11,7 @@ projekti() {
 		-st) KRN_PROJ_FUNCTION="-st"; KRN_PROJ_INPUT=$2;;
 		-u) KRN_PROJ_FUNCTION="-u"; KRN_PROJ_INPUT=$2;;
 		p) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$2;;
+		u) KRN_PROJ_FUNCTION="-u"; KRN_PROJ_INPUT=$2;;
 		*) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$1;;
 	esac
 	KR_PROJECTS_COUNT=$(cat $KR_DIR_CFG/proj.csv | \grep $KRN_PROJ_INPUT | wc -l | awk '{ print $1 }')
