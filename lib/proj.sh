@@ -46,7 +46,7 @@ projekti_status() {
 		*master*)
 			KR_PROJ_UPDATE=$(echo $KR_PROJ_STATUS | \grep origin)
 			case $KR_PROJ_UPDATE in
-				*ahead*) echo $KR_PROJ_UPDATE;;
+				*ahead*) echo "You are ahead of master branch in commits.";;
 				*date*)
 					KR_PROJ_COMMITS=$(echo $KR_PROJ_STATUS | \grep commit | \grep to)
 					case $KR_PROJ_COMMITS in
