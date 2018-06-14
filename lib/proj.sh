@@ -61,6 +61,11 @@ projekti_status() {
 # this function is a tool for keeping projects automatically updated if they use git.
 # update (pull) project if in master branch, if working dir is clean and if there are no commits to push.
 projekti_update() {
+	KRN_PROJ_ST_NEW=$(projekti_status)
+	case $KRN_PROJ_ST_NEW in
+		*Up-to-date*)  if [ $KR_NETWORK != "NADA" ]; then kaiku $KRN_PROJ_ST_NEW; else virhe "Can't update," "Internet not available"; fi;;
+		*) virhe "$KRN_PROJ_ST_NEW";;
+	esac
 	KR_PROJ_STATUS=$(git status)
 	KR_PROJ_BRANCH=$(echo $KR_PROJ_STATUS | \grep 'On branch')
 	case $KR_PROJ_BRANCH in
