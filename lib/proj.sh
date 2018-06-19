@@ -68,19 +68,19 @@ projekti_update() {
 	esac
 	KR_PROJ_STATUS=$(git status)
 	KR_PROJ_BRANCH=$(echo $KR_PROJ_STATUS | \grep 'On branch')
-	case $KR_PROJ_BRANCH in
-		*master*)
-			KR_PROJ_UPDATE=$(echo $KR_PROJ_STATUS | \grep origin)
-			case $KR_PROJ_UPDATE in
-				*date*)
-					KR_PROJ_COMMITS=$(echo $KR_PROJ_STATUS | \grep commit | \grep to)
-					case $KR_PROJ_COMMITS in
-						*nothing*) if [ $KR_NETWORK != "NADA" ]; then git pull; else virhe "Can't update," "Internet not available"; fi;;
-						*) virhe "Can't" "update," "you have changes" "to commit";;
-					esac;;
-				*ahead*) virhe "Can't update," "you are" "ahead of master" "in commits";;
-				*) virhe NOT "up to date" with master;;
-			esac;;
-		*) virhe "Can't update," "you are" NOT "in master branch";;
-	esac
+	#case $KR_PROJ_BRANCH in
+	#	*master*)
+	#		KR_PROJ_UPDATE=$(echo $KR_PROJ_STATUS | \grep origin)
+	#		case $KR_PROJ_UPDATE in
+	#			*date*)
+	#				KR_PROJ_COMMITS=$(echo $KR_PROJ_STATUS | \grep commit | \grep to)
+	#				case $KR_PROJ_COMMITS in
+	#					*nothing*) if [ $KR_NETWORK != "NADA" ]; then git pull; else virhe "Can't update," "Internet not available"; fi;;
+	#					*) virhe "Can't" "update," "you have changes" "to commit";;
+	#				esac;;
+	#			*ahead*) virhe "Can't update," "you are" "ahead of master" "in commits";;
+	#			*) virhe NOT "up to date" with master;;
+	#		esac;;
+	#	*) virhe "Can't update," "you are" NOT "in master branch";;
+	#esac
 }
