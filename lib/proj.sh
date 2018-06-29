@@ -28,7 +28,7 @@ projekti_status() {
 projekti_update() {
 	KRN_PROJ_ST_NEW=$(projekti_status)
 	case $KRN_PROJ_ST_NEW in
-		*Up-to-date*) if [ $KR_NETWORK != "NADA" ]; then kaiku "PROJ_UPD:" $KRN_PROJ_ST_NEW; git pull; else virhe "PROJ_UPD:" "Can't update," "Internet not available"; fi;;
+		*Up-to-date*) if [ $KR_NETWORK != "NADA" ]; then kaiku "PROJ_UPD:" $KRN_PROJ_ST_NEW; compu_secu; git pull; else virhe "PROJ_UPD:" "Can't update," "Internet not available"; fi;;
 		*) virhe "PROJ_UPD:" "$KRN_PROJ_ST_NEW";;
 	esac
 }
