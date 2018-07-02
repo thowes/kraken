@@ -74,7 +74,7 @@ synkronoi() {
 						;;
 					*) virhe "found too many sites (" "$KR_SYNK_N" ")." ;;
 				esac; else virhe "csv file(s) not found."; fi;;
-		syn) synk_real syn $2;;
+		syn) synkronoi upl $2;;
 		upl) if [ -f $KR_DIR_CFG/upl.csv ]; then
 				KR_SYNK_N=_$(cat $KR_DIR_CFG/upl.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
 				case $KR_SYNK_N in
@@ -93,6 +93,6 @@ synkronoi() {
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found" "($KR_SYNK_N)" "."; fi;;
 		ups) synkronoi upl $2;;
-		*) synk_real syn $1;;
+		*) synkronoi upl $1;;
 	esac
 }
