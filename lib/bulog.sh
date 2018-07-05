@@ -44,3 +44,15 @@ bulog_add() {
 		fi
 	fi
 }
+
+bulog_check_today() {
+	# Getting the last row of backup.log and splitting it to retrieve the part of the string for latest backup date.
+	BU_LATEST_DATE=$(bulog_latest $1|awk '{print $1}')
+	BU_TODAY_DATE=$(date +"%F")
+	# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
+	if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
+		echo "true"
+	else
+		echo "false"
+	fi
+}
