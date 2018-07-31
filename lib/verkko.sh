@@ -6,18 +6,15 @@ if [ -f $KR_DIR_CFG/nets.sh ]; then
 	# Contents of KAYTTIS variable are defined in ymp.sh, to recognize the OS.
 	# Different network commands are available in different OSes.
 	case $KAYTTIS in
-		cygwin)
-			# Using windows networks commands
+		cygwin) # Using windows networks commands
 			VERKKO_IP=$(ipconfig|\grep IPv4)
 			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|\grep SSID|\grep -v BSSID); else VERKKO_ESSID=nada; fi
 			;;
-		darwin)
-			# Using macos networks commands.
+		darwin) # Using macos networks commands.
 			VERKKO_IP=$(ifconfig|\grep broadcast)
 			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(airport -I|\grep SSID|\grep -v BSSID); else VERKKO_ESSID=nada; fi
 			;;
-		ubuntu)
-			# Using unix/linux/ubuntu networks commands.
+		ubuntu) # Using unix/linux/ubuntu networks commands.
 			VERKKO_IP=$(ifconfig eth0|\grep Bcast)
 			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(iwlist wlan0 scan|\grep ESSID); else VERKKO_ESSID=nada; fi
 			;;
@@ -32,6 +29,7 @@ verkko() {
 			case $1 in
 				eth) netsh lan show interfaces;;
 				ext) \curl $KRN_EXT_IP_ADDRESS;;
+				internet) if [ "$KRN_NETWORK" != "NADA" ]; then echo true; else echo false; fi;;
 				ip) ipconfig|\grep IPv4;;
 				mac) getmac /v;;
 				ssid) netsh wlan show interfaces|\grep SSID|\grep -v BSSID;;
@@ -42,6 +40,7 @@ verkko() {
 			case $1 in
 				eth) ifconfig eth0;;
 				ext) \curl $KRN_EXT_IP_ADDRESS;;
+				internet) if [ "$KRN_NETWORK" != "NADA" ]; then echo true; else echo false; fi;;
 				ip) ifconfig|\grep broadcast;;
 				mac) ifconfig -a|\grep HWaddr;;
 				ssid) airport -I|\grep -v BSSID|\grep SSID;;
@@ -53,6 +52,7 @@ verkko() {
 			case $1 in
 				eth) ifconfig eth0;;
 				ext) \curl $KRN_EXT_IP_ADDRESS;;
+				internet) if [ "$KRN_NETWORK" != "NADA" ]; then echo true; else echo false; fi;;
 				ip) ifconfig -a|\grep Bcast;;
 				mac) ifconfig -a|\grep HWaddr;;
 				ssid) iwlist wlan0 scan|\grep ESSID;;
