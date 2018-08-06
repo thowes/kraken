@@ -59,11 +59,11 @@ synkronoi() {
 						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
 						if [ -d $KR_SYNK_LDIR ]; then
 							# Getting the last row of backup.log and splitting it to retrieve the part of the string for latest backup date.
-							BU_LATEST_DATE=$(bulog_latest $SYNK_LDIR|awk '{print $1}'); BU_TODAY_DATE=$(date +"%F")
+							BU_LATEST_DATE=$(bulog_latest $KR_SYNK_LDIR|awk '{print $1}'); BU_TODAY_DATE=$(date +"%F")
 							# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
-							if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
+							if [ "$BU_LATEST_DATE" != "$BU_TODAY_DATE" ]; then
 								kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-								bulog_add $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
+								bulog_add $KR_SYNK_LDIR $2 $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
 								rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $KR_SYNK_EXCL
 							else virhe "ALREADY done backup today" $2; fi
 						else virhe DIR $KR_SYNK_LDIR not found.; fi;;
@@ -94,8 +94,15 @@ synkronoi() {
 						KR_SYNK_PARAM=$(echo $KR_SYNK_LINE|awk -F\; '{print $4}')
 						KR_SYNK_LDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $5}')
 						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
-						if [ -d $KR_SYNK_LDIR ]; then kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-							rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_SYNK_EXCL
+						if [ -d $KR_SYNK_LDIR ]; then
+							# Getting the last row of backup.log and splitting it to retrieve the part of the string for latest backup date.
+							BU_LATEST_DATE=$(bulog_latest $KR_SYNK_LDIR|awk '{print $1}'); BU_TODAY_DATE=$(date +"%F")
+							# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
+							if [ "$BU_LATEST_DATE" != "$BU_TODAY_DATE" ]; then
+								kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
+								bulog_add $KR_SYNK_LDIR $2 $HOSTNAME $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
+								rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_SYNK_EXCL
+							else virhe "ALREADY done backup today" $2; fi
 						else virhe DIR $KR_SYNK_LDIR not found.; fi;;
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found" "($KR_SYNK_N)" "."; fi;;
