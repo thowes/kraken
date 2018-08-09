@@ -1,6 +1,6 @@
 #!/bin/bash
 shorts_dt() {
-	kaiku "SHORTS/DT" "$1 $2 $3"
+	debug "SHORTS/DT" "$1 $2 $3"
 	case $1 in
 		p) if [ -d $KR_DIR_LNK/ ]; then
 				if [ -d $KR_DIR_LNK/COMP/$HOSTNAME ]; then \cp $KR_DIR_LNK/COMP/$HOSTNAME/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/COMP/$HOSTNAME "not found."; fi
@@ -69,7 +69,7 @@ shorts() {
 	debug "SHORTS/MAIN"
 	case $1 in
 		clr) if [ -d $KR_DIR_LNK ]; then tynnyri new SHORTS/CLR; shorts_clear; else debug no APPLNK directory; fi;;
-		dt) tynnyri new SHORTS/DT; shorts_dt p $3 $2;;
+		dt) tynnyri new SHORTS/DT; shorts_dt $3 $2;;
 		st) tynnyri new SHORTS/ST; debug shorts_sendto $HOSTNAME; shorts_startup $HOSTNAME; shorts_startup $2;;
 	esac
 }
