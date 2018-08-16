@@ -1,21 +1,18 @@
 #!/bin/bash
 shorts_dt() {
 	debug "SHORTS/DT" "$1 $2 $3"
-	case $1 in
-		p) if [ -d $KR_DIR_LNK/ ]; then
-				if [ -d $KR_DIR_LNK/COMP/$HOSTNAME ]; then \cp $KR_DIR_LNK/COMP/$HOSTNAME/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/COMP/$HOSTNAME "not found."; fi
-				if [ -d $KR_DIR_LNK/USER/$USER ]; then \cp $KR_DIR_LNK/USER/$USER/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/USER/$USER "not found."; fi
-				if [ -d $KR_DIR_LNK/KTXT/$KR_NETWORK/ ]; then \cp $KR_DIR_LNK/KTXT/$KR_NETWORK/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/KTXT/$KR_NETWORK "not found."; fi
-				if [ -d $KR_DIR_LNK/PROG/$2 ]; then \cp $KR_DIR_LNK/PROG/$2/*.* $KR_DIR_DT/; else virhe "SHORTS dir dt-prog" $1 $2 "not found."; fi
-			else virhe "SHORTS/dt dir" $KR_DIR_LNK "not found."; fi
-			if [ -d $KR_DIRPO/.desktop_links ]; then
-				\cp $KR_DIRPO/.desktop_links/*.* $KR_DIR_DT/; 
-			else
-				virhe "DIR:" $KR_DIRPO/.desktop_links/ "not found."
-				if [ -d $KR_DIR_LNK/PROJ/$2 ]; then \cp $KR_DIR_LNK/PROJ/$2/*.* $KR_DIR_DT/; else virhe "SHORTS dir dt-proj" $1 $2 "not found."; fi
-			fi;;
-		*) shorts_dt p $1;;
-	esac
+	if [ -d $KR_DIR_LNK/ ]; then
+		if [ -d $KR_DIR_LNK/COMP/$HOSTNAME ]; then \cp $KR_DIR_LNK/COMP/$HOSTNAME/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/COMP/$HOSTNAME "not found."; fi
+		if [ -d $KR_DIR_LNK/USER/$USER ]; then \cp $KR_DIR_LNK/USER/$USER/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/USER/$USER "not found."; fi
+		if [ -d $KR_DIR_LNK/KTXT/$KR_NETWORK/ ]; then \cp $KR_DIR_LNK/KTXT/$KR_NETWORK/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/KTXT/$KR_NETWORK "not found."; fi
+		if [ -d $KR_DIR_LNK/PROG/$1 ]; then \cp $KR_DIR_LNK/PROG/$1/*.* $KR_DIR_DT/; else virhe "SHORTS dir dt-prog" $1 $2 "not found."; fi
+	else virhe "SHORTS/dt dir" $KR_DIR_LNK "not found."; fi
+	if [ -d $KR_DIRPO/.desktop_links ]; then
+		\cp $KR_DIRPO/.desktop_links/*.* $KR_DIR_DT/; 
+	else
+		virhe "DIR:" $KR_DIRPO/.desktop_links/ "not found."
+		if [ -d $KR_DIR_LNK/PROJ/$1 ]; then \cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/; else virhe "SHORTS dir dt-proj" $1 $2 "not found."; fi
+	fi
 }
 
 shorts_clear() {
