@@ -5,7 +5,7 @@ shorts_dt() {
 		if [ -d $KR_DIR_LNK/COMP/$HOSTNAME ]; then \cp $KR_DIR_LNK/COMP/$HOSTNAME/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/COMP/$HOSTNAME "not found."; fi
 		if [ -d $KR_DIR_LNK/USER/$USER ]; then \cp $KR_DIR_LNK/USER/$USER/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/USER/$USER "not found."; fi
 		if [ -d $KR_DIR_LNK/KTXT/$KR_NETWORK/ ]; then \cp $KR_DIR_LNK/KTXT/$KR_NETWORK/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/KTXT/$KR_NETWORK "not found."; fi
-		if [ -d $KR_DIR_LNK/PROG/$1 ]; then \cp $KR_DIR_LNK/PROG/$1/*.* $KR_DIR_DT/; else virhe "SHORTS dir dt-prog" $1 $2 "not found."; fi
+		if [ -d $KR_DIR_LNK/PROG/$1 ]; then \cp $KR_DIR_LNK/PROG/$1/*.* $KR_DIR_DT/; fi #else virhe "SHORTS dir dt-prog" $1 $2 "not found."; fi
 	else virhe "SHORTS/dt dir" $KR_DIR_LNK "not found."; fi
 	if [ -d $KR_DIRPO/.desktop_links ]; then
 		\cp $KR_DIRPO/.desktop_links/*.* $KR_DIR_DT/; 
