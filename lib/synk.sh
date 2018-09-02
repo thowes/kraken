@@ -2,6 +2,7 @@
 if [ $KR_DEBUG == "true" ]; then tynnyri SYNK; fi
 
 synkronoi() {
+	compu_secu
 	case $1 in
 		csv) synkronoi ssh $2;;
 		dwl) if [ -f $KR_DIR_CFG/dwl.csv ]; then
