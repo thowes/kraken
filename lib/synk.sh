@@ -1,6 +1,4 @@
 #!/bin/bash
-if [ $KR_DEBUG == "true" ]; then tynnyri SYNK; fi
-
 synkronoi() {
 	case $1 in
 		csv) synkronoi ssh $2;;
