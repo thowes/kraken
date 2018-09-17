@@ -9,7 +9,7 @@ tccm() {
 		darwin) KRN_TC_DIR="/Volumes";;
 		ubuntu) KRN_TC_DIR="/media/$USER";;
 	esac
-	case $1 in
+	if [ -d $KRN_TC_DIR/$2/ ]; then virhe "Drive directory already in use."; else case $1 in
 		dm) case $KAYTTIS in
 				cygwin) tc /q /s /d $2;;
 				*) tc -d l$2;;
@@ -35,5 +35,5 @@ tccm() {
 				cygwin) tc /q /s /d;;
 				*) tc -d;;
 			esac;;
-	esac
+	esac; fi
 }
