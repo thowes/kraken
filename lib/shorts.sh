@@ -10,8 +10,7 @@ shorts_dt() {
 	if [ -d $KR_DIRPO/.desktop_links ]; then
 		\cp $KR_DIRPO/.desktop_links/*.* $KR_DIR_DT/; 
 	else
-		virhe "DIR:" $KR_DIRPO/.desktop_links/ "not found."
-		if [ -d $KR_DIR_LNK/PROJ/$1 ]; then \cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/; else virhe "SHORTS dir dt-proj" $1 $2 "not found."; fi
+		if [ -d $KR_DIR_LNK/PROJ/$1 ]; then \cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/; else virhe "Directory .desktop_links not found for project" $1 $2; fi
 	fi
 }
 
