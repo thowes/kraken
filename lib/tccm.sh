@@ -38,5 +38,6 @@ tccm() {
 			#wipe) KR_PASSU=passu1; KR_SALIS=passu2;;
 			*) virhe "TCCM command" $1 "not recognized.";;
 		esac
+		if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi
 	fi
 }
