@@ -13,6 +13,7 @@ tccm() {
 		case $1 in
 			dm) case $KAYTTIS in
 					cygwin) tc /q /s /d $2;;
+					darwin) tc -d $KRN_TC_DIR/$2;;
 					*) tc -d $2;;
 				esac;;
 			*) virhe "Drive directory already in use.";;
