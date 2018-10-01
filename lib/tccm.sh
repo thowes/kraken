@@ -21,19 +21,19 @@ tccm() {
 	else
 		case $1 in
 			ro) case $KAYTTIS in
-				cygwin) tc /l$2 /q /s /m ro /v $3 /p $KRN_PASSU /k $4; if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi;;
+				cygwin) tc /l$2 /q /s /m ro /v $3 /p $KRN_PASSU /k $4;;
 				*) tc -m ro $3 -p $KRN_PASSU -k $4 $KRN_TC_DIR/$2; if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi;;
 			esac;;
 			rw) case $KAYTTIS in
-				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KRN_PASSU /k $4; if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi;;
+				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KRN_PASSU /k $4;;
 				*) tc -m ts $3 -p $KRN_PASSU -k $4 $KRN_TC_DIR/$2; if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi;;
 			esac;;
 			vo) case $KAYTTIS in
-				cygwin) tc /l$2 /q /s /m ro /v $3 /p $KRN_PASSU; if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi;;
+				cygwin) tc /l$2 /q /s /m ro /v $3 /p $KRN_PASSU;;
 				*) tc -m ro $3 -p $KRN_PASSU $KRN_TC_DIR/$2; if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi;;
 			esac;;
 			vw) case $KAYTTIS in
-				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KRN_PASSU; if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi;;
+				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KRN_PASSU;;
 				*) tc -m ts $3 -p $KRN_PASSU $KRN_TC_DIR/$2; if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi;;
 			esac;;
 			#wipe) KR_PASSU=passu1; KR_SALIS=passu2;;
