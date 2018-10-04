@@ -1,5 +1,4 @@
 #!/bin/bash
-KR_PASSU=passu1; KR_SALIS=passu2
 
 tccm() {
 	debug TTCM $1 $2 $3
@@ -36,7 +35,6 @@ tccm() {
 				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KRN_PASSU;;
 				*) tc -m ts $3 -p $KRN_PASSU $KRN_TC_DIR/$2;;
 			esac;;
-			#wipe) KR_PASSU=passu1; KR_SALIS=passu2;;
 			*) virhe "TCCM command" $1 "not recognized.";;
 		esac
 		if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi
