@@ -6,25 +6,17 @@ KAYTTIS_FULL=$(uname -a)
 # Only cygwin, darwin and ubuntu are tested to work properly.
 if [ $KR_HOSTED == "false" ]; then
 	case $KAYTTIS_FULL in
-		*Darwin*)
-			KAYTTIS=darwin
-			;;
-		*CYGWIN*)
-			KAYTTIS=cygwin
-			;;
-		*BSD*)
-			KAYTTIS=bsd
-			;;
+		*BSD*) KAYTTIS=bsd;;
+		*CYGWIN*) KAYTTIS=cygwin;;
+		*Darwin*) KAYTTIS=darwin;;
+		*Haiku*) KAYTTIS=haiku;;
 		*Linux*)
-			#KAYTTIS_FULL=$(uname -a)
 			case $KAYTTIS_FULL in
-				*debian*) KAYTTIS=debian;;
-				*Mint*) KAYTTIS=mint;;
 				*Ubuntu*) KAYTTIS=ubuntu;;
 				*) KAYTTIS=linux;;
 			esac
 			;;
-		*) kaiku KRAKEN/YMP $KAYTTIS "ei tunnistettu!";;
+		*) kaiku KRAKEN/YMP $KAYTTIS "not recognized!";;
 	esac
 fi
 
