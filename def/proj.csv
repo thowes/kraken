@@ -6,4 +6,5 @@ dwl,Downloads,HOME,~/Downloads/
 krn,kraken.sh,HOME,~/Projects/kraken/
 lib,krakenlib,HOME,~/Projects/kraken/lib/
 prj,Projects,HOME,~/Projects/
+rvm,RVM,HOME,~/.rvm/
 tmpl,kraken templates,HOME,~/Projects/kraken/tmpl/
