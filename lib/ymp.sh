@@ -12,6 +12,7 @@ if [ $KR_HOSTED == "false" ]; then
 		*Haiku*) KAYTTIS=haiku;;
 		*Linux*)
 			case $KAYTTIS_FULL in
+				*Debian*) KAYTTIS=debian;;
 				*Ubuntu*) KAYTTIS=ubuntu;;
 				*) KAYTTIS=linux;;
 			esac
