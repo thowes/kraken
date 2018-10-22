@@ -10,6 +10,10 @@ tccm() {
 	esac
 	if [ -d $KRN_TC_DIR/$2/ ]; then
 		case $1 in
+			all) case $KAYTTIS in
+					cygwin) tc /q /s /d;;
+					*) tc -d;;
+				esac;;
 			dm) case $KAYTTIS in
 					cygwin) tc /q /s /d $2;;
 					darwin) tc -d $KRN_TC_DIR/$2;;
