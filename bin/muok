@@ -12,13 +12,3 @@ muokkaa() {
 	esac
 	EDITOR='nano -w -T 2'
 }
-
-muokkaa_drives() {
-	if [ -d /cygdrive/$1 ] && [ -f $KR_DIR_CFG/usb.lst ]; then
-		for f in $(ls /cygdrive/$1|grep sh); do
-			for d in $(cat $KR_DIR_CFG/usb.lst); do
-				if [ /cygdrive/$1/$f == $d ]; then $EDITOR $d; fi
-			done
-		done
-	fi
-}
