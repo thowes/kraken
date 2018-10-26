@@ -3,11 +3,25 @@ if [ $KR_DEBUG == "true" ]; then tynnyri MUOK; fi
 EDITOR='nano -w -T 2'
 
 #muokkaa() {
-case $1 in
+case $2 in
 	em) EDITOR=emacs; . $KR_DIR_CFG/nano.sh $2 $3;;
 	emacs) EDITOR=emacs; . $KR_DIR_CFG/nano.sh $2 $3;;
 	n) EDITOR=nano; . $KR_DIR_CFG/nano.sh $2 $3;;
 	*) . $KR_DIR_CFG/nano.sh $1 $2;;
 esac
+
+case $1 in
+	ab) $EDITOR ~/.addressbook;;
+	al) $EDITOR ~/Projects/kraken/cfg/alias.sh;;
+	brc) $EDITOR ~/.bashrc;;
+	bp) $EDITOR ~/.bash_profile;;
+	cfg) $EDITOR ~/Projects/kraken/cfg/kraken.cfg;;
+	gpg) $EDITOR ~/.gnupg/gpg.conf;;
+	p) $EDITOR ~/.profile;;
+	proj) $EDITOR ~/Projects/kraken/cfg/proj.csv;;
+	vk) $EDITOR ~/Projects/kraken/cfg/vker.sh;;
+	*) echo "[[ MUOK err: argument not known. ]]";;
+esac
+
 EDITOR='nano -w -T 2'
 #}
