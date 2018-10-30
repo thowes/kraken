@@ -2,16 +2,6 @@
 if [ $KR_DEBUG == "true" ]; then echo "[[ KRAKEN/KAIKU ]]"; fi
 TYNNYRI=""
 
-debug() {
-	if [ $KR_DEBUG == "true" ]; then 
-		echo -e "[[ DEBUG $1 $2 $3 $4 ]]"
-	fi 
-}
-
-kaiku() {
-	echo "[[ $1 $2 $3 $4 ]]"
-}
-
 kaiku80() {
 	echo 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 }
@@ -35,8 +25,3 @@ tynnyri() {
 verboosi() {
 	if [ $KR_DEBUG == "true" ]; then echo "[[ $1 $2 $3 $4 ]]"; fi
 }
-
-virhe() {
-	echo -e "[[ ERR $1 $2 $3 $4 ]]" 
-}
-

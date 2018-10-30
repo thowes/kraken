@@ -1,1 +1,3 @@
 #!/bin/bash
+
+echo -e "[[ ERR $1 $2 $3 $4 ]]"
