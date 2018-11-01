@@ -1,8 +1,8 @@
 #!/bin/bash
 running() {
 	KR_OUTPUT=false
-	case $KAYTTIS in
-		cygwin)
+	case $(uname) in
+		*CYGWIN*)
 			KR_APPCHECKER_RUNNING=$(tasklist | tr -s " " | awk '{print $1 " " $3}' | \grep $1.exe)
 			case $KR_APPCHECKER_RUNNING in
 				*Console*) KR_OUTPUT=true;;
