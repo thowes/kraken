@@ -16,9 +16,13 @@ case $KR_SYSTEM_TYPE in
 esac
 
 TESTATTR=_$1_
-KR_TO_DIR=$(pwd)/cfg
+KR_TO_DIR=~/Projects/config
 if [ $TESTATTR == "__" ]; then
-	if [ -d 'cfg' ]; then echo cfg/ already exists.; else mkdir cfg; fi
+	if [ -d ~/Projects/ ]; then
+		\cd ~/Projects/
+		if [ -d 'config' ]; then echo config/ already exists.; else mkdir config; fi
+		if [ -d 'temp' ]; then echo temp/ already exists.; else mkdir temp; fi
+	fi
 else KR_TO_DIR=$1; fi
 
 if [ -f $KR_TO_DIR/alias.sh ]; then echo "[[ ERR INSTALL alias.sh exists already in the directory! ]]"; else cp $KR_FROM_DIR/def/$KR_INSTALL_ALIAS_FILE $KR_TO_DIR/alias.sh; fi
