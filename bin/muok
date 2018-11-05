@@ -9,13 +9,13 @@ esac
 
 case $1 in
 	ab) $EDITOR ~/.addressbook;;
-	al) $EDITOR ~/Projects/kraken/cfg/alias.sh;;
+	al) $EDITOR ~/Projects/config/alias.sh;;
 	brc) $EDITOR ~/.bashrc;;
 	bp) $EDITOR ~/.bash_profile;;
-	cfg) $EDITOR ~/Projects/kraken/cfg/kraken.cfg;;
+	cfg) $EDITOR ~/Projects/config/kraken.cfg;;
 	gpg) $EDITOR ~/.gnupg/gpg.conf;;
 	p) $EDITOR ~/.profile;;
-	proj) $EDITOR ~/Projects/kraken/cfg/proj.csv;;
-	vk) $EDITOR ~/Projects/kraken/cfg/vker.sh;;
+	proj) $EDITOR ~/Projects/config/proj.csv;;
+	vk) $EDITOR ~/Projects/config/vker.sh;;
 	*) echo "[[ MUOK err: argument not known. ]]";;
 esac
