@@ -1,3 +1,7 @@
 #!/bin/bash
 
-echo "[[ $1 $2 $3 $4 ]]"
+if [ "_$1_" != "__" ]; then
+	echo "[[ $1 $2 $3 $4 ]]"
+else
+	echo "[[ ]]"
+fi
