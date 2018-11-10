@@ -23,7 +23,7 @@ if [ -f $2 ]; then
 	if [ -f $KR_DIR_LIB/uus.sh ]; then . $KR_DIR_LIB/uus.sh; fi
 	if [ -f $KR_DIR_LIB/bulog.sh ]; then . $KR_DIR_LIB/bulog.sh; fi
 	if [ -f $KR_DIR_LIB/kop.sh ]; then . $KR_DIR_LIB/kop.sh; fi
-	if [ -f $KR_DIR_LIB/../bin/running ]; then . $KR_DIR_LIB/../bin/running; fi
+	#if [ -f $KR_DIR_LIB/../bin/running ]; then . $KR_DIR_LIB/../bin/running; fi
 	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
 	# LOCAL
@@ -37,7 +37,7 @@ if [ -f $2 ]; then
 	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FUNK /w"; fi
 	#if [ -f $KR_DIR_LIB/drives.sh ]; then . $KR_DIR_LIB/drives.sh; fi
 	if [ -f $KR_DIR_LIB/synk.sh ]; then . $KR_DIR_LIB/synk.sh; fi
-		if [ -f $KR_DIR_LIB/func.sh ]; then . $KR_DIR_LIB/func.sh; fi
+	if [ -f $KR_DIR_LIB/func.sh ]; then . $KR_DIR_LIB/func.sh; fi
 	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
 	#TOIMENPITEET
