@@ -34,9 +34,7 @@ if [ -f $2 ]; then
 
 	#OTHER FUNCTIONS
 	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FUNK /w"; fi
-	#if [ -f $KR_DIR_LIB/drives.sh ]; then . $KR_DIR_LIB/drives.sh; fi
 	if [ -f $KR_DIR_LIB/synk.sh ]; then . $KR_DIR_LIB/synk.sh; fi
-	if [ -f $KR_DIR_LIB/../bin/olemassa ]; then . $KR_DIR_LIB/../bin/olemassa; fi
 	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
 	#TOIMENPITEET
