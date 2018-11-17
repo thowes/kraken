@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#running() {
 KR_OUTPUT=false
 case $(uname) in
 	CYGWIN*)
@@ -10,6 +9,12 @@ case $(uname) in
 			*Session*) KR_OUTPUT=true;;
 			*Services*) KR_OUTPUT=true;;
 		esac;;
+	Darwin*)
+		KR_APPCHECKER_RUNNING=$(ps aux | \grep $1 | \grep -v running | \grep -v grep)
+		case $KR_APPCHECKER_RUNNING in
+			*AM*) KR_OUTPUT=true;;
+			*PM*) KR_OUTPUT=true;;
+		esac;;
 	*) # not functional yet
 		KR_APPCHECKER_NUMBER=$(ps aux | \grep -v grep | \grep $1 | wc -l)
 		case "$KR_APPCHECKER_NUMBER" in
@@ -18,4 +23,3 @@ case $(uname) in
 		esac;;
 esac
 echo $KR_OUTPUT
-#}
