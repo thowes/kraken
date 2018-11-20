@@ -34,6 +34,7 @@ if [ -f $2 ]; then
 
 	#OTHER FUNCTIONS
 	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FUNK /w"; fi
+	if [ -f $KR_DIR_LIB/func.sh ]; then . $KR_DIR_LIB/func.sh; fi
 	if [ -f $KR_DIR_LIB/synk.sh ]; then . $KR_DIR_LIB/synk.sh; fi
 	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
