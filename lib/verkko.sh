@@ -6,10 +6,10 @@ if [ -f $KR_DIR_CFG/nets.sh ]; then
 	# Different network commands are available in different OSes.
 	case $KAYTTIS in
 		cygwin) # Using windows networks commands
-			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(netsh wlan show interfaces|\grep SSID|\grep -v BSSID); else VERKKO_ESSID=nada; fi
+			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(verkko ssid); else VERKKO_ESSID=nada; fi
 			;;
 		darwin) # Using macos networks commands.
-			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(airport -I|\grep SSID|\grep -v BSSID); else VERKKO_ESSID=nada; fi
+			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(verkko ssid); else VERKKO_ESSID=nada; fi
 			;;
 		ubuntu) # Using unix/linux/ubuntu networks commands.
 			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(iwlist wlan0 scan|\grep ESSID); else VERKKO_ESSID=nada; fi
