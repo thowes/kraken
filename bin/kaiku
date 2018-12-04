@@ -1,7 +1,19 @@
 #!/bin/bash
 
 if [ "_$1_" != "__" ]; then
-	echo "[[ $1 $2 $3 $4 ]]"
+	if [ "_$2_" != "__" ]; then
+		if [ "_$3_" != "__" ]; then
+			if [ "_$4_" != "__" ]; then
+				echo "[[ $1 $2 $3 $4 ]]"
+			else
+				echo "[[ $1 $2 $3 ]]"
+			fi
+		else
+			echo "[[ $1 $2 ]]"
+		fi
+	else
+		echo "[[ $1 ]]"
+	fi
 else
 	echo "[[ ]]"
 fi
