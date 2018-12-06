@@ -2,6 +2,6 @@
 
 # this function gives md5 and sha256 checksums for individual as output"
 case $(uname) in
-	*Darwin*) echo $(md5 $1|awk -F= '{print $2}'),$(shasum -a 256 $1|awk '{print $1}');;
-	*) echo $(md5sum $1|awk '{print $1}'),$(sha256sum $1|awk '{print $1}');;
+	*Darwin*) echo $(md5 "$1"|awk -F= '{print $2}'),$(shasum -a 256 "$1"|awk '{print $1}');;
+	*) echo $(md5sum "$1"|awk '{print $1}'),$(sha256sum "$1"|awk '{print $1}');;
 esac
