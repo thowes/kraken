@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ -f $1/kraken.cfg ]; then
+	. $1/kraken.cfg
+else
+	if [ -f $1 ]; then
+		. $1
+	fi
+fi
+
+case $2 in
+	dir:buc) echo $KR_DIR_BUC;;
+	dir:bua) echo $KR_DIR_BUA;;
+	dir:cfg) echo $KR_DIR_CFG;;
+	dir:dt) echo $KR_DIR_DT;;
+	dir:dt) echo $KR_DIR_DT;;
+	dir:excl) echo $KR_DIR_EXCL;;
+	dir:incl) echo $KR_DIR_INCL;;
+	dir:keys) echo $KR_DIR_KEYS;;
+	dir:lib) echo $KR_DIR_LIB;;
+	dir:lnk) echo $KR_DIR_LNK;;
+	dir:logs) echo $KR_DIR_LOGS;;
+	dir:temp) echo $KR_DIR_TEMP;;
+esac
