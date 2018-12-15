@@ -1,3 +1,12 @@
 #!/bin/bash
 
-
+if [ "_$1_" == "__" ]; then
+	case $1 in
+		clear) kaiku SHORTS clear;;
+		desktop) kaiku SHORTS desktop $2;;
+		startup) kaiku SHORTS startup;;
+		*) kaiku SHORTS dt;;
+	esac
+else
+	shorts clear
+fi
