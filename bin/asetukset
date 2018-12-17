@@ -1,14 +1,22 @@
 #!/bin/bash
 
 if [ -f $1/kraken.cfg ]; then
+	ASETUKSET_REQUEST=$2
 	. $1/kraken.cfg
 else
 	if [ -f $1 ]; then
+		ASETUKSET_REQUEST=$2
 		. $1
+	else
+		ASETUKSET_REQUEST=$1
 	fi
 fi
 
-case $2 in
+case $ASETUKSET_REQUEST in
+	bool:backups) echo $KR_BACKUPS;;
+	bool:debug) echo $KR_DEBUG;;
+	bool:hosted) echo $KR_HOSTED;;
+	bool:wireless) echo $KR_WIRELESS;;
 	dir:buc) echo $KR_DIR_BUC;;
 	dir:bua) echo $KR_DIR_BUA;;
 	dir:cfg) echo $KR_DIR_CFG;;
