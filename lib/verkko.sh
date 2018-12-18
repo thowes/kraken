@@ -11,8 +11,8 @@ if [ -f $KR_DIR_CFG/nets.sh ]; then
 		darwin) # Using macos networks commands.
 			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(verkko ssid); else VERKKO_ESSID=nada; fi
 			;;
-		ubuntu) # Using unix/linux/ubuntu networks commands.
-			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(iwlist wlan0 scan|\grep ESSID); else VERKKO_ESSID=nada; fi
+		linux|ubuntu) # Using unix/linux/ubuntu networks commands.
+			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(verkko ssid); else VERKKO_ESSID=nada; fi
 			;;
 	esac
 	. $KR_DIR_CFG/nets.sh
