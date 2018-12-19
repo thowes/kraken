@@ -9,6 +9,17 @@ else
 		. $1
 	else
 		ASETUKSET_REQUEST=$1
+		if [ -f ~/Projects/config/$HOSTNAME/kraken.cfg ]; then
+			. ~/Projects/config/$HOSTNAME/kraken.cfg
+		else
+			if [ -f ~/Projects/config/kraken.cfg ]; then
+				. ~/Projects/config/kraken.cfg
+			else
+				if [ -f ~/Projects/kraken/cfg/kraken.cfg ]; then
+					. ~/Projects/kraken/cfg/kraken.cfg
+				fi
+			fi
+		fi
 	fi
 fi
 
@@ -21,7 +32,6 @@ case $ASETUKSET_REQUEST in
 	dir:bua) echo $KR_DIR_BUA;;
 	dir:cfg) echo $KR_DIR_CFG;;
 	dir:dt) echo $KR_DIR_DT;;
-	dir:dt) echo $KR_DIR_DT;;
 	dir:excl) echo $KR_DIR_EXCL;;
 	dir:incl) echo $KR_DIR_INCL;;
 	dir:keys) echo $KR_DIR_KEYS;;
@@ -29,4 +39,5 @@ case $ASETUKSET_REQUEST in
 	dir:lnk) echo $KR_DIR_LNK;;
 	dir:logs) echo $KR_DIR_LOGS;;
 	dir:temp) echo $KR_DIR_TEMP;;
+	dir:tmpl) echo $KR_DIR_TMPL;;
 esac
