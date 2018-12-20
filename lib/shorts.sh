@@ -20,10 +20,10 @@ shorts_clear() {
 		all) shorts_clear menu; shorts_clear startup; shorts_clear desktop;;
 		desktop)
 			if [ -d $KR_DIR_BUA/DESKTOP/ ]; then
-				case $KAYTTIS in
-					cygwin) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
-					darwin) if [ -d $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.app $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.app; fi;;
-					ubuntu) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi;;
+				case $(uname) in
+					CYGWIN) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
+					Darwin) if [ -d $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.app $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.app; fi;;
+					Ubuntu) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi;;
 				esac
 				if [ -f $KR_DIR_DT/$KR_NAME_URL ]; then \cp $KR_DIR_DT/*.url $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.url; fi
 			fi;;
