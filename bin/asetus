@@ -40,4 +40,6 @@ case $ASETUKSET_REQUEST in
 	dir:logs) echo $KR_DIR_LOGS;;
 	dir:temp) echo $KR_DIR_TEMP;;
 	dir:tmpl) echo $KR_DIR_TMPL;;
+	str:network) echo $KR_NETWORK;;
+	str:recipient) echo $KR_RECIPIENT;;
 esac
