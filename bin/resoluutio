@@ -1,0 +1,12 @@
+#!/bin/bash
+
+case $(uname) in
+	CYGWIN*) wmic desktopmonitor get screenheight, screenwidth | grep -v '^[[:space:]]*$' | tr -s " " | grep -v Screen | awk '{print $2 "x" $1}';;
+	Darwin) system_profiler SPDisplaysDataType | grep Resolution | awk '{print $2 "x" $4}';;
+	Linux|Ubuntu)
+		case $(uname -a) in
+			Microsoft) cmd.exe /c wmic desktopmonitor get screenheight, screenwidth | grep -v '^[[:space:]]*$' | tr -s " " | grep -v Screen | awk '{print $2 "x" $1}';;
+			WSL) cmd.exe /c wmic desktopmonitor get screenheight, screenwidth | grep -v '^[[:space:]]*$' | tr -s " " | grep -v Screen | awk '{print $2 "x" $1}';;
+			*) xdpyinfo | grep dimensions | awk '{print $2}';;
+		esac;;
+esac
