@@ -29,8 +29,8 @@ if [ -f $2 ]; then
 	if [ -f $KR_DIR_CFG/compu.sh ]; then . $KR_DIR_CFG/compu.sh; fi
 
 	#KIRJASTOT
-	if [ -f $KR_DIR_LIB/verkko.sh ]; then . $KR_DIR_LIB/verkko.sh; fi
 	if [ -f $KR_DIR_LIB/kr_network.sh ]; then . $KR_DIR_LIB/kr_network.sh; fi
+	if [ -f $KR_DIR_LIB/val.sh ]; then . $KR_DIR_LIB/val.sh; fi
 	if [ -f $KR_DIR_LIB/proj.sh ]; then . $KR_DIR_LIB/proj.sh; fi
 
 	#OTHER FUNCTIONS
