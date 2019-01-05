@@ -1,5 +1,25 @@
 #!/bin/bash
 
-if [ $KR_DEBUG == "true" ]; then 
-	echo -e "[[ DEBUG $1 $2 $3 $4 ]]"
+if [ "_$KR_DEBUG_" == "__" ]; then
+	KR_DEBUG=$(asetus bool:debug)
+fi
+kaiku $KR_DEBUG
+if [ $KR_DEBUG == "true" ]; then
+	if [ "_$1_" != "__" ]; then
+		if [ "_$2_" != "__" ]; then
+			if [ "_$3_" != "__" ]; then
+				if [ "_$4_" != "__" ]; then
+					echo "[[ DEBUG $1 $2 $3 $4 ]]"
+				else
+					echo "[[ DEBUG $1 $2 $3 ]]"
+				fi
+			else
+				echo "[[ DEBUG $1 $2 ]]"
+			fi
+		else
+			echo "[[ DEBUG $1 ]]"
+		fi
+	else
+		echo "[[ DEBUG ]]"
+	fi
 fi
