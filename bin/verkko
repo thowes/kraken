@@ -10,7 +10,9 @@ case $(uname) in
 			internet) if [ "$KR_NETWORK" != "NADA" ]; then echo true; else echo false; fi;;
 			ip) ipconfig|\grep IPv4|awk '{print $14}';;
 			mac) ipconfig /all|\grep Physical|awk '{print $12}';;
+			ssh) echo $SSH_AGENT_PID;;
 			ssid) netsh wlan show interfaces|\grep SSID|\grep -v BSSID|awk '{print $3}';;
+			tty) tty | awk -F\/ '{print $3}';;
 			wlan) netsh wlan show interfaces;;
 			*) ipconfig /all;;
 		esac;;
@@ -21,7 +23,9 @@ case $(uname) in
 			internet) if [ "$KR_NETWORK" != "NADA" ]; then echo true; else echo false; fi;;
 			ip) ifconfig|\grep broadcast|awk '{print $2}';;
 			mac) ifconfig -a|\grep ether|awk '{print $2}';;
+			ssh) echo $SSH_AGENT_PID;;
 			ssid) airport -I|\grep -v BSSID|\grep SSID|awk '{print $2}';;
+			tty) tty | awk -F\/ '{print $3}';;
 			wlan) ifconfig wlan0;;
 			*) ifconfig -a;;
 		esac;;
@@ -32,7 +36,9 @@ case $(uname) in
 			internet) if [ "$KR_NETWORK" != "NADA" ]; then echo true; else echo false; fi;;
 			ip) ifconfig|\grep broadcast|awk '{print $2}';;
 			mac) ifconfig -a|\grep ether|awk '{print $2}';;
+			ssh) echo $SSH_AGENT_PID;;
 			ssid) iwlist wlan0 scan|\grep ESSID;;
+			tty) tty | awk -F\/ '{print $3}';;
 			wlan) ifconfig wlan0;;
 			*) ifconfig -a;;
 		esac;;
