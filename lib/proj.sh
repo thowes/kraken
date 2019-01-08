@@ -1,32 +1,9 @@
 #!/bin/bash
-if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/PROJ /w"; fi
-if [ -f $KR_DIR_LIB/val.sh ]; then . $KR_DIR_LIB/val.sh; fi
-if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
-
-#summarize the status of git project in one line.
-projekti_status() {
-	KR_PROJ_STATUS=$(git status)
-	KR_PROJ_BRANCH=$(echo $KR_PROJ_STATUS | \grep 'On branch')
-	case $KR_PROJ_BRANCH in
-		*master*)
-			KR_PROJ_UPDATE=$(echo $KR_PROJ_STATUS | \grep origin)
-			case $KR_PROJ_UPDATE in
-				*ahead*) echo "You are ahead of master branch in commits.";;
-				*date*)
-					KR_PROJ_COMMITS=$(echo $KR_PROJ_STATUS | \grep commit | \grep to)
-					case $KR_PROJ_COMMITS in
-						*nothing*) echo "Up-to-date with origin/master";;
-						*) echo "You have changes not staged for commit.";;
-					esac;;
-			esac;;
-		*) echo "Not in master branch";;
-	esac
-}
 
 # this function is a tool for keeping projects automatically updated if they use git.
 # update (pull) project if locally up to date.
 projekti_update() {
-	KRN_PROJ_ST_NEW=$(projekti_status)
+	KRN_PROJ_ST_NEW=$(projekti-status)
 	case $KRN_PROJ_ST_NEW in
 		*Up-to-date*) if [ $KR_NETWORK != "NADA" ]; then kaiku "PROJ_UPD:" $KRN_PROJ_ST_NEW; compu_secu; git pull; else virhe "PROJ_UPD:" "Can't update," "Internet not available"; fi;;
 		*) virhe "PROJ_UPD:" "$KRN_PROJ_ST_NEW";;
