@@ -1,5 +1,10 @@
 #!/bin/bash
 varko() {
+	KR_DIR_BUC=$(asetus dir:buc)
+	KR_DIR_EXCL=$(asetus dir:excl)
+	KR_DIR_INCL=$(asetus dir:incl)
+	KR_DIR_TEMP=$(asetus dir:temp)
+	KR_RECIPIENT=$(asetus str:recipient)
 	if [ -d $1 ] && [ $2 != "" ]; then
 		# Delete and rename old backups, if they exist.
 		if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old ]; then \rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old; fi
@@ -27,8 +32,8 @@ varko() {
 				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			fi
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
-				case $KAYTTIS in
-					darwin) BU_TODAY_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
+				case $(uname) in
+					Darwin) BU_TODAY_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
 					*) BU_TODAY_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 				esac
 			fi
