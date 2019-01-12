@@ -1,0 +1,14 @@
+#!/bin/bash
+# returns the last row of the backup log file.
+if [ -f $1/backup.log ]; then
+	KR_LATEST_BACKUP_LINE=$(tail -n 1 $1/backup.log)
+	echo $KR_LATEST_BACKUP_LINE
+else
+	touch $1/backup.log
+	if [ -f $1/backup.log ]; then
+		KR_NEW_BACKUP=$(date +"%F %R")
+		echo $KR_NEW_BACKUP $2 ver $3 > $1/backup.log
+	else
+		virhe $1/backup.log cannot exist.
+	fi
+fi
