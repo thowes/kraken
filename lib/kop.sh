@@ -17,7 +17,7 @@ varko() {
 			\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old
 		fi
 		# Getting the last row of backup.log
-		BU_LATEST_LOGLINE=$(bulog_latest $1)
+		BU_LATEST_LOGLINE=$(latest $1)
 		# Splitting BU_LATEST_LOGLINE the retrieve the parts of the string for md5 sum and latest backup date.
 		BU_LATEST_DATE=$(echo $BU_LATEST_LOGLINE|awk '{print $1}')
 		if [ $BU_LATEST_MD5 == "nada" ]; then BU_LATEST_MD5=$(echo $BU_LATEST_LOGLINE|awk '{print $5}'); fi
