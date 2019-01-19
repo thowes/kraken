@@ -27,7 +27,7 @@ case $ASETUKSET_REQUEST in
 	bool:backups) echo $KR_BACKUPS;;
 	bool:debug) echo $KR_DEBUG;;
 	bool:hosted) echo $KR_HOSTED;;
-	bool:wireless) echo $KR_WIRELESS;;dir:
+	bool:wireless) echo $KR_WIRELESS;;
 	dir:amenu) echo $KR_DIR_AMENU;;
 	dir:buc) echo $KR_DIR_BUC;;
 	dir:bua) echo $KR_DIR_BUA;;
