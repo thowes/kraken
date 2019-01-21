@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # returns the last row of the backup log file.
 if [ -f $1/backup.log ]; then
 	KR_LATEST_BACKUP_LINE=$(tail -n 1 $1/backup.log)
