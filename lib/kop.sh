@@ -1,6 +1,6 @@
 #!/bin/bash
 varko() {
-	KR_DIR_BUC=$(asetus dir:buc)
+	#KR_DIR_BUC=$(asetus dir:buc)
 	KR_DIR_EXCL=$(asetus dir:excl)
 	KR_DIR_INCL=$(asetus dir:incl)
 	KR_DIR_TEMP=$(asetus dir:temp)
@@ -51,7 +51,7 @@ varko() {
 			# Moving the created gpg file to the backup directory.
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg ]; then tynnyri $2
 				# Update the backup.log file and copy it to the backup.logs directory.
-				bulog_add $1 $2 $BU_TODAY_MD5
+				bulog-add $1 $2 $BU_TODAY_MD5
 				\cp $1/backup.log $KR_DIR_LOGS/$2.log
 				\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.cbc
 			fi
