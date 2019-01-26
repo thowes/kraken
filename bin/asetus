@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -f $1/kraken.cfg ]; then
 	ASETUKSET_REQUEST=$2
@@ -46,6 +46,9 @@ case $ASETUKSET_REQUEST in
 	dir:temp) echo $KR_DIR_TEMP;;
 	dir:tmpl) echo $KR_DIR_TMPL;;
 	dir:umenu) echo $KR_DIR_UMENU;;
+	str:lnk) echo $KR_NAME_LNK;;
 	str:network) echo $KR_NETWORK;;
 	str:recipient) echo $KR_RECIPIENT;;
+	str:startup) echo $KR_NAME_STARTUP;;
+	str:url) echo $KR_NAME_URL;;
 esac
