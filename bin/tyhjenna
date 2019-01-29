@@ -8,20 +8,25 @@ KR_DIR_AMENU=$(asetus dir:amenu)
 KR_DIR_CMENU=$(asetus dir:cmenu)
 KR_DIR_PMENU=$(asetus dir:pmenu)
 KR_DIR_UMENU=$(asetus dir:umenu)
+KR_NAME_LNK=$(asetus str:lnk)
+KR_NAME_STARTUP=$(asetus str:startup)
+KR_NAME_URL=$(asetus str:url)
 
-#shorts_clear() {
-debug "SHORTS/CLEAR" "$1"
 case $1 in
 	all) tyhjenna menu; tyhjenna startup; tyhjenna desktop;;
 	desktop)
 		if [ -d $KR_DIR_BUA/DESKTOP/ ]; then
 			case $(uname) in
-				CYGWIN) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
+				CYGWIN*) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
 				Darwin) if [ -d $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.app $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.app; fi;;
 				Ubuntu) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi;;
 			esac
 			if [ -f $KR_DIR_DT/$KR_NAME_URL ]; then \cp $KR_DIR_DT/*.url $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.url; fi
 		fi;;
+	hst)
+		if [ -f ~/.bash_history ]; then \rm ~/.bash_history; fi
+		if [ -f ~/.wget-hsts ]; then \rm ~/.wget-hsts; fi
+		;;
 	sendto) if [ -d $KR_DIR_SENDTO/ ]; then \cp $KR_DIR_SENDTO/*.lnk $KR_DIR_BUA/SENDTO/; \rm $KR_DIR_SENDTO/*.lnk; else virhe SHORTS no SENDTO directory; fi;;
 	startup) if [ -f $KR_DIR_STARTUP/$KR_NAME_STARTUP ]; then \cp $KR_DIR_STARTUP/*.lnk $KR_DIR_BUA/STARTUP/; \rm $KR_DIR_STARTUP/*.lnk; fi;;
 	menu)
@@ -34,4 +39,3 @@ case $1 in
 		fi;;
 	*) tyhjenna menu; tyhjenna desktop;;
 esac
-#}
