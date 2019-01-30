@@ -15,7 +15,7 @@ shorts_dt() {
 }
 
 shorts_clear() {
-	debug "SHORTS/CLEAR" "$1"
+	kaiku "SHORTS/CLEAR" "$1"
 	case $1 in
 		all) shorts_clear menu; shorts_clear startup; shorts_clear desktop;;
 		desktop)
@@ -64,7 +64,7 @@ shorts_startup() {
 shorts() {
 	debug "SHORTS/MAIN"
 	case $1 in
-		clr) if [ -d $KR_DIR_LNK ]; then tynnyri new SHORTS/CLR; shorts_clear; else debug no APPLNK directory; fi;;
+		clr) if [ -d $KR_DIR_LNK ]; then tynnyri new SHORTS/CLR; tyhjenna; else debug no APPLNK directory; fi;;
 		dt) tynnyri new SHORTS/DT; shorts_dt $3 $2;;
 		st) tynnyri new SHORTS/ST; debug shorts_sendto $HOSTNAME; shorts_startup $HOSTNAME; shorts_startup $2;;
 	esac
