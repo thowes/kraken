@@ -1,6 +1,6 @@
 #!/bin/bash
 varko() {
-	#KR_DIR_BUC=$(asetus dir:buc)
+	if [ "_$KR_DIR_BUC" == "_" ]; then KR_DIR_BUC=$(asetus dir:buc); fi
 	KR_DIR_EXCL=$(asetus dir:excl)
 	KR_DIR_INCL=$(asetus dir:incl)
 	KR_DIR_TEMP=$(asetus dir:temp)
