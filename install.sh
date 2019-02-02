@@ -13,6 +13,7 @@ case $KR_SYSTEM_TYPE in
 	CYGWIN*) KR_INSTALL_ALIAS_FILE="alias_cygwin.sh";;
 	Darwin*) KR_INSTALL_ALIAS_FILE="alias_darwin.sh";;
 	Linux*) KR_INSTALL_ALIAS_FILE="alias_linux.sh";;
+	Ubuntu*) KR_INSTALL_ALIAS_FILE="alias_linux.sh";;
 esac
 
 TESTATTR=_$1_
