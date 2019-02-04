@@ -45,7 +45,7 @@ bulog_add() {
 	fi
 }
 
-bulog_check_today() {
+bulog-today() {
 	# Getting the last row of backup.log and splitting it to retrieve the part of the string for latest backup date.
 	BU_LATEST_DATE=$(latest $1|awk '{print $1}')
 	BU_TODAY_DATE=$(date +"%F")
@@ -56,3 +56,23 @@ bulog_check_today() {
 		echo "false"
 	fi
 }
+
+if [ "_$1_" != "__" ]; then
+	case $1 in
+		-*) case $1 in
+				-a*) BULOG_FUNCTION="bulog-add";;
+				-l*) BULOG_FUNCTION="bulog-latest";;
+				-t*) BULOG_FUNCTION="bulog-today";;
+				*) BULOG_FUNCTION="bulog-latest";;
+			esac;;
+		*) ;;
+	esac
+	BULOG_FILE="./backup.log"
+else
+	if [ -f "./backup.log" ]; then latest ./backup.log; fi
+fi
+case $BULOG_FUNCTION in
+	bulog-add) echo bulog-add $BULOG_FILE;;
+	bulog-latest) echo latest $BULOG_FILE;;
+	bulog-today) echo bulog-today $BULOG_FILE;;
+esac
