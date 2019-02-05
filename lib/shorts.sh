@@ -14,34 +14,37 @@ shorts_dt() {
 	fi
 }
 
-shorts_clear() {
-	kaiku "SHORTS/CLEAR" "$1"
-	case $1 in
-		all) shorts_clear menu; shorts_clear startup; shorts_clear desktop;;
-		desktop)
-			if [ -d $KR_DIR_BUA/DESKTOP/ ]; then
-				case $(uname) in
-					CYGWIN) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
-					Darwin) if [ -d $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.app $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.app; fi;;
-					Ubuntu) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi;;
-				esac
-				if [ -f $KR_DIR_DT/$KR_NAME_URL ]; then \cp $KR_DIR_DT/*.url $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.url; fi
-			fi;;
-		sendto) if [ -d $KR_DIR_SENDTO/ ]; then \cp $KR_DIR_SENDTO/*.lnk $KR_DIR_BUA/SENDTO/; \rm $KR_DIR_SENDTO/*.lnk; else virhe SHORTS no SENDTO directory; fi;;
-		startup) if [ -f $KR_DIR_STARTUP/$KR_NAME_STARTUP ]; then \cp $KR_DIR_STARTUP/*.lnk $KR_DIR_BUA/STARTUP/; \rm $KR_DIR_STARTUP/*.lnk; fi;;
-		menu)
-			if [ -d $KR_DIR_BUA/MENU/ ]; then
-				if [ -d $KR_DIR_AMENU ]; then \cp $KR_DIR_AMENU/*.lnk $KR_DIR_BUA/MENU/; else virhe shorts.sh:28 dir $KR_DIR_AMENU missing; fi
-				if [ -d $KR_DIR_UMENU ]; then \cp $KR_DIR_UMENU/*.lnk $KR_DIR_BUA/MENU/; else virhe shorts.sh:29 dir $KR_DIR_UMENU missing; fi
-				if [ -d $KR_DIR_CMENU ]; then \cp $KR_DIR_CMENU/*.lnk $KR_DIR_BUA/CMENU/; else virhe shorts.sh:29 dir $KR_DIR_CMENU missing; fi
-				if [ -d $KR_DIR_PMENU ]; then \cp $KR_DIR_PMENU/*.lnk $KR_DIR_BUA/PMENU/; else virhe shorts.sh:29 dir $KR_DIR_PMENU missing; fi
-			else virhe shorts.sh:30 dir $KR_DIR_BUA/MENU/ missing
-			fi;;
-		*) shorts_clear menu; shorts_clear desktop;;
-	esac
-}
+#shorts_clear() {
+#	kaiku "SHORTS/CLEAR" "$1"
+#	case $1 in
+#		all) shorts_clear menu; shorts_clear startup; shorts_clear desktop;;
+#		desktop)
+#			if [ -d $KR_DIR_BUA/DESKTOP/ ]; then
+#				case $(uname) in
+#					CYGWIN) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
+#					Darwin) if [ -d $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.app $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.app; fi;;
+#					Ubuntu) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi;;
+#				esac
+#				if [ -f $KR_DIR_DT/$KR_NAME_URL ]; then \cp $KR_DIR_DT/*.url $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.url; fi
+#			fi;;
+#		sendto) if [ -d $KR_DIR_SENDTO/ ]; then \cp $KR_DIR_SENDTO/*.lnk $KR_DIR_BUA/SENDTO/; \rm $KR_DIR_SENDTO/*.lnk; else virhe SHORTS no SENDTO directory; fi;;
+#		startup) if [ -f $KR_DIR_STARTUP/$KR_NAME_STARTUP ]; then \cp $KR_DIR_STARTUP/*.lnk $KR_DIR_BUA/STARTUP/; \rm $KR_DIR_STARTUP/*.lnk; fi;;
+#		menu)
+#			if [ -d $KR_DIR_BUA/MENU/ ]; then
+#				if [ -d $KR_DIR_AMENU ]; then \cp $KR_DIR_AMENU/*.lnk $KR_DIR_BUA/MENU/; else virhe shorts.sh:28 dir $KR_DIR_AMENU missing; fi
+#				if [ -d $KR_DIR_UMENU ]; then \cp $KR_DIR_UMENU/*.lnk $KR_DIR_BUA/MENU/; else virhe shorts.sh:29 dir $KR_DIR_UMENU missing; fi
+#				if [ -d $KR_DIR_CMENU ]; then \cp $KR_DIR_CMENU/*.lnk $KR_DIR_BUA/CMENU/; else virhe shorts.sh:29 dir $KR_DIR_CMENU missing; fi
+#				if [ -d $KR_DIR_PMENU ]; then \cp $KR_DIR_PMENU/*.lnk $KR_DIR_BUA/PMENU/; else virhe shorts.sh:29 dir $KR_DIR_PMENU missing; fi
+#			else virhe shorts.sh:30 dir $KR_DIR_BUA/MENU/ missing
+#			fi;;
+#		*) shorts_clear menu; shorts_clear desktop;;
+#	esac
+#}
 
 shorts_sendto() {
+	KR_DIR_BUA=$(asetus dir:bua)
+	KR_DIR_LNK=$(asetus dir:lnk)
+	KR_DIR_SENDTO=$(asetus dir:sendto)
 	debug "SHORTS/SENDTO" "$1 $2"
 	if [ -d $KR_DIR_SENDTO ]; then
 		case $1 in
@@ -54,6 +57,8 @@ shorts_sendto() {
 }
 
 shorts_startup() {
+	KR_DIR_LNK=$(asetus dir:lnk)
+	KR_DIR_STARTUP=$(asetus dir:startup)
 	debug "SHORTS/STARTUP" "$1 $2"
 	case $1 in
 		def) \cp $KR_DIR_LNK/STARTUP/default/*.lnk $KR_DIR_STARTUP/;;
