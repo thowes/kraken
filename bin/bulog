@@ -2,7 +2,7 @@
 # bulog.sh: functions to manage backup log files.
 
 # returns the last row of the backup log file.
-bulog_latest() {
+bulog-latest() {
 	if [ -f $1/backup.log ]; then
 		KR_LATEST_BACKUP_LINE=$(tail -n 1 $1/backup.log)
 		echo $KR_LATEST_BACKUP_LINE
@@ -58,21 +58,24 @@ bulog-today() {
 }
 
 if [ "_$1_" != "__" ]; then
+	BULOG_NUM=1
 	case $1 in
 		-*) case $1 in
 				-a*) BULOG_FUNCTION="bulog-add";;
-				-l*) BULOG_FUNCTION="bulog-latest";;
 				-t*) BULOG_FUNCTION="bulog-today";;
-				*) BULOG_FUNCTION="bulog-latest";;
+				*) BULOG_FUNCTION="bulog-latest"; case $1 in
+					*:*) BULOG_NUM=$(echo $1|awk -F\: '{print $2}');;
+				esac;;
 			esac;;
-		*) ;;
+		*) if [ -d $1/ ]; then if [ -f $1/backup.log ]; then BULOG_FUNCTION="bulog-latest"; BULOG_FILE=$1/; fi; else if [ -f $1 ]; then BULOG_FUNCTION="bulog-latest"; BULOG_FILE=$1; fi; fi;;
 	esac
-	BULOG_FILE="./backup.log"
+	if [ "_$2_" != "__" ]; then if [ -d $2/ ]; then if [ -f $2/backup.log ]; then BULOG_FILE=$2/; fi; else if [ -f $2 ]; then BULOG_FILE=$2; fi; fi; fi
 else
-	if [ -f "./backup.log" ]; then latest ./backup.log; fi
+	if [ -f "backup.log" ]; then BULOG_FUNCTION="bulog-latest"; BULOG_FILE="."; fi
 fi
 case $BULOG_FUNCTION in
 	bulog-add) echo bulog-add $BULOG_FILE;;
-	bulog-latest) echo latest $BULOG_FILE;;
+	#bulog-latest) echo latest -n:$BULOG_NUM $BULOG_FILE;;
+	bulog-latest) latest $BULOG_FILE;;
 	bulog-today) echo bulog-today $BULOG_FILE;;
 esac
