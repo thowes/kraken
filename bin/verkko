@@ -6,9 +6,11 @@ case $1 in
 		KR_NETWORK=$(asetus str:network)
 		VERKKO_IP=$(verkko ip)
 		VERKKO_SSID=nada
+		if [ $(asetus bool_hosted) != true ]; then
 		if [ $(asetus bool:wireless) == "true" ]; then VERKKO_ESSID=$(verkko ssid); fi
 		KR_DIR_CFG=$(asetus dir:cfg)
 		if [ -f $KR_DIR_CFG/nets.sh ]; then . $KR_DIR_CFG/nets.sh; fi
+		fi
 		case $1 in
 			*symbol) echo $KR_SSID_SYMBOL;;
 			*) echo $KR_NETWORK;;
@@ -25,13 +27,9 @@ case $(uname) in
 	CYGWIN*)
 		case $1 in
 			eth) netsh lan show interfaces;;
-			ext) \curl $KRN_EXT_IP_ADDRESS;;
-			internet) if [ "$KR_NETWORK" != "NADA" ]; then echo true; else echo false; fi;;
 			ip) ipconfig|\grep IPv4|awk '{print $14}';;
 			mac) ipconfig /all|\grep Physical|awk '{print $12}';;
-			ssh) echo $SSH_AGENT_PID;;
 			ssid) netsh wlan show interfaces|\grep SSID|\grep -v BSSID|awk '{print $3}';;
-			tty) tty | awk -F\/ '{print $3}';;
 			wlan) netsh wlan show interfaces;;
 			*) ipconfig /all;;
 		esac;;
