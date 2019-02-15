@@ -33,7 +33,7 @@ case $ASETUKSET_REQUEST in
 	dir:bua) echo $KR_DIR_BUA;;
 	dir:cfg) echo $KR_DIR_CFG;;
 	dir:cmenu) echo $KR_DIR_CMENU;;
-	dir:dt) echo $KR_DIR_DT;;
+	dir:d*t*) echo $KR_DIR_DT;;
 	dir:excl) echo $KR_DIR_EXCL;;
 	dir:incl) echo $KR_DIR_INCL;;
 	dir:keys) echo $KR_DIR_KEYS;;
@@ -51,4 +51,5 @@ case $ASETUKSET_REQUEST in
 	str:recipient) echo $KR_RECIPIENT;;
 	str:startup) echo $KR_NAME_STARTUP;;
 	str:url) echo $KR_NAME_URL;;
+	url:ext) echo $KRN_EXT_IP_ADDRESS;;
 esac
