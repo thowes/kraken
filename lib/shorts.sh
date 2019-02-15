@@ -1,5 +1,5 @@
 #!/bin/bash
-shorts_dt() {
+shorts_desktop() {
 	debug "SHORTS/DT" "$1 $2 $3"
 	if [ -d $KR_DIR_LNK/ ]; then
 		if [ -d $KR_DIR_LNK/COMP/$HOSTNAME ]; then \cp $KR_DIR_LNK/COMP/$HOSTNAME/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/COMP/$HOSTNAME "not found."; fi
@@ -10,14 +10,11 @@ shorts_dt() {
 	if [ -d $KR_DIRPO/.desktop_links ]; then
 		\cp $KR_DIRPO/.desktop_links/*.* $KR_DIR_DT/; 
 	else
-		if [ -d $KR_DIR_LNK/PROJ/$1 ]; then \cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/; else virhe "Directory .desktop_links not found for project" $1 $2; fi
+		if [ -d $KR_DIR_LNK/PROJ/$1 ]; then \cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/; else virhe "Directory .desktop_links not found for project" p:$1 k:$2; fi
 	fi
 }
 
 shorts_sendto() {
-	KR_DIR_BUA=$(asetus dir:bua)
-	KR_DIR_LNK=$(asetus dir:lnk)
-	KR_DIR_SENDTO=$(asetus dir:sendto)
 	debug "SHORTS/SENDTO" "$1 $2"
 	if [ -d $KR_DIR_SENDTO ]; then
 		case $1 in
@@ -30,8 +27,6 @@ shorts_sendto() {
 }
 
 shorts_startup() {
-	KR_DIR_LNK=$(asetus dir:lnk)
-	KR_DIR_STARTUP=$(asetus dir:startup)
 	debug "SHORTS/STARTUP" "$1 $2"
 	case $1 in
 		def) \cp $KR_DIR_LNK/STARTUP/default/*.lnk $KR_DIR_STARTUP/;;
@@ -39,11 +34,18 @@ shorts_startup() {
 	esac
 }
 
+KR_DIR_BUA=$(asetus dir:bua)
+KR_DIR_DT=$(asetus dir:dt)
+KR_DIR_LNK=$(asetus dir:lnk)
+KR_DIR_SENDTO=$(asetus dir:sendto)
+KR_DIR_STARTUP=$(asetus dir:startup)
 shorts() {
-	debug "SHORTS/MAIN"
+	debug "SHORTS"
 	case $1 in
-		clr) if [ -d $KR_DIR_LNK ]; then tynnyri new SHORTS/CLR; tyhjenna; else debug no APPLNK directory; fi;;
-		dt) tynnyri new SHORTS/DT; shorts_dt $3 $2;;
+		d*t*) tynnyri new SHORTS/DT; shorts_desktop $3 $2;;
+		sendto) tynnyri new SHORTS/STO; debug shorts_sendto $HOSTNAME;;
 		st) tynnyri new SHORTS/ST; debug shorts_sendto $HOSTNAME; shorts_startup $HOSTNAME; shorts_startup $2;;
+		startup) tynnyri new SHORTS/STU; shorts_startup $HOSTNAME; shorts_startup $2;;
+		*) if [ -d $KR_DIR_LNK ]; then tynnyri new SHORTS/CLR; tyhjenna; else debug no APPLNK directory; fi;;
 	esac
 }
