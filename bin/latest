@@ -1,4 +1,5 @@
 #!/bin/bash
+LATEST_DIR=$1
 
 # returns the last row of the backup log file.
 if [ -f $1/backup.log ]; then
@@ -8,7 +9,7 @@ else
 	touch $1/backup.log
 	if [ -f $1/backup.log ]; then
 		KR_NEW_BACKUP=$(date +"%F %R")
-		echo $KR_NEW_BACKUP $2 ver $3 > $1/backup.log
+		echo $KR_NEW_BACKUP $2 new $3 > $1/backup.log
 	else
 		virhe $1/backup.log cannot exist.
 	fi
