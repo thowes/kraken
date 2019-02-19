@@ -1,5 +1,9 @@
 #!/bin/bash
-LATEST_DIR=$1
+if [ "_$1_" != "__" ]; then
+	LATEST_DIR=$1
+else
+	LATEST_DIR=$(pwd)
+fi
 
 # returns the last row of the backup log file.
 if [ -f $1/backup.log ]; then
