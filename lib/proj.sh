@@ -46,3 +46,7 @@ projekti() {
 		*) virhe "Project keyword" $KRN_PROJ_INPUT "found multiple times in project file.";;
 	esac
 }
+
+projekti_go() {
+	debug PROJ/GO
+}

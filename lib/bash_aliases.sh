@@ -12,6 +12,7 @@ alias co='git checkout'
 alias ed=muokkaa
 alias egrep='egrep --color=auto'              # show differences in colour
 alias fgrep='fgrep --color=auto'              # show differences in colour
+alias go=projekti_go
 alias grep='grep --color'                     # show differences in colour
 alias hst='cat ~/.bash_history'
 alias k80=kaiku80
