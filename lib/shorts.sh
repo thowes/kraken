@@ -1,4 +1,10 @@
 #!/bin/bash
+KR_DIR_BUA=$(asetus dir:bua)
+KR_DIR_DT=$(asetus dir:dt)
+KR_DIR_LNK=$(asetus dir:lnk)
+KR_DIR_SENDTO=$(asetus dir:sendto)
+KR_DIR_STARTUP=$(asetus dir:startup)
+
 shorts_desktop() {
 	debug "SHORTS/DT" "$1 $2 $3"
 	if [ -d $KR_DIR_LNK/ ]; then
@@ -7,6 +13,7 @@ shorts_desktop() {
 		if [ -d $KR_DIR_LNK/KTXT/$KR_NETWORK/ ]; then \cp $KR_DIR_LNK/KTXT/$KR_NETWORK/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/KTXT/$KR_NETWORK "not found."; fi
 		if [ -d $KR_DIR_LNK/PROG/$1 ]; then \cp $KR_DIR_LNK/PROG/$1/*.* $KR_DIR_DT/; fi #else virhe "SHORTS dir dt-prog" $1 $2 "not found."; fi
 	else virhe "SHORTS/dt dir" $KR_DIR_LNK "not found."; fi
+	echo SHORTS/DT/DIR: $KR_DIRPO
 	if [ -d $KR_DIRPO/.desktop_links ]; then
 		\cp $KR_DIRPO/.desktop_links/*.* $KR_DIR_DT/; 
 	else
@@ -34,13 +41,9 @@ shorts_startup() {
 	esac
 }
 
-KR_DIR_BUA=$(asetus dir:bua)
-KR_DIR_DT=$(asetus dir:dt)
-KR_DIR_LNK=$(asetus dir:lnk)
-KR_DIR_SENDTO=$(asetus dir:sendto)
-KR_DIR_STARTUP=$(asetus dir:startup)
 shorts() {
-	debug "SHORTS"
+	if [ "_$KR_NETWORK" == "_" ]; then KR_NETWORK=$(asetus str:network); fi
+	kaiku "SHORTS" 1:$1 2:$2 3:$3 n:$KR_NETWORK
 	case $1 in
 		d*t*) tynnyri new SHORTS/DT; shorts_desktop $3 $2;;
 		sendto) tynnyri new SHORTS/STO; debug shorts_sendto $HOSTNAME;;

@@ -1,9 +1,8 @@
 #!/bin/bash
 
 if [ "_$1_" == "__" ]; then
-	debug "SHORTS" "$1 $2 $3"
+	KR_DEBUG=true debug "BIN/SHORTS" "$1 $2 $3"
 	case $1 in
-		clear) kaiku SHORTS clear;;
 		desktop)
 			KR_DIR_LNK=$(asetus dir:lnk)
 			KR_DIR_DT=$(asetus dir:dt)
@@ -19,9 +18,7 @@ if [ "_$1_" == "__" ]; then
 			else
 				if [ -d $KR_DIR_LNK/PROJ/$2 ]; then \cp $KR_DIR_LNK/PROJ/$2/*.* $KR_DIR_DT/; else virhe "Directory .desktop_links not found for project" $1 $2; fi
 			fi
-			kaiku SHORTS desktop $2
 			;;
-		startup) kaiku SHORTS startup;;
 		*) kaiku SHORTS dt;;
 	esac
 else
