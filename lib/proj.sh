@@ -10,7 +10,6 @@ projekti_update() {
 	esac
 }
 
-
 # reads list projects (proj.csv) and jumps to the project folder.
 projekti() {
 	case $1 in
@@ -22,12 +21,13 @@ projekti() {
 		u) KRN_PROJ_FUNCTION="-u"; KRN_PROJ_INPUT=$2;;
 		*) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$1;;
 	esac
+	KR_DIRPO=$(projekti-dir -d $KRN_PROJ_INPUT)
 	KR_PROJECTS_COUNT=$(cat $KR_DIR_CFG/proj.csv | \grep $KRN_PROJ_INPUT | wc -l | awk '{ print $1 }')
-	case $KR_PROJECTS_COUNT in
-		0) virhe "Project keyword" $KRN_PROJ_INPUT "not found" "in project file.";;
-		1)
-			KR_DIRPO_LINE=$(cat $KR_DIR_CFG/proj.csv | \grep $KRN_PROJ_INPUT )
-			KR_DIRPO=$(echo $KR_DIRPO_LINE | awk -F, '{ print $4 }')
+	#case $KR_PROJECTS_COUNT in
+	#	0) virhe "Project keyword" $KRN_PROJ_INPUT "not found" "in project file.";;
+	#	1)
+	#		KR_DIRPO_LINE=$(cat $KR_DIR_CFG/proj.csv | \grep $KRN_PROJ_INPUT )
+	#		KR_DIRPO=$(echo $KR_DIRPO_LINE | awk -F, '{ print $4 }')
 			KR_DIRPO_TEMP=$KR_DIRPO; KR_DIRPO_HOME=~
 			case $KR_DIRPO_TEMP in
 				~*) KR_DIRPO=$KR_DIRPO_HOME$(echo $KR_DIRPO_TEMP | awk -F~ '{ print$2 }');;
@@ -42,11 +42,11 @@ projekti() {
 				compu_proj $KRN_PROJ_FUNCTION $KRN_PROJ_INPUT
 			else 
 				virhe PROJ $KRN_PROJ_INPUT $KR_DIRPO "is not a directory!"
-			fi;;
-		*) virhe "Project keyword" $KRN_PROJ_INPUT "found multiple times in project file.";;
-	esac
+			fi #;;
+		#*) virhe "Project keyword" $KRN_PROJ_INPUT "found multiple times in project file.";;
+	#esac
 }
 
-projekti_go() {
-	debug PROJ/GO
+projekti-go() {
+	nada
 }
