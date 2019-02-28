@@ -6,15 +6,20 @@ else
 fi
 
 # returns the last row of the backup log file.
-if [ -f $1/backup.log ]; then
-	KR_LATEST_BACKUP_LINE=$(tail -n 1 $1/backup.log)
+if [ -f $LATEST_DIR/backup.log ]; then
+	KR_LATEST_BACKUP_LINE=$(tail -n 1 $LATEST_DIR/backup.log)
 	echo $KR_LATEST_BACKUP_LINE
 else
-	touch $1/backup.log
-	if [ -f $1/backup.log ]; then
+	touch $LATEST_DIR/backup.log
+	if [ -f $LATEST_DIR/backup.log ]; then
 		KR_NEW_BACKUP=$(date +"%F %R")
-		echo $KR_NEW_BACKUP $2 new $3 > $1/backup.log
+		if [ "_$2_" != "__" ]; then
+			BACKUPS_NAME=$2; if [ "_$3_" == "__" ]; then BACKUPS_SUM=123; else BACKUPS_SUM=$3; fi
+		else
+			BACKUPS_NAME=X; BACKUPS_SUM=123
+		fi
+		echo $KR_NEW_BACKUP $BACKUPS_NAME new $BACKUPS_SUM > $LATEST_DIR/backup.log
 	else
-		virhe $1/backup.log cannot exist.
+		virhe $LATEST_DIR/backup.log cannot exist.
 	fi
 fi
