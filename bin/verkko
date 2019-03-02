@@ -32,15 +32,15 @@ case $1 in
 					wlan) netsh wlan show interfaces;;
 					*) ipconfig /all;;
 				esac;;
-	Darwin*)
-		case $1 in
-			eth) ifconfig eth0;;
-			ip) ifconfig|\grep broadcast|awk '{print $2}';;
-			mac) ifconfig -a|\grep ether|awk '{print $2}';;
-			ssid) airport -I|\grep -v BSSID|\grep SSID|awk '{print $2}';;
-			wlan) ifconfig wlan0;;
-			*) ifconfig -a;;
-		esac;;
+			Darwin*)
+				case $1 in
+					eth) ifconfig eth0;;
+					ip) ifconfig|\grep broadcast|awk '{print $2}';;
+					mac) ifconfig -a|\grep ether|awk '{print $2}';;
+					ssid) airport -I|\grep -v BSSID|\grep SSID|awk '{print $2}';;
+					wlan) ifconfig wlan0;;
+					*) ifconfig -a;;
+				esac;;
 	Ubuntu*|Linux*)
 		case $1 in
 			eth) ifconfig eth0;;
