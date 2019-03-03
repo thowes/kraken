@@ -41,14 +41,14 @@ case $1 in
 					wlan) ifconfig wlan0;;
 					*) ifconfig -a;;
 				esac;;
-	Ubuntu*|Linux*)
-		case $1 in
-			eth) ifconfig eth0;;
-			ip) ifconfig|\grep broadcast|awk '{print $2}';;
-			mac) ifconfig -a|\grep ether|awk '{print $2}';;
-			ssid) iwlist wlan0 scan|\grep ESSID;;
-			wlan) ifconfig wlan0;;
-			*) ifconfig -a;;
-		esac;;
+			Ubuntu*|Linux*)
+				case $1 in
+					eth) ifconfig eth0;;
+					ip) ifconfig|\grep broadcast|awk '{print $2}';;
+					mac) ifconfig -a|\grep ether|awk '{print $2}';;
+					ssid) iwlist wlan0 scan|\grep ESSID;;
+					wlan) ifconfig wlan0;;
+					*) ifconfig -a;;
+				esac;;
 	*) echo "[[ KRAKEN/VERKKO err2: $KAYTTIS ei tunnistettu/tuettu! ]]";;
 esac;; esac
