@@ -3,5 +3,13 @@
 case $1 in
 	pull) echo AGENTTI: git pull;;
 	push) echo AGENTTI: git push;;
-	*) if [ "_$SSH_AGENT_PID" == "_" ]; then ps aux|grep ssh|grep agent|grep -v grep|awk '{print $1}'; else echo $SSH_AGENT_PID; fi;;
+	*)
+		if [ "_$SSH_AGENT_PID" == "_" ]; then
+			case $(uname) in
+				CYGWIN*) ps aux|grep ssh|grep agent|grep -v grep|awk '{print $1}';; 
+				*) ps aux|grep ssh|grep agent|grep -v grep|awk '{print $2}';;
+			esac
+		else
+			echo $SSH_AGENT_PID
+		fi;;
 esac
