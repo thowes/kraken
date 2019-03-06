@@ -13,11 +13,11 @@ shorts_desktop() {
 		if [ -d $KR_DIR_LNK/KTXT/$KR_NETWORK/ ]; then \cp $KR_DIR_LNK/KTXT/$KR_NETWORK/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/KTXT/$KR_NETWORK "not found."; fi
 		if [ -d $KR_DIR_LNK/PROG/$1 ]; then \cp $KR_DIR_LNK/PROG/$1/*.* $KR_DIR_DT/; fi #else virhe "SHORTS dir dt-prog" $1 $2 "not found."; fi
 	else virhe "SHORTS/dt dir" $KR_DIR_LNK "not found."; fi
-	echo SHORTS/DT/DIR: $KR_DIRPO
+	if [ "_$KR_DIRPO" == "_" ]; then KR_DIRPO=$(projekti-dir -r $1); fi #echo SHORTS/DT/DIR: $KR_DIRPO $KR_NETWORK
 	if [ -d $KR_DIRPO/.desktop_links ]; then
 		\cp $KR_DIRPO/.desktop_links/*.* $KR_DIR_DT/; 
 	else
-		if [ -d $KR_DIR_LNK/PROJ/$1 ]; then \cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/; else virhe "Directory .desktop_links not found for project" p:$1 k:$2; fi
+		if [ -d $KR_DIR_LNK/PROJ/$1 ]; then \cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/; else virhe "Directory .desktop_links not found for project" $KR_DIRPO p:$1 k:$2/$KR_NETWORK; fi
 	fi
 }
 
@@ -42,8 +42,8 @@ shorts_startup() {
 }
 
 shorts() {
-	if [ "_$KR_NETWORK" == "_" ]; then KR_NETWORK=$(asetus str:network); fi
-	kaiku "SHORTS" 1:$1 2:$2 3:$3 n:$KR_NETWORK
+	if [ "_$KR_NETWORK" == "_" ]; then KR_NETWORK=$(verkko context); fi
+	kaiku "SHORTS" 1f:$1 2p:$2 3p:$3 n:$KR_NETWORK
 	case $1 in
 		d*t*) tynnyri new SHORTS/DT; shorts_desktop $3 $2;;
 		sendto) tynnyri new SHORTS/STO; debug shorts_sendto $HOSTNAME;;
