@@ -1,8 +1,10 @@
 #!/bin/bash
 
 case $1 in
+	dwl) echo AGENTTI: synk dwl $2;;
 	pull) echo AGENTTI: git pull;;
 	push) echo AGENTTI: git push;;
+	upl) echo AGENTTI: synk $2;;
 	*)
 		if [ "_$SSH_AGENT_PID" == "_" ]; then
 			case $(uname) in
