@@ -19,7 +19,11 @@ bulog-latest() {
 
 # returns the 2nd last row of the backup log file.
 bulog_2nd_latest() {
-	if [ "_$1_" == "__" ]; then BULOG_DIR=$(pwd); else BULOG_DIR=$1; fi
+	if [ "_$1_" == "__" ]; then
+		BULOG_DIR=$(pwd)
+	else
+		BULOG_DIR=$1 
+	fi
 	if [ -f $BULOG_DIR/backup.log ]; then
 		KRN_2ND_LATEST_LINE=$(tail -n 2 $BULOG_DIR/backup.log|head -n 1)
 		echo $KRN_2ND_LATEST_LINE
