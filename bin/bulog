@@ -19,13 +19,22 @@ bulog-latest() {
 
 # returns the 2nd last row of the backup log file.
 bulog_2nd_latest() {
-	if [ "_$1_" == "__" ]; then
-		BULOG_DIR=$(pwd)
-	else
-		BULOG_DIR=$1 
+	BULOG_DIR=$(pwd)
+	BULOG_NUM=1
+	if [ "_$1_" != "__" ]; then
+		case "$1" in
+			-*:*) BULOG_NUM=$(echo $1|awk -F\: '{print $2}');;
+			*) if [ -f $1 ]; then BULOG_DIR=$1; fi;;
+		esac
+		if [ "_$2_" != "__" ]; then
+			case "$2" in
+				-*:*) BULOG_NUM=$(echo $2|awk -F\: '{print $2}');;
+				*) if [ -f $2 ]; then BULOG_DIR=$2; fi;;
+			esac
+		fi
 	fi
 	if [ -f $BULOG_DIR/backup.log ]; then
-		KRN_2ND_LATEST_LINE=$(tail -n 2 $BULOG_DIR/backup.log|head -n 1)
+		KRN_2ND_LATEST_LINE=$(tail -n $BULOG_NUM $BULOG_DIR/backup.log|head -n 1)
 		echo $KRN_2ND_LATEST_LINE
 	else
 		virhe $BULOG_DIR/backup.log "doesn't exist."
@@ -66,6 +75,8 @@ if [ "_$1_" != "__" ]; then
 	BULOG_NUM=1
 	case $1 in
 		-*) case $1 in
+				-1*) BULOG_FUNCTION="bulog_2nd_latest"; BULOG_NUM=1;;
+				-2*) BULOG_FUNCTION="bulog_2nd_latest"; BULOG_NUM=2;;
 				-a*) BULOG_FUNCTION="bulog-add";;
 				-t*) BULOG_FUNCTION="bulog-today";;
 				*) BULOG_FUNCTION="bulog-latest"; case $1 in
@@ -79,6 +90,7 @@ else
 	if [ -f "backup.log" ]; then BULOG_FUNCTION="bulog-latest"; BULOG_FILE="."; fi
 fi
 case $BULOG_FUNCTION in
+	bulog_2nd_latest) bulog_2nd_latest -n:$BULOG_NUM $BULOG_FILE;;
 	bulog-add) echo bulog-add $BULOG_FILE;;
 	#bulog-latest) echo latest -n:$BULOG_NUM $BULOG_FILE;;
 	bulog-latest) latest $BULOG_FILE;;
