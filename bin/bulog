@@ -37,7 +37,8 @@ bulog_2nd_latest() {
 		KRN_2ND_LATEST_LINE=$(tail -n $BULOG_NUM $BULOG_DIR/backup.log|head -n 1)
 		echo $KRN_2ND_LATEST_LINE
 	else
-		virhe $BULOG_DIR/backup.log "doesn't exist."
+		touch $BULOG_DIR/backup.log
+		if [ -f $BULOG_DIR/backup.log ]; then KR_NEW_BACKUP=$(date +"%F %R"); else virhe $BULOG_DIR/backup.log "doesn't exist."; fi
 	fi
 }
 
