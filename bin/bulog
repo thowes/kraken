@@ -1,24 +1,8 @@
 #!/bin/bash
 # bulog.sh: functions to manage backup log files.
 
-# returns the last row of the backup log file.
+# returns the n:th last row of the backup log file.
 bulog-latest() {
-	if [ -f $1/backup.log ]; then
-		KR_LATEST_BACKUP_LINE=$(tail -n 1 $1/backup.log)
-		echo $KR_LATEST_BACKUP_LINE
-	else
-		touch $1/backup.log
-		if [ -f $1/backup.log ]; then
-			KR_NEW_BACKUP=$(date +"%F %R")
-			echo $KR_NEW_BACKUP $2 ver $3 > $1/backup.log
-		else
-			virhe $1/backup.log cannot exist.
-		fi
-	fi
-}
-
-# returns the 2nd last row of the backup log file.
-bulog_2nd_latest() {
 	BULOG_DIR=$(pwd)
 	BULOG_NUM=1
 	if [ "_$1_" != "__" ]; then
@@ -91,7 +75,7 @@ else
 	if [ -f "backup.log" ]; then BULOG_FUNCTION="bulog-latest"; BULOG_FILE="."; fi
 fi
 case $BULOG_FUNCTION in
-	bulog_2nd_latest) bulog_2nd_latest -n:$BULOG_NUM $BULOG_FILE;;
+	bulog_2nd_latest) bulog-latest -n:$BULOG_NUM $BULOG_FILE;;
 	bulog-add) echo bulog-add $BULOG_FILE;;
 	#bulog-latest) echo latest -n:$BULOG_NUM $BULOG_FILE;;
 	bulog-latest) latest $BULOG_FILE;;
