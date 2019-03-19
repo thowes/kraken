@@ -1,10 +1,9 @@
 #!/bin/bash
-# bulog.sh: functions to manage backup log files.
+# bulog: functions to manage backup.log files.
 
-# returns the n:th last row of the backup log file.
+# returns the n:th last row of the backup.log file.
 bulog-latest() {
-	BULOG_DIR=$(pwd)
-	BULOG_NUM=1
+	BULOG_DIR=$(pwd); BULOG_NUM=1
 	if [ "_$1_" != "__" ]; then
 		case "$1" in
 			-*:*) BULOG_NUM=$(echo $1|awk -F\: '{print $2}');;
@@ -26,9 +25,8 @@ bulog-latest() {
 	fi
 }
 
-# adds a line to the backup log file.
+# adds a line to the backup.log file.
 bulog_add() {
-	#debug BULOG add $1 $2 $3
 	if [ -f $1/backup.log ]; then
 		# make a note in the log of new backup
 		KR_NEW_BACKUP=$(date +"%F %R")
@@ -46,14 +44,9 @@ bulog_add() {
 
 bulog-today() {
 	# Getting the last row of backup.log and splitting it to retrieve the part of the string for latest backup date.
-	BU_LATEST_DATE=$(latest $1|awk '{print $1}')
-	BU_TODAY_DATE=$(date +"%F")
+	BU_LATEST_DATE=$(bulog -1 $1|awk '{print $1}'); BU_TODAY_DATE=$(date +"%F")
 	# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
-	if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
-		echo "true"
-	else
-		echo "false"
-	fi
+	if [ $BU_LATEST_DATE == $BU_TODAY_DATE ]; then echo "true"; else echo "false"; fi
 }
 
 if [ "_$1_" != "__" ]; then
@@ -63,7 +56,7 @@ if [ "_$1_" != "__" ]; then
 				-1*) BULOG_FUNCTION="latest"; BULOG_NUM=1;;
 				-2*) BULOG_FUNCTION="latest"; BULOG_NUM=2;;
 				-a*) BULOG_FUNCTION="add";;
-				-t*) BULOG_FUNCTION="bulog-today";;
+				-t*) BULOG_FUNCTION="today";;
 				*) BULOG_FUNCTION="bulog-latest"; case $1 in
 					*:*) BULOG_NUM=$(echo $1|awk -F\: '{print $2}');;
 				esac;;
@@ -75,9 +68,9 @@ else
 	if [ -f "backup.log" ]; then BULOG_FUNCTION="bulog-latest"; BULOG_FILE="."; fi
 fi
 case $BULOG_FUNCTION in
-	add) bulog_add $BULOG_FILE;;
+	add) bulog_add $BULOG_FILE $2 $3;;
 	#bulog-latest) echo latest -n:$BULOG_NUM $BULOG_FILE;;
 	bulog-latest) latest $BULOG_FILE;;
-	bulog-today) echo bulog-today $BULOG_FILE;;
 	latest) bulog-latest -n:$BULOG_NUM $BULOG_FILE;;
+	today) bulog-today $BULOG_FILE;;
 esac
