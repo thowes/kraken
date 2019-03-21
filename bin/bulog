@@ -68,7 +68,7 @@ else
 	if [ -f "backup.log" ]; then BULOG_FUNCTION="bulog-latest"; BULOG_FILE="."; fi
 fi
 case $BULOG_FUNCTION in
-	add) bulog_add $BULOG_FILE $2 $3;;
+	add) bulog_add $BULOG_FILE $3 $4;;
 	#bulog-latest) echo latest -n:$BULOG_NUM $BULOG_FILE;;
 	bulog-latest) latest $BULOG_FILE;;
 	latest) bulog-latest -n:$BULOG_NUM $BULOG_FILE;;
