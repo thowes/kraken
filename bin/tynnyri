@@ -1,16 +1,3 @@
 #!/bin/bash
 
-# adds a line to the backup log file.
-if [ -f $1/backup.log ]; then
-	# make a note in the log of new backup
-	KR_NEW_BACKUP=$(date +"%F %R")
-	echo $KR_NEW_BACKUP $2 ver $3 >> $1/backup.log
-else
-	touch $1/backup.log
-	if [ -f $1/backup.log ]; then
-		KR_NEW_BACKUP=$(date +"%F %R")
-		echo $KR_NEW_BACKUP $2 new $3 > $1/backup.log
-	else
-		virhe $1/backup.log is not a valid file.
-	fi
-fi
+
