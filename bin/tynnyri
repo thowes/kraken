@@ -2,7 +2,7 @@
 case $1 in
 	-*)
 		KR_DIR_TEMP=$(asetus dir:temp)
-		TYNNYRI_TTY=$(verkko tty); echo TYN: $1 $2 $TYNNYRI_TTY
+		TYNNYRI_TTY=$(verkko tty)
 		case $1 in
 			*0*) tynnyri -l; tynnyri -n $2;;
 			*a*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY ]; then echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY; else tynnyri -n $2; fi;;
