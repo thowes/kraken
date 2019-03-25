@@ -5,18 +5,18 @@ case $1 in
 		TYNNYRI_TTY=$(verkko tty)
 		case $1 in
 			*0*) tynnyri -l; tynnyri -n $2;;
-			*a*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY ]; then echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY; else tynnyri -n $2; fi;;
-			*k*) cat $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY; tynnyri -0;;
-			*l*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY ]; then rm $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY; fi;;
-			*n)
+			*a*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; else tynnyri -n $2; fi;;
+			*k*) cat $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; tynnyri -0;;
+			*l*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then rm $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; fi;;
+			*n) kaiku TYN11 $1 $2 $KR_DIR_TEMP
 					if [ -d $KR_DIR_TEMP/tynnyri/ ]; then
-						if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY ]; then echo $2 > $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY; fi
+						if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then echo $2 > $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; fi
 					else
 						cd $KR_DIR_TEMP/
 						mkdir tynnyri 
 					fi;;
-			*p*) cat $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY;;
-			*u*|*d*) echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY; tynnyri -k;;
+			*p*) cat $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri;;
+			*u*|*d*) echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; tynnyri -k;;
 		esac;;
 	a|add) tynnyri -a $2;;
 	d) tynnyri -u $2;;
