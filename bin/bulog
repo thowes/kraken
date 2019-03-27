@@ -2,7 +2,7 @@
 # bulog: functions to manage backup.log files.
 
 # adds a line to the backup.log file.
-bulog_add() {
+bulog-add() {
 	if [ -f $1/backup.log ]; then
 		# make a note in the log of new backup
 		KR_NEW_BACKUP=$(date +"%F %R")
@@ -68,7 +68,7 @@ else
 	if [ -f "backup.log" ]; then BULOG_FUNCTION="bulog-latest"; BULOG_FILE="."; fi
 fi
 case $BULOG_FUNCTION in
-	add) bulog_add $BULOG_FILE $3 $4;;
+	add) bulog-add $BULOG_FILE $3 $4;;
 	#bulog-latest) echo latest -n:$BULOG_NUM $BULOG_FILE;;
 	bulog-latest) latest $BULOG_FILE;;
 	latest) bulog-latest -n:$BULOG_NUM $BULOG_FILE;;
