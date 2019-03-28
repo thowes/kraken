@@ -8,12 +8,12 @@ case $1 in
 			*a*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; else tynnyri -n $2; fi;;
 			*k*) cat $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; tynnyri -0;;
 			*l*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then rm $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; fi;;
-			*n) kaiku TYN11 $1 $2 $KR_DIR_TEMP
+			*n)
 					if [ -d $KR_DIR_TEMP/tynnyri/ ]; then
-						if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then echo $2 > $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; fi
+						echo $2 > $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri
 					else
-						cd $KR_DIR_TEMP/
-						mkdir tynnyri 
+						cd $KR_DIR_TEMP/; pwd; mkdir tynnyri
+						echo $2 > $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri
 					fi;;
 			*p*) cat $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri;;
 			*u*|*d*) echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; tynnyri -k;;
