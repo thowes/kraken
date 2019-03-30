@@ -6,7 +6,7 @@ case $1 in
 		case $1 in
 			*0*) tynnyri -l; tynnyri -n $2;;
 			*a*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; else tynnyri -n $2; fi;;
-			*k*) cat $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; tynnyri -0;;
+			*k*) tynnyri -p; tynnyri -l;;
 			*l*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then rm $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; fi;;
 			*n)
 					if [ -d $KR_DIR_TEMP/tynnyri/ ]; then
@@ -15,7 +15,7 @@ case $1 in
 						cd $KR_DIR_TEMP/; pwd; mkdir tynnyri
 						echo $2 > $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri
 					fi;;
-			*p*) cat $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri;;
+			*p*) echo $(cat $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri|tr "\n" ",");;
 			*u*|*d*) echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; tynnyri -k;;
 		esac;;
 	a|add) tynnyri -a $2;;
