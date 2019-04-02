@@ -6,16 +6,16 @@ if [ -d $1 ] && [ $2 != "" ]; then
 	KR_DIR_INCL=$(asetus dir:incl)
 	KR_DIR_TEMP=$(asetus dir:temp)
 	KR_RECIPIENT=$(asetus str:recipient)
-		# Delete and rename old backups, if they exist.
-		if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old ]; then \rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old; fi
-		BU_LATEST_MD5="nada"; BU_TODAY_MD5=md5
-		if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
+	# Delete and rename old backups, if they exist.
+	if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old ]; then \rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old; fi
+	BU_LATEST_MD5="nada"; BU_TODAY_MD5=md5
+	if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
 			case $(uname) in
 				Darwin) BU_LATEST_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
 				*) BU_LATEST_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 			esac
 			\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old
-		fi
+	fi
 		# Getting the last row of backup.log
 		BU_LATEST_LOGLINE=$(latest $1)
 		# Splitting BU_LATEST_LOGLINE the retrieve the parts of the string for md5 sum and latest backup date.
@@ -52,6 +52,7 @@ if [ -d $1 ] && [ $2 != "" ]; then
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg ]; then tynnyri $2
 				# Update the backup.log file and copy it to the backup.logs directory.
 				bulog -a $1 $2 $BU_TODAY_MD5
+		KR_DIR_LOGS=$(asetus dir:logs)
 				\cp $1/backup.log $KR_DIR_LOGS/$2.log
 				\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.cbc
 			fi
@@ -60,5 +61,5 @@ if [ -d $1 ] && [ $2 != "" ]; then
 		fi
 else
 	virhe "Arguments" $1 $2 "not valid!"
-#fi
+fi
 #}
