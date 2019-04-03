@@ -10,20 +10,20 @@ if [ -d $1 ] && [ $2 != "" ]; then
 	if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old ]; then \rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old; fi
 	BU_LATEST_MD5="nada"; BU_TODAY_MD5=md5
 	if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
-			case $(uname) in
-				Darwin) BU_LATEST_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
-				*) BU_LATEST_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
-			esac
-			\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old
+		case $(uname) in
+			Darwin) BU_LATEST_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
+			*) BU_LATEST_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
+		esac
+		\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old
 	fi
-		# Getting the last row of backup.log
-		BU_LATEST_LOGLINE=$(latest $1)
-		# Splitting BU_LATEST_LOGLINE the retrieve the parts of the string for md5 sum and latest backup date.
-		BU_LATEST_DATE=$(echo $BU_LATEST_LOGLINE|awk '{print $1}')
-		if [ $BU_LATEST_MD5 == "nada" ]; then BU_LATEST_MD5=$(echo $BU_LATEST_LOGLINE|awk '{print $5}'); fi
-		BU_TODAY_DATE=$(date +"%F")
-		# Compare the date in latest line of backup.log, if not today, then continue.
-		if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
+	# Getting the last row of backup.log
+	BU_LATEST_LOGLINE=$(latest $1)
+	# Splitting BU_LATEST_LOGLINE the retrieve the parts of the string for md5 sum and latest backup date.
+	BU_LATEST_DATE=$(echo $BU_LATEST_LOGLINE|awk '{print $1}')
+	if [ $BU_LATEST_MD5 == "nada" ]; then BU_LATEST_MD5=$(echo $BU_LATEST_LOGLINE|awk '{print $5}'); fi
+	BU_TODAY_DATE=$(date +"%F")
+	# Compare the date in latest line of backup.log, if not today, then continue.
+	if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
 			debug "kop.sh:22c" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
 			# Creating new zip from the directory without backup.log file
 			if [ -f $KR_DIR_INCL/$2.lst ]; then
@@ -56,9 +56,9 @@ if [ -d $1 ] && [ $2 != "" ]; then
 				\cp $1/backup.log $KR_DIR_LOGS/$2.log
 				\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.cbc
 			fi
-		else
-			debug "kop.sh:54nc" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
-		fi
+	else
+		debug "kop.sh:54nc" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
+	fi
 else
 	virhe "Arguments" $1 $2 "not valid!"
 fi
