@@ -18,7 +18,7 @@ synkronoi() {
 						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
 						if [ -d $KR_SYNK_LDIR ]; then
 							# Getting the last row of backup.log and splitting it to retrieve the part of the string for latest backup date.
-							BU_LATEST_DATE=$(bulog -1 $KR_SYNK_LDIR|awk '{print $1}'); BU_TODAY_DATE=$(date +"%F")
+							BU_LATEST_DATE=$(latest $KR_SYNK_LDIR|awk '{print $1}'); BU_TODAY_DATE=$(date +"%F")
 							# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
 							if [ "$BU_LATEST_DATE" != "$BU_TODAY_DATE" ]; then
 								kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
@@ -57,7 +57,7 @@ synkronoi() {
 						KR_SYNK_RDIR=$(echo $KR_SYNK_LINE|awk -F\; '{print $6}')
 						if [ -d $KR_SYNK_LDIR ]; then
 							# Getting the last row of backup.log and splitting it to retrieve the part of the string for latest backup date.
-							BU_LATEST_DATE=$(bulog -1 $KR_SYNK_LDIR|awk '{print $1}'); BU_TODAY_DATE=$(date +"%F")
+							BU_LATEST_DATE=$(latest $KR_SYNK_LDIR|awk '{print $1}'); BU_TODAY_DATE=$(date +"%F")
 							# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
 							if [ "$BU_LATEST_DATE" != "$BU_TODAY_DATE" ]; then
 								kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
