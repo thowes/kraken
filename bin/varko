@@ -2,8 +2,6 @@
 #varko() {
 if [ -d $1 ] && [ $2 != "" ]; then
 	if [ "_$KR_DIR_BUC" == "_" ]; then KR_DIR_BUC=$(asetus dir:buc); fi
-	KR_DIR_EXCL=$(asetus dir:excl)
-	KR_DIR_INCL=$(asetus dir:incl)
 	KR_DIR_TEMP=$(asetus dir:temp)
 	KR_RECIPIENT=$(asetus str:recipient)
 	# Delete and rename old backups, if they exist.
@@ -24,13 +22,19 @@ if [ -d $1 ] && [ $2 != "" ]; then
 	BU_TODAY_DATE=$(date +"%F")
 	# Compare the date in latest line of backup.log, if not today, then continue.
 	if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
-			debug "kop.sh:22c" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
-			# Creating new zip from the directory without backup.log file
+		debug "kop.sh:22c" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
+		KR_DIR_EXCL=$(asetus dir:excl)
+		# Creating new zip from the directory without backup.log file
+		if [ -f $KR_DIR_EXCL/$2.lst ]; then
+			zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/$2.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+		else
+			KR_DIR_INCL=$(asetus dir:incl)
 			if [ -f $KR_DIR_INCL/$2.lst ]; then
 				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -i@$KR_DIR_INCL/$2.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			else
 				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			fi
+		fi
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
 				case $(uname) in
 					Darwin) BU_TODAY_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
