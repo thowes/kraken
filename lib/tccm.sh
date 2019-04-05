@@ -1,5 +1,4 @@
 #!/bin/bash
-
 tccm() {
 	debug TTCM $1 $2 $3
 	KR_TC_NAME=$(echo $3|awk -F "." '{print $1}')
@@ -24,19 +23,19 @@ tccm() {
 	else
 		case $1 in
 			ro) case $KAYTTIS in
-				cygwin) tc /l$2 /q /s /m ro /v $3 /p $KRN_PASSU /k $4;;
+				cygwin) tc /l$2 /q /s /m ro /m rm /v $3 /p $KRN_PASSU /k $4;;
 				*) tc -m ro $3 -p $KRN_PASSU -k $4 $KRN_TC_DIR/$2;;
 			esac;;
 			rw) case $KAYTTIS in
-				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KRN_PASSU /k $4;;
+				cygwin) tc /l$2 /q /s /m ts /m rm /v $3 /p $KRN_PASSU /k $4;;
 				*) tc -m ts $3 -p $KRN_PASSU -k $4 $KRN_TC_DIR/$2;;
 			esac;;
 			vo) case $KAYTTIS in
-				cygwin) tc /l$2 /q /s /m ro /v $3 /p $KRN_PASSU;;
+				cygwin) tc /l$2 /q /s /m ro /m rm /v $3 /p $KRN_PASSU;;
 				*) tc -m ro $3 -p $KRN_PASSU $KRN_TC_DIR/$2;;
 			esac;;
 			vw) case $KAYTTIS in
-				cygwin) tc /l$2 /q /s /m ts /v $3 /p $KRN_PASSU;;
+				cygwin) tc /l$2 /q /s /m ts /m rm /v $3 /p $KRN_PASSU;;
 				*) tc -m ts $3 -p $KRN_PASSU $KRN_TC_DIR/$2;;
 			esac;;
 			*) virhe "TCCM command" $1 "not recognized.";;
