@@ -3,7 +3,6 @@
 if [ -d $1 ] && [ $2 != "" ]; then
 	if [ "_$KR_DIR_BUC" == "_" ]; then KR_DIR_BUC=$(asetus dir:buc); fi
 	KR_DIR_TEMP=$(asetus dir:temp)
-	KR_RECIPIENT=$(asetus str:recipient)
 	# Delete and rename old backups, if they exist.
 	if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old ]; then \rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old; fi
 	BU_LATEST_MD5="nada"; BU_TODAY_MD5=md5
@@ -22,10 +21,10 @@ if [ -d $1 ] && [ $2 != "" ]; then
 	BU_TODAY_DATE=$(date +"%F")
 	# Compare the date in latest line of backup.log, if not today, then continue.
 	if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
-		debug "kop.sh:22c" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
 		KR_DIR_EXCL=$(asetus dir:excl)
 		# Creating new zip from the directory without backup.log file
 		if [ -f $KR_DIR_EXCL/$2.lst ]; then
+			#kaiku "vk27 $2" "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE" $KR_DIR_EXCL/$2.lst
 			zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/$2.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 		else
 			KR_DIR_INCL=$(asetus dir:incl)
@@ -35,21 +34,22 @@ if [ -d $1 ] && [ $2 != "" ]; then
 				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			fi
 		fi
-			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
+		if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
 				case $(uname) in
 					Darwin) BU_TODAY_MD5=$(md5 $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $4}');;
 					*) BU_TODAY_MD5=$(md5sum $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip|awk '{print $1}');;
 				esac
+		fi
+		# Checking if md5 sum is the same between the latest backup in backup.log and current backup. If not, continue.
+		if [ "$BU_LATEST_MD5" != "$BU_TODAY_MD5" ]; then
+			# Create new encrypted file from the created zip file.
+			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
+				debug "$BU_LATEST_MD5" "v" "$BU_TODAY_MD5"
+				KR_RECIPIENT=$(asetus str:recipient)
+				gpg --encrypt -r $KR_RECIPIENT $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip
 			fi
-			# Checking if md5 sum is the same between the latest backup in backup.log and current backup. If not, continue.
-			if [ "$BU_LATEST_MD5" != "$BU_TODAY_MD5" ]; then
-				# Create new encrypted file from the created zip file.
-				if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
-					debug "$BU_LATEST_MD5" "v" "$BU_TODAY_MD5"
-					gpg --encrypt -r $KR_RECIPIENT $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip
-				fi
-			else debug "kop.sh:42nc" $2 "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
-			fi
+		else debug "kop.sh:42nc" $2 "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
+		fi
 			# Removing the created zip file.
 			if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then \rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip; fi
 			# Moving the created gpg file to the backup directory.
