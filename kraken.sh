@@ -11,9 +11,6 @@ if [ -f $2 ]; then
 	. $2
 	CONTEXT=$1"_"$USECONTEXT
 
-	#FUNCTIONS
-	if [ -f $KR_DIR_LIB/kaiku.sh ]; then . $KR_DIR_LIB/kaiku.sh; fi
-
 	# MODULES, FILE MANAGEMENT & BACKUP FUNCTIONS
 	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FLM /w"; fi
 	if [ -f $KR_DIR_LIB/vers.sh ]; then . $KR_DIR_LIB/vers.sh; fi
