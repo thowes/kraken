@@ -1,5 +1,4 @@
 #!/bin/bash
-#varko() {
 if [ -d $1 ] && [ $2 != "" ]; then
 	KR_DIR_TEMP=$(asetus dir:temp)
 	# Delete and rename old backups, if they exist.
@@ -66,4 +65,3 @@ if [ -d $1 ] && [ $2 != "" ]; then
 else
 	virhe "Arguments" $1 $2 "not valid!"
 fi
-#}
