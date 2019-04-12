@@ -20,21 +20,21 @@ bulog-add() {
 
 # returns the n:th last row of the backup.log file.
 bulog-latest() {
-	BULOG_DIR=$(pwd); BULOG_NUM=1
+	BULOG_FILE=$(pwd)/backup.log; BULOG_NUM=1
 	if [ "_$1_" != "__" ]; then
 		case "$1" in
 			-*:*) BULOG_NUM=$(echo $1|awk -F\: '{print $2}');;
-			*) if [ -f $1 ]; then BULOG_DIR=$1; fi;;
+			*) if [ -f $1 ]; then BULOG_FILE=$1; fi;;
 		esac
 		if [ "_$2_" != "__" ]; then
 			case "$2" in
 				-*:*) BULOG_NUM=$(echo $2|awk -F\: '{print $2}');;
-				*) if [ -f $2 ]; then BULOG_DIR=$2; fi;;
+				*) if [ -f $2 ]; then BULOG_FILE=$2; fi;;
 			esac
 		fi
 	fi
-	if [ -f $BULOG_DIR/backup.log ]; then
-		KRN_2ND_LATEST_LINE=$(tail -n $BULOG_NUM $BULOG_DIR/backup.log|head -n 1)
+	if [ -f $BULOG_FILE ]; then
+		KRN_2ND_LATEST_LINE=$(tail -n $BULOG_NUM $BULOG_FILE|head -n 1)
 		echo $KRN_2ND_LATEST_LINE
 	else
 		echo "0000-00-00 00:00" nada new d41d8cd98f00b204e9800998ecf8427e
