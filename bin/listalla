@@ -1,0 +1,17 @@
+#!/bin/sh
+
+LISTA_VIRHE=false
+if [ "_$1_" != "__" ]; then
+	LISTA_ITEM=$1
+else
+	LISTA_VIRHE=true
+fi
+if [ "$_(echo $LISTA)_" == "__" ]; then if [ -f levy.lst ]; then $LISTA = $(pwd)/levy.lst; else LISTA_VIRHE=true; fi; fi
+if [ $LISTA_VIRHE == false ]; then
+	LISTA_SUMMA="d41d8cd98f00b204e9800998ecf8427e,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+	if [ -f "$LISTA_ITEM" ]; then LISTA_SUMMA=$(summa "$LISTA_ITEM"); fi
+	kaiku LISTA: $LISTA
+	if [ -f $LISTA ]; then cat $LISTA | \grep $LISTA_SUMMA; fi
+else
+	virhe LISTA: $LISTA_VIRHE
+fi
