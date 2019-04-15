@@ -1,5 +1,6 @@
 #!/bin/sh
 
+if [ "_$1_" != "" ]; then
 case $1 in
 	-*)
 		case $1 in
@@ -15,15 +16,23 @@ case $1 in
 			*u) KANTA_FUNCTION=update;;
 			*x) KANTA_FUNCTION=status; KANTA_PARAM=INDEX;;
 		esac;;
-	*) echo kanta $1 $2 $3 $4;;
+	*) KANTA_FUNCTION=search; KANTA_SEARCH=$1;;
 esac
+	if [ "_$2_" != "" ]; then
+		case $2 in
+			*) KANTA_SEARCH=$2;;
+		esac
+	fi
+else
+	KANTA_FUNCTION=status
+fi
 
 if [ "_$(echo $DB)_" != "__" ]; then
 	case $KANTA_FUNCTION in
 		add) echo sqlite $DB insert $2 $3;;
 		generate) echo sqlite $DB create table;;
-		remove) echo sqlite $DB delete "(where)";;
-		search) echo sqlite $DB search "(where)";;
+		remove) echo sqlite $DB delete "(where $KANTA_SEARCH)";;
+		search) echo sqlite $DB select FROM "(where $KANTA_SEARCH)";;
 		status) if [ "_$(echo $KANTA_PARAM)_" != "__" ]; then sqlite3 $DB .schema|grep $KANTA_PARAM; else sqlite3 $DB .schema; fi;;
 		update) echo sqlite $DB edit;;
 	esac
