@@ -1,5 +1,12 @@
 #!/bin/sh
 
+kanta_param() {
+	case $1 in
+		-*) echo $1;;
+		*) KANTA_SEARCH=$1;;
+	esac
+}
+
 if [ "_$1_" != "" ]; then
 case $1 in
 	-*)
