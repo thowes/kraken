@@ -25,11 +25,7 @@ case $1 in
 		esac;;
 	*) KANTA_FUNCTION=search; KANTA_SEARCH=$1;;
 esac
-	if [ "_$2_" != "" ]; then
-		case $2 in
-			*) KANTA_SEARCH=$2;;
-		esac
-	fi
+	if [ "_$2_" != "" ]; then kanta_param $2; fi
 else
 	KANTA_FUNCTION=status
 fi
