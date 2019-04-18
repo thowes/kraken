@@ -7,7 +7,7 @@ kanta_param() {
 	esac
 }
 
-if [ "_$1_" != "" ]; then
+if [ "_$1_" != "__" ]; then
 case $1 in
 	-*)
 		case $1 in
