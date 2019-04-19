@@ -2,14 +2,7 @@
 
 kanta_param() {
 	case $1 in
-		-*) echo $1;;
-		*) KANTA_SEARCH=$1;;
-	esac
-}
-
-if [ "_$1_" != "__" ]; then
-case $1 in
-	-*)
+		-*)
 		case $1 in
 			*a) KANTA_FUNCTION=add;;
 			*db:*) KANTA_FUNCTION=update;; #DB=?
@@ -24,8 +17,12 @@ case $1 in
 			*x) KANTA_FUNCTION=status; KANTA_PARAM=INDEX;;
 		esac;;
 	*) KANTA_FUNCTION=search; KANTA_SEARCH=$1;;
-esac
-	if [ "_$2_" != "" ]; then kanta_param $2; fi
+	esac
+}
+
+if [ "_$1_" != "__" ]; then
+	kanta_param $1
+	if [ "_$2_" != "__" ]; then kanta_param $2; fi
 else
 	KANTA_FUNCTION=status
 fi
@@ -34,7 +31,7 @@ if [ "_$(echo $DB)_" != "__" ]; then
 	case $KANTA_FUNCTION in
 		add) echo sqlite $DB insert $2 $3;;
 		generate) echo sqlite $DB create table;;
-		remove) echo sqlite $DB delete "(where $KANTA_SEARCH)";;
+		remove) echo sqlite $DB delete "(where $KANTA_REMOVE)";;
 		search) echo sqlite $DB select FROM "(where $KANTA_SEARCH)";;
 		status) if [ "_$(echo $KANTA_PARAM)_" != "__" ]; then sqlite3 $DB .schema|grep $KANTA_PARAM; else sqlite3 $DB .schema; fi;;
 		update) echo sqlite $DB edit;;
