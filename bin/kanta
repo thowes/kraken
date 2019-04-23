@@ -33,7 +33,7 @@ if [ "_$(echo $DB)_" != "__" ]; then
 		add) echo sqlite $DB insert $2 $3;;
 		generate) echo sqlite $DB create table;;
 		remove) echo sqlite $DB delete "(where $KANTA_REMOVE)";;
-		search) echo sqlite3 "$DB select * FROM $KANTA_TABLE;";; #| grep $KANTA_SEARCH;;
+		search) sqlite3 $DB "select * FROM $KANTA_TABLE;";; #| grep $KANTA_SEARCH;;
 		status) if [ "_$(echo $KANTA_PARAM)_" != "__" ]; then sqlite3 $DB .schema|grep $KANTA_PARAM; else sqlite3 $DB .schema; fi;;
 		update) echo sqlite $DB edit;;
 	esac
