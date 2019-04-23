@@ -4,8 +4,9 @@ kanta_param() {
 	case $1 in
 		-*)
 			case $1 in
-			*a) KANTA_FUNCTION=add;;
-				*db:*) KANTA_FUNCTION=update; DB=$(echo $1|awk -F\: '{print $2}');;
+				*a) KANTA_FUNCTION=add;;
+				*c*:*) CFG=$(echo $1|awk -F\: '{print $2}');;
+				*db:*) DB=$(echo $1|awk -F\: '{print $2}');;
 			*del:*) KANTA_FUNCTION=remove;;
 			*f:*) KANTA_FUNCTION=search;;
 			*g) KANTA_FUNCTION=generate;;
