@@ -23,7 +23,10 @@ kanta_param() {
 
 if [ "_$1_" != "__" ]; then
 	kanta_param $1
-	if [ "_$2_" != "__" ]; then kanta_param $2; fi
+	if [ "_$2_" != "__" ]; then
+		kanta_param $2
+		if [ "_$3_" != "__" ]; then kanta_param $3; fi
+	fi
 else
 	KANTA_FUNCTION=status
 fi
@@ -33,7 +36,7 @@ if [ "_$(echo $DB)_" != "__" ]; then
 		add) echo sqlite $DB insert $2 $3;;
 		generate) echo sqlite $DB create table;;
 		remove) echo sqlite $DB delete "(where $KANTA_REMOVE)";;
-		search) sqlite3 $DB "select * FROM $KANTA_TABLE;";; #| grep $KANTA_SEARCH;;
+		search) if [ "_$(echo $KANTA_SEARCH)_" != "__" ]; then sqlite3 $DB "select * FROM $KANTA_TABLE;" | grep $KANTA_SEARCH; else sqlite3 $DB "select * FROM $KANTA_TABLE;"; fi;;
 		status) if [ "_$(echo $KANTA_PARAM)_" != "__" ]; then sqlite3 $DB .schema|grep $KANTA_PARAM; else sqlite3 $DB .schema; fi;;
 		update) echo sqlite $DB edit;;
 	esac
