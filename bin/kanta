@@ -7,16 +7,16 @@ kanta_param() {
 				*a) KANTA_FUNCTION=add;;
 				*c*:*) CFG=$(echo $1|awk -F\: '{print $2}');;
 				*db:*) DB=$(echo $1|awk -F\: '{print $2}');;
-			*del:*) KANTA_FUNCTION=remove;;
-			*f:*) KANTA_FUNCTION=search;;
-			*g) KANTA_FUNCTION=generate;;
-			*i) KANTA_FUNCTION=add;;
+				*del:*) KANTA_FUNCTION=remove;;
+				*f:*) KANTA_FUNCTION=search;;
+				*g) KANTA_FUNCTION=generate;;
+				*i) KANTA_FUNCTION=add;;
 				*l:*) KANTA_FUNCTION=search; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
 				*s:*) KANTA_FUNCTION=search; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
-			*st) KANTA_FUNCTION=status;;
-			*t) KANTA_FUNCTION=status; KANTA_PARAM=TABLE;;
-			*u) KANTA_FUNCTION=update;;
-			*x) KANTA_FUNCTION=status; KANTA_PARAM=INDEX;;
+				*st) KANTA_FUNCTION=status;;
+				*t) KANTA_FUNCTION=status; KANTA_PARAM=TABLE;;
+				*u) KANTA_FUNCTION=update;;
+				*x) KANTA_FUNCTION=status; KANTA_PARAM=INDEX;;
 			esac;;
 		*) KANTA_FUNCTION=search; KANTA_SEARCH=$1;;
 	esac
