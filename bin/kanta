@@ -14,9 +14,9 @@ kanta_param() {
 				*n:*) KANTA_FUNCTION=count; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
 				*s:*) KANTA_FUNCTION=search; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
 				*st) KANTA_FUNCTION=status;;
-				*t) KANTA_FUNCTION=status; KANTA_PARAM=TABLE;;
+				*t) KANTA_FUNCTION=status; KANTA_FILTER=TABLE;;
 				*u) KANTA_FUNCTION=update;;
-				*x) KANTA_FUNCTION=status; KANTA_PARAM=INDEX;;
+				*x) KANTA_FUNCTION=status; KANTA_FILTER=INDEX;;
 			esac;;
 		*) KANTA_SEARCH=$1;;
 	esac
@@ -24,10 +24,10 @@ kanta_param() {
 
 if [ "_$1_" != "__" ]; then
 	KANTA_FUNCTION=search
-	KANTA_INPUT=$(echo $1|tr ";" " "); kanta_param "$KANTA_INPUT"
+	kanta_param "$1"
 	if [ "_$2_" != "__" ]; then
-		KANTA_INPUT=$(echo $2|tr ";" " "); kanta_param "$KANTA_INPUT"
-		if [ "_$3_" != "__" ]; then KANTA_INPUT=$(echo $1|tr ";" " "); kanta_param "$KANTA_INPUT"; fi
+		kanta_param "$2"
+		if [ "_$3_" != "__" ]; then kanta_param "$3"; fi
 	fi
 else
 	KANTA_FUNCTION=status
@@ -37,10 +37,10 @@ if [ "_$(echo $DB)_" != "__" ]; then
 	case $KANTA_FUNCTION in
 		add) echo sqlite $DB insert $2 $3;;
 		count) sqlite3 $DB "SELECT Count(*) FROM $KANTA_TABLE;";;
-		generate) echo sqlite3 $DB "CREATE $KANTA_TABLE ($KANTA_SEARCH);";;
+		generate) sqlite3 $DB "CREATE TABLE $KANTA_TABLE ($KANTA_SEARCH);";;
 		remove) echo sqlite $DB delete "(where $KANTA_REMOVE)";;
 		search) if [ "_$(echo $KANTA_SEARCH)_" != "__" ]; then sqlite3 $DB "SELECT * FROM $KANTA_TABLE;" | grep $KANTA_SEARCH; else sqlite3 $DB "SELECT * FROM $KANTA_TABLE;"; fi;;
-		status) if [ "_$(echo $KANTA_PARAM)_" != "__" ]; then sqlite3 $DB .schema|grep $KANTA_PARAM; else sqlite3 $DB .schema; fi;;
+		status) if [ "_$(echo $KANTA_FILTER)_" != "__" ]; then sqlite3 $DB .schema|grep $KANTA_FILTER; else sqlite3 $DB .schema; fi;;
 		update) echo sqlite $DB edit;;
 	esac
 else
