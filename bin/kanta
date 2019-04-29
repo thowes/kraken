@@ -1,6 +1,6 @@
 #!/bin/sh
 
-kanta_param() {
+kanta_params() {
 	case $1 in
 		-*) case $1 in
 				*a:*) KANTA_FUNCTION=add; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
@@ -25,10 +25,10 @@ kanta_param() {
 
 if [ "_$1_" != "__" ]; then
 	KANTA_FUNCTION=search
-	kanta_param "$1"
+	kanta_params "$(echo $1|tr ";" ":")"
 	if [ "_$2_" != "__" ]; then
-		kanta_param "$2"
-		if [ "_$3_" != "__" ]; then kanta_param "$3"; fi
+		kanta_params "$(echo $2|tr ";" " ")"
+		if [ "_$3_" != "__" ]; then kanta_params "$(echo $3|tr ";" " ")"; fi
 	fi
 else
 	KANTA_FUNCTION=status
