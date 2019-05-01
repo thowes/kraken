@@ -24,25 +24,25 @@ else
 fi
 
 case $ASETUKSET_REQUEST in
-	bool:backups) echo $KR_BACKUPS;;
+	bool:b*u*) echo $KR_BACKUPS;;
 	bool:debug) echo $KR_DEBUG;;
 	bool:hosted) echo $KR_HOSTED;;
 	bool:wireless) echo $KR_WIRELESS;;
 	dir:amenu) echo $KR_DIR_AMENU;;
 	dir:buc) echo $KR_DIR_BUC;;
 	dir:bua) echo $KR_DIR_BUA;;
-	dir:cfg) echo $KR_DIR_CFG;;
+	dir:c*f*g) echo $KR_DIR_CFG;;
 	dir:cmenu) echo $KR_DIR_CMENU;;
 	dir:d*t*) echo $KR_DIR_DT;;
-	dir:excl) echo $KR_DIR_EXCL;;
-	dir:incl) echo $KR_DIR_INCL;;
-	dir:keys) echo $KR_DIR_KEYS;;
+	dir:excl*) echo $KR_DIR_EXCL;;
+	dir:incl*) echo $KR_DIR_INCL;;
+	dir:key*) echo $KR_DIR_KEYS;;
 	dir:lib) echo $KR_DIR_LIB;;
 	dir:lnk) echo $KR_DIR_LNK;;
-	dir:logs) echo $KR_DIR_LOGS;;
+	dir:log*) echo $KR_DIR_LOGS;;
 	dir:pmenu) echo $KR_DIR_PMENU;;
-	dir:sendto) echo $KR_DIR_SENDTO;;
-	dir:startup) echo $KR_DIR_STARTUP;;
+	dir:s*to) echo $KR_DIR_SENDTO;;
+	dir:s*up) echo $KR_DIR_STARTUP;;
 	dir:temp) echo $KR_DIR_TEMP;;
 	dir:tmpl) echo $KR_DIR_TMPL;;
 	dir:umenu) echo $KR_DIR_UMENU;;
