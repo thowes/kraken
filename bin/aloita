@@ -1,1 +1,7 @@
 #!/bin/sh
+
+if [ "$(asetus bool:backups)" == "true" ]; then
+	kaiku ALOITA
+else
+	virhe ALOITA
+fi
