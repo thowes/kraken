@@ -24,10 +24,10 @@ else
 fi
 
 case $ASETUKSET_REQUEST in
-	bool:b*u*) echo $KR_BACKUPS;;
-	bool:debug) echo $KR_DEBUG;;
-	bool:hosted) echo $KR_HOSTED;;
-	bool:wireless) echo $KR_WIRELESS;;
+	b*:b*u*) echo $KR_BACKUPS;;
+	b*:debug) echo $KR_DEBUG;;
+	b*:hosted) echo $KR_HOSTED;;
+	b*:wireless) echo $KR_WIRELESS;;
 	dir:amenu) echo $KR_DIR_AMENU;;
 	dir:buc) echo $KR_DIR_BUC;;
 	dir:bua) echo $KR_DIR_BUA;;
@@ -51,5 +51,5 @@ case $ASETUKSET_REQUEST in
 	str:recipient) echo $KR_RECIPIENT;;
 	str:startup) echo $KR_NAME_STARTUP;;
 	str:url) echo $KR_NAME_URL;;
-	url:ext) echo $KRN_EXT_IP_ADDRESS;;
+	u*:ext) echo $KRN_EXT_IP_ADDRESS;;
 esac
