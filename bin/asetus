@@ -46,10 +46,10 @@ case $ASETUKSET_REQUEST in
 	d*:temp) echo $KR_DIR_TEMP;;
 	d*:tmpl) echo $KR_DIR_TMPL;;
 	d*:umenu) echo $KR_DIR_UMENU;;
-	str:lnk) echo $KR_NAME_LNK;;
-	str:network) echo $KR_NETWORK;;
-	str:recipient) echo $KR_RECIPIENT;;
-	str:startup) echo $KR_NAME_STARTUP;;
-	str:url) echo $KR_NAME_URL;;
+	s*:lnk) echo $KR_NAME_LNK;;
+	s*:network) echo $KR_NETWORK;;
+	s*:recipient) echo $KR_RECIPIENT;;
+	s*:startup) echo $KR_NAME_STARTUP;;
+	s*:url) echo $KR_NAME_URL;;
 	u*:ext) echo $KRN_EXT_IP_ADDRESS;;
 esac
