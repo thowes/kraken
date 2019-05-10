@@ -1,2 +1,8 @@
 #!/bin/sh
 
+CFG=$(asetus dir:cfg)
+if [ -f $CFG/kerain.sh ]; then
+	. $CFG/kerain.sh
+else
+	virhe Not found $CFG/kerain.sh
+fi
