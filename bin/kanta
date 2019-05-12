@@ -2,38 +2,38 @@
 kanta_params() {
 	case $1 in
 		-*) case $1 in
-				*a:*) KANTA_FUNCTION=add; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*a:*) FUNCTION=add; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
 				*cf*:*) CFG=$(echo $1|awk -F\: '{print $2}');;
-				*cr:*) KANTA_FUNCTION=create; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*cr:*) FUNCTION=create; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
 				*db:*) DB=$(echo $1|awk -F\: '{print $2}');;
-				*del:*) KANTA_FUNCTION=remove;;
-				*f:*) KANTA_FUNCTION=search; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
-				*g:*) KANTA_FUNCTION=create; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
-				*i:*) KANTA_FUNCTION=add; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
-				*l:*) KANTA_FUNCTION=search; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
-				*n:*) KANTA_FUNCTION=count; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
-				*s:*) KANTA_FUNCTION=search; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
-				*st*) KANTA_FUNCTION=status; FILTER=$(echo $1|awk -F\: '{print $2}');;
+				*del:*) FUNCTION=remove;;
+				*f:*) FUNCTION=search; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*g:*) FUNCTION=create; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*i:*) FUNCTION=add; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*l:*) FUNCTION=search; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*n:*) FUNCTION=count; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*s:*) FUNCTION=search; KANTA_TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*st*) FUNCTION=status; FILTER=$(echo $1|awk -F\: '{print $2}');;
 				*t:*) KANTA_TABLE=$(echo "$1"|awk -F\: '{print $2}');;
-				*u) KANTA_FUNCTION=update;;
-				*x) KANTA_FUNCTION=status; FILTER=INDEX;;
+				*u) FUNCTION=update;;
+				*x) FUNCTION=status; FILTER=INDEX;;
 			esac;;
 		*) SEARCH=$1;;
 	esac
 }
 
 if [ "_$1_" != "__" ]; then
-	KANTA_FUNCTION=search; kanta_params "$(echo $1|tr ";" ":")"
+	FUNCTION=search; kanta_params "$(echo $1|tr ";" ":")"
 	if [ "_$2_" != "__" ]; then
 		kanta_params "$(echo $2|tr ";" " ")"
 		if [ "_$3_" != "__" ]; then kanta_params "$(echo $3|tr ";" " ")"; fi
 	fi
 else
-	KANTA_FUNCTION=status
+	FUNCTION=status
 fi
 
 if [ "_$(echo $DB)_" != "__" ]; then
-	case $KANTA_FUNCTION in
+	case $FUNCTION in
 		add) sqlite3 $DB "INSERT INTO $KANTA_TABLE values($SEARCH);";;
 		count) sqlite3 $DB "SELECT Count(*) FROM $KANTA_TABLE;";;
 		create) sqlite3 $DB "CREATE TABLE $KANTA_TABLE ($SEARCH);";;
