@@ -1,12 +1,11 @@
 #!/bin/bash
-
 case $1 in
 	dwl) echo AGENTTI: synk dwl $2;;
 	pull) echo AGENTTI: git pull;;
 	push) echo AGENTTI: git push;;
 	upl) echo AGENTTI: synk $2;;
 	*)
-		if [ "_$SSH_AGENT_PID" == "_" ]; then
+		if [ "_$(echo $SSH_AGENT_PID)_" == "__" ]; then
 			case $(uname) in
 				CYGWIN*) ps aux|grep ssh|grep agent|grep -v grep|awk '{print $1}';; 
 				*) ps aux|grep ssh|grep agent|grep -v grep|awk '{print $2}';;
