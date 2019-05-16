@@ -7,12 +7,12 @@ kanta_params() {
 				*cr:*) FUNCTION=create; TABLE=$(echo $1|awk -F\: '{print $2}');;
 				*db:*) DB=$(echo $1|awk -F\: '{print $2}');;
 				*del:*) FUNCTION=remove;;
-				*f:*) FUNCTION=search; TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*f:*) FUNCTION=search; FILTER=$(echo $1|awk -F\: '{print $2}');;
 				*g:*) FUNCTION=create; TABLE=$(echo $1|awk -F\: '{print $2}');;
 				*i:*) FUNCTION=add; TABLE=$(echo $1|awk -F\: '{print $2}');;
-				*l:*) FUNCTION=search; TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*l:*) FUNCTION=list; FILTER=$(echo $1|awk -F\: '{print $2}');;
 				*n:*) FUNCTION=count; FILTER=$(echo $1|awk -F\: '{print $2}');;
-				*s:*) FUNCTION=search; TABLE=$(echo $1|awk -F\: '{print $2}');;
+				*s:*) FUNCTION=search; FILTER=$(echo $1|awk -F\: '{print $2}');;
 				*st*) FUNCTION=status; FILTER=$(echo $1|awk -F\: '{print $2}');;
 				*t:*) TABLE=$(echo "$1"|awk -F\: '{print $2}');;
 				*u) FUNCTION=update;;
@@ -37,9 +37,10 @@ if [ "_$(echo $DB)_" != "__" ]; then
 		add) sqlite3 $DB "INSERT INTO $TABLE values($SEARCH);";;
 		count) if [ "_$(echo $FILTER)_" != "__" ] && [ "_$(echo $SEARCH)_" != "__" ]; then sqlite3 $DB "SELECT Count(*) FROM $TABLE WHERE $FILTER LIKE '%$SEARCH%';"; else sqlite3 $DB "SELECT Count(*) FROM $TABLE;"; fi;;
 		create) sqlite3 $DB "CREATE TABLE $TABLE ($SEARCH);";;
+		list) if [ "_$(echo $SEARCH)_" != "__" ]; then sqlite3 $DB "SELECT * FROM $TABLE;" | grep $SEARCH; else sqlite3 $DB "SELECT * FROM $TABLE;"; fi;;
 		remove) echo sqlite $DB delete "(where $REMOVE)";;
-		search) if [ "_$(echo $SEARCH)_" != "__" ]; then sqlite3 $DB "SELECT * FROM $TABLE;" | grep $SEARCH; else sqlite3 $DB "SELECT * FROM $TABLE;"; fi;;
-		status) if [ "_$(echo $FILTER)_" != "__" ]; then sqlite3 $DB .schema|grep $FILTER; else sqlite3 $DB .schema; fi;;
+		search) if [ "_$(echo $FILTER)_" != "__" ] && [ "_$(echo $SEARCH)_" != "__" ]; then sqlite3 $DB "SELECT * FROM $TABLE WHERE $FILTER LIKE '%$SEARCH%';"; else sqlite3 $DB "SELECT * FROM $TABLE;"; fi;;
+		status) if [ "_$(echo $FILTER)_" != "__" ]; then sqlite3 $DB .schema | grep $FILTER; else sqlite3 $DB .schema; fi;;
 		update) echo sqlite $DB edit;;
 	esac
 else
