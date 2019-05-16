@@ -1,12 +1,10 @@
 #!/bin/bash
-KR_DIR_BUA=$(asetus dir:bua)
-KR_DIR_DT=$(asetus dir:dt)
 KR_DIR_LNK=$(asetus dir:lnk)
-KR_DIR_SENDTO=$(asetus dir:sendto)
-KR_DIR_STARTUP=$(asetus dir:startup)
 
 shorts_desktop() {
 	debug "SHORTS/DT" "$1 $2 $3"
+	KR_DIR_DT=$(asetus dir:dt)
+	if [ "_$KR_NETWORK" == "_" ]; then KR_NETWORK=$(verkko context); fi
 	if [ -d $KR_DIR_LNK/ ]; then
 		if [ -d $KR_DIR_LNK/COMP/$HOSTNAME ]; then \cp $KR_DIR_LNK/COMP/$HOSTNAME/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/COMP/$HOSTNAME "not found."; fi
 		if [ -d $KR_DIR_LNK/USER/$USER ]; then \cp $KR_DIR_LNK/USER/$USER/*.* $KR_DIR_DT/; else virhe "SHORTS/dt: dir" $KR_DIR_LNK/USER/$USER "not found."; fi
@@ -23,6 +21,8 @@ shorts_desktop() {
 
 shorts_sendto() {
 	debug "SHORTS/SENDTO" "$1 $2"
+	KR_DIR_SENDTO=$(asetus dir:sendto)
+	KR_DIR_BUA=$(asetus dir:bua)
 	if [ -d $KR_DIR_SENDTO ]; then
 		case $1 in
 			def) \cp $KR_DIR_LNK/SENDTO/default/*.lnk $KR_DIR_SENDTO/;;
@@ -35,6 +35,7 @@ shorts_sendto() {
 
 shorts_startup() {
 	debug "SHORTS/STARTUP" "$1 $2"
+	KR_DIR_STARTUP=$(asetus dir:startup)
 	case $1 in
 		def) \cp $KR_DIR_LNK/STARTUP/default/*.lnk $KR_DIR_STARTUP/;;
 		*) if [ -d $KR_DIR_LNK/STARTUP/$1 ]; then \cp $KR_DIR_LNK/STARTUP/$1/*.lnk $KR_DIR_STARTUP/; fi;;
@@ -42,7 +43,6 @@ shorts_startup() {
 }
 
 shorts() {
-	if [ "_$KR_NETWORK" == "_" ]; then KR_NETWORK=$(verkko context); fi
 	kaiku "SHORTS" 1f:$1 2p:$2 3p:$3 n:$KR_NETWORK
 	case $1 in
 		d*t*) tynnyri new SHORTS/DT; shorts_desktop $3 $2;;
