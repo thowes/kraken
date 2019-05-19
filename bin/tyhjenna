@@ -1,6 +1,5 @@
 #!/bin/bash
 KR_DIR_BUA=$(asetus dir:bua)
-#KR_DIR_LNK=$(asetus dir:lnk)
 
 case $1 in
 	all) tyhjenna menu; tyhjenna startup; tyhjenna desktop;;
