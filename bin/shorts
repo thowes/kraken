@@ -42,7 +42,7 @@ shorts_startup() {
 	esac
 }
 
-shorts() {
+#shorts() {
 	kaiku "SHORTS" 1f:$1 2p:$2 3p:$3 n:$KR_NETWORK
 	case $1 in
 		d*t*) tynnyri new SHORTS/DT; shorts_desktop $3 $2;;
@@ -51,4 +51,4 @@ shorts() {
 		startup) tynnyri new SHORTS/STU; shorts_startup $HOSTNAME; shorts_startup $2;;
 		*) if [ -d $KR_DIR_LNK ]; then tynnyri new SHORTS/CLR; tyhjenna; else debug no APPLNK directory; fi;;
 	esac
-}
+#}
