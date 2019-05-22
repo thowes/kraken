@@ -1,5 +1,4 @@
 #!/bin/sh
-
 if [ -f $1/kraken.cfg ]; then
 	ASETUKSET_REQUEST=$2
 	. $1/kraken.cfg
