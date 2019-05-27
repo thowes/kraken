@@ -1,22 +1,22 @@
 #!/bin/bash
 case $1 in
 	-*)
-		KR_DIR_TEMP=$(asetus dir:temp)
+		DIR_TEMP=$(asetus dir:temp)
 		TYNNYRI_TTY=$(verkko tty)
 		case $1 in
 			*0*) tynnyri -l; tynnyri -n $2;;
-			*a*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; else tynnyri -n $2; fi;;
+			*a*) if [ -f $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then echo $2 >> $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; else tynnyri -n $2; fi;;
 			*k*) tynnyri -p; tynnyri -l;;
-			*l*) if [ -f $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then rm $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; fi;;
+			*l*) if [ -f $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then rm $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; fi;;
 			*n)
-					if [ -d $KR_DIR_TEMP/tynnyri/ ]; then
-						echo $2 > $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri
+					if [ -d $DIR_TEMP/tynnyri/ ]; then
+						echo $2 > $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri
 					else
-						cd $KR_DIR_TEMP/; pwd; mkdir tynnyri
-						echo $2 > $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri
+						cd $DIR_TEMP/; pwd; mkdir tynnyri
+						echo $2 > $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri
 					fi;;
-			*p*) echo $(cat $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri|tr "\n" ",");;
-			*u*|*d*) echo $2 >> $KR_DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; tynnyri -k;;
+			*p*) echo $(cat $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri|tr "\n" ",");;
+			*u*|*d*) echo $2 >> $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; tynnyri -k;;
 		esac;;
 	a|add) tynnyri -a $2;;
 	d) tynnyri -u $2;;
