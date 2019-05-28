@@ -7,10 +7,11 @@ case $1 in
 	*)
 		if [ "_$(echo $SSH_AGENT_PID)_" == "__" ]; then
 			case $(uname) in
-				CYGWIN*) ps aux|grep ssh|grep agent|grep -v grep|awk '{print $1}';; 
-				*) ps aux|grep ssh|grep agent|grep -v grep|awk '{print $2}';;
+				CYGWIN*) SSH_AGENT_PID=$(ps aux|grep ssh|grep agent|grep -v grep|awk '{print $1}');; 
+				*) SSH_AGENT_PID=$(ps aux|grep ssh|grep agent|grep -v grep|awk '{print $2}');;
 			esac
-		else
-			echo $SSH_AGENT_PID
-		fi;;
+			if [ "_$(echo $SSH_AGENT_PID)_" == "__" ]; then virhe SSH_AGENT_PID; fi
+		fi
+		echo $SSH_AGENT_PID
+		;;
 esac
