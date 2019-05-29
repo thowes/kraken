@@ -1,4 +1,3 @@
 #!/bin/sh
-
 KR_DEBUG=false
 debug nada
