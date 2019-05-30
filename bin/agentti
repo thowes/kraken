@@ -1,4 +1,8 @@
 #!/bin/bash
+agentti_kirjaudu() {
+	virhe SSH_AGENT_PID
+}
+
 case $1 in
 	dwl) echo AGENTTI: synk dwl $2;;
 	pull) echo AGENTTI: git pull;;
@@ -10,7 +14,7 @@ case $1 in
 				CYGWIN*) SSH_AGENT_PID=$(ps aux|grep ssh|grep agent|grep -v grep|awk '{print $1}');; 
 				*) SSH_AGENT_PID=$(ps aux|grep ssh|grep agent|grep -v grep|awk '{print $2}');;
 			esac
-			if [ "_$(echo $SSH_AGENT_PID)_" == "__" ]; then virhe SSH_AGENT_PID; fi
+			if [ "_$(echo $SSH_AGENT_PID)_" == "__" ]; then agentti_kirjaudu; fi
 		fi
 		echo $SSH_AGENT_PID
 		;;
