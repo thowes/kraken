@@ -1,8 +1,11 @@
 #!/bin/bash
 if [ -d $1 ] && [ $2 != "" ]; then
 	KR_DIR_TEMP=$(asetus dir:temp)
+	DIR=$1
+	PKG=$2
+	DIR_TEMP=$KR_DIR_TEMP
 	# Delete and rename old backups, if they exist.
-	if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old ]; then \rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old; fi
+	if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.old ]; then \rm $DIR_TEMP/$PKG.$USER.$HOSTNAME.old; fi
 	BU_LATEST_MD5="nada"; BU_TODAY_MD5=md5
 	if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
 		case $(uname) in
@@ -12,7 +15,7 @@ if [ -d $1 ] && [ $2 != "" ]; then
 		\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $KR_DIR_TEMP/$2.$USER.$HOSTNAME.old
 	fi
 	# Getting the last row of backup.log
-	BU_LATEST_LOGLINE=$(latest $1)
+	BU_LATEST_LOGLINE=$(latest $DIR)
 	# Splitting BU_LATEST_LOGLINE the retrieve the parts of the string for md5 sum and latest backup date.
 	BU_LATEST_DATE=$(echo $BU_LATEST_LOGLINE|awk '{print $1}')
 	if [ $BU_LATEST_MD5 == "nada" ]; then BU_LATEST_MD5=$(echo $BU_LATEST_LOGLINE|awk '{print $5}'); fi
