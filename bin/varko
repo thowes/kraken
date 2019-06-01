@@ -20,15 +20,15 @@ if [ -d $1 ] && [ $2 != "" ]; then
 	if [ $BU_LATEST_DATE != $BU_TODAY_DATE ]; then
 		KR_DIR_EXCL=$(asetus dir:excl)
 		# Creating new zip from the directory without backup.log file
-		if [ -f $KR_DIR_EXCL/$2.lst ]; then
+		if [ -f $KR_DIR_EXCL/$PKG.lst ]; then
 			#kaiku "vk27 $2" "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE" $KR_DIR_EXCL/$2.lst
-			zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/$2.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+			zip -qr $KR_DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 		else
 			KR_DIR_INCL=$(asetus dir:incl)
-			if [ -f $KR_DIR_INCL/$2.lst ]; then
-				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -i@$KR_DIR_INCL/$2.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+			if [ -f $KR_DIR_INCL/$PKG.lst ]; then
+				zip -qr $KR_DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -i@$KR_DIR_INCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			else
-				zip -qr $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip $1 -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+				zip -qr $KR_DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			fi
 		fi
 		if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then
