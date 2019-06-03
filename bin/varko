@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -d $1 ] && [ $2 != "" ]; then
-	KR_DIR_TEMP=$(asetus dir:temp); DIR=$1; PKG=$2; DIR_TEMP=$KR_DIR_TEMP
+	DIR=$1; DIR_TEMP=$(asetus dir:temp); PKG=$2
 	# Delete and rename old backups, if they exist.
 	if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.old ]; then \rm $DIR_TEMP/$PKG.$USER.$HOSTNAME.old; fi
 	BU_LATEST_MD5="nada"; BU_TODAY_MD5=md5
@@ -21,20 +21,19 @@ if [ -d $1 ] && [ $2 != "" ]; then
 		KR_DIR_EXCL=$(asetus dir:excl)
 		# Creating new zip from the directory without backup.log file
 		if [ -f $KR_DIR_EXCL/$PKG.lst ]; then
-			#kaiku "vk27 $2" "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE" $KR_DIR_EXCL/$2.lst
-			zip -qr $KR_DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+			zip -qr $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 		else
 			KR_DIR_INCL=$(asetus dir:incl)
 			if [ -f $KR_DIR_INCL/$PKG.lst ]; then
-				zip -qr $KR_DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -i@$KR_DIR_INCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+				zip -qr $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -i@$KR_DIR_INCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			else
-				zip -qr $KR_DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+				zip -qr $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			fi
 		fi
-		if [ -f $KR_DIR_TEMP/$PKG.$USER.$HOSTNAME.zip ]; then
+		if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip ]; then
 			case $(uname) in
-				Darwin) BU_TODAY_MD5=$(md5 $KR_DIR_TEMP/$PKG.$USER.$HOSTNAME.zip|awk '{print $4}');;
-				*) BU_TODAY_MD5=$(md5sum $KR_DIR_TEMP/$PKG.$USER.$HOSTNAME.zip|awk '{print $1}');;
+				Darwin) BU_TODAY_MD5=$(md5 $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip|awk '{print $4}');;
+				*) BU_TODAY_MD5=$(md5sum $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip|awk '{print $1}');;
 			esac
 		fi
 		# Checking if md5 sum is the same between the latest backup in backup.log and current backup. If not, continue.
@@ -45,7 +44,7 @@ if [ -d $1 ] && [ $2 != "" ]; then
 				KR_RECIPIENT=$(asetus str:recipient)
 				gpg --encrypt -r $KR_RECIPIENT $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip
 			fi
-		else debug "varko:48" $PKG "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
+		else debug "varko:47" $PKG "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
 		fi
 		# Removing the created zip file.
 		if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip ]; then \rm $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip; fi
@@ -59,7 +58,7 @@ if [ -d $1 ] && [ $2 != "" ]; then
 			\mv $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$PKG.cbc
 		fi
 	else
-		debug "kop.sh:54nc" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
+		debug "varko:62" $PKG "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE" $DIR
 	fi
 else
 	virhe "Arguments" $1 $2 "not valid!"
