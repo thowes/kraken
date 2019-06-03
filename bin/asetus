@@ -46,6 +46,7 @@ case $ASETUKSET_REQUEST in
 	d*:tmpl) echo $KR_DIR_TMPL;;
 	d*:umenu) echo $KR_DIR_UMENU;;
 	s*:lnk) echo $KR_NAME_LNK;;
+	s*:loc*) echo $KR_LOCATION;;
 	s*:network) echo $KR_NETWORK;;
 	s*:recipient) echo $KR_RECIPIENT;;
 	s*:startup) echo $KR_NAME_STARTUP;;
