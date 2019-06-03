@@ -48,15 +48,15 @@ if [ -d $1 ] && [ $2 != "" ]; then
 		else debug "varko:48" $PKG "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
 		fi
 		# Removing the created zip file.
-		if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip ]; then \rm $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip; fi
+		if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip ]; then \rm $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip; fi
 		# Moving the created gpg file to the backup directory.
-		if [ -f $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg ]; then tynnyri $2
+		if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip.gpg ]; then tynnyri $PKG
 			# Update the backup.log file and copy it to the backup.logs directory.
-			bulog -a $1 $2 $BU_TODAY_MD5
+			bulog -a $DIR $PKG $BU_TODAY_MD5
 			KR_DIR_LOGS=$(asetus dir:logs)
-			\cp $1/backup.log $KR_DIR_LOGS/$2.log
+			\cp $DIR/backup.log $KR_DIR_LOGS/$PKG.log
 			if [ "_$KR_DIR_BUC" == "_" ]; then KR_DIR_BUC=$(asetus dir:buc); fi
-			\mv $KR_DIR_TEMP/$2.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$2.cbc
+			\mv $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$PKG.cbc
 		fi
 	else
 		debug "kop.sh:54nc" $2 "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE"
