@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -d $1 ] && [ $2 != "" ]; then
+if [ -d $1 ] && [ $2 != "" ]; then 
 	DIR=$1; DIR_TEMP=$(asetus dir:temp); PKG=$2
 	# Delete and rename old backups, if they exist.
 	if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.old ]; then \rm $DIR_TEMP/$PKG.$USER.$HOSTNAME.old; fi
@@ -10,8 +10,7 @@ if [ -d $1 ] && [ $2 != "" ]; then
 			*) BU_LATEST_MD5=$(md5sum $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip|awk '{print $1}');;
 		esac; \mv $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR_TEMP/$PKG.$USER.$HOSTNAME.old
 	fi
-	# Getting the last row of backup.log
-	BU_LATEST_LOGLINE=$(latest $DIR)
+	BU_LATEST_LOGLINE=$(latest $DIR) # Getting the last row of backup.log
 	# Splitting BU_LATEST_LOGLINE the retrieve the parts of the string for md5 sum and latest backup date.
 	BU_LATEST_DATE=$(echo $BU_LATEST_LOGLINE|awk '{print $1}')
 	if [ $BU_LATEST_MD5 == "nada" ]; then BU_LATEST_MD5=$(echo $BU_LATEST_LOGLINE|awk '{print $5}'); fi
