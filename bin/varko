@@ -1,6 +1,7 @@
 #!/bin/bash
-if [ -d $1 ] && [ $2 != "" ]; then 
-	DIR=$1; DIR_TEMP=$(asetus dir:temp); PKG=$2
+if [ $1 != "" ] && [ $2 != "" ]; then DIR_TEMP=$(asetus dir:temp);
+	if [ -d $1 ]; then DIR=$1; PKG=$2; fi
+	if [ -d $2 ]; then DIR=$2; PKG=$1; fi
 	# Delete and rename old backups, if they exist.
 	if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.old ]; then \rm $DIR_TEMP/$PKG.$USER.$HOSTNAME.old; fi
 	BU_LATEST_MD5="nada"; BU_TODAY_MD5=md5
