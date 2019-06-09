@@ -1,5 +1,4 @@
 #!/bin/sh
-
 KR_DIR_CFG=$(asetus dir:cfg)
 if [ -f $KR_DIR_CFG/kerain.sh ]; then
 	. $KR_DIR_CFG/kerain.sh
