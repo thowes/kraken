@@ -1,5 +1,4 @@
 #!/bin/sh
-
 LISTA_VIRHE=false
 if [ "_$1_" != "__" ]; then
 	LISTA_ITEM=$1
