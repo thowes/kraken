@@ -1,10 +1,13 @@
-#!/bin/bash
-
+#!/bin/sh
 if [ "_$1_" != "__" ]; then
 	if [ "_$2_" != "__" ]; then
 		if [ "_$3_" != "__" ]; then
 			if [ "_$4_" != "__" ]; then
-				echo "[[ $1 $2 $3 $4 ]]"
+				if [ "_$5_" != "__" ]; then
+					echo "[[ $1 $2 $3 $4 $5 ]]"	
+				else
+					echo "[[ $1 $2 $3 $4 ]]"
+				fi
 			else
 				echo "[[ $1 $2 $3 ]]"
 			fi
