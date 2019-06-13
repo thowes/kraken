@@ -16,6 +16,8 @@ if [ $(asetus bool:hosted) != "true" ]; then
 			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(verkko ssid); else VERKKO_ESSID=nada; fi
 			;;
 	esac
-		. $KR_DIR_CFG/nets.sh
-	else virhe FILE nets.sh not found; fi
+		#. $KR_DIR_CFG/nets.sh
+	else
+		virhe FILE nets.sh not found
+	fi
 fi
