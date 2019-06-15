@@ -48,5 +48,5 @@ projekti() {
 }
 
 projekti-go() {
-	nada
+	echo projekti $1 #$2 $3
 }
