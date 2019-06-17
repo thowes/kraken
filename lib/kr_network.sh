@@ -12,9 +12,9 @@ if [ $(asetus bool:hosted) != "true" ]; then
 		darwin) # Using macos networks commands.
 			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(verkko ssid); else VERKKO_ESSID=nada; fi
 			;;
-		linux|ubuntu) # Using unix/linux/ubuntu networks commands.
-			if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(verkko ssid); else VERKKO_ESSID=nada; fi
-			;;
+		#linux|ubuntu) # Using unix/linux/ubuntu networks commands.
+			#if [ $KR_WIRELESS == "true" ]; then VERKKO_ESSID=$(verkko ssid); else VERKKO_ESSID=nada; fi
+			#;;
 	esac
 		. $KR_DIR_CFG/nets.sh
 	else
