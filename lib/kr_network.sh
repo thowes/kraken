@@ -7,4 +7,4 @@ verkko_update() {
 	fi
 }
 
-	verkko_update
+verkko_update
