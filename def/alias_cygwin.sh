@@ -3,6 +3,8 @@ if [ -f ~/Projects/kraken/lib/bash_aliases.sh ]; then
     . ~/Projects/kraken/lib/bash_aliases.sh
 else echo NOT FOUND bash_aliases.sh; fi
 
+alias 256=sha256sum
+alias 512=sha512sum
 alias a='git add -A; git commit -m'
 alias b=bundle
 alias cdr='cd /cygdrive; cd'
@@ -24,6 +26,7 @@ alias p=projekti
 alias r=rails
 alias rt='cd /'
 alias s='synkronoi syn'
+alias sha1=sha1sum
 alias t=touch
 alias tl=tasklist
 alias u='synkronoi upl'
