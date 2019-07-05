@@ -22,11 +22,27 @@ tccm() {
 		esac
 	else
 		case $1 in
+			ko) case $KAYTTIS in
+				cygwin) tc /l$2 /q /s /m ro /m rm /v $3 /p $KRN_PASSU;;
+				*) tc -m ro $3 -p $KRN_PASSU $KRN_TC_DIR/$2;;
+			esac;;
+			kw) case $KAYTTIS in
+				cygwin) tc /l$2 /q /s /m ts /m rm /v $3 /p $KRN_PASSU;;
+				*) tc -m ts $3 -p $KRN_PASSU $KRN_TC_DIR/$2;;
+			esac;;
 			ro) case $KAYTTIS in
 				cygwin) tc /l$2 /q /s /m ro /m rm /v $3 /p $KRN_PASSU /k $4;;
 				*) tc -m ro $3 -p $KRN_PASSU -k $4 $KRN_TC_DIR/$2;;
 			esac;;
 			rw) case $KAYTTIS in
+				cygwin) tc /l$2 /q /s /m ts /m rm /v $3 /p $KRN_PASSU /k $4;;
+				*) tc -m ts $3 -p $KRN_PASSU -k $4 $KRN_TC_DIR/$2;;
+			esac;;
+			to) case $KAYTTIS in
+				cygwin) tc /l$2 /q /s /m ro /m rm /v $3 /p $KRN_PASSU /k $4;;
+				*) tc -m ro $3 -p $KRN_PASSU -k $4 $KRN_TC_DIR/$2;;
+			esac;;
+			tw) case $KAYTTIS in
 				cygwin) tc /l$2 /q /s /m ts /m rm /v $3 /p $KRN_PASSU /k $4;;
 				*) tc -m ts $3 -p $KRN_PASSU -k $4 $KRN_TC_DIR/$2;;
 			esac;;
