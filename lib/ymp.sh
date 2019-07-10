@@ -5,10 +5,6 @@ KAYTTIS_FULL=$(uname -a)
 # Based on the contents of the uname ouput string, recognizes the OS.
 # Only cygwin, darwin and ubuntu are tested to work properly.
 kayttis() {
-	debug
-}
-
-if [ $KR_HOSTED == "false" ]; then
 	case $KAYTTIS_FULL in
 		*BSD*) KAYTTIS=bsd;;
 		*CYGWIN*) KAYTTIS=cygwin;;
@@ -23,6 +19,10 @@ if [ $KR_HOSTED == "false" ]; then
 			;;
 		*) kaiku KRAKEN/YMP $KAYTTIS "not recognized!";;
 	esac
+}
+
+if [ $KR_HOSTED == "false" ]; then
+	kayttis
 fi
 
 if [ $KR_DEBUG == "true" ]; then kaiku KRAKEN/YMP $KAYTTIS; fi
