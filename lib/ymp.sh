@@ -1,5 +1,4 @@
 #!/bin/bash
-KAYTTIS="hosted"
 
 # Based on the contents of the uname ouput string, recognizes the OS.
 # Only cygwin, darwin and ubuntu are tested to work properly.
@@ -18,7 +17,7 @@ kayttis() {
 			esac
 			;;
 		*) kaiku KRAKEN/YMP $KAYTTIS "not recognized!";;
-	esac; fi
+	esac; else KAYTTIS_SHORT=hosted; fi
 	echo $KAYTTIS_SHORT
 }
 
