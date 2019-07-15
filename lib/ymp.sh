@@ -6,19 +6,20 @@ KAYTTIS="hosted"
 kayttis() {
 	KAYTTIS_FULL=$(uname -a)
 	if [ $KR_HOSTED == "false" ]; then case $KAYTTIS_FULL in
-		*BSD*) KAYTTIS=bsd;;
-		*CYGWIN*) KAYTTIS=cygwin;;
-		*Darwin*) KAYTTIS=darwin;;
-		*Haiku*) KAYTTIS=haiku;;
+		*BSD*) KAYTTIS_SHORT=bsd;;
+		*CYGWIN*) KAYTTIS_SHORT=cygwin;;
+		*Darwin*) KAYTTIS_SHORT=darwin;;
+		*Haiku*) KAYTTIS_SHORT=haiku;;
 		*Linux*)
 			case $KAYTTIS_FULL in
-				*Debian*) KAYTTIS=debian;;
-				*Ubuntu*) KAYTTIS=ubuntu;;
-				*) KAYTTIS=linux;;
+				*Debian*) KAYTTIS_SHORT=debian;;
+				*Ubuntu*) KAYTTIS_SHORT=ubuntu;;
+				*) KAYTTIS_SHORT=linux;;
 			esac
 			;;
 		*) kaiku KRAKEN/YMP $KAYTTIS "not recognized!";;
 	esac; fi
+	echo $KAYTTIS_SHORT
 }
 
-kayttis
+KAYTTIS=$(kayttis)
