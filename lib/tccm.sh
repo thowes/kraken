@@ -1,6 +1,6 @@
 #!/bin/bash
 tccm() {
-	debug TTCM $1 $2 $3; KR_TC_NAME=$(echo $3|awk -F "." '{print $1}'); case $KAYTTIS in
+	debug TTCM $1 $2 $3; KR_TC_NAME=$(echo $3|awk -F "." '{print $1}'); KAYTTIS=$(kayttis); case $KAYTTIS in
 		cygwin) KRN_TC_DIR="/cygdrive";;
 		darwin) KRN_TC_DIR="/Volumes";;
 		ubuntu) KRN_TC_DIR="/media/$USER";;
