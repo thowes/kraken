@@ -21,4 +21,4 @@ kayttis() {
 	echo $KAYTTIS_SHORT
 }
 
-KAYTTIS=$(kayttis)
+#KAYTTIS=$(kayttis)
