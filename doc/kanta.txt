@@ -1,0 +1,20 @@
+KANTA (kanta)
+A small program/script for managing SQLite databases from command line.
+
+-a:		add a record
+-cf:	give configuration file name as a parametre (not functional)
+-cr:	create table
+-db 	give databases path as a parametre
+-del	delete (not functional)
+-f:		find (requires a search word)
+-g:		generate a table (same as -cr)
+-gen	generate the empty database
+-h		help (this command)
+-i:		insert (same as -a)
+-l 		list
+-n:		count
+-s:		search (same as -f:)
+-st		status, show tabase schema
+-t		give table name as a parametre
+-u		update (not functional)
+-x		show schema for indexes
