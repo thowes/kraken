@@ -14,8 +14,6 @@ if [ -f $2 ]; then
 	# MODULES, FILE MANAGEMENT & BACKUP FUNCTIONS
 	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FLM /w"; fi
 	if [ -f $KR_DIR_LIB/vers.sh ]; then . $KR_DIR_LIB/vers.sh; fi
-	if [ -f $KR_DIR_LIB/ymp.sh ]; then . $KR_DIR_LIB/ymp.sh; fi
-	if [ -f $KR_DIR_LIB/../bin/ymp.sh ]; then . $KR_DIR_LIB/../bin/ymp.sh; fi
 	if [ -f $KR_DIR_LIB/tccm.sh ]; then . $KR_DIR_LIB/tccm.sh; fi
 	if [ -f $KR_DIR_LIB/uus.sh ]; then . $KR_DIR_LIB/uus.sh; fi
 	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
@@ -40,7 +38,7 @@ if [ -f $2 ]; then
 			b_app) compu_app $APPNAME; exit;;
 			b_start) compu_start $CONTEXT;;
 			*) debug KONTEXT $1 $CONTEXT;;
-		esac 
+		esac
 	fi
 	if [ $KR_DEBUG == "true" ]; then kraken s; fi
 fi
