@@ -8,8 +8,9 @@ else
 		. $1
 	else
 		ASETUKSET_REQUEST=$1
-		if [ -f ~/Projects/config/$HOSTNAME/kraken.cfg ]; then
-			. ~/Projects/config/$HOSTNAME/kraken.cfg
+		if [ "_$HOSTNAME" != "_" ]; then KR_HOSTNAME=$HOSTNAME; else KR_HOSTNAME=$(hostname); fi
+		if [ -f ~/Projects/config/$KR_HOSTNAME/kraken.cfg ]; then
+			. ~/Projects/config/$KR_HOSTNAME/kraken.cfg
 		else
 			if [ -f ~/Projects/config/kraken.cfg ]; then
 				. ~/Projects/config/kraken.cfg
@@ -30,7 +31,7 @@ case $ASETUKSET_REQUEST in
 	d*:amenu) echo $KR_DIR_AMENU;;
 	d*:buc) echo $KR_DIR_BUC;;
 	d*:bua) echo $KR_DIR_BUA;;
-	d*:c*f*g) echo $KR_DIR_CFG;;
+	d*:c*f*g) if [ "_$KR_DIR_CFG" != "_" ]; then echo $KR_DIR_CFG; else echo ~/Projects/config; fi;;
 	d*:cmenu) echo $KR_DIR_CMENU;;
 	d*:d*t*) echo $KR_DIR_DT;;
 	d*:excl*) echo $KR_DIR_EXCL;;
@@ -47,7 +48,7 @@ case $ASETUKSET_REQUEST in
 	d*:umenu) echo $KR_DIR_UMENU;;
 	s*:lnk) echo $KR_NAME_LNK;;
 	s*:loc*) echo $KR_LOCATION;;
-	s*:network) echo $KR_NETWORK;;
+	s*:network) if [ "_$KR_NETWORK" != "_" ]; then echo $KR_NETWORK; else echo NADA; fi;;
 	s*:recipient) echo $KR_RECIPIENT;;
 	s*:startup) echo $KR_NAME_STARTUP;;
 	s*:url) echo $KR_NAME_URL;;
