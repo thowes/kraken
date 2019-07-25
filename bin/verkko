@@ -20,7 +20,7 @@ case $1 in
 	symbol) verkko context:symbol;;
 	tty) tty | awk -F\/ '{print $3}';;
 	*) # not working properly in some cases
-		case $(uname) in
+		case $(uname -a) in
 			CYGWIN*)
 				case $1 in
 					eth) netsh lan show interfaces;;
@@ -37,6 +37,15 @@ case $1 in
 					mac) ifconfig -a|\grep ether|awk '{print $2}';;
 					ssid) airport -I|\grep -v BSSID|\grep SSID|awk '{print $2}';;
 					wlan) ifconfig wlan0;;
+					*) ifconfig -a;;
+				esac;;
+			*Microsoft*)
+				case $1 in
+					eth) ifconfig eth0;;
+					ip) ifconfig|\grep broadcast|awk '{print $2}';;
+					mac) ifconfig -a|\grep ether|awk '{print $2}';;
+					ssid) netsh.exe wlan show interfaces|\grep SSID|\grep -v BSSID|awk '{print $3}';;
+					wlan) netsh.exe wlan show interfaces;;
 					*) ifconfig -a;;
 				esac;;
 			Ubuntu*|Linux*)
