@@ -1,9 +1,9 @@
 #!/bin/bash
 
 KR_OUTPUT=false
-case $(uname) in
-	CYGWIN*)
-		KR_APPCHECKER_RUNNING=$(tasklist | tr -s " " | awk '{print $1 " " $3}' | \grep $1.exe)
+case $(uname -a) in
+	CYGWIN*|*Microsoft*)
+		KR_APPCHECKER_RUNNING=$(tasklist.exe | tr -s " " | awk '{print $1 " " $3}' | \grep $1.exe)
 		case $KR_APPCHECKER_RUNNING in
 			*Console*) KR_OUTPUT=true;;
 			*Session*) KR_OUTPUT=true;;

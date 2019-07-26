@@ -13,6 +13,7 @@ if [ $(asetus bool:hosted) == "false" ]; then
 		*Linux*)
 			case $KAYTTIS_FULL in
 				*Debian*) KAYTTIS_SHORT=debian;;
+				*Microsoft*) KAYTTIS_SHORT=wsl;;
 				*Ubuntu*) KAYTTIS_SHORT=ubuntu;;
 				*) KAYTTIS_SHORT=linux;;
 			esac

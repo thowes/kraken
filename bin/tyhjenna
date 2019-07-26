@@ -27,10 +27,10 @@ case $1 in
 			KR_DIR_CMENU=$(asetus dir:cmenu)
 			KR_DIR_PMENU=$(asetus dir:pmenu)
 			KR_DIR_UMENU=$(asetus dir:umenu)
-			if [ -d $KR_DIR_AMENU ]; then \cp $KR_DIR_AMENU/*.lnk $KR_DIR_BUA/MENU/; else virhe shorts.sh:28 dir $KR_DIR_AMENU missing; fi
-			if [ -d $KR_DIR_UMENU ]; then \cp $KR_DIR_UMENU/*.lnk $KR_DIR_BUA/MENU/; else virhe shorts.sh:29 dir $KR_DIR_UMENU missing; fi
-			if [ -d $KR_DIR_CMENU ]; then \cp $KR_DIR_CMENU/*.lnk $KR_DIR_BUA/CMENU/; else virhe shorts.sh:29 dir $KR_DIR_CMENU missing; fi
-			if [ -d $KR_DIR_PMENU ]; then \cp $KR_DIR_PMENU/*.lnk $KR_DIR_BUA/PMENU/; else virhe shorts.sh:29 dir $KR_DIR_PMENU missing; fi
+			if [ -d "$KR_DIR_AMENU" ]; then \cp $KR_DIR_AMENU/*.lnk $KR_DIR_BUA/MENU/; fi
+			if [ -d "$KR_DIR_UMENU" ]; then \cp $KR_DIR_UMENU/*.lnk $KR_DIR_BUA/MENU/; fi
+			if [ -d "$KR_DIR_CMENU" ]; then \cp $KR_DIR_CMENU/*.lnk $KR_DIR_BUA/CMENU/; fi
+			if [ -d "$KR_DIR_PMENU" ]; then \cp $KR_DIR_PMENU/*.lnk $KR_DIR_BUA/PMENU/; fi
 		else virhe shorts.sh:30 dir $KR_DIR_BUA/MENU/ missing
 		fi;;
 	*) tyhjenna menu; tyhjenna desktop;;
