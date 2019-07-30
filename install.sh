@@ -35,8 +35,10 @@ if [ -f $KR_TO_DIR/proj.csv ]; then echo "[[ ERR INSTALL compu.sh exists already
 
 KR_INSTALL_OUTPUT_FILE=~/.bashrc
 if [ -f $KR_INSTALL_OUTPUT_FILE ]; then
+	echo 'KR_TERMINAL="NADA"' >> $KR_INSTALL_OUTPUT_FILE
+	echo '#export PS1="\n\t \u@\h via \$KR_TERMINAL: \w\n$ "' >> $KR_INSTALL_OUTPUT_FILE
+	echo 'KR_TERMINAL=$(verkko symbol)' >> $KR_INSTALL_OUTPUT_FILE
 	echo -e "\nKR_DIR_ALIAS=$KR_TO_DIR" >> $KR_INSTALL_OUTPUT_FILE
-	echo '#export PS1="\n\t \u@\h via \$(kraken): \w\n$ "' >> $KR_INSTALL_OUTPUT_FILE
 	echo -e "if [ -f \$KR_DIR_ALIAS/alias.sh ]; then" >> $KR_INSTALL_OUTPUT_FILE
 	echo -e "\t. \$KR_DIR_ALIAS/alias.sh\nfi" >> $KR_INSTALL_OUTPUT_FILE
 	echo -e "\nif [ -f \$KR_DIR_ALIAS/kraken.cfg ]; then" >> $KR_INSTALL_OUTPUT_FILE
