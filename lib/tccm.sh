@@ -1,6 +1,6 @@
 #!/bin/bash
 tccm() {
-	kaiku "TTCM $1 $2 $3 $4 $5"; pwd; KR_TC_NAME=$(echo $3|awk -F "." '{print $1}'); KAYTTIS=$(kayttis); case $KAYTTIS in
+	echo "TTCM 1:$1 2:$2 3:$3 4:$4 5:$5"; pwd; KR_TC_NAME=$(echo $3|awk -F "." '{print $1}'); KAYTTIS=$(kayttis); case $KAYTTIS in
 		cygwin) KRN_TC_DIR="/cygdrive";;
 		darwin) KRN_TC_DIR="/Volumes";;
 		ubuntu) KRN_TC_DIR="/media/$USER";;
