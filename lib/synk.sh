@@ -7,7 +7,7 @@ synkronoi() {
 		dwl) if [ -f $KR_DIR_CFG/dwl.csv ]; then
 				KR_SYNK_N=_$(cat $KR_DIR_CFG/dwl.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
 				case $KR_SYNK_N in
-					*_0_) virhe "information not found.";;
+					*_0_) virhe "SY11 $1: information not found.";;
 					*_1_) KR_SYNK_LINE=$(cat $KR_DIR_CFG/dwl.csv | \grep $2)
 						KR_SYNK_EXCL=$KR_DIR_EXCL/$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
 						if [ -f $KR_SYNK_EXCL ]; then debug "file exists."; else KR_SYNK_EXCL=$KR_DIR_EXCL/default.lst; fi
@@ -26,7 +26,7 @@ synkronoi() {
 								bulog -a $KR_SYNK_LDIR $2 $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
 								rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $KR_SYNK_EXCL
 							else virhe "ALREADY done backup today" $2; fi
-						else virhe DIR $KR_SYNK_LDIR not found.; fi;;
+						else virhe "SY29: DIR" $KR_SYNK_LDIR not found.; fi;;
 					*) virhe "found too many sites ($KR_SYNK_N) .";;
 				esac; else virhe "csv file not found."; fi;;
 		ssh) if [ -f $KR_DIR_CFG/dwl.csv ] && [ -f $KR_DIR_CFG/upl.csv ]; then
@@ -65,7 +65,7 @@ synkronoi() {
 								bulog -a $KR_SYNK_LDIR $2 $HOSTNAME $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
 								rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_SYNK_EXCL
 							else virhe "ALREADY done backup today" $2; fi
-						else virhe DIR $KR_SYNK_LDIR not found.; fi;;
+						else virhe "SY68: DIR" $KR_SYNK_LDIR not found.; fi;;
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found" "($KR_SYNK_N)" "."; fi;;
 		ups) synkronoi upl $2;;
