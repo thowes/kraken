@@ -23,7 +23,7 @@ tccm() {
 					else
 						$APP $TC_ARGS /m ro /m rm /v \"$3\" /p $PASSU /k \"\" /l$2
 					fi;;
-				*) if [ "_$4_" != "__" ]; then $APP -m ro $3 -p $PASSU -k "$4" $KRN_TC_DIR/$2; else $APP -m ro $3 -p $PASSU -k "" $KRN_TC_DIR/$2; fi;;
+				darwin) if [ "_$4_" != "__" ]; then $APP -m ro $3 -p $PASSU -k "$4" $KRN_TC_DIR/$2; else $APP -m ro $3 -p $PASSU -k "" $KRN_TC_DIR/$2; fi;;
 			esac;;
 			ts) case $KAYTTIS in
 				cygwin|wsl)
@@ -32,7 +32,7 @@ tccm() {
 					else
 						echo $APP /m ro /m rm /v $3 /p $PASSU /k \"\" /l$3
 					fi;;
-				*) if [ "_$4_" != "__" ]; then $APP -m ts $3 -p $PASSU -k "$4" $KRN_TC_DIR/$2; else $APP -m ts $3 -p $PASSU -k "" $KRN_TC_DIR/$2; fi  ;;
+				darwin) if [ "_$4_" != "__" ]; then $APP -m ts $3 -p $PASSU -k "$4" $KRN_TC_DIR/$2; else $APP -m ts $3 -p $PASSU -k "" $KRN_TC_DIR/$2; fi  ;;
 			esac;;
 			*) virhe "TCCM command" $1 "not recognized.";;
 		esac
