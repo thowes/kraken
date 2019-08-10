@@ -20,10 +20,6 @@ tccm() {
 		#esac
 	#else
 		#case $1 in
-			kw) case $KAYTTIS in
-				cygwin|wsl) tc /l$2 /q /s /m ts /m rm /v $3 /p $KRN_PASSU;;
-				*) tc -m ts $3 -p $KRN_PASSU $KRN_TC_DIR/$2;;
-			esac;;
 			ro) case $KAYTTIS in
 				cygwin|wsl)
 					if [ "_$4_" != "__" ]; then
