@@ -33,10 +33,6 @@ tccm() {
 				cygwin|wsl) if [ "_$4_" != "__" ]; then echo $APP /m ro /m rm /v $3 /p $PASSU /k "$4" /l$3; else echo $APP /m ro /m rm /v $3 /p $PASSU /k \"\" /l$3; fi;;
 				*) if [ "_$4_" != "__" ]; then $APP -m ts $3 -p $PASSU -k "$4" $KRN_TC_DIR/$2; else $APP -m ts $3 -p $PASSU -k "" $KRN_TC_DIR/$2; fi  ;;
 			esac;;
-			vo) case $KAYTTIS in
-				cygwin|wsl) tc /l$2 /q /s /m ro /m rm /v $3 /p $KRN_PASSU;;
-				*) $APP -m ro $3 -p $PASSU -k "" --mount $KRN_TC_DIR/$2;;
-			esac;;
 			vw) case $KAYTTIS in
 				cygwin|wsl) tc /l$2 /q /s /m ts /m rm /v $3 /p $KRN_PASSU;;
 				*) $APP -m ts $3 -p $PASSU -k "" --mount $KRN_TC_DIR/$2;;
