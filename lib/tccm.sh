@@ -6,7 +6,7 @@ tccm() {
 		ubuntu) KRN_TC_DIR="/media/$USER";;
 		wsl) KRN_TC_DIR="/mnt";;
 	esac; echo "TTCM 1:$1 2:$2 3:$3 4:$4 5:$5"; #if [ -d $KRN_TC_DIR/$2/ ]; then
-		case $1 in
+	case $1 in
 			all) case $KAYTTIS in
 					cygwin|wsl) $APP $TC_ARGS /d;;
 					*) tc -d;;
@@ -35,7 +35,7 @@ tccm() {
 				darwin) if [ "_$4_" != "__" ]; then $APP -m ts $3 -p $PASSU -k "$4" $KRN_TC_DIR/$2; else $APP -m ts $3 -p $PASSU -k "" $KRN_TC_DIR/$2; fi  ;;
 			esac;;
 			*) virhe "TCCM command" $1 "not recognized.";;
-		esac
+	esac
 		#if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi
 	#fi
 }
