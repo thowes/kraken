@@ -8,8 +8,8 @@ tccm() {
 	esac; echo "TTCM 1:$1 2:$2 3:$3 4:$4 5:$5"; #if [ -d $KRN_TC_DIR/$2/ ]; then
 	case $1 in
 		all) case $KAYTTIS in
-					cygwin|wsl) $APP $TC_ARGS /d;;
-					*) tc -d;;
+				cygwin|wsl) $APP $TC_ARGS /d;;
+				*) tc -d;;
 			esac;;
 		dm) case $KAYTTIS in
 					cygwin|wsl) vc /q /s /d $2;;
