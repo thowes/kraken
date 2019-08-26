@@ -12,9 +12,9 @@ tccm() {
 				*) tc -d;;
 			esac;;
 		dm) case $KAYTTIS in
-					cygwin|wsl) vc /q /s /d $2;;
-					darwin) tc -d $KRN_TC_DIR/$2;;
-					*) tc -d $2;;
+				cygwin|wsl) vc /q /s /d $2;;
+				darwin) tc -d $KRN_TC_DIR/$2;;
+				*) tc -d $2;;
 			esac;;
 		ro) case $KAYTTIS in
 				cygwin|wsl)
@@ -34,7 +34,7 @@ tccm() {
 					fi;;
 			darwin) if [ "_$4_" != "__" ]; then $APP -m ts $3 -p $PASSU -k "$4" $KRN_TC_DIR/$2; else $APP -m ts $3 -p $PASSU -k "" $KRN_TC_DIR/$2; fi  ;;
 			esac;;
-			*) virhe "TCCM command" $1 "not recognized.";;
+		*) virhe "TCCM command" $1 "not recognized.";;
 	esac
 	#if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi
 	#fi
