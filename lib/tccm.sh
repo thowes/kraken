@@ -5,7 +5,7 @@ tccm() {
 		darwin) KRN_TC_DIR="/Volumes";;
 		ubuntu) KRN_TC_DIR="/media/$USER";;
 		wsl) KRN_TC_DIR="/mnt";;
-	esac; echo "TTCM 1:$1 2:$2 3:$3 4:$4 5:$5"; #if [ -d $KRN_TC_DIR/$2/ ]; then
+	esac; echo "TTCM 1:$1 2:$2 3:$3 4:$4 5:$5"
 	case $1 in
 		all) case $KAYTTIS in
 				cygwin|wsl) $APP $TC_ARGS /d;;
