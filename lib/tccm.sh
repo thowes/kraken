@@ -15,10 +15,7 @@ tccm() {
 				*) virhe "TCCM command" $1 "not recognized.";;
 			esac;;
 		cygwin|wsl) case $1 in
-		all) case $KAYTTIS in
-				cygwin|wsl) $APP $TC_ARGS /d;;
-				*) tc -d;;
-			esac;;
+				all) $APP $TC_ARGS /d;;
 		dm) case $KAYTTIS in
 				cygwin|wsl) vc /q /s /d $2;;
 				*) tc -d $2;;
