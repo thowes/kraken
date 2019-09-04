@@ -23,14 +23,12 @@ tccm() {
 					else
 						$APP $TC_ARGS /m ro /m rm /l $2 /v $3 /p $PASSU /k \"\"
 					fi;;
-		ts) case $KAYTTIS in
-				cygwin|wsl)
+			ts) case $KAYTTIS in
 					if [ "_$4_" != "__" ]; then
 						$APP $TC_ARGS /m ts /m rm /l $2 /v $3 /p $PASSU /k "$4"
 					else
 						$APP $TC_ARGS /m ts /m rm /l $2 /v $3 /p $PASSU /k \"\"
 					fi;;
-			esac;;
 		*) virhe "TCCM command" $1 "not recognized.";;
 	esac;; esac
 	#if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi
