@@ -17,14 +17,12 @@ tccm() {
 		cygwin|wsl) case $1 in
 				all) $APP $TC_ARGS /d;;
 				dm) vc /q /s /d $2;;
-		ro) case $KAYTTIS in
-				cygwin|wsl)
+				ro) case $KAYTTIS in
 					if [ "_$4_" != "__" ]; then
 						$APP $TC_ARGS /m ro /m rm /l $2 /v $3 /p $PASSU /k "$4"
 					else
 						$APP $TC_ARGS /m ro /m rm /l $2 /v $3 /p $PASSU /k \"\"
 					fi;;
-			esac;;
 		ts) case $KAYTTIS in
 				cygwin|wsl)
 					if [ "_$4_" != "__" ]; then
