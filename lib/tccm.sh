@@ -16,10 +16,7 @@ tccm() {
 			esac;;
 		cygwin|wsl) case $1 in
 				all) $APP $TC_ARGS /d;;
-		dm) case $KAYTTIS in
-				cygwin|wsl) vc /q /s /d $2;;
-				*) tc -d $2;;
-			esac;;
+				dm) vc /q /s /d $2;;
 		ro) case $KAYTTIS in
 				cygwin|wsl)
 					if [ "_$4_" != "__" ]; then
