@@ -15,7 +15,7 @@ if [ -f $2 ]; then
 	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FLM /w"; fi
 	if [ -f $KR_DIR_LIB/vers.sh ]; then . $KR_DIR_LIB/vers.sh; fi
 	if [ -f $KR_DIR_LIB/tccm.sh ]; then . $KR_DIR_LIB/tccm.sh; fi
-	if [ -f $KR_DIR_LIB/../bin/tccm.sh ]; then . $KR_DIR_LIB/../bin/tccm.sh; fi
+	if [ -f $KR_DIR_LIB/../bin/tccm ]; then . $KR_DIR_LIB/../bin/tccm; fi
 	if [ -f $KR_DIR_LIB/uus.sh ]; then . $KR_DIR_LIB/uus.sh; fi
 	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
