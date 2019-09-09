@@ -1,5 +1,5 @@
 #!/bin/bash
-tccm() {
+#tccm() {
 	KR_TC_NAME=$(echo $3|awk -F "." '{print $1}'); KAYTTIS=$(kayttis); case $KAYTTIS in
 		cygwin) KRN_TC_DIR="/cygdrive";;
 		darwin) KRN_TC_DIR="/Volumes";;
@@ -31,5 +31,5 @@ tccm() {
 					fi;;
 			*) virhe "TCCM command" $1 "not recognized.";;
 		esac;; esac
-	#if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi
-}
+#if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi
+#}
