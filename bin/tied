@@ -1,0 +1,13 @@
+#!/bin/bash
+echo "$1"
+
+if [ -d "$1" ]; then cd "$1"; fi
+DIR_TEMP=$(asetus dir:temp)
+ls -lR > $DIR_TEMP/ls.lst
+while read p; do
+	case $p in
+		"./"*":"*) echo "$p"|awk -F':' '{ print $1 $2 }' ;; #\
+		total*) debug $p;;
+		*) echo $p;;
+	esac
+done < $DIR_TEMP/ls.lst
