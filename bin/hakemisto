@@ -1,5 +1,8 @@
 #!/bin/bash
 if [ -d "$1" ]; then cd "$1"; fi
+if [ -f changed.log ]; then mv changed.log changed.lst; fi
+if [ -f duplicate.log ]; then mv duplicate.log duplicate.lst; fi
+if [ -f levy.lst ]; then mv levy.lst hakemisto.lst; fi
 DIR_DIR="."; DIR_TEMP=$(asetus dir:temp); TEMP=$(asetus dir:temp)
 pwd > $DIR_TEMP/changed.lst
 pwd > $DIR_TEMP/duplicate.lst
@@ -22,7 +25,7 @@ while read p; do
 		*"levy.log"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		*"levy.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		*"ls.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
-		"total"*) debug $p;;
+		"total "*) nada;;
 		*)
 			FILE_FILE=$DIR_DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
 			if [ -d "$FILE_FILE" ]; then debug "$FILE_FILE"; else
