@@ -1,13 +1,17 @@
 #!/bin/bash
-echo "$1"
-
 if [ -d "$1" ]; then cd "$1"; fi
 DIR_TEMP=$(asetus dir:temp)
-ls -lR > $DIR_TEMP/ls.lst
+ls -1R > $DIR_TEMP/ls.lst
 while read p; do
 	case $p in
-		"./"*":"*) echo "$p"|awk -F':' '{ print $1 $2 }' ;; #\
+		"./"*":"*) DIR_DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
 		total*) debug $p;;
-		*) echo $p;;
+		*)
+			FILE_FILE=$DIR_DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
+			if [ -d "$FILE_FILE" ]; then debug "$FILE_FILE"; else
+				SUMMA=$(summa "$FILE_FILE")
+				#META_META=$(TIME_STYLE=long-iso ls -l)
+				echo "$SUMMA,$FILE_FILE"
+			fi;;
 	esac
 done < $DIR_TEMP/ls.lst
