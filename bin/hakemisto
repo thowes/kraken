@@ -1,10 +1,25 @@
 #!/bin/bash
 if [ -d "$1" ]; then cd "$1"; fi
 DIR_TEMP=$(asetus dir:temp)
+pwd > $DIR_TEMP/changed.lst
+pwd > $DIR_TEMP/duplicate.lst
+pwd > $DIR_TEMP/hakemisto.lst
+pwd > $DIR_TEMP/junk.lst
 ls -1R > $DIR_TEMP/ls.lst
 while read p; do
 	case $p in
 		"./"*":"*) DIR_DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
+		*"backup.log"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*"changed.log"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*"changed.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*"duplicate.log"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*"duplicate.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*"esktop.ini"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*"hakemisto.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*"junk.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*"levy.log"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*"levy.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*"ls.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		total*) debug $p;;
 		*)
 			FILE_FILE=$DIR_DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
@@ -15,3 +30,11 @@ while read p; do
 			fi;;
 	esac
 done < $DIR_TEMP/ls.lst
+if [ -f $DIR_TEMP/changed.log ]; then rm $DIR_TEMP/changed.log; fi
+if [ -f $DIR_TEMP/changed.lst ]; then rm $DIR_TEMP/changed.lst; fi
+if [ -f $DIR_TEMP/duplicate.log ]; then rm $DIR_TEMP/duplicate.log; fi
+if [ -f $DIR_TEMP/duplicate.lst ]; then rm $DIR_TEMP/duplicate.lst; fi
+if [ -f $DIR_TEMP/hakemisto.lst ]; then rm $DIR_TEMP/hakemisto.lst; fi
+if [ -f $DIR_TEMP/junk.lst ]; then rm $DIR_TEMP/junk.lst; fi
+if [ -f $DIR_TEMP/levy.lst ]; then rm $DIR_TEMP/levy.lst; fi
+if [ -f $DIR_TEMP/ls.lst ]; then rm $DIR_TEMP/ls.lst; fi
