@@ -3,7 +3,7 @@ if [ -d "$1" ]; then cd "$1"; fi
 if [ -f changed.log ]; then mv changed.log changed.lst; fi
 if [ -f duplicate.log ]; then mv duplicate.log duplicate.lst; fi
 if [ -f levy.lst ]; then mv levy.lst hakemisto.lst; fi
-DIR_DIR="."; DIR_TEMP=$(asetus dir:temp); TEMP=$(asetus dir:temp)
+DIR_DIR="."; DIR="."; DIR_TEMP=$(asetus dir:temp); TEMP=$(asetus dir:temp)
 pwd > $DIR_TEMP/changed.lst
 pwd > $DIR_TEMP/duplicate.lst
 pwd > $DIR_TEMP/hakemisto.lst
@@ -16,6 +16,7 @@ while read p; do
 		*"backup.log"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		*"changed.log"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		*"changed.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
+		*".DS_Store"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;; 
 		*"duplicate.log"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		*"duplicate.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		*"esktop.ini"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
@@ -26,12 +27,13 @@ while read p; do
 		*"levy.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		*"ls.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		"total "*) nada;;
-		*)
-			FILE_FILE=$DIR_DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
-			if [ -d "$FILE_FILE" ]; then debug "$FILE_FILE"; else
-				SUMMA=$(summa "$FILE_FILE")
+		*) DIR=$DIR_DIR;
+			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
+			if [ -d "$FILE" ]; then debug "$FILE"; else
+				SUMMA=$(summa "$FILE")
+				cat hakemisto.lst | grep "$SUMMA" | grep -v "$FILE" >> $TEMP/duplicate.lst #| tr -s " " #
 				#META_META=$(TIME_STYLE=long-iso ls -l)
-				echo "$SUMMA,$FILE_FILE" >> $DIR_TEMP/hakemisto.lst
+				echo "$SUMMA,$FILE" >> $TEMP/hakemisto.lst
 			fi;;
 	esac
 done < $DIR_TEMP/ls.lst
