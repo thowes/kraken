@@ -4,11 +4,11 @@ if [ -f changed.log ]; then mv changed.log changed.lst; fi
 if [ -f duplicate.log ]; then mv duplicate.log duplicate.lst; fi
 if [ -f levy.lst ]; then mv levy.lst hakemisto.lst; fi
 DIR_DIR="."; DIR="."; DIR_TEMP=$(asetus dir:temp); TEMP=$(asetus dir:temp)
-pwd > $DIR_TEMP/changed.lst
-pwd > $DIR_TEMP/duplicate.lst
-pwd > $DIR_TEMP/hakemisto.lst
-pwd > $DIR_TEMP/junk.lst
-ls -1R > $DIR_TEMP/ls.lst
+pwd > $TEMP/changed.lst
+pwd > $TEMP/duplicate.lst
+pwd > $TEMP/hakemisto.lst
+pwd > $TEMP/junk.lst
+ls -1R > $TEMP/ls.lst
 while read p; do
 	case $p in
 		".:") DIR_DIR=".";;
@@ -36,11 +36,11 @@ while read p; do
 				echo "$SUMMA,$FILE" >> $TEMP/hakemisto.lst
 			fi;;
 	esac
-done < $DIR_TEMP/ls.lst
-mv $DIR_TEMP/changed.lst .
-mv $DIR_TEMP/duplicate.lst .
-mv $DIR_TEMP/hakemisto.lst .
-mv $DIR_TEMP/junk.lst .
+done < $TEMP/ls.lst
+mv $TEMP/changed.lst .
+mv $TEMP/duplicate.lst .
+mv $TEMP/hakemisto.lst .
+mv $TEMP/junk.lst .
 if [ -f $DIR_TEMP/changed.log ]; then rm $DIR_TEMP/changed.log; fi
 if [ -f $DIR_TEMP/changed.lst ]; then rm $DIR_TEMP/changed.lst; fi
 if [ -f $DIR_TEMP/duplicate.log ]; then rm $DIR_TEMP/duplicate.log; fi
