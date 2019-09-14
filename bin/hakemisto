@@ -11,8 +11,8 @@ pwd > $TEMP/junk.lst
 ls -1R > $TEMP/ls.lst
 while read p; do
 	case $p in
-		".:") DIR_DIR=".";;
-		"./"*":"*) DIR_DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
+		".:") DIR_DIR="."; DIR=".";;
+		"./"*":"*) DIR_DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }'); DIR="$DIR_DIR";; #\
 		*"backup.log"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		*"changed.log"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
 		*"changed.lst"*) echo "$DIR_DIR/$p" >> $DIR_TEMP/junk.lst;;
@@ -41,11 +41,11 @@ mv $TEMP/changed.lst .
 mv $TEMP/duplicate.lst .
 mv $TEMP/hakemisto.lst .
 mv $TEMP/junk.lst .
-if [ -f $DIR_TEMP/changed.log ]; then rm $DIR_TEMP/changed.log; fi
-if [ -f $DIR_TEMP/changed.lst ]; then rm $DIR_TEMP/changed.lst; fi
-if [ -f $DIR_TEMP/duplicate.log ]; then rm $DIR_TEMP/duplicate.log; fi
-if [ -f $DIR_TEMP/duplicate.lst ]; then rm $DIR_TEMP/duplicate.lst; fi
-if [ -f $DIR_TEMP/hakemisto.lst ]; then rm $DIR_TEMP/hakemisto.lst; fi
-if [ -f $DIR_TEMP/junk.lst ]; then rm $DIR_TEMP/junk.lst; fi
-if [ -f $DIR_TEMP/levy.lst ]; then rm $DIR_TEMP/levy.lst; fi
-if [ -f $DIR_TEMP/ls.lst ]; then rm $DIR_TEMP/ls.lst; fi
+if [ -f $TEMP/changed.log ]; then rm $TEMP/changed.log; fi
+if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
+if [ -f $TEMP/duplicate.log ]; then rm $TEMP/duplicate.log; fi
+if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
+if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
+if [ -f $TEMP/junk.lst ]; then rm $TEMP/junk.lst; fi
+if [ -f $TEMP/levy.lst ]; then rm $TEMP/levy.lst; fi
+if [ -f $TEMP/ls.lst ]; then rm $TEMP/ls.lst; fi
