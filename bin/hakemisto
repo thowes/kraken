@@ -3,7 +3,7 @@ if [ -d "$1" ]; then cd "$1"; fi
 if [ -f changed.log ]; then mv changed.log changed.lst; fi
 if [ -f duplicate.log ]; then mv duplicate.log duplicate.lst; fi
 if [ -f levy.lst ]; then mv levy.lst hakemisto.lst; fi
-DIR_DIR="."; DIR="."; DIR_TEMP=$(asetus dir:temp); TEMP=$(asetus dir:temp)
+DIR="."; TEMP=$(asetus dir:temp)
 pwd > $TEMP/changed.lst
 pwd > $TEMP/duplicate.lst
 pwd > $TEMP/hakemisto.lst
@@ -11,8 +11,8 @@ pwd > $TEMP/junk.lst
 ls -1R > $TEMP/ls.lst
 while read p; do
 	case $p in
-		".:") DIR_DIR="."; DIR=".";;
-		"./"*":"*) DIR_DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }'); DIR="$DIR_DIR";; #\
+		".:") DIR=".";;
+		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
 		*"backup.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"changed.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"changed.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
@@ -27,7 +27,7 @@ while read p; do
 		*"levy.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"ls.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		"total "*) nada;;
-		*) DIR=$DIR_DIR;
+		*)
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
 			if [ -d "$FILE" ]; then debug "$FILE"; else
 				SUMMA=$(summa "$FILE")
