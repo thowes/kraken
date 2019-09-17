@@ -1,11 +1,10 @@
 #!/bin/bash
-#tccm() {
 KR_TC_NAME=$(echo $3|awk -F "." '{print $1}'); KAYTTIS=$(kayttis)
 case $KAYTTIS in
-		cygwin) KRN_TC_DIR="/cygdrive";;
-		darwin) KRN_TC_DIR="/Volumes";;
-		ubuntu) KRN_TC_DIR="/media/$USER";;
-		wsl) KRN_TC_DIR="/mnt";;
+	cygwin) KRN_TC_DIR="/cygdrive";;
+	darwin) KRN_TC_DIR="/Volumes";;
+	ubuntu) KRN_TC_DIR="/media/$USER";;
+	wsl) KRN_TC_DIR="/mnt";;
 esac
 echo "TTCM 1:$1 2:$2 3:$3 4:$4 5:$5"
 case $KAYTTIS in
@@ -37,4 +36,3 @@ case $KAYTTIS in
 		esac;; 
 esac
 #if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi
-#}
