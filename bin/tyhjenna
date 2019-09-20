@@ -15,6 +15,7 @@ case $1 in
 			esac
 			if [ -f $KR_DIR_DT/$KR_NAME_URL ]; then \cp $KR_DIR_DT/*.url $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.url; fi
 		fi;;
+	exit) PATH_TTY=$KR_DIR_TEMP/tynnyri/$(verkko tty).tynnyri; if [ -f $PATH_TTY ]; then \rm $PATH_TTY; fi;;
 	hst)
 		if [ -f ~/.bash_history ]; then \rm ~/.bash_history; fi
 		if [ -f ~/.wget-hsts ]; then \rm ~/.wget-hsts; fi
