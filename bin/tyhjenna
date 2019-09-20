@@ -2,20 +2,20 @@
 KR_DIR_BUA=$(asetus dir:bua)
 
 case $1 in
-	all) tyhjenna menu; tyhjenna startup; tyhjenna desktop;;
+	all) tyhjenna menu; tyhjenna startup; tyhjenna exit;;
 	desktop)
 		if [ -d $KR_DIR_BUA/DESKTOP/ ]; then
 			KR_DIR_DT=$(asetus dir:dt)
 			KR_NAME_LNK=$(asetus str:lnk)
 			KR_NAME_URL=$(asetus str:url)
-			case $(uname) in
-				CYGWIN*) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
+			case $(uname -a) in
+				CYGWIN*|*Microsoft*) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.lnk $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.lnk; fi;;
 				Darwin) if [ -d $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.app $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.app; fi;;
 				Ubuntu) if [ -f $KR_DIR_DT/$KR_NAME_LNK ]; then \cp $KR_DIR_DT/*.desktop $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.desktop; fi;;
 			esac
 			if [ -f $KR_DIR_DT/$KR_NAME_URL ]; then \cp $KR_DIR_DT/*.url $KR_DIR_BUA/DESKTOP/; \rm $KR_DIR_DT/*.url; fi
 		fi;;
-	exit) PATH_TTY=$KR_DIR_TEMP/tynnyri/$(verkko tty).tynnyri; if [ -f $PATH_TTY ]; then \rm $PATH_TTY; fi;;
+	exit) tyhjenna desktop; PATH_TTY=$KR_DIR_TEMP/tynnyri/$(verkko tty).tynnyri; if [ -f $PATH_TTY ]; then \rm $PATH_TTY; fi;;
 	hst)
 		if [ -f ~/.bash_history ]; then \rm ~/.bash_history; fi
 		if [ -f ~/.wget-hsts ]; then \rm ~/.wget-hsts; fi
@@ -34,5 +34,5 @@ case $1 in
 			if [ -d "$KR_DIR_PMENU" ]; then \cp $KR_DIR_PMENU/*.lnk $KR_DIR_BUA/PMENU/; fi
 		else virhe shorts.sh:30 dir $KR_DIR_BUA/MENU/ missing
 		fi;;
-	*) tyhjenna menu; tyhjenna desktop;;
+	*) tyhjenna exit;;
 esac
