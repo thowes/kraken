@@ -22,15 +22,15 @@ case $KAYTTIS in
 			dm) vc /q /s /d $2;;
 			ro)
 				if [ "_$4_" != "__" ]; then
-						$APP $TC_ARGS /m ro /m rm /l $2 /v $3 /p $PASSU /k "$4"
+					$APP $TC_ARGS /m ro /m rm /l $2 /v $3 /p $PASSU /k "$4"
 				else
-						$APP $TC_ARGS /m ro /m rm /l $2 /v $3 /p $PASSU /k \"\"
+					$APP $TC_ARGS /m ro /m rm /l $2 /v $3 /p $PASSU /k \"\"
 				fi;;
 			ts)
 				if [ "_$4_" != "__" ]; then
-						$APP $TC_ARGS /m ts /m rm /l $2 /v $3 /p $PASSU /k "$4"
+					$APP $TC_ARGS /m ts /m rm /l $2 /v $3 /p $PASSU /k "$4"
 				else
-						$APP $TC_ARGS /m ts /m rm /l $2 /v $3 /p $PASSU /k \"\"
+					$APP $TC_ARGS /m ts /m rm /l $2 /v $3 /p $PASSU /k \"\"
 				fi;;
 			*) virhe "TCCM command" $1 "not recognized.";;
 		esac;; 
