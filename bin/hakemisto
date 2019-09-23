@@ -29,9 +29,12 @@ while read p; do
 		"total "*) nada;;
 		*)
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
-			if [ -d "$FILE" ]; then debug "$FILE"; else
-				SUMMA=$(summa "$FILE")
-				cat hakemisto.lst | grep "$SUMMA" | grep -v "$FILE" >> $TEMP/duplicate.lst #| tr -s " " #
+			if [ -d "$FILE" ]; then nada; else
+				SUMMA=$(summa "$FILE"); RIVI=$SUMMA,$FILE
+				RIVIT=$(cat hakemisto.lst | grep "$SUMMA")
+				if [ "$SUMMA,$FILE" == "$RIVIT" ]; then nada; else
+					echo "$RIVIT" | grep -v "$RIVI" >> $TEMP/duplicate.lst
+				fi
 				#META_META=$(TIME_STYLE=long-iso ls -l)
 				echo "$SUMMA,$FILE" >> $TEMP/hakemisto.lst
 			fi;;
