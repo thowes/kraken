@@ -2,6 +2,7 @@
 if [ $KR_DEBUG == "true" ]; then tynnyri "UUS"; fi
 
 uus() {
+	KR_DIR_LIB=$(asetus dir:lib)
 	case "$1" in
 		dir) cp $KR_DIR_LIB/../tmpl/dir.makefile makefile;;
 		git) cp $KR_DIR_LIB/../tmpl/git.makefile makefile;;
