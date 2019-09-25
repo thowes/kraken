@@ -14,6 +14,7 @@ if [ -f $2 ]; then
 	# MODULES, FILE MANAGEMENT & BACKUP FUNCTIONS
 	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FLM /w"; fi
 	if [ -f $KR_DIR_LIB/vers.sh ]; then . $KR_DIR_LIB/vers.sh; fi
+	if [ -f $KR_DIR_LIB/../bin/uus.sh ]; then . $KR_DIR_LIB/../bin/uus.sh; fi
 	if [ -f $KR_DIR_LIB/uus.sh ]; then . $KR_DIR_LIB/uus.sh; fi
 	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
 
