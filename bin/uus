@@ -1,7 +1,6 @@
 #!/bin/bash
 if [ $KR_DEBUG == "true" ]; then tynnyri "UUS"; fi
 
-#uus() {
 KR_DIR_LIB=$(asetus dir:lib)
 case "$1" in
 	dir) cp $KR_DIR_LIB/../tmpl/dir.makefile makefile;;
@@ -12,4 +11,3 @@ case "$1" in
 	sh) cp $KR_DIR_LIB/../tmpl/template.sh template.sh;;
 	*) cp $KR_DIR_LIB/../tmpl/$1 $2;;
 esac
-#}
