@@ -31,9 +31,11 @@ while read p; do
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
 			if [ -d "$FILE" ]; then nada; else
 				SUMMA=$(summa "$FILE"); RIVI=$SUMMA,$FILE
-				RIVIT=$(cat hakemisto.lst | grep "$SUMMA")
-				if [ "$SUMMA,$FILE" == "$RIVIT" ]; then nada; else
-					echo "$RIVIT" | grep -v "$RIVI" >> $TEMP/duplicate.lst
+				if [ -f hakemisto.lst ]; then
+					RIVIT=$(cat hakemisto.lst | grep "$SUMMA")
+					if [ "$SUMMA,$FILE" == "$RIVIT" ]; then nada; else
+						echo "$RIVIT" | grep -v "$RIVI" >> $TEMP/duplicate.lst
+					fi
 				fi
 				#META_META=$(TIME_STYLE=long-iso ls -l)
 				echo "$SUMMA,$FILE" >> $TEMP/hakemisto.lst
