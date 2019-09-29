@@ -3,11 +3,11 @@ if [ -d "$1" ]; then cd "$1"; fi
 if [ -f changed.log ]; then mv changed.log changed.lst; fi
 if [ -f duplicate.log ]; then mv duplicate.log duplicate.lst; fi
 if [ -f levy.lst ]; then mv levy.lst hakemisto.lst; fi
-DIR="."; TEMP=$(asetus dir:temp)
-pwd > $TEMP/changed.lst
-pwd > $TEMP/duplicate.lst
-pwd > $TEMP/hakemisto.lst
-pwd > $TEMP/junk.lst
+DIR="."; TEMP=$(asetus dir:temp); INIT_STRING="$(pwd) $(pvm)"
+echo $INIT_STRING > $TEMP/changed.lst
+echo $INIT_STRING > $TEMP/duplicate.lst
+echo $INIT_STRING > $TEMP/hakemisto.lst
+echo $INIT_STRING > $TEMP/junk.lst
 ls -1R > $TEMP/ls.lst
 while read p; do
 	case $p in
