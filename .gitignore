@@ -2,5 +2,5 @@ backup.log
 /cfg
 .desktop_links
 .DS_Store
-*.sublime*
+*.sublime-w*
 /temp
