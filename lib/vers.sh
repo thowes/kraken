@@ -21,9 +21,13 @@ vers_w() {
 }
 
 vers() {
+	case $1 in
+		-w*) nada;;
+		*)
 	if [ -f $KR_DIR_CFG/versions/$1.txt ]; then
 		cat $KR_DIR_CFG/versions/$1.txt
 	else
 		virhe VERS "Parametria ei tunnistettu!"
-	fi
+	fi;;
+	esac
 }
