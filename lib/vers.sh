@@ -1,4 +1,5 @@
 #!/bin/bash
+DIR_CFG=$(asetus dir:cfg)
 vers_w() {
 	if [ -d $KR_DIR_CFG/versions/ ]; then
 		case $1 in
@@ -22,7 +23,7 @@ vers_w() {
 
 vers() {
 	case $1 in
-		-v*) if [ -f $KR_DIR_CFG/versions/$2.txt ]; then cat $KR_DIR_CFG/versions/$2.txt; else; virhe VERS "Parametre $2 not recognized!"; fi;;
+		-v*) if [ -f $DIR_CFG/versions/$2.txt ]; then cat $DIR_CFG/versions/$2.txt; else virhe VERS "Parametre $2 not recognized!"; fi;;
 		-w*) nada;;
 		*)
 	if [ -f $KR_DIR_CFG/versions/$1.txt ]; then
