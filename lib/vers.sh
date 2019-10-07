@@ -22,6 +22,7 @@ vers_w() {
 
 vers() {
 	case $1 in
+		-v*) if [ -f $KR_DIR_CFG/versions/$2.txt ]; then cat $KR_DIR_CFG/versions/$2.txt; else; virhe VERS "Parametre $2 not recognized!"; fi;;
 		-w*) nada;;
 		*)
 	if [ -f $KR_DIR_CFG/versions/$1.txt ]; then
