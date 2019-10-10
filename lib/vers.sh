@@ -1,10 +1,10 @@
 #!/bin/bash
-DIR_CFG=$(asetus dir:cfg)
+if [ -z" $DIR_CFG" ]; then DIR_CFG=$(asetus dir:cfg); fi
 vers_w() {
 	if [ -d $DIR_CFG/versions/ ]; then
 		case $1 in
-			apache) apache2 -v  > $KR_DIR_CFG/versions/$1.txt;;
-			git) git --version > DIR_CFG/versions/$2.txt;;
+			apache) apache2 -v  > $DIR_CFG/versions/$2.txt;;
+			git) git --version > $DIR_CFG/versions/$2.txt;;
 			heroku) heroku version > $DIR_CFG/versions/$2.txt;;
 			kraken) svn info ~/proj/kraken|grep Revision > $KR_DIR_CFG/versions/$1.txt;;
 			mysql) mysql -V > $KR_DIR_CFG/versions/$1.txt;;
@@ -15,7 +15,7 @@ vers_w() {
 			rails) rails --version > $DIR_CFG/versions/$2.txt;;
 			ruby) ruby -v > $DIR_CFG/versions/$2.txt;;
 			svn) svn help | grep client > $DIR_CFG/versions/$2.txt;;
-			wget) wget -V|grep ggdb|grep lib > $KR_DIR_CFG/versions/$1.txt;;
+			wget) wget -V|grep ggdb|grep lib > $DIR_CFG/versions/$2.txt;;
 			*) virhe VERS "parametria ei tunnistettu!";;
 		esac
 	fi
@@ -27,6 +27,7 @@ vers() {
 		-w*)
 			case $2 in
 				curl) curl -V | grep libcurl > $DIR_CFG/versions/$2.txt;;
+				imagemagick) identify --version | grep Version > $DIR_CFG/versions/$2.txt;;
 				rbenv) rbenv version > $DIR_CFG/versions/$2.txt;;
 			esac;;
 		*)
