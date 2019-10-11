@@ -1,8 +1,15 @@
 #!/bin/bash
 if [ -d "$1" ]; then cd "$1"; fi
-if [ -f changed.log ]; then mv changed.log changed.lst; fi
-if [ -f duplicate.log ]; then mv duplicate.log duplicate.lst; fi
-if [ -f hakemisto.lst ]; then nada; else 
+if [ -f changed.lst ]; then nada; else
+	if [ -f changed.old ]; then mv changed.old changed.lst; fi
+	if [ -f changed.log ]; then mv changed.log changed.lst; fi
+fi
+if [ -f duplicate.lst ]; then nada; else
+	if [ -f duplicate.old ]; then mv duplicate.old duplicate.lst; fi
+	if [ -f duplicate.log ]; then mv duplicate.log duplicate.lst; fi
+fi
+if [ -f hakemisto.lst ]; then nada; else
+	if [ -f levy.old ]; then mv levy.old hakemisto.lst; fi
 	if [ -f levy.log ]; then mv levy.log hakemisto.lst; fi
 	if [ -f levy.lst ]; then mv levy.lst hakemisto.lst; fi
 fi
@@ -56,9 +63,14 @@ mv $TEMP/hakemisto.lst .
 mv $TEMP/junk.lst .
 if [ -f $TEMP/changed.log ]; then rm $TEMP/changed.log; fi
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
+if [ -f $TEMP/changed.old ]; then rm $TEMP/changed.old; fi
 if [ -f $TEMP/duplicate.log ]; then rm $TEMP/duplicate.log; fi
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
+if [ -f $TEMP/duplicate.old ]; then rm $TEMP/duplicate.old; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
+if [ -f $TEMP/hakemisto.old ]; then rm $TEMP/hakemisto.old; fi
 if [ -f $TEMP/junk.lst ]; then rm $TEMP/junk.lst; fi
+if [ -f $TEMP/junk.old ]; then rm $TEMP/junk.old; fi
 if [ -f $TEMP/levy.lst ]; then rm $TEMP/levy.lst; fi
+if [ -f $TEMP/levy.old ]; then rm $TEMP/levy.old; fi
 if [ -f $TEMP/ls.lst ]; then rm $TEMP/ls.lst; fi
