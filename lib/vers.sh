@@ -33,10 +33,10 @@ case $1 in
 			*) if [ -f $DIR_CFG/versions.txt ]; then rm $DIR_CFG/versions.txt; fi; echo "versions.txt:" $(pvm) > $DIR_CFG/versions.txt; vers -w apache; vers -w curl; vers -w git; vers -w gpg; vers -w heroku; vers -w imagemagick; vers -w mysql; vers -w php; vers -w psql; vers -w python; vers -w rails; vers -w rbenv; vers -w rsync; vers -w ruby; vers -w svn; vers -w wget;;
 		esac;; 
 	*)
-	if [ -f $DIR_CFG/versions/$1.txt ]; then echo V36 $1 $2
-		cat $DIR_CFG/versions/$1.txt
+	if [ -f $DIR_CFG/versions.txt ]; then
+		cat $DIR_CFG/versions.txt | grep "$1"
 	else
-		virhe VERS "Parametria ei tunnistettu!"
+		virhe "VERS versions.txt not found!"
 	fi;;
 esac
 }
