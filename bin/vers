@@ -1,5 +1,4 @@
 #!/bin/bash
-vers() {
 if [ -z "$DIR_CFG" ]; then DIR_CFG=$(asetus dir:cfg); fi
 case $1 in
 	-v*) if [ -f $DIR_CFG/versions.txt ]; then cat $DIR_CFG/versions.txt | grep $2; else virhe VERS "file versions.txt not found!"; fi;;
@@ -16,10 +15,10 @@ case $1 in
 			php) echo "php:" $(php -v) >> $DIR_CFG/versions.txt;;
 			ps*) echo "psql:" $(psql -V) >> $DIR_CFG/versions.txt;;
 			py*) echo "python:" $(python -V|grep Python) >> $DIR_CFG/versions.txt;;
-			rails) echo "rails:" $(rails --version) >> $DIR_CFG/versions.txt;;
-			rbenv) echo "rbenv:" $(rbenv version) >> $DIR_CFG/versions.txt;;
-			rsync) echo "rsync:" $(rsync --version|grep version) >> $DIR_CFG/versions.txt;;
-			ruby) echo "ruby:" $(ruby -v) >> $DIR_CFG/versions.txt;;
+			ra*) echo "rails:" $(rails --version) >> $DIR_CFG/versions.txt;;
+			rb*) echo "rbenv:" $(rbenv version) >> $DIR_CFG/versions.txt;;
+			rs*) echo "rsync:" $(rsync --version|grep version) >> $DIR_CFG/versions.txt;;
+			ru*) echo "ruby:" $(ruby -v) >> $DIR_CFG/versions.txt;;
 			svn) echo "svn:" $(svn help|grep client) >> $DIR_CFG/versions.txt;;
 			wget) echo "wget:" $(wget -V|grep Wget) >> $DIR_CFG/versions.txt;;
 			*)
@@ -36,4 +35,3 @@ case $1 in
 			if [ -f $DIR_CFG/versions.txt ]; then cat $DIR_CFG/versions.txt | grep "$1"; else virhe "VERS versions.txt not found!"; fi
 		fi;;
 esac
-}
