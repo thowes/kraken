@@ -2,7 +2,7 @@
 vers_w() {
 	if [ -d $DIR_CFG/versions/ ]; then
 		case $1 in
-			kraken) svn info ~/proj/kraken|grep Revision > $KR_DIR_CFG/versions/$1.txt;;
+			kraken) echo "kraken:" $(svn info ~/proj/kraken|grep Revision) >> $DIR_CFG/versions.txt;;
 			*) virhe VERS "parametria ei tunnistettu!";;
 		esac
 	fi
@@ -30,7 +30,11 @@ case $1 in
 			ruby) echo "ruby:" $(ruby -v) >> $DIR_CFG/versions.txt;;
 			svn) echo "svn:" $(svn help|grep client) >> $DIR_CFG/versions.txt;;
 			wget) echo "wget:" $(wget -V|grep Wget) >> $DIR_CFG/versions.txt;;
-			*) if [ -f $DIR_CFG/versions.txt ]; then rm $DIR_CFG/versions.txt; fi; echo "versions.txt:" $(pvm) > $DIR_CFG/versions.txt; vers -w apache; vers -w curl; vers -w git; vers -w gpg; vers -w heroku; vers -w imagemagick; vers -w mysql; vers -w php; vers -w psql; vers -w python; vers -w rails; vers -w rbenv; vers -w rsync; vers -w ruby; vers -w svn; vers -w wget;;
+			*)
+				if [ -f $DIR_CFG/versions.txt ]; then rm $DIR_CFG/versions.txt; fi
+				echo "versions.txt:" $(pvm) > $DIR_CFG/versions.txt
+				vers -w apache; vers -w curl; vers -w git; vers -w gpg; vers -w heroku; vers -w imagemagick; vers -w mysql; vers -w php; vers -w psql; vers -w python; vers -w rails; vers -w rbenv; vers -w rsync; vers -w ruby; vers -w svn; vers -w wget
+				;;
 		esac;; 
 	*)
 	if [ -f $DIR_CFG/versions.txt ]; then
