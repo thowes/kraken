@@ -11,17 +11,12 @@ if [ -f $2 ]; then
 	. $2
 	CONTEXT=$1"_"$USECONTEXT
 
-	# MODULES, FILE MANAGEMENT & BACKUP FUNCTIONS
-	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FLM /w"; fi
-	if [ -f $KR_DIR_LIB/../bin/vers ]; then . $KR_DIR_LIB/../bin/vers; fi
-	if [ -f $KR_DIR_LIB/vers.sh ]; then . $KR_DIR_LIB/vers.sh; fi
-	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
-
 	# LOCAL
 	if [ -f $KR_DIR_CFG/compu.sh ]; then . $KR_DIR_CFG/compu.sh; fi
 
 	#KIRJASTOT
 	if [ -f $KR_DIR_LIB/kr_network.sh ]; then . $KR_DIR_LIB/kr_network.sh; fi
+	if [ -f $KR_DIR_LIB/../bin/valitse ]; then . $KR_DIR_LIB/../bin/valitse; fi
 	if [ -f $KR_DIR_LIB/val.sh ]; then . $KR_DIR_LIB/val.sh; fi
 	if [ -f $KR_DIR_LIB/proj.sh ]; then . $KR_DIR_LIB/proj.sh; fi
 
