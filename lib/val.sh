@@ -1,10 +1,8 @@
 #!/bin/bash
-#val.sh, L 11.6.2013/20.7.2014
-if [ $KR_DEBUG == "true" ]; then tynnyri VAL; fi
-
 valitse() {
-	#prints to screen list projects valid for current location
-	cat $KR_DIR_CFG/proj.csv|\grep $1|awk -F, '{ print " "$1"\t" $2 }'
+DIR_CFG=$(asetus dir:cfg)
+#prints to screen list projects valid for current location
+cat $DIR_CFG/proj.csv|\grep $1|awk -F, '{ print " "$1"\t" $2 }'
 	KR_PROJ_TEMP="def"
 	KR_PROJ_TEST=" "
 	read -p "PROJECT " -r KR_PROJ_TEMP
@@ -18,6 +16,6 @@ valitse() {
 		PROJECT="def"
 		debug PROJ $KR_PROJ_TEST is "empty." 
 	fi
-	KR_DIRPO_LINE=$(cat $KR_DIR_CFG/proj.csv | \grep $PROJECT )
-	KR_DIRPO=$(echo $KR_DIRPO_LINE|awk -F, '{print $4}')
+KR_DIRPO_LINE=$(cat $DIR_CFG/proj.csv|\grep $PROJECT)
+KR_DIRPO=$(echo $KR_DIRPO_LINE|awk -F, '{print $4}')
 }
