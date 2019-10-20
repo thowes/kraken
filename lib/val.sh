@@ -18,4 +18,5 @@ cat $DIR_CFG/proj.csv|\grep $1|awk -F, '{ print " "$1"\t" $2 }'
 	fi
 KR_DIRPO_LINE=$(cat $DIR_CFG/proj.csv|\grep $PROJECT)
 KR_DIRPO=$(echo $KR_DIRPO_LINE|awk -F, '{print $4}')
+echo PROJECT=$PROJECT \n KR_DIRPO_LINE=$KR_DIRPO_LINE \n KR_DIRPO=$KR_DIRPO > $(asetus dir:temp)/$(verkko tty).proj
 }
