@@ -1,9 +1,4 @@
 #!/bin/sh
 
-if [ "$(asetus bool:backups)" == "true" ]; then
-	kaiku ALOITA
-	#kerain.sh
-	#vker.sh
-else
-	virhe ALOITA
-fi
+
+
