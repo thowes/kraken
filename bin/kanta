@@ -36,7 +36,7 @@ fi
 
 if [ "_$(echo $DB)_" != "__" ]; then
 	case $FUNCTION in
-		add) sqlite3 $DB "INSERT INTO $TABLE ($FILTER) values($INPUT);";;
+		add) sqlite3 $DB "INSERT INTO $TABLE ($FILTER) values($SEARCH);";;
 		count) if [ "_$(echo $FILTER)_" != "__" ] && [ "_$(echo $SEARCH)_" != "__" ]; then sqlite3 $DB "SELECT Count(*) FROM $TABLE WHERE $FILTER LIKE '%$SEARCH%';"; else sqlite3 $DB "SELECT Count(*) FROM $TABLE;"; fi;;
 		create) sqlite3 $DB "CREATE TABLE $TABLE ($SEARCH);";;
 		generate) if [ "_$DB" != "_" ]; then touch $DB; fi;;
