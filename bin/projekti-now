@@ -1,4 +1,11 @@
 #!/bin/sh
-
-
-
+TEMP=$(asetus dir:temp)
+TTY=$(verkko tty)
+if [ -f $TEMP/$TTY.proj ]; then
+	case $1 in
+		-d*) cat $TEMP/$TTY.proj | grep "KR_DIRPO=";;
+		-l*) cat $TEMP/$TTY.proj | grep "LINE=";;
+		-p*) cat $TEMP/$TTY.proj | grep "PROJECT=";;
+		*) cat $TEMP/$TTY.proj | grep "LINE=";;
+	esac
+fi
