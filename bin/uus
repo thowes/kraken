@@ -1,6 +1,4 @@
-#!/bin/bash
-if [ $KR_DEBUG == "true" ]; then tynnyri "UUS"; fi
-
+#!/bin/sh
 KR_DIR_LIB=$(asetus dir:lib)
 case "$1" in
 	dir) cp $KR_DIR_LIB/../tmpl/dir.makefile makefile;;
