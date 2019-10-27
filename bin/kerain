@@ -1,10 +1,10 @@
 #!/bin/sh
-KR_DIR_CFG=$(asetus dir:cfg)
-if [ -f $KR_DIR_CFG/kerain.sh ]; then
-	. $KR_DIR_CFG/kerain.sh
+DIR_CFG=$(asetus dir:cfg)
+if [ -f $DIR_CFG/kerain.sh ]; then
+	. $DIR_CFG/kerain.sh
 else
-	virhe Not found $KR_DIR_CFG/kerain.sh
+	virhe Not found $DIR_CFG/kerain.sh
 fi
-if [ -f $KR_DIR_CFG/kerain.csv ]; then
-	kaiku $KR_DIR_CFG/kerain.csv
+if [ -f $DIR_CFG/kerain.csv ]; then
+	kaiku $DIR_CFG/kerain.csv
 fi
