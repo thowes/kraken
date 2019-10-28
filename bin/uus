@@ -1,11 +1,11 @@
 #!/bin/sh
-KR_DIR_LIB=$(asetus dir:lib)
+DIR_LIB=$(asetus dir:lib)
 case "$1" in
-	dir) cp $KR_DIR_LIB/../tmpl/dir.makefile makefile;;
-	git) cp $KR_DIR_LIB/../tmpl/git.makefile makefile;;
-	mf) cp $KR_DIR_LIB/../tmpl/$2.makefile makefile;;
-	subl) cp $KR_DIR_LIB/../tmpl/P.sublime-project P.sublime-project;;
-	svn) cp $KR_DIR_LIB/../tmpl/svn.makefile makefile;;
-	sh) cp $KR_DIR_LIB/../tmpl/template.sh template.sh;;
-	*) cp $KR_DIR_LIB/../tmpl/$1 $2;;
+	dir) cp $DIR_LIB/../tmpl/dir.makefile makefile;;
+	git) cp $DIR_LIB/../tmpl/git.makefile makefile;;
+	mf) cp $DIR_LIB/../tmpl/$2.makefile makefile;;
+	subl) cp $DIR_LIB/../tmpl/P.sublime-project P.sublime-project;;
+	svn) cp $DIR_LIB/../tmpl/svn.makefile makefile;;
+	sh) cp $DIR_LIB/../tmpl/template.sh template.sh;;
+	*) cp $DIR_LIB/../tmpl/$1 $2;;
 esac
