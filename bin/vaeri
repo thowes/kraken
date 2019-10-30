@@ -1,6 +1,10 @@
 #!/bin/bash
 #colors.sh, 11.2.2014
-if [ $KR_DEBUG == "true" ]; then echo "[[ KRAKEN/COLORS ]]"; fi
+if [ -z "$1" ]; then case $1 in
+	-c) FUNC=clr;;
+	-n) FUNC=num;;
+	-t) FUNC=tst;;
+esac; fi; COLOR_NAME=zero; COLOR=e[0m
 
 if [ "true" == "true" ]; then
 	BLACK=30m
@@ -24,7 +28,6 @@ if [ "true" == "true" ]; then
 	WHITE=97m
 	YELLOW=33m
 	LYELLOW=93m
-	ZERO=e[0m
 fi
 
 colors_test() {
@@ -48,3 +51,9 @@ colors_test() {
 	tyn $YELLOW
 	tynnyri kick
 }
+
+case $FUNC in
+	tst) kaiku $COLOR_NAME: $COLOR;;
+	*) echo $COLOR;;
+esac
+
