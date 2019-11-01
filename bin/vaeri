@@ -1,5 +1,5 @@
 #!/bin/bash
-COLOR_NAME=zero; COLOR=e[0m
+COLOR_NAME=zero; COLOR=e[0m; NORMAL="\e[0m";
 if [ -z "$1" ]; then nada; else case $1 in
 	-c) FUNC=clr; COLOR_NAME=$2;;
 	-n) FUNC=num; COLOR_NAME=$2;;
@@ -9,6 +9,7 @@ esac; fi
 
 case $COLOR_NAME in
 	black) COLOR=30m;;
+	red) COLOR=31m;;
 esac
 
 if [ "true" == "true" ]; then
@@ -27,7 +28,6 @@ if [ "true" == "true" ]; then
 	ORANGE=orange
 	PINK=pink
 	PURPLE=purple
-	RED=31m
 	LRED=91m
 	WHITE=97m
 	YELLOW=33m
@@ -48,13 +48,12 @@ colors_test() {
 	tyn $ORANGE
 	tyn $PINK
 	tyn $PURPLE
-	kaiku $RED RED
 	tyn $WHITE
 	tyn $YELLOW
 }
 
 case $FUNC in
-	tst) kaiku "VAERI: $COLOR $COLOR_NAME" $COLOR e[0m "($COLOR_NAME)";;
-	*) echo $COLOR;;
+	tst) START="\e[$COLOR"; printf "$START%b$NORMAL" "$COLOR $COLOR_NAME"; printf " ($COLOR $COLOR_NAME)\n";;
+	*) printf "$COLOR\n";;
 esac
 
