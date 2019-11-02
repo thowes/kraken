@@ -9,6 +9,7 @@ esac; fi
 
 case $COLOR_NAME in
 	black) COLOR=30m;;
+	purple) COLOR=35m;;
 	red) COLOR=31m;;
 esac
 
@@ -27,7 +28,6 @@ if [ "true" == "true" ]; then
 	LMAGENTA=95m
 	ORANGE=orange
 	PINK=pink
-	PURPLE=purple
 	LRED=91m
 	WHITE=97m
 	YELLOW=33m
@@ -47,7 +47,6 @@ colors_test() {
 	tyn $NAVY
 	tyn $ORANGE
 	tyn $PINK
-	tyn $PURPLE
 	tyn $WHITE
 	tyn $YELLOW
 }
