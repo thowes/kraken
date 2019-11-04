@@ -1,21 +1,26 @@
 #!/bin/bash
-COLOR_NAME=zero; COLOR=e[0m; NORMAL="\e[0m";
+MODE=def; COLOR_NAME=zero; COLOR=e[0m; NORMAL="\e[0m";
 if [ -z "$1" ]; then nada; else case $1 in
 	-c) FUNC=clr; COLOR_NAME=$2;;
+	-d) MODE=dark; FUNC=clr; COLOR_NAME=$2;;
+	-l) MODE=light; FUNC=clr; COLOR_NAME=$2;;
 	-n) FUNC=num; COLOR_NAME=$2;;
 	-t) FUNC=tst; COLOR_NAME=$2;;
 	*) FUNC=clr; COLOR_NAME=$1;;
 esac; fi
 
+case $MODE in
+	*)
 case $COLOR_NAME in
 	black) COLOR=30m;;
+	blue) COLOR=34m;;
 	green) COLOR=32m;;
 	purple) COLOR=35m;;
 	red) COLOR=31m;;
+esac;;
 esac
 
 if [ "true" == "true" ]; then
-	BLUE=34m
 	LBLUE=94m
 	CYAN=36m
 	LCYAN=96m
@@ -26,8 +31,6 @@ if [ "true" == "true" ]; then
 	LIME=lime
 	MAGENTA=35m
 	LMAGENTA=95m
-	ORANGE=orange
-	PINK=pink§§§
 	LRED=91m
 	WHITE=97m
 	YELLOW=33m
@@ -35,7 +38,6 @@ if [ "true" == "true" ]; then
 fi
 
 colors_test() {
-	tyn $BLUE
 	tyn $BURGUNDY
 	tyn $CELESTE
 	tyn $CYAN
