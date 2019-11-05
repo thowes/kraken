@@ -11,20 +11,21 @@ esac; fi
 
 case $MODE in
 	*)
-case $COLOR_NAME in
-	black) COLOR=30m;;
-	blue) COLOR=34m;;
-	green) COLOR=32m;;
-	purple) COLOR=35m;;
-	red) COLOR=31m;;
-esac;;
+		case $COLOR_NAME in
+			black) COLOR=30m;;
+			blue) COLOR=34m;;
+			gray) COLOR=37m;;
+			green) COLOR=32m;;
+			grey) COLOR=37m;;
+			purple) COLOR=35m;;
+			red) COLOR=31m;;
+	esac;;
 esac
 
 if [ "true" == "true" ]; then
 	LBLUE=94m
 	CYAN=36m
 	LCYAN=96m
-	GREY=grey
 	DGREY=90m
 	LGREY=37m
 	LGREEN=92m
