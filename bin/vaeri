@@ -14,42 +14,45 @@ case $MODE in
 		case $COLOR_NAME in
 			black) COLOR=30m;;
 			blue) COLOR=34m;;
+			b*red) COLOR="1;31m";;
+			burgundy) COLOR=31m;;
+			celeste) COLOR="1;34m";;
+			crimson) COLOR="1;31m";;
+			d*blue) COLOR=34m;;
+			d*gray) COLOR="1;30m";;
+			d*grey) COLOR="1;30m";;
 			gray) COLOR=37m;;
 			green) COLOR=32m;;
 			grey) COLOR=37m;;
+			ivory) COLOR=37m;;
+			l*blue) COLOR="1;34m";;
+			l*gray) COLOR=37m;;
+			l*grey) COLOR=37m;;
+			navy) COLOR=34m;;
 			purple) COLOR=35m;;
 			red) COLOR=31m;;
+			white) COLOR="1;37m";;
 	esac;;
 esac
 
 if [ "true" == "true" ]; then
-	LBLUE=94m
 	CYAN=36m
 	LCYAN=96m
-	DGREY=90m
-	LGREY=37m
 	LGREEN=92m
 	LIME=lime
 	MAGENTA=35m
 	LMAGENTA=95m
 	LRED=91m
-	WHITE=97m
 	YELLOW=33m
 	LYELLOW=93m
 fi
 
 colors_test() {
-	tyn $BURGUNDY
-	tyn $CELESTE
 	tyn $CYAN
-	tyn $GREY; tyn $DARKGREY; tyn $LIGHTGREY
-	tyn $IVORY
 	tyn $LIME
 	tyn $MAGENTA
-	tyn $NAVY
 	tyn $ORANGE
 	tyn $PINK
-	tyn $WHITE
 	tyn $YELLOW
 }
 
