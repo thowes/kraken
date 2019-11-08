@@ -19,6 +19,15 @@ case $MODE in
 			red) COLOR=31m;;
 			yellow) COLOR="33m";;
 		esac;;
+	L) case $COLOR_NAME in
+			blue) COLOR="1;34m";;	
+			gray) COLOR="37m";;
+			green) COLOR="1;32m";;
+			grey) COLOR="37m";;
+			purple) COLOR="1;35m";;
+			red) COLOR="1;31m";;
+			yellow) COLOR="1;33m";;
+		esac;;
 	*) case $COLOR_NAME in
 			black) COLOR=30m;;
 			blue) COLOR=34m;;
@@ -38,6 +47,7 @@ case $MODE in
 			l*gray) COLOR=37m;;
 			l*grey) COLOR=37m;;
 			l*yellow) COLOR="1;33m";;
+			magenta) COLOR="1;35m";;
 			navy) COLOR=34m;;
 			purple) COLOR=35m;;
 			red) COLOR=31m;;
@@ -51,15 +61,11 @@ if [ "true" == "true" ]; then
 	LCYAN=96m
 	LGREEN=92m
 	LIME=lime
-	MAGENTA=35m
-	LMAGENTA=95m
-	LRED=91m
 fi
 
 colors_test() {
 	tyn $CYAN
 	tyn $LIME
-	tyn $MAGENTA
 }
 
 case $FUNC in
