@@ -40,7 +40,7 @@ case $MODE in
 			gray|grey|ivory|l*gray|l*grey) COLOR="37m";;
 			green) COLOR=32m;;
 			lime|l*green) COLOR="1;32m";;
-			magenta) COLOR="1;35m";;
+			magenta|pink) COLOR="1;35m";;
 			purple) COLOR=35m;;
 			red|burgundy|d*red) COLOR=31m;;
 			white) COLOR="1;37m";;
