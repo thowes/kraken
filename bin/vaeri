@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 MODE=def; COLOR_NAME=zero; COLOR=e[0m; NORMAL="\e[0m";
 if [ -z "$1" ]; then nada; else case $1 in
 	-c) FUNC=clr; COLOR_NAME=$2;;
@@ -11,18 +11,18 @@ esac; fi
 
 case $MODE in
 	D) case $COLOR_NAME in
-			blue) COLOR="34m";;
+			blue) COLOR="0;34m";;
 			cyan) COLOR="0;36m";;
 			gray|grey) COLOR="1;30m";;
 			green) COLOR=32m;;
-			purple|magenta) COLOR="35m";;
-			red) COLOR=31m;;
-			yellow) COLOR="33m";;
+			purple|magenta) COLOR="0;35m";;
+			red) COLOR="0;31m";;
+			yellow) COLOR="0;33m";;
 		esac;;
 	L) case $COLOR_NAME in
 			blue) COLOR="1;34m";;
 			cyan) COLOR="1;36m";;
-			gray|grey) COLOR="37m";;
+			gray|grey) COLOR="0;37m";;
 			green) COLOR="1;32m";;
 			magenta|purple) COLOR="1;35m";;
 			red) COLOR="1;31m";;
