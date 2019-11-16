@@ -17,6 +17,7 @@ DIR="."; TEMP=$(asetus dir:temp); INIT_STRING="$(pwd) $(pvm)" #pvm=date +"%F %R"
 echo $INIT_STRING > $TEMP/changed.lst
 echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
+echo $INIT_STRING > $TEMP/indb.lst
 echo $INIT_STRING > $TEMP/junk.lst
 ls -1R > $TEMP/ls.lst
 while read p; do
@@ -24,19 +25,20 @@ while read p; do
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"backup.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"backup.log"*) nada;;
 		*"changed.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"changed.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"changed.lst"*) nada;;
 		*"cover.jpg"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"cover.png"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"changed.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;		
+		*"changed.lst"*) nada;;		
 		*".DS_Store"*) echo "$DIR/$p" >> $TEMP/junk.lst;; 
 		*"duplicate.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"duplicate.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"duplicate.lst"*) nada;;
 		*"esktop.ini"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"hakemisto.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"hakemisto.lst"*) nada;;
 		*"humbs.db"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"junk.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"junk.lst"*) nada;;
+		*"indb.lst"*) nada;;
 		*"levy.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"levy.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"ls.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
@@ -46,6 +48,7 @@ while read p; do
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
 			if [ -d "$FILE" ]; then nada; else
 				SUMMA=$(summa "$FILE"); RIVI=$SUMMA,$FILE
+				if [ "$(kannassa $FILE)" ]; then nada; else echo "$SUMMA,$FILE" >> $TEMP/indb.lst; fi
 				if [ -f hakemisto.lst ]; then
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA")
 					if [ "$SUMMA,$FILE" == "$RIVIT" ]; then nada; else
@@ -60,6 +63,7 @@ done < $TEMP/ls.lst
 mv $TEMP/changed.lst .
 mv $TEMP/duplicate.lst .
 mv $TEMP/hakemisto.lst .
+mv $TEMP/indb.lst .
 mv $TEMP/junk.lst .
 if [ -f $TEMP/changed.log ]; then rm $TEMP/changed.log; fi
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
@@ -69,6 +73,7 @@ if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/duplicate.old ]; then rm $TEMP/duplicate.old; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
 if [ -f $TEMP/hakemisto.old ]; then rm $TEMP/hakemisto.old; fi
+if [ -f $TEMP/indb.lst ]; then rm $TEMP/indb.lst; fi
 if [ -f $TEMP/junk.lst ]; then rm $TEMP/junk.lst; fi
 if [ -f $TEMP/junk.old ]; then rm $TEMP/junk.old; fi
 if [ -f $TEMP/levy.lst ]; then rm $TEMP/levy.lst; fi
