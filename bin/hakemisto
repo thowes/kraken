@@ -13,7 +13,7 @@ if [ -f hakemisto.lst ]; then nada; else
 	if [ -f levy.log ]; then mv levy.log hakemisto.lst; fi
 	if [ -f levy.lst ]; then mv levy.lst hakemisto.lst; fi
 fi
-DIR="."; TEMP=$(asetus dir:temp); INIT_STRING="$(pwd) $(pvm)" #pvm=date +"%F %R"
+DIR="."; TEMP=$(asetus dir:temp); INIT_STRING="$HOSTNAME $(pwd) $(pvm)" #pvm=date +"%F %R"
 echo $INIT_STRING > $TEMP/changed.lst
 echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
@@ -65,17 +65,9 @@ mv $TEMP/duplicate.lst .
 mv $TEMP/hakemisto.lst .
 mv $TEMP/indb.lst .
 mv $TEMP/junk.lst .
-if [ -f $TEMP/changed.log ]; then rm $TEMP/changed.log; fi
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
-if [ -f $TEMP/changed.old ]; then rm $TEMP/changed.old; fi
-if [ -f $TEMP/duplicate.log ]; then rm $TEMP/duplicate.log; fi
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
-if [ -f $TEMP/duplicate.old ]; then rm $TEMP/duplicate.old; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
-if [ -f $TEMP/hakemisto.old ]; then rm $TEMP/hakemisto.old; fi
 if [ -f $TEMP/indb.lst ]; then rm $TEMP/indb.lst; fi
 if [ -f $TEMP/junk.lst ]; then rm $TEMP/junk.lst; fi
-if [ -f $TEMP/junk.old ]; then rm $TEMP/junk.old; fi
-if [ -f $TEMP/levy.lst ]; then rm $TEMP/levy.lst; fi
-if [ -f $TEMP/levy.old ]; then rm $TEMP/levy.old; fi
 if [ -f $TEMP/ls.lst ]; then rm $TEMP/ls.lst; fi
