@@ -2,6 +2,7 @@
 DIR_LIB=$(asetus dir:lib)
 case "$1" in
 	dir) cp $DIR_LIB/../tmpl/dir.makefile makefile;;
+	excl) cp $DIR_LIB/../tmpl/exclude.lst exclude.lst;;
 	git) cp $DIR_LIB/../tmpl/git.makefile makefile;;
 	mf) cp $DIR_LIB/../tmpl/$2.makefile makefile;;
 	subl) cp $DIR_LIB/../tmpl/P.sublime-project P.sublime-project;;
