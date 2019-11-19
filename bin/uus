@@ -2,10 +2,10 @@
 DIR_LIB=$(asetus dir:lib)
 case "$1" in
 	dir) cp $DIR_LIB/../tmpl/dir.makefile makefile;;
-	excl) cp $DIR_LIB/../tmpl/exclude.lst exclude.lst;;
+	ex*) cp $DIR_LIB/../tmpl/exclude.lst exclude.lst;;
 	git) cp $DIR_LIB/../tmpl/git.makefile makefile;;
 	mf) cp $DIR_LIB/../tmpl/$2.makefile makefile;;
-	subl) cp $DIR_LIB/../tmpl/P.sublime-project P.sublime-project;;
+	su*) cp $DIR_LIB/../tmpl/P.sublime-project P.sublime-project;;
 	svn) cp $DIR_LIB/../tmpl/svn.makefile makefile;;
 	sh) cp $DIR_LIB/../tmpl/template.sh template.sh;;
 	*) cp $DIR_LIB/../tmpl/$1 $2;;
