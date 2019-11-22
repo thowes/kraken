@@ -1,12 +1,12 @@
 #!/bin/bash
 KR_TC_NAME=$(echo $3|awk -F "." '{print $1}'); KAYTTIS=$(kayttis)
 case $KAYTTIS in
-	cygwin) KRN_TC_DIR="/cygdrive";;
+	cygwin) DIR="/cygdrive";;
 	darwin) DIR="/Volumes";;
 	ubuntu) KRN_TC_DIR="/media/$USER";;
-	wsl) KRN_TC_DIR="/mnt";;
+	wsl) DIR="/mnt";;
 esac
-debug "TTCM 1:$1 2:$2 3:$3 4:$4 5:$5"
+KR_DEBUG=$KR_DEBUG debug "TTCM $TC_ARGS	1:$1 2:$2 5:$5 4:$4 3:$3"
 case $KAYTTIS in
 	darwin)
 		case $1 in
@@ -18,21 +18,21 @@ case $KAYTTIS in
 		esac;;
 	cygwin|wsl)
 		case $1 in
-			all) $APP $TC_ARGS /d;;
-			dm) vc /q /s /d $2;;
-			ro)
-				if [ "_$4_" != "__" ]; then
-					$APP $TC_ARGS /m ro /m rm /l $2 /v $3 /p $PASSU /k "$4"
-				else
+			all|-a) $APP $TC_ARGS /d;;
+			dm|-d|-dm) $APP $TC_ARGS /d $2;;
+			ro|-r|-ro)
+				if [ -z "$4" ]; then
 					$APP $TC_ARGS /m ro /m rm /l $2 /v $3 /p $PASSU /k \"\"
-				fi;;
-			ts)
-				if [ "_$4_" != "__" ]; then
-					$APP $TC_ARGS /m ts /m rm /l $2 /v $3 /p $PASSU /k "$4"
 				else
+					$APP $TC_ARGS /m ro /m rm /l $2 /v $3 /p $PASSU /k "$4"
+				fi;;
+			ts|-ts|-rw|-w)
+				if [ -z "$4" ]; then
 					$APP $TC_ARGS /m ts /m rm /l $2 /v $3 /p $PASSU /k \"\"
+				else
+					$APP $TC_ARGS /m ts /m rm /l $2 /v $3 /p $PASSU /k "$4"
 				fi;;
 			*) virhe "TCCM command" $1 "not recognized.";;
-		esac;; 
+		esac;;
 esac
 #if [ -f $KRN_TC_DIR/$2/$KR_TC_NAME.sh ]; then . $KRN_TC_DIR/$2/$KR_TC_NAME.sh; else echo NO: $KRN_TC_DIR/$2/$KR_TC_NAME.sh; fi
