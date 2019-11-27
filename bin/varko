@@ -21,13 +21,13 @@ if [ $1 != "" ] && [ $2 != "" ]; then DIR_TEMP=$(asetus dir:temp);
 		KR_DIR_EXCL=$(asetus dir:excl)
 		# Creating new zip from the directory without backup.log file
 		if [ -f $KR_DIR_EXCL/$PKG.lst ]; then
-			zip -qr $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+			zip -q -r $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 		else
 			KR_DIR_INCL=$(asetus dir:incl)
 			if [ -f $KR_DIR_INCL/$PKG.lst ]; then
-				zip -qr $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -i@$KR_DIR_INCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+				zip -q -r $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -i@$KR_DIR_INCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			else
-				zip -qr $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+				zip -q -r $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
 			fi
 		fi
 		if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip ]; then
