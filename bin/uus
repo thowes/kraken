@@ -4,6 +4,7 @@ case "$1" in
 	dir) cp $DIR_LIB/../tmpl/dir.makefile makefile;;
 	ex*) cp $DIR_LIB/../tmpl/exclude.lst exclude.lst;;
 	git) cp $DIR_LIB/../tmpl/git.makefile makefile;;
+	md) touch .metadata_never_index;;
 	mf) cp $DIR_LIB/../tmpl/$2.makefile makefile;;
 	su*) cp $DIR_LIB/../tmpl/P.sublime-project P.sublime-project;;
 	svn) cp $DIR_LIB/../tmpl/svn.makefile makefile;;
