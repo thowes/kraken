@@ -18,21 +18,19 @@ kanta_params() {
 				*st*) FUNCTION=status; FILTER=$(echo $1|awk -F\: '{print $2}');;
 				*t:*) TABLE=$(echo "$1"|awk -F\: '{print $2}');;
 				*u) FUNCTION=update;;
-				*w) FUNCTION=where; FILTER=$(echo $1|awk -F\: '{print $2}')
+				*w*) FILTER=$(echo $1|awk -F\: '{print $2}');;
 				*x) FUNCTION=status; FILTER=INDEX;;
 			esac;;
 		*) SEARCH="$1";;
 	esac
 }
 
-if [ "_$1_" != "__" ]; then
-	FUNCTION=search; kanta_params "$(echo $1|tr ";" ":")"
-	if [ "_$2_" != "__" ]; then
+if [ -z "$1" ]; then FUNCTION=status; else
+	FUNCTION=search; kanta_params "$(echo $1|tr ";" ":")" 
+	if [ -z "$2" ]; then nada; else
 		kanta_params "$(echo $2|tr ";" " ")"
-		if [ "_$3_" != "__" ]; then kanta_params "$(echo $3|tr ";" " ")"; fi
+		if [ -z "$3" ]; then nada; else kanta_params "$(echo $3|tr ";" " ")"; fi
 	fi
-else
-	FUNCTION=status
 fi
 
 if [ "_$(echo $DB)_" != "__" ]; then
