@@ -41,11 +41,11 @@ if [ "_$(echo $DB)_" != "__" ]; then
 		generate) if [ "_$DB" != "_" ]; then touch $DB; fi;;
 		help) LIB=$(asetus dir:lib); if [ "_$(echo $FILTER)_" != "__" ]; then cat $LIB/../doc/kanta.txt | grep $FILTER; else cat $LIB/../doc/kanta.txt; fi;;
 		list) if [ "_$(echo $SEARCH)_" != "__" ]; then sqlite3 $DB "SELECT * FROM $TABLE;" | grep $SEARCH; else sqlite3 $DB "SELECT * FROM $TABLE;"; fi;;
+		replace) if [ "_$(echo $FILTER)_" != "__" ] && [ "_$(echo $SEARCH)_" != "__" ]; then sqlite3 $DB "SELECT * FROM $TABLE WHERE $FILTER LIKE '%$SEARCH%';"; else nada; fi;;
 		remove) echo sqlite $DB delete "(where $REMOVE)";;
 		search) if [ "_$(echo $FILTER)_" != "__" ] && [ "_$(echo $SEARCH)_" != "__" ]; then sqlite3 $DB "SELECT * FROM $TABLE WHERE $FILTER LIKE '%$SEARCH%';"; else sqlite3 $DB "SELECT * FROM $TABLE;"; fi;;
 		status) if [ "_$(echo $FILTER)_" != "__" ]; then sqlite3 $DB .schema | grep $FILTER; else sqlite3 $DB .schema; fi;;
 		update) echo sqlite $DB edit;;
-		where) if [ "_$(echo $FILTER)_" != "__" ] && [ "_$(echo $SEARCH)_" != "__" ]; then sqlite3 $DB "SELECT * FROM $TABLE WHERE $FILTER LIKE '%$SEARCH%';"; else sqlite3 $DB "SELECT * FROM $TABLE;"; fi;;
 	esac
 else
 	virhe DB $DB not defined
