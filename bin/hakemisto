@@ -38,11 +38,11 @@ while read p; do
 		*"hakemisto.lst"*) nada;;
 		*"humbs.db"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"junk.lst"*) nada;;
-		*"Icon"*) nada;;
+		*"/Icon"*) nada;;
 		*"indb.lst"*) nada;;
 		*"levy.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"levy.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"LOCK"*) nada;;
+		*"/LOCK"*) nada;;
 		*"ls.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"Notes.txt"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		"total "*) nada;;
