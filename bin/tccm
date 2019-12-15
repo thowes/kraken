@@ -1,5 +1,5 @@
 #!/bin/bash
-NAME=$(echo $3|awk -F "." '{print $1}'); KAYTTIS=$(kayttis)
+NAME=$(printf $3\n|awk -F "." '{print $1}'); KAYTTIS=$(kayttis)
 case $KAYTTIS in
 	cygwin) DIR="/cygdrive";;
 	darwin) DIR="/Volumes";;
