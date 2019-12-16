@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 EDITOR='nano -w -T 2'
 
 case $2 in
@@ -17,5 +17,5 @@ case $1 in
 	p) $EDITOR ~/.profile;;
 	proj) $EDITOR ~/Projects/config/proj.csv;;
 	vk) $EDITOR ~/Projects/config/vker.sh;;
-	*) echo "[[ MUOK err: argument not known. ]]";;
+	*) printf "[[ MUOK err: argument not known. ]]\n";;
 esac
