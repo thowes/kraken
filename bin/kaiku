@@ -4,19 +4,19 @@ if [ "_$1_" != "__" ]; then
 		if [ "_$3_" != "__" ]; then
 			if [ "_$4_" != "__" ]; then
 				if [ "_$5_" != "__" ]; then
-					echo "[[ $1 $2 $3 $4 $5 ]]"	
+					printf "[[ $1 $2 $3 $4 $5 ]]\n"	
 				else
-					echo "[[ $1 $2 $3 $4 ]]"
+					printf "[[ $1 $2 $3 $4 ]]\n"
 				fi
 			else
-				echo "[[ $1 $2 $3 ]]"
+				printf "[[ $1 $2 $3 ]]\n"
 			fi
 		else
-			echo "[[ $1 $2 ]]"
+			printf "[[ $1 $2 ]]\n"
 		fi
 	else
-		echo "[[ $1 ]]"
+		printf "[[ $1 ]]\n"
 	fi
 else
-	echo "[[ ]]"
+	printf "[[ ]]\n"
 fi
