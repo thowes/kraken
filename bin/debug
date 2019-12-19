@@ -8,17 +8,17 @@ if [ $KR_DEBUG == "true" ]; then
 		if [ "_$2_" != "__" ]; then
 			if [ "_$3_" != "__" ]; then
 				if [ "_$4_" != "__" ]; then
-					echo "[[ DEBUG $1 $2 $3 $4 ]]"
+					printf "[[ DEBUG $1 $2 $3 $4 ]]\n"
 				else
-					echo "[[ DEBUG $1 $2 $3 ]]"
+					printf "[[ DEBUG $1 $2 $3 ]]\n"
 				fi
 			else
-				echo "[[ DEBUG $1 $2 ]]"
+				printf "[[ DEBUG $1 $2 ]]\n"
 			fi
 		else
-			echo "[[ DEBUG $1 ]]"
+			printf "[[ DEBUG $1 ]]\n"
 		fi
 	else
-		echo "[[ DEBUG ]]"
+		printf "[[ DEBUG ]]\n"
 	fi
 fi
