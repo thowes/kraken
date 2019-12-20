@@ -24,14 +24,14 @@ else
 fi
 
 case $ASETUKSET_REQUEST in
-	b*:b*u*) echo $KR_BACKUPS;;
-	b*:debug) echo $KR_DEBUG;;
-	b*:hosted) echo $KR_HOSTED;;
-	b*:wireless) echo $KR_WIRELESS;;
+	b*:b*u*) if [ -z "$KR_BACKUPS" ]; then printf "false\n"; else printf "$KR_BACKUPS\n"; fi;;
+	b*:debug) if [ -z "$KR_DEBUG" ]; then printf "false\n"; else printf "$KR_DEBUG\n"; fi;;
+	b*:hosted) if [ -z "$KR_HOSTED" ]; then printf "true\n"; else printf "$KR_HOSTED\n"; fi;;
+	b*:wireless) if [ -z "$KR_WIRELESS" ]; then printf "false\n"; else printf "$KR_WIRELESS\n"; fi;;
 	d*:amenu) echo $KR_DIR_AMENU;;
 	d*:buc) echo $KR_DIR_BUC;;
 	d*:bua) echo $KR_DIR_BUA;;
-	d*:c*f*g) if [ "_$KR_DIR_CFG" != "_" ]; then echo $KR_DIR_CFG; else echo ~/Projects/config; fi;;
+	d*:c*f*g) if [ -z "$KR_DIR_CFG" ]; then printf "~/Projects/config\n"; else printf "$KR_DIR_CFG\n"; fi;;
 	d*:cmenu) echo $KR_DIR_CMENU;;
 	d*:d*t*) echo $KR_DIR_DT;;
 	d*:excl*) echo $KR_DIR_EXCL;;
@@ -48,7 +48,7 @@ case $ASETUKSET_REQUEST in
 	d*:umenu) echo $KR_DIR_UMENU;;
 	s*:lnk) echo $KR_NAME_LNK;;
 	s*:loc*) echo $KR_LOCATION;;
-	s*:network) if [ "_$KR_NETWORK" != "_" ]; then echo $KR_NETWORK; else echo NADA; fi;;
+	s*:network) if [ -z "$KR_NETWORK" ]; then printf "NADA\n"; else printf "$KR_NETWORK\n"; fi;;
 	s*:recipient) echo $KR_RECIPIENT;;
 	s*:startup) echo $KR_NAME_STARTUP;;
 	s*:url) echo $KR_NAME_URL;;
