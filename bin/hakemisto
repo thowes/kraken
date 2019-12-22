@@ -1,4 +1,5 @@
 #!/bin/bash
+which kannassa
 if [ -d "$1" ]; then cd "$1"; fi
 if [ -f changed.lst ]; then nada; else
 	if [ -f changed.old ]; then mv changed.old changed.lst; fi
@@ -50,7 +51,7 @@ while read p; do
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
 			if [ -d "$FILE" ]; then nada; else
 				SUMMA=$(summa "$FILE"); RIVI=$SUMMA,$FILE
-				if [ "$(kannassa $FILE)" ]; then nada; else echo "$SUMMA,$FILE" >> $TEMP/indb.lst; fi
+				if [ $(kannassa "$FILE") == "false" ]; then echo "$SUMMA,$FILE" >> $TEMP/indb.lst; fi
 				if [ -f hakemisto.lst ]; then
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA")
 					if [ "$SUMMA,$FILE" == "$RIVIT" ]; then nada; else
@@ -73,3 +74,5 @@ if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
 if [ -f $TEMP/indb.lst ]; then rm $TEMP/indb.lst; fi
 if [ -f $TEMP/junk.lst ]; then rm $TEMP/junk.lst; fi
 if [ -f $TEMP/ls.lst ]; then rm $TEMP/ls.lst; fi
+if [ -f $TEMP/puuttuu.lst ]; then rm $TEMP/puuttuu.lst; fi
+if [ -f $TEMP/roskat.lst ]; then rm $TEMP/roskat.lst; fi
