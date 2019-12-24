@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 case $1 in
 	context*)
 		KR_NETWORK=$(asetus str:network)
 		VERKKO_IP=$(verkko ip)
 		VERKKO_SSID=nada
-		if [ $(asetus bool:hosted) != true ]; then
-			if [ $(asetus bool:wireless) == "true" ]; then VERKKO_ESSID=$(verkko ssid); fi
+		if [ "$(asetus bool:hosted)" == "false" ]; then
+			if [ "$(asetus bool:wireless)" == "true" ]; then VERKKO_ESSID="$(verkko ssid)"; fi
 			KR_DIR_CFG=$(asetus dir:cfg)
 			if [ -f $KR_DIR_CFG/nets.sh ]; then . $KR_DIR_CFG/nets.sh; fi
 		fi
