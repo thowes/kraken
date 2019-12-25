@@ -49,8 +49,8 @@ case $ASETUKSET_REQUEST in
 	s*:lnk) echo $KR_NAME_LNK;;
 	s*:loc*) echo $KR_LOCATION;;
 	s*:network) if [ -z "$KR_NETWORK" ]; then printf "NADA\n"; else printf "$KR_NETWORK\n"; fi;;
-	s*:recipient) echo $KR_RECIPIENT;;
-	s*:startup) echo $KR_NAME_STARTUP;;
-	s*:url) echo $KR_NAME_URL;;
-	u*:ext) echo $KRN_EXT_IP_ADDRESS;;
+	s*:recipient) if [ -z "$KR_RECIPIENT" ]; then printf "nada\n"; else printf "$KR_RECIPIENT\n"; fi;;
+	s*:startup) if [ -z "$KR_NAME_STARTUP" ]; then print "START.lnk\n"; else printf "$KR_NAME_STARTUP\n"; fi;;
+	s*:url) if [ -z "$KR_NAME_URL" ]; then printf "Localhost.url\n"; else printf "$KR_NAME_URL\n"; fi;;
+	u*:ext) if [ -z "$KRN_EXT_IP_ADDRESS" ]; then printf "http://ipinfo.io/ip\n"; else printf "$KRN_EXT_IP_ADDRESS\n"; fi;;
 esac
