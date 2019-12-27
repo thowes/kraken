@@ -1,5 +1,5 @@
 #!/bin/bash
-which kannassa
+
 if [ -d "$1" ]; then cd "$1"; fi
 if [ -f changed.lst ]; then nada; else
 	if [ -f changed.old ]; then mv changed.old changed.lst; fi
@@ -31,7 +31,6 @@ while read p; do
 		*"changed.lst"*) nada;;
 		*"cover.jpg"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"cover.png"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"changed.lst"*) nada;;		
 		*".DS_Store"*) echo "$DIR/$p" >> $TEMP/junk.lst;; 
 		*"duplicate.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"duplicate.lst"*) nada;;
