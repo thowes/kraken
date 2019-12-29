@@ -28,9 +28,9 @@ case $ASETUKSET_REQUEST in
 	b*:debug) if [ -z "$KR_DEBUG" ]; then printf "false\n"; else printf "$KR_DEBUG\n"; fi;;
 	b*:hosted) if [ -z "$KR_HOSTED" ]; then printf "true\n"; else printf "$KR_HOSTED\n"; fi;;
 	b*:wireless) if [ -z "$KR_WIRELESS" ]; then printf "false\n"; else printf "$KR_WIRELESS\n"; fi;;
-	d*:amenu) echo $KR_DIR_AMENU;;
-	d*:buc) echo $KR_DIR_BUC;;
-	d*:bua) echo $KR_DIR_BUA;;
+	d*:amenu) printf "$KR_DIR_AMENU\n";;
+	d*:buc) printf "$KR_DIR_BUC\n";;
+	d*:bua) printf "$KR_DIR_BUA\n";;
 	d*:c*f*g) if [ -z "$KR_DIR_CFG" ]; then printf "~/Projects/config\n"; else printf "$KR_DIR_CFG\n"; fi;;
 	d*:cmenu) echo $KR_DIR_CMENU;;
 	d*:d*t*) echo $KR_DIR_DT;;
