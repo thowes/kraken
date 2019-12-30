@@ -4,7 +4,11 @@ if [ "_$1_" != "__" ]; then
 		if [ "_$3_" != "__" ]; then
 			if [ "_$4_" != "__" ]; then
 				if [ "_$5_" != "__" ]; then
-					printf "[[ $1 $2 $3 $4 $5 ]]\n"	
+					if [ -z "$6" ]; then
+						printf "[[ $1 $2 $3 $4 $5 ]]\n"
+					else
+						printf "[[ $1 $2 $3 $4 $5 $6 ]]\n"
+					fi
 				else
 					printf "[[ $1 $2 $3 $4 ]]\n"
 				fi
