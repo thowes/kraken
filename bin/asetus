@@ -37,9 +37,9 @@ case $ASETUKSET_REQUEST in
 	d*:excl*) echo $KR_DIR_EXCL;;
 	d*:incl*) echo $KR_DIR_INCL;;
 	d*:key*) echo $KR_DIR_KEYS;;
-	d*:lib) echo $KR_DIR_LIB;;
-	d*:lnk) echo $KR_DIR_LNK;;
-	d*:log*) echo $KR_DIR_LOGS;;
+	d*:lib) if [ -z "$KR_DIR_LIB" ]; then printf "~/Projects/kraken/lib\n"; else printf "$KR_DIR_LIB\n"; fi;;
+	d*:lnk) if [ -z "$KR_DIR_LNK" ]; then printf "~/Projects/config/lnks\n"; else printf "$KR_DIR_LNK\n"; fi;;
+	d*:log*) if [ -z "$KR_DIR_LOGS" ]; then printf "~/Projects/config/logs\n"; else printf "$KR_DIR_LOGS\n"; fi;;
 	d*:pmenu) echo $KR_DIR_PMENU;;
 	d*:s*to) echo $KR_DIR_SENDTO;;
 	d*:s*up) echo $KR_DIR_STARTUP;;
