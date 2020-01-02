@@ -43,11 +43,11 @@ case $ASETUKSET_REQUEST in
 	d*:pmenu) echo $KR_DIR_PMENU;;
 	d*:s*to) echo $KR_DIR_SENDTO;;
 	d*:s*up) echo $KR_DIR_STARTUP;;
-	d*:temp) echo $KR_DIR_TEMP;;
-	d*:tmpl) echo $KR_DIR_TMPL;;
-	d*:umenu) echo $KR_DIR_UMENU;;
-	s*:lnk) echo $KR_NAME_LNK;;
-	s*:loc*) echo $KR_LOCATION;;
+	d*:temp) if [ -z "$KR_DIR_TEMP" ]; then printf "~/Projects/temp\n"; else printf "$KR_DIR_TEMP\n"; fi;;
+	d*:tmpl) if [ -z "$KR_DIR_TMPL" ]; then printf "~/Projects/kraken/tmpl\n"; else printf "$KR_DIR_TMPL\n"; fi;;
+	d*:umenu) printf "$KR_DIR_UMENU\n";;
+	s*:lnk) if [ -z "$KR_NAME_LNK" ]; then printf "App.lnk\n"; else printf "$KR_NAME_LNK\n"; fi;;
+	s*:loc*) printf "$KR_LOCATION\n";;
 	s*:network) if [ -z "$KR_NETWORK" ]; then printf "NADA\n"; else printf "$KR_NETWORK\n"; fi;;
 	s*:recipient) if [ -z "$KR_RECIPIENT" ]; then printf "nada\n"; else printf "$KR_RECIPIENT\n"; fi;;
 	s*:startup) if [ -z "$KR_NAME_STARTUP" ]; then print "START.lnk\n"; else printf "$KR_NAME_STARTUP\n"; fi;;
