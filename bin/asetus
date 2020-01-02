@@ -32,7 +32,7 @@ case $ASETUKSET_REQUEST in
 	d*:buc) printf "$KR_DIR_BUC\n";;
 	d*:bua) printf "$KR_DIR_BUA\n";;
 	d*:c*f*g) if [ -z "$KR_DIR_CFG" ]; then printf "~/Projects/config\n"; else printf "$KR_DIR_CFG\n"; fi;;
-	d*:cmenu) echo $KR_DIR_CMENU;;
+	d*:cmenu) printf "$KR_DIR_CMENU\n";;
 	d*:d*t*) echo $KR_DIR_DT;;
 	d*:excl*) echo $KR_DIR_EXCL;;
 	d*:incl*) echo $KR_DIR_INCL;;
@@ -40,12 +40,12 @@ case $ASETUKSET_REQUEST in
 	d*:lib) if [ -z "$KR_DIR_LIB" ]; then printf "~/Projects/kraken/lib\n"; else printf "$KR_DIR_LIB\n"; fi;;
 	d*:lnk) if [ -z "$KR_DIR_LNK" ]; then printf "~/Projects/config/lnks\n"; else printf "$KR_DIR_LNK\n"; fi;;
 	d*:log*) if [ -z "$KR_DIR_LOGS" ]; then printf "~/Projects/config/logs\n"; else printf "$KR_DIR_LOGS\n"; fi;;
-	d*:pmenu) echo $KR_DIR_PMENU;;
-	d*:s*to) echo $KR_DIR_SENDTO;;
-	d*:s*up) echo $KR_DIR_STARTUP;;
+	d*:pm*) printf "$KR_DIR_PMENU\n";;
+	d*:s*to) printf "$KR_DIR_SENDTO\n";;
+	d*:s*up) printf "$KR_DIR_STARTUP\n";;
 	d*:temp) if [ -z "$KR_DIR_TEMP" ]; then printf "~/Projects/temp\n"; else printf "$KR_DIR_TEMP\n"; fi;;
 	d*:tmpl) if [ -z "$KR_DIR_TMPL" ]; then printf "~/Projects/kraken/tmpl\n"; else printf "$KR_DIR_TMPL\n"; fi;;
-	d*:umenu) printf "$KR_DIR_UMENU\n";;
+	d*:um*) printf "$KR_DIR_UMENU\n";;
 	s*:lnk) if [ -z "$KR_NAME_LNK" ]; then printf "App.lnk\n"; else printf "$KR_NAME_LNK\n"; fi;;
 	s*:loc*) printf "$KR_LOCATION\n";;
 	s*:network) if [ -z "$KR_NETWORK" ]; then printf "NADA\n"; else printf "$KR_NETWORK\n"; fi;;
