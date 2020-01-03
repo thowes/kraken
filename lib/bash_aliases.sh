@@ -68,7 +68,6 @@ alias o+x='chmod o+x'
 alias origin='git remote -v|grep origin'
 alias p=projekti
 alias proj=projekti
-alias projekti_go='projekti -p'
 alias psf='ps fu'
 alias pull='git pull'
 alias push='git push'
