@@ -39,12 +39,10 @@ projekti() {
 					-u) if [ -d .git/ ]; then projekti_update; fi;;
 					*) if [ -d .git/ ]; then git status --short; else if [ -d ../.git/ ]; then git status --short; else if [ -d ../../.git/ ]; then git status --short; else ls; fi; fi; fi;;
 		esac
-				compu_proj $KRN_PROJ_FUNCTION $KRN_PROJ_INPUT
+		compu_proj $KRN_PROJ_FUNCTION $KRN_PROJ_INPUT
 	else 
-				virhe PROJ $KRN_PROJ_INPUT $KR_DIRPO "is not a directory!"
+		virhe PROJ $KRN_PROJ_INPUT $KR_DIRPO "is not a directory!"
 	fi
-		#*) virhe "Project keyword" $KRN_PROJ_INPUT "found multiple times in project file.";;
-	#esac
 }
 
 projekti-go() {
