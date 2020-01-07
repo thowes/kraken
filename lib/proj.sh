@@ -23,11 +23,6 @@ projekti() {
 		*) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$1;;
 	esac
 	KR_DIRPO=$(projekti-dir -d $KRN_PROJ_INPUT)
-	#case $KR_PROJECTS_COUNT in
-	#	0) virhe "Project keyword" $KRN_PROJ_INPUT "not found" "in project file.";;
-	#	1)
-	#		KR_DIRPO_LINE=$(cat $KR_DIR_CFG/proj.csv | \grep $KRN_PROJ_INPUT )
-	#		KR_DIRPO=$(echo $KR_DIRPO_LINE | awk -F, '{ print $4 }')
 	KR_DIRPO_TEMP=$KR_DIRPO; KR_DIRPO_HOME=~
 	case $KR_DIRPO_TEMP in
 		~*) KR_DIRPO=$KR_DIRPO_HOME$(echo $KR_DIRPO_TEMP | awk -F~ '{ print$2 }');;
