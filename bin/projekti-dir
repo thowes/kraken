@@ -20,15 +20,16 @@ if [ -z "$1" ]; then nada; else
 	esac
 	PROJ_ROW=$(cat $KR_DIR_CFG/proj.csv|grep -m 1 $PROJ_KEYWORD)
 	case $PROJ_FUNCTION in
-		dir) echo $PROJ_ROW|awk -F\, '{print $4}';;
+		#dir) echo $PROJ_ROW|awk -F\, '{print $4}';;
 		row) echo $PROJ_ROW;;
 		*)
 			PROJ_DIR=$(echo $PROJ_ROW|awk -F\, '{print $4}')
 			case $PROJ_DIR in
 				~*) PROJ_HOME=~; PROJ_DIR=$PROJ_HOME$(echo $PROJ_DIR|awk -F\~ '{print $2}');;
 			esac
-			if [ -d $PROJ_DIR ]; then cd $PROJ_DIR; fi; case $PROJ_FUNCTION in
-				st) projekti-status;;
+			case $PROJ_FUNCTION in
+				dir) echo "$PROJ_DIR";;
+				st) if [ -d $PROJ_DIR ]; then cd $PROJ_DIR; projekti-status; fi;;
 				#*) open .;;
 			esac;;
 	esac
