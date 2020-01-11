@@ -23,10 +23,10 @@ projekti() {
 		*) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$1;;
 	esac
 	KR_DIRPO=$(projekti-dir -d $KRN_PROJ_INPUT)
-	KR_DIRPO_TEMP=$KR_DIRPO; KR_DIRPO_HOME=~
-	case $KR_DIRPO_TEMP in
-		~*) KR_DIRPO=$KR_DIRPO_HOME$(echo $KR_DIRPO_TEMP | awk -F~ '{ print$2 }');;
-	esac
+	#KR_DIRPO_TEMP=$KR_DIRPO; KR_DIRPO_HOME=~
+	#case $KR_DIRPO_TEMP in
+	#	~*) KR_DIRPO=$KR_DIRPO_HOME$(echo $KR_DIRPO_TEMP | awk -F~ '{ print$2 }');;
+	#esac
 	if [ -d $KR_DIRPO ]; then
 		\cd $KR_DIRPO
 		case $KRN_PROJ_FUNCTION in
