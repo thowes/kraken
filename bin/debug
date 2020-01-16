@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
-if [ "_$(echo $KR_DEBUG)_" == "__" ]; then
+if [ -z "$KR_DEBUG" ]; then
 	KR_DEBUG=$(asetus bool:debug)
 fi
-if [ $KR_DEBUG == "true" ]; then
+if [ "$KR_DEBUG" = "true" ]; then
 	if [ "_$1_" != "__" ]; then
 		if [ "_$2_" != "__" ]; then
 			if [ "_$3_" != "__" ]; then
