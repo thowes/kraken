@@ -1,14 +1,14 @@
 #!/bin/sh
-if [ -f $1/kraken.cfg ]; then
+if [ -f "$1/kraken.cfg" ]; then
 	ASETUKSET_REQUEST=$2
 	. $1/kraken.cfg
 else
-	if [ -f $1 ]; then
+	if [ -f "$1" ]; then
 		ASETUKSET_REQUEST=$2
 		. $1
 	else
 		ASETUKSET_REQUEST=$1
-		if [ "_$HOSTNAME" != "_" ]; then KR_HOSTNAME=$HOSTNAME; else KR_HOSTNAME=$(hostname); fi
+		if [ -z "$HOSTNAME" ]; then KR_HOSTNAME=$(hostname); else KR_HOSTNAME=$HOSTNAME; fi
 		if [ -f ~/Projects/config/$KR_HOSTNAME/kraken.cfg ]; then
 			. ~/Projects/config/$KR_HOSTNAME/kraken.cfg
 		else
