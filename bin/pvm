@@ -11,10 +11,10 @@ else
 		echo $1 $(date +"%T.%N")
 	else
 		KR_SEC=$(echo $2 | awk -F\: '{print $3}')
-		if [ "$KR_SEC" != "" ]; then
-			echo $1 $2.$(date +"%N")
-		else
+		if [ -z "$KR_SEC" ]; then
 			echo $1 $2:$(date +"%S.%N")
+		else
+			echo $1 $2.$(date +"%N")
 		fi
 	fi
 fi
