@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # pvm is short for päivämäärä ('calendar date' in Finnish).
 # Takes datetime information as input.
