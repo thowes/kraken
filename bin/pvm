@@ -4,7 +4,9 @@
 # Takes datetime information as input.
 # gives full YYYY-MM-DD HH:MM:SS.xyz as output.
 # the part missing from input is generated based on the current time.
-if [ "$1" != "" ]; then
+if [ -z "$1" ]; then
+	date +"%F %T.%N"
+else
 	if [ "$2" != "" ]; then
 		KR_SEC=$(echo $2 | awk -F\: '{print $3}')
 		if [ "$KR_SEC" != "" ]; then
@@ -15,6 +17,4 @@ if [ "$1" != "" ]; then
 	else
 		echo $1 $(date +"%T.%N")
 	fi
-else
-	date +"%F %T.%N"
 fi
