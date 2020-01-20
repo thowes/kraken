@@ -7,14 +7,14 @@
 if [ -z "$1" ]; then
 	date +"%F %T.%N"
 else
-	if [ "$2" != "" ]; then
+	if [ -z "$2" ]; then
+		echo $1 $(date +"%T.%N")
+	else
 		KR_SEC=$(echo $2 | awk -F\: '{print $3}')
 		if [ "$KR_SEC" != "" ]; then
 			echo $1 $2.$(date +"%N")
 		else
 			echo $1 $2:$(date +"%S.%N")
 		fi
-	else
-		echo $1 $(date +"%T.%N")
 	fi
 fi
