@@ -1,10 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
 # Based on the contents of the uname ouput string, recognizes the OS.
 # Only cygwin, darwin and ubuntu are tested to work properly.
-#kayttis() {
 KAYTTIS_FULL=$(uname -a)
-if [ $(asetus bool:hosted) == "false" ]; then
+if [ "$(asetus bool:hosted)" = "false" ]; then
 	case $KAYTTIS_FULL in
 		*BSD*) KAYTTIS_SHORT=bsd;;
 		*CYGWIN*) KAYTTIS_SHORT=cygwin;;
@@ -18,12 +17,9 @@ if [ $(asetus bool:hosted) == "false" ]; then
 				*) KAYTTIS_SHORT=linux;;
 			esac
 			;;
-		*) kaiku KRAKEN/YMP $KAYTTIS "not recognized!";;
+		*) virhe KRAKEN/YMP $KAYTTIS "not recognized!";;
 	esac
 else
 	KAYTTIS_SHORT=hosted
 fi
-echo $KAYTTIS_SHORT
-#}
-
-#KAYTTIS=$(kayttis)
+printf "$KAYTTIS_SHORT\n"
