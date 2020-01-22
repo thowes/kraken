@@ -5,7 +5,7 @@ case $(uname) in
 	Darwin) system_profiler SPDisplaysDataType | grep Resolution | awk '{print $2 "x" $4}';;
 	Linux|Ubuntu)
 		case $(uname -a) in
-			Microsoft) cmd.exe /c wmic desktopmonitor get screenheight, screenwidth | grep -v '^[[:space:]]*$' | tr -s " " | grep -v Screen | awk '{print $2 "x" $1}';;
+			*Microsoft*) cmd.exe /c wmic path Win32_VideoController get VideoModeDescription | grep colors | awk '{print $1 "x" $3}';;
 			WSL) cmd.exe /c wmic desktopmonitor get screenheight, screenwidth | grep -v '^[[:space:]]*$' | tr -s " " | grep -v Screen | awk '{print $2 "x" $1}';;
 			*) xdpyinfo | grep dimensions | awk '{print $2}';;
 		esac;;
