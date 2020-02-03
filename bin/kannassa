@@ -1,2 +1,2 @@
 #!/bin/sh
-echo true
+printf "false\n"
