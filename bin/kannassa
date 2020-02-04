@@ -1,2 +1,6 @@
 #!/bin/sh
-printf "false\n"
+COUNT="0" #DB=$DB kanta -t:$TABLE -f $1
+case "$COUNT" in
+	"0") printf "false\n";;
+	*) printf "true\n";;
+esac
