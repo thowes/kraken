@@ -50,7 +50,9 @@ while read p; do
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
 			if [ -d "$FILE" ]; then nada; else
 				SUMMA=$(summa "$FILE"); RIVI=$SUMMA,$FILE
-				if [ $(kannassa "$FILE") == "false" ]; then echo "$SUMMA,$FILE" >> $TEMP/indb.lst; fi
+				if [ "$(kannassa $FILE)" = "true" ]; then
+					echo "$SUMMA,$FILE" >> $TEMP/indb.lst
+				else nada; fi
 				if [ -f hakemisto.lst ]; then
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA")
 					if [ "$SUMMA,$FILE" == "$RIVIT" ]; then nada; else
@@ -62,11 +64,11 @@ while read p; do
 			fi;;
 	esac
 done < $TEMP/ls.lst
-mv $TEMP/changed.lst .
-mv $TEMP/duplicate.lst .
-mv $TEMP/hakemisto.lst .
-mv $TEMP/indb.lst .
-mv $TEMP/junk.lst .
+mv $TEMP/changed.lst ./changed.lst
+mv $TEMP/duplicate.lst ./duplicate.lst
+mv $TEMP/hakemisto.lst ./hakemisto.lst
+mv $TEMP/indb.lst ./indb.lst
+mv $TEMP/junk.lst ./junk.lst
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
