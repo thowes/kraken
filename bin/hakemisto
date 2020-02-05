@@ -64,11 +64,11 @@ while read p; do
 			fi;;
 	esac
 done < $TEMP/ls.lst
-mv $TEMP/changed.lst ./changed.lst
-mv $TEMP/duplicate.lst ./duplicate.lst
-mv $TEMP/hakemisto.lst ./hakemisto.lst
-mv $TEMP/indb.lst ./indb.lst
-mv $TEMP/junk.lst ./junk.lst
+cp $TEMP/changed.lst ./changed.lst
+cp $TEMP/duplicate.lst ./duplicate.lst
+cp $TEMP/hakemisto.lst ./hakemisto.lst
+cp $TEMP/indb.lst ./indb.lst
+cp $TEMP/junk.lst ./junk.lst
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
