@@ -2,7 +2,7 @@
 COUNT="0"
 if [ -z "$DB" ]; then DB="$(asetus path:db)"; fi
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
-#DB=$DB kanta -t:$TABLE -f $1
+echo DB=$DB kanta -t:$TABLE -f $1
 case "$COUNT" in
 	"0") printf "false\n";;
 	*) printf "true\n";;
