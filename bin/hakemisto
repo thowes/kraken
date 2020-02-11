@@ -1,5 +1,4 @@
 #!/bin/bash
-
 if [ -d "$1" ]; then cd "$1"; fi
 if [ -f changed.lst ]; then nada; else
 	if [ -f changed.old ]; then mv changed.old changed.lst; fi
@@ -14,12 +13,19 @@ if [ -f hakemisto.lst ]; then nada; else
 	if [ -f levy.log ]; then mv levy.log hakemisto.lst; fi
 	if [ -f levy.lst ]; then mv levy.lst hakemisto.lst; fi
 fi
+if [ -f missing.lst ]; then nada; else
+	if [ -f indb.lst ]; then mv indb.lst missing.lst; fi
+fi
 DIR="."; TEMP=$(asetus dir:temp); INIT_STRING="$HOSTNAME $(pwd) $(pvm)" #pvm=date +"%F %R"
+KAYTTIS=$(kayttis)
+if [ -z "$DB" ]; then DB="$(asetus path:db)"; fi
+if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 echo $INIT_STRING > $TEMP/changed.lst
 echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
 echo $INIT_STRING > $TEMP/indb.lst
 echo $INIT_STRING > $TEMP/junk.lst
+echo $INIT_STRING > $TEMP/missing.lst
 ls -1R > $TEMP/ls.lst
 while read p; do
 	case $p in
@@ -39,23 +45,30 @@ while read p; do
 		*"humbs.db"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"junk.lst"*) nada;;
 		*"Icon"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"indb.lst"*) nada;;
+		*"indb.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"levy.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"levy.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"LOCK"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"ls.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"missing.lst"*) nada;;
 		*"Notes.txt"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		"total "*) nada;;
 		*)
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
+			#case "$KAYTTIS" in
+				#darwin*) LS_TIME=$(ls -T "$FILE"|awk '{print $6 " " $7 $8 }');;
+				#* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 " " $7 $8 }');;
+			#esac
 			if [ -d "$FILE" ]; then nada; else
 				SUMMA=$(summa "$FILE"); RIVI=$SUMMA,$FILE
-				if [ "$(kannassa $FILE)" = "true" ]; then
+				if [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "true" ]; then
 					echo "$SUMMA,$FILE" >> $TEMP/indb.lst
-				else nada; fi
+				else
+					echo "$SUMMA,$FILE" >> $TEMP/missing.lst
+				fi
 				if [ -f hakemisto.lst ]; then
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA")
-					if [ "$SUMMA,$FILE" == "$RIVIT" ]; then nada; else
+					if [ "$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
 						echo "$RIVIT" | grep -v "$RIVI" >> $TEMP/duplicate.lst
 					fi
 				fi
@@ -67,13 +80,15 @@ done < $TEMP/ls.lst
 cp $TEMP/changed.lst ./changed.lst
 cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.lst ./hakemisto.lst
-cp $TEMP/indb.lst ./indb.lst
+#cp $TEMP/indb.lst ./indb.lst
 cp $TEMP/junk.lst ./junk.lst
+cp $TEMP/missing.lst ./missing.lst
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
 if [ -f $TEMP/indb.lst ]; then rm $TEMP/indb.lst; fi
 if [ -f $TEMP/junk.lst ]; then rm $TEMP/junk.lst; fi
 if [ -f $TEMP/ls.lst ]; then rm $TEMP/ls.lst; fi
+if [ -f $TEMP/missing.lst ]; then rm $TEMP/missing.lst; fi
 if [ -f $TEMP/puuttuu.lst ]; then rm $TEMP/puuttuu.lst; fi
 if [ -f $TEMP/roskat.lst ]; then rm $TEMP/roskat.lst; fi
