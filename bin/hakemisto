@@ -55,16 +55,16 @@ while read p; do
 		"total "*) nada;;
 		*)
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }'); 
-			#case "$KAYTTIS" in
-				#darwin*) LS_TIME=$(ls -T "$FILE"|awk '{print $6 " " $7 $8 }');;
-				#* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 " " $7 $8 }');;
-			#esac
+			case "$KAYTTIS" in
+				darwin*) LS_TIME=$(ls -T "$FILE"|awk '{print $6 " " $7 $8 }');;
+				* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 " " $7 $8 }');;
+			esac
 			if [ -d "$FILE" ]; then nada; else
 				SUMMA=$(summa "$FILE"); RIVI=$SUMMA,$FILE
 				if [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "true" ]; then
 					echo "$SUMMA,$FILE" >> $TEMP/indb.lst
 				else
-					echo "$SUMMA,$FILE" >> $TEMP/missing.lst
+					echo "$LS_TIME,$SUMMA,$FILE" >> $TEMP/missing.lst
 				fi
 				if [ -f hakemisto.lst ]; then
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA")
