@@ -22,7 +22,7 @@ synkronoi() {
 							# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
 							if [ "$BU_LATEST_DATE" != "$BU_TODAY_DATE" ]; then
 								kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-								compu_secu
+								#compu_secu
 								bulog -a $KR_SYNK_LDIR $2 $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
 								rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $KR_SYNK_EXCL
 							else virhe "ALREADY done backup today" $2; fi
@@ -37,7 +37,7 @@ synkronoi() {
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
 						KR_SYNK_USER=$(echo $KR_SYNK_LINE|awk -F\; '{print $3}')
 						kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-						compu_secu
+						#compu_secu
 						ssh $KR_SYNK_USER@$KR_SYNK_SERVER
 						;;
 					*) virhe "found too many sites (" "$KR_SYNK_N" ")." ;;
@@ -61,7 +61,7 @@ synkronoi() {
 							# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
 							if [ "$BU_LATEST_DATE" != "$BU_TODAY_DATE" ]; then
 								kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-								compu_secu
+								#compu_secu
 								bulog -a $KR_SYNK_LDIR $2 $HOSTNAME $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
 								rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_SYNK_EXCL
 							else virhe "ALREADY done backup today" $2; fi
