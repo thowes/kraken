@@ -1,10 +1,10 @@
 #!/bin/bash
 synkronoi() {
-	KR_DIR_CFG=$(asetus dir:cfg)
-	KR_DIR_EXCL=$(asetus dir:excl)
-	case $1 in
-		csv) synkronoi ssh $2;;
-		dwl) if [ -f $KR_DIR_CFG/dwl.csv ]; then
+KR_DIR_CFG=$(asetus dir:cfg); CFG=$(asetus dir:cfg)
+KR_DIR_EXCL=$(asetus dir:excl); EXCL=$(asetus dir:excl)
+case $1 in
+	csv) synkronoi ssh $2;;
+	dwl) if [ -f $KR_DIR_CFG/dwl.csv ]; then
 				KR_SYNK_N=_$(cat $KR_DIR_CFG/dwl.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
 				case $KR_SYNK_N in
 					*_0_) virhe "SY11 $1: information not found.";;
@@ -29,7 +29,7 @@ synkronoi() {
 						else virhe "SY29: DIR" $KR_SYNK_LDIR not found.; fi;;
 					*) virhe "found too many sites ($KR_SYNK_N) .";;
 				esac; else virhe "csv file not found."; fi;;
-		ssh) if [ -f $KR_DIR_CFG/dwl.csv ] && [ -f $KR_DIR_CFG/upl.csv ]; then
+	ssh) if [ -f $KR_DIR_CFG/dwl.csv ] && [ -f $KR_DIR_CFG/upl.csv ]; then
 				KR_SYNK_N=_$(cat $KR_DIR_CFG/*l.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
 				case $KR_SYNK_N in
 					*_0_) virhe "information not found.";;
@@ -42,8 +42,8 @@ synkronoi() {
 						;;
 					*) virhe "found too many sites (" "$KR_SYNK_N" ")." ;;
 				esac; else virhe "csv file(s) not found."; fi;;
-		syn) synkronoi upl $2;;
-		upl) if [ -f $KR_DIR_CFG/upl.csv ]; then
+	syn) synkronoi upl $2;;
+	upl) if [ -f $KR_DIR_CFG/upl.csv ]; then
 				KR_SYNK_N=_$(cat $KR_DIR_CFG/upl.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
 				case $KR_SYNK_N in
 					*_0_) virhe "information not found.";;
@@ -68,7 +68,7 @@ synkronoi() {
 						else virhe "SY68: DIR" $KR_SYNK_LDIR not found.; fi;;
 					*) virhe "found too many sites.";;
 				esac; else virhe "csv file not found" "($KR_SYNK_N)" "."; fi;;
-		ups) synkronoi upl $2;;
-		*) synkronoi upl $1;;
-	esac
+	ups) synkronoi upl $2;;
+	*) synkronoi upl $1;;
+esac
 }
