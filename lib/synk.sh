@@ -42,7 +42,7 @@ case $1 in
 						;;
 					*) virhe "found too many sites (" "$KR_SYNK_N" ")." ;;
 			esac; else virhe "csv file(s) not found."; fi;;
-	syn) synkronoi upl $2;;
+	#syn) synkronoi upl $2;;
 	upl) if [ -f $KR_DIR_CFG/upl.csv ]; then
 			KR_SYNK_N=_$(cat $KR_DIR_CFG/upl.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
 			case $KR_SYNK_N in
