@@ -1,7 +1,6 @@
 #!/bin/bash
 synkronoi() {
-KR_DIR_CFG=$(asetus dir:cfg); CFG=$(asetus dir:cfg)
-KR_DIR_EXCL=$(asetus dir:excl); EXCL=$(asetus dir:excl)
+CFG=$(asetus dir:cfg); KR_DIR_EXCL=$(asetus dir:excl); EXCL=$(asetus dir:excl)
 case $1 in
 	csv) synkronoi ssh $2;;
 	dwl) if [ -f $CFG/dwl.csv ]; then
@@ -9,8 +8,8 @@ case $1 in
 			case $KR_SYNK_N in
 				*_0_) virhe "SY11 $1: information not found.";;
 				*_1_) KR_SYNK_LINE=$(cat $CFG/dwl.csv | \grep $2)
-						KR_SYNK_EXCL=$KR_DIR_EXCL/$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
-						if [ -f $KR_SYNK_EXCL ]; then debug "file exists."; else KR_SYNK_EXCL=$KR_DIR_EXCL/default.lst; fi
+					EXCL=$EXCL/$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
+					if [ -f $EXCL ]; then debug "file exists."; else EXCL=$EXCL/default.lst; fi
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
 						KR_SYNK_USER=$(echo $KR_SYNK_LINE|awk -F\; '{print $3}')
 						KR_SYNK_PARAM=$(echo $KR_SYNK_LINE|awk -F\; '{print $4}')
@@ -24,7 +23,7 @@ case $1 in
 								kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
 								#compu_secu
 								bulog -a $KR_SYNK_LDIR $2 $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
-								rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $KR_SYNK_EXCL
+								rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $EXCL
 							else virhe "ALREADY done backup today" $2; fi
 						else virhe "SY29: DIR" $KR_SYNK_LDIR not found.; fi;;
 				*) virhe "found too many sites ($KR_SYNK_N) .";;
@@ -48,8 +47,8 @@ case $1 in
 			case $KR_SYNK_N in
 					*_0_) virhe "information not found.";;
 					*_1_) KR_SYNK_LINE=$(cat $CFG/upl.csv | \grep $2)
-						KR_SYNK_EXCL=$KR_DIR_EXCL/$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
-						if [ -f $KR_SYNK_EXCL ]; then debug "file exists."; else KR_SYNK_EXCL=$KR_DIR_EXCL/default.lst; fi
+						EXCL=$EXCL/$(echo $KR_SYNK_LINE|awk -F\; '{print $1}').lst
+						if [ -f $EXCL ]; then debug "file exists."; else EXCL=$EXCL/default.lst; fi
 						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
 						KR_SYNK_USER=$(echo $KR_SYNK_LINE|awk -F\; '{print $3}')
 						KR_SYNK_PARAM=$(echo $KR_SYNK_LINE|awk -F\; '{print $4}')
@@ -63,7 +62,7 @@ case $1 in
 								kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
 								#compu_secu
 								bulog -a $KR_SYNK_LDIR $2 $HOSTNAME $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
-								rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $KR_SYNK_EXCL
+								rsync $KR_SYNK_PARAM $KR_SYNK_LDIR $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR --exclude-from $EXCL
 							else virhe "ALREADY done backup today" $2; fi
 						else virhe "SY68: DIR" $KR_SYNK_LDIR not found.; fi;;
 					*) virhe "found too many sites.";;
