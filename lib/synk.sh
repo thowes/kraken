@@ -9,8 +9,8 @@ case $1 in
 			case $KR_SYNK_N in
 				*_0_) virhe "SY11 $1: information not found.";;
 				*_1_) LINE=$(cat $CFG/dwl.csv | \grep $2)
-					EXCL=$EXCL/$(echo $LINE|awk -F\; '{print $1}').lst
-					if [ -f $EXCL ]; then debug "file exists."; else EXCL=$EXCL/default.lst; fi
+					EXCL=$KR_DIR_EXCL/$(echo $LINE|awk -F\; '{print $1}').lst
+					if [ -f $EXCL ]; then debug "file exists."; else EXCL=$KR_DIR_EXCL/default.lst; fi
 					KR_SYNK_SERVER=$(echo $LINE|awk -F\; '{print $2}')
 					KR_SYNK_USER=$(echo $LINE|awk -F\; '{print $3}')
 					KR_SYNK_PARAM=$(echo $LINE|awk -F\; '{print $4}')
@@ -21,10 +21,9 @@ case $1 in
 						BU_LATEST_DATE=$(latest $KR_SYNK_LDIR|awk '{print $1}'); BU_TODAY_DATE=$(date +"%F")
 						# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
 						if [ "$BU_LATEST_DATE" != "$BU_TODAY_DATE" ]; then
-								kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-								#compu_secu
-								bulog -a $KR_SYNK_LDIR $2 $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
-								rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $EXCL
+							kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
+							bulog -a $KR_SYNK_LDIR $2 $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR
+							rsync $KR_SYNK_PARAM $KR_SYNK_USER@$KR_SYNK_SERVER:$KR_SYNK_RDIR $KR_SYNK_LDIR --exclude-from $EXCL
 						else virhe "ALREADY done backup today" $2; fi
 					else virhe "SY29: DIR" $KR_SYNK_LDIR not found.; fi;;
 				*) virhe "found too many sites ($KR_SYNK_N) .";;
