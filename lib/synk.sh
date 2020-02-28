@@ -29,20 +29,20 @@ case $1 in
 				*) virhe "found too many sites ($KR_SYNK_N) .";;
 			esac
 		else virhe "csv file not found."; fi;;
-	ssh) if [ -f $CFG/dwl.csv ] && [ -f $CFG/upl.csv ]; then
+	ssh|csv)
+		if [ -f $CFG/dwl.csv ] && [ -f $CFG/upl.csv ]; then
 			KR_SYNK_N=_$(cat $CFG/*l.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
 			case $KR_SYNK_N in
-					*_0_) virhe "information not found.";;
-					*_1_) KR_SYNK_LINE=$(cat $CFG/*l.csv | \grep $2)
-						KR_SYNK_SERVER=$(echo $KR_SYNK_LINE|awk -F\; '{print $2}')
-						KR_SYNK_USER=$(echo $KR_SYNK_LINE|awk -F\; '{print $3}')
-						kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
-						#compu_secu
-						ssh $KR_SYNK_USER@$KR_SYNK_SERVER
-						;;
-					*) virhe "found too many sites (" "$KR_SYNK_N" ")." ;;
-			esac; else virhe "csv file(s) not found."; fi;;
-	#syn) synkronoi upl $2;;
+				*_0_) virhe "information not found.";;
+				*_1_) LINE=$(cat $CFG/*l.csv | \grep $2)
+					KR_SYNK_SERVER=$(echo $LINE|awk -F\; '{print $2}')
+					KR_SYNK_USER=$(echo $LINE|awk -F\; '{print $3}')
+					kaiku SY $1 $2 $KR_SYNK_USER@$KR_SYNK_SERVER
+					ssh $KR_SYNK_USER@$KR_SYNK_SERVER
+					;;
+				*) virhe "found too many sites (" "$KR_SYNK_N" ")." ;;
+			esac
+		else virhe "csv file(s) not found."; fi;;
 	upl) if [ -f $CFG/upl.csv ]; then
 			KR_SYNK_N=_$(cat $CFG/upl.csv | \grep $2 | wc -l | tr -s ' ' | tr " " "_" )_
 			case $KR_SYNK_N in
