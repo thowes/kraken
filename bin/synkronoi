@@ -1,5 +1,4 @@
 #!/bin/bash
-synkronoi() {
 CFG=$(asetus dir:cfg); EXCL=$(asetus dir:excl); KR_DIR_EXCL=$(asetus dir:excl)
 case $1 in
 	dwl)
@@ -70,4 +69,3 @@ case $1 in
 		else virhe "csv file not found" "($KR_SYNK_N)" "."; fi;;
 	*) synkronoi csv $1;;
 esac
-}
