@@ -1,8 +1,8 @@
 #!/bin/bash
 valitse() {
-DIR_CFG=$(asetus dir:cfg)
+CFG=$(asetus dir:cfg)
 #prints to screen list projects valid for current location
-cat $DIR_CFG/proj.csv|\grep $1|awk -F, '{ print " "$1"\t" $2 }'
+cat $CFG/proj.csv|\grep $1|awk -F, '{ print " "$1"\t" $2 }'
 KR_PROJ_TEMP="def"
 KR_PROJ_TEST=" "
 read -p "PROJECT " -r KR_PROJ_TEMP
@@ -16,7 +16,7 @@ else
 		PROJECT="def"
 		debug PROJ $KR_PROJ_TEST is "empty." 
 fi
-KR_DIRPO_LINE=$(cat $DIR_CFG/proj.csv|\grep $PROJECT)
-KR_DIRPO=$(echo $KR_DIRPO_LINE|awk -F, '{print $4}')
-printf "PROJECT=$PROJECT \nKR_DIRPO_LINE=$KR_DIRPO_LINE \nKR_DIRPO=$KR_DIRPO" > $(asetus dir:temp)/$(verkko tty).proj
+LINE=$(cat $CFG/proj.csv|\grep $PROJECT)
+KR_DIRPO=$(echo $LINE|awk -F, '{print $4}')
+printf "PROJECT=$PROJECT \nLINE=$LINE \nKR_DIRPO=$KR_DIRPO" > $(asetus dir:temp)/$(verkko tty).proj
 }
