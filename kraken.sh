@@ -16,8 +16,6 @@ if [ -f $2 ]; then
 
 	#KIRJASTOT
 	if [ -f $KR_DIR_LIB/kr_network.sh ]; then . $KR_DIR_LIB/kr_network.sh; fi
-	if [ -f $KR_DIR_LIB/../bin/valitse ]; then . $KR_DIR_LIB/../bin/valitse; fi
-	if [ -f $KR_DIR_LIB/val.sh ]; then . $KR_DIR_LIB/val.sh; fi
 	if [ -f $KR_DIR_LIB/proj.sh ]; then . $KR_DIR_LIB/proj.sh; fi
 
 	#OTHER FUNCTIONS
