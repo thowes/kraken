@@ -1,5 +1,4 @@
 #!/bin/bash
-#valitse() {
 CFG=$(asetus dir:cfg)
 #prints to screen list projects valid for current location
 cat $CFG/proj.csv|\grep $1|awk -F, '{ print " "$1"\t" $2 }'
@@ -17,6 +16,5 @@ else
 		debug PROJ $PROJ_TEST is "empty." 
 fi
 LINE=$(cat $CFG/proj.csv|\grep $PROJECT)
-KR_DIRPO=$(echo $LINE|awk -F, '{print $4}')
-printf "PROJECT=$PROJECT \nLINE=$LINE \nKR_DIRPO=$KR_DIRPO" > $(asetus dir:temp)/$(verkko tty).proj
-#}
+DIRPO=$(echo $LINE|awk -F, '{print $4}')
+printf "PROJECT=$PROJECT \nLINE=$LINE \nDIRPO=$DIRPO" > $(asetus dir:temp)/$(verkko tty).proj
