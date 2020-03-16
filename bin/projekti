@@ -2,10 +2,10 @@
 
 # this function is a tool for keeping projects automatically updated if they use git.
 # update (pull) project if locally up to date.
-projekti_update() {
+projekti-update() {
 	KRN_PROJ_ST_NEW=$(projekti-status)
 	case $KRN_PROJ_ST_NEW in
-		*Up-to-date*) if [ $KR_NETWORK != "NADA" ]; then kaiku "PROJ_UPD:" $KRN_PROJ_ST_NEW; compu_secu; git pull; else virhe "PROJ_UPD:" "Can't update," "Internet not available"; fi;;
+		*Up-to-date*) if [ $KR_NETWORK != "NADA" ]; then kaiku "PROJ_UPD:" $KRN_PROJ_ST_NEW; git pull; else virhe "PROJ_UPD:" "Can't update," "Internet not available"; fi;;
 		*) virhe "PROJ_UPD:" "$KRN_PROJ_ST_NEW";;
 	esac
 }
@@ -27,7 +27,7 @@ projekti() {
 		\cd $KR_DIRPO
 		case $KRN_PROJ_FUNCTION in
 			-o) open .;;
-			-u) if [ -d .git/ ]; then projekti_update; fi;;
+			-u) if [ -d .git/ ]; then projekti-update; fi;;
 			*) if [ -d .git/ ]; then git status --short; else if [ -d ../.git/ ]; then git status --short; else if [ -d ../../.git/ ]; then git status --short; else ls; fi; fi; fi;;
 		esac
 		compu_proj $KRN_PROJ_FUNCTION $KRN_PROJ_INPUT
