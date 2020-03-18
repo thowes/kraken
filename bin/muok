@@ -10,14 +10,14 @@ esac
 CFG=$(asetus dir:cfg)
 case $1 in
 	ab) $EDITOR ~/.addressbook;;
-	al) $EDITOR ~/Projects/config/alias.sh;;
+	al) $EDITOR $CFG/alias.sh;;
 	bl*) $EDITOR ~/.bash_logout;;
 	brc|bashrc) $EDITOR ~/.bashrc;;
 	bp*) $EDITOR ~/.bash_profile;;
 	c*f*) $EDITOR $CFG/kraken.cfg;;
 	gpg) $EDITOR ~/.gnupg/gpg.conf;;
 	p|prof*) $EDITOR ~/.profile;;
-	proj) $EDITOR ~/Projects/config/proj.csv;;
+	proj) $EDITOR $CFG/proj.csv;;
 	vk*) $EDITOR $CFG/vker.sh;;
 	*) printf "[[ MUOK err: argument not known. ]]\n";;
 esac
