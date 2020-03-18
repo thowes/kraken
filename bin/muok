@@ -7,16 +7,17 @@ case $2 in
 	n) EDITOR=nano;;
 esac
 
+CFG=$(asetus dir:cfg)
 case $1 in
 	ab) $EDITOR ~/.addressbook;;
 	al) $EDITOR ~/Projects/config/alias.sh;;
 	bl*) $EDITOR ~/.bash_logout;;
 	brc|bashrc) $EDITOR ~/.bashrc;;
 	bp*) $EDITOR ~/.bash_profile;;
-	cfg) $EDITOR ~/Projects/config/kraken.cfg;;
+	c*f*) $EDITOR $CFG/kraken.cfg;;
 	gpg) $EDITOR ~/.gnupg/gpg.conf;;
 	p|prof*) $EDITOR ~/.profile;;
 	proj) $EDITOR ~/Projects/config/proj.csv;;
-	vk) $EDITOR ~/Projects/config/vker.sh;;
+	vk*) $EDITOR $CFG/vker.sh;;
 	*) printf "[[ MUOK err: argument not known. ]]\n";;
 esac
