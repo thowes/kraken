@@ -14,8 +14,8 @@ case $1 in
 						cd $DIR_TEMP/; pwd; mkdir tynnyri
 						echo $2 > $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check
 					fi;;
-			*p*) echo $(cat $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri|tr "\n" ",");;
-			*u*|*d*) echo $2 >> $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; tynnyri -k;;
+			*p*) echo $(cat $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check|tr "\n" ",");;
+			*u*|*d*) echo $2 >> $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check; tynnyri -k;;
 		esac;;
 	a|add) tynnyri -a $2;;
 	d) tynnyri -u $2;;
