@@ -1,7 +1,7 @@
 #!/bin/bash
 case $1 in
 	-*)
-		DIR_TEMP=$(asetus dir:temp); TYNNYRI_TTY=$(verkko tty)
+		DIR_TEMP=$(asetus dir:temp); TYNNYRI_TTY=$(verkko tty); DIR_TTY=$DIR_TEMP/$TYNNYRI_TTY
 		case $1 in
 			*0*) tynnyri -l; tynnyri -n $2;;
 			*a*) if [ -f $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check ]; then echo $2 >> $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check; else tynnyri -n $2; fi;;
@@ -12,7 +12,7 @@ case $1 in
 						echo $2 > $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check
 					else
 						cd $DIR_TEMP/; pwd; mkdir tynnyri
-						echo $2 > $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri
+						echo $2 > $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check
 					fi;;
 			*p*) echo $(cat $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri|tr "\n" ",");;
 			*u*|*d*) echo $2 >> $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; tynnyri -k;;
