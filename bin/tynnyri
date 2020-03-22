@@ -5,7 +5,7 @@ case $1 in
 		TYNNYRI_TTY=$(verkko tty)
 		case $1 in
 			*0*) tynnyri -l; tynnyri -n $2;;
-			*a*) if [ -f $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then echo $2 >> $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; else tynnyri -n $2; fi;;
+			*a*) if [ -f $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check ]; then echo $2 >> $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check; else tynnyri -n $2; fi;;
 			*k*) tynnyri -p; tynnyri -l;;
 			*l*) if [ -f $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri ]; then rm $DIR_TEMP/tynnyri/$TYNNYRI_TTY.tynnyri; fi;;
 			*n)
