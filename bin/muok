@@ -16,6 +16,7 @@ case $1 in
 	bp*) $EDITOR ~/.bash_profile;;
 	c*f*) $EDITOR $CFG/kraken.cfg;;
 	gpg) $EDITOR ~/.gnupg/gpg.conf;;
+	ker*) $EDITOR $CFG/kerain.sh;;
 	p|prof*) $EDITOR ~/.profile;;
 	proj) $EDITOR $CFG/proj.csv;;
 	vk*) $EDITOR $CFG/vker.sh;;
