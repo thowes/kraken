@@ -1,5 +1,6 @@
 #!/bin/bash
 CFG=$(asetus dir:cfg)
+kaiku VALITSE $1
 #prints to screen list projects valid for current location
 cat $CFG/proj.csv|\grep $1|awk -F, '{ print " "$1"\t" $2 }'
 TEMP="def"
