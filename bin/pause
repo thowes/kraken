@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 MESSAGE="$1"
 if [ -z "$MESSAGE" ]; then
 	MESSAGE="Press [Enter] key to continue..."
