@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 MESSAGE="$1"
 if [ -z "$MESSAGE" ]; then
-	MESSAGE="Press [Enter] key to start backup..."
+	MESSAGE="Press [Enter] key to continue..."
 fi
 read -s -n 1 -p "$MESSAGE"
 printf "\n"
