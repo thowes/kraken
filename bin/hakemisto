@@ -54,7 +54,7 @@ while read p; do
 		*"Notes.txt"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		"total "*) nada;;
 		*)
-			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }'); FILE_STATUS="OK"
+			FILE_STATUS="OK"; FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }')
 			case "$KAYTTIS" in
 				darwin*) LS_TIME=$(gls -l --time-style=full-iso "$FILE"|awk '{print $6 "T" $7 $8 }');;
 				* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 "T" $7 $8 }');;
@@ -66,12 +66,14 @@ while read p; do
 					echo "$SUMMA,$FILE" >> $TEMP/missing.lst
 				fi
 				if [ -f hakemisto.lst ]; then
-					RIVIT=$(cat hakemisto.lst | grep "$SUMMA")
+					RIVIT=$(cat hakemisto.lst | grep "$SUMMA" | grep -v "$FILE" )
 					if [ "$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
 						if [ "$LS_TIME,$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
-							if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="N2"; fi
-							if [ "$FILE_STATUS" = "MM" ]; then FILE_STATUS="M2"; fi
-							echo "$RIVIT" | grep -v "$RIVI" >> $TEMP/duplicate.lst
+							if [ "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
+								if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="N2"; fi
+								if [ "$FILE_STATUS" = "MM" ]; then FILE_STATUS="M2"; fi
+								echo "$RIVIT" | grep -v "$RIVI" >> $TEMP/duplicate.lst
+							fi
 						fi
 					fi
 				fi
