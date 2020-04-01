@@ -23,7 +23,6 @@ if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 echo $INIT_STRING > $TEMP/changed.lst
 echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
-echo $INIT_STRING > $TEMP/indb.lst
 echo $INIT_STRING > $TEMP/junk.lst
 echo $INIT_STRING > $TEMP/missing.lst
 ls -1R > $TEMP/ls.lst
@@ -66,18 +65,18 @@ while read p; do
 					echo "$SUMMA,$FILE" >> $TEMP/missing.lst
 				fi
 				if [ -f hakemisto.lst ]; then
-					RIVIT=$(cat hakemisto.lst | grep "$SUMMA" | grep -v "$FILE" )
+					RIVIT=$(cat hakemisto.lst | grep "$SUMMA" | grep -v "$RIVI" )
 					if [ "$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
 						if [ "$LS_TIME,$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
 							if [ "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
 								if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="N2"; fi
 								if [ "$FILE_STATUS" = "MM" ]; then FILE_STATUS="M2"; fi
-								echo "$RIVIT" | grep -v "$RIVI" >> $TEMP/duplicate.lst
+								echo "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" >> $TEMP/duplicate.lst
 							fi
 						fi
 					fi
 				fi
-				echo "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" >> $TEMP/hakemisto.lst
+				echo "$LS_TIME,$SUMMA,$FILE" >> $TEMP/hakemisto.lst
 			fi;;
 	esac
 done < $TEMP/ls.lst
