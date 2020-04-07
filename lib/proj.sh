@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# this function is a tool for keeping projects automatically updated if they use git.
-# update (pull) project if locally up to date.
-projekti-update() {
-	KRN_PROJ_ST_NEW=$(projekti-status)
-	case $KRN_PROJ_ST_NEW in
-		*Up-to-date*) if [ $KR_NETWORK != "NADA" ]; then kaiku "PROJ_UPD:" $KRN_PROJ_ST_NEW; git pull; else virhe "PROJ_UPD:" "Can't update," "Internet not available"; fi;;
-		*) virhe "PROJ_UPD:" "$KRN_PROJ_ST_NEW";;
-	esac
-}
-
 # reads list projects (proj.csv) and jumps to the project folder.
 projekti() {
 	case $1 in
