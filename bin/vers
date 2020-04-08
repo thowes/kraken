@@ -17,6 +17,7 @@ case $1 in
 			py*) echo "python:" $(python -V|grep Python) >> $DIR_CFG/versions.txt;;
 			ra*) echo "rails:" $(rails --version) >> $DIR_CFG/versions.txt;;
 			rb*) echo "rbenv:" $(rbenv version) >> $DIR_CFG/versions.txt;;
+			robo*) echo "robot:" $(robot --version) >> $DIR_CFG/versions.txt;;
 			rs*) echo "rsync:" $(rsync --version|grep version) >> $DIR_CFG/versions.txt;;
 			ru*) echo "ruby:" $(ruby -v) >> $DIR_CFG/versions.txt;;
 			svn) echo "svn:" $(svn help|grep client) >> $DIR_CFG/versions.txt;;
@@ -24,8 +25,8 @@ case $1 in
 			*)
 				if [ -f $DIR_CFG/versions.txt ]; then rm $DIR_CFG/versions.txt; fi
 				echo "versions.txt:" $(pvm) > $DIR_CFG/versions.txt
-				vers -w curl; vers -w git; vers -w gpg; vers -w heroku; vers -w im; vers -w my; vers -w py; vers -w rails; vers -w rbenv; vers -w rsync; vers -w ruby; vers -w wget
-				#vers -w apache; vers -w php; vers -w psql; vers -w svn;
+				vers -w curl; vers -w git; vers -w gpg; vers -w heroku; vers -w im; vers -w my; vers -w php; vers -w py; vers -w rails; vers -w rbenv; vers -w robo; vers -w rsync; vers -w ruby; vers -w wget
+				#vers -w apache; vers -w psql; vers -w svn;
 				;;
 		esac;; 
 	*)
