@@ -29,6 +29,7 @@ case $ASETUKSET_REQUEST in
 	b*:hosted) if [ -z "$KR_HOSTED" ]; then printf "true\n"; else printf "$KR_HOSTED\n"; fi;;
 	b*:wireless) if [ -z "$KR_WIRELESS" ]; then printf "false\n"; else printf "$KR_WIRELESS\n"; fi;;
 	d*:am*) printf "$KR_DIR_AMENU\n";;
+	d*:bot*) if [ -z "$KR_DIR_BOTS" ]; then printf "~/Projects/config/robots\n"; else printf "$KR_DIR_BOTS\n"; fi;;
 	d*:buc) printf "$KR_DIR_BUC\n";;
 	d*:bua) printf "$KR_DIR_BUA\n";;
 	d*:c*f*g) if [ -z "$KR_DIR_CFG" ]; then printf "~/Projects/config\n"; else printf "$KR_DIR_CFG\n"; fi;;
