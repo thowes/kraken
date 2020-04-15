@@ -9,7 +9,6 @@ projekti() {
 		-st) KRN_PROJ_FUNCTION="-st"; KRN_PROJ_INPUT=$2;;
 		-u) KRN_PROJ_FUNCTION="-u"; KRN_PROJ_INPUT=$2;;
 		p) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$2;;
-		#u) KRN_PROJ_FUNCTION="-u"; KRN_PROJ_INPUT=$2;;
 		*) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$1;;
 	esac
 	KR_DIRPO=$(projekti-dir -d $KRN_PROJ_INPUT)
