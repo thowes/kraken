@@ -34,5 +34,11 @@ case $1 in
 			if [ -d "$KR_DIR_PMENU" ]; then \cp $KR_DIR_PMENU/*.lnk $KR_DIR_BUA/PMENU/; fi
 		else virhe shorts.sh:30 dir $KR_DIR_BUA/MENU/ missing
 		fi;;
+	tty)
+			TEMP=$(asetus dir:temp)/$(verkko tty)
+			if [ -f "$TEMP/log.html" ]; then rm "$TEMP/log.html"; fi
+			if [ -f "$TEMP/output.xml" ]; then rm "$TEMP/output.xml"; fi
+			if [ -f "$TEMP/report.html" ]; then rm "$TEMP/report.html"; fi
+			;;
 	*) tyhjenna exit;;
 esac
