@@ -35,8 +35,9 @@ case $1 in
 		fi;;
 	tty)
 			VERKKO_TTY=$(verkko tty); KR_DIR_TEMP=$(asetus dir:temp); TEMP=$KR_DIR_TEMP/$VERKKO_TTY
-			PATH_TTY=$KR_DIR_TEMP/tynnyri/$(verkko tty).tynnyri; if [ -f $PATH_TTY ]; then \rm $PATH_TTY; fi
+			PATH_TTY=$KR_DIR_TEMP/tynnyri/$VERKKO_TTY.tynnyri; if [ -f $PATH_TTY ]; then \rm $PATH_TTY; fi
 			if [ -f "$TEMP/hakemisto.lst" ]; then rm "$TEMP/*lst"; fi
+			if [ -f "$TEMP/indb.lst" ]; then rm "$TEMP/*lst"; fi
 			if [ -f "$TEMP/log.html" ]; then rm "$TEMP/log.html"; fi
 			if [ -f "$TEMP/output.xml" ]; then rm "$TEMP/output.xml"; fi
 			if [ -f "$TEMP/report.html" ]; then rm "$TEMP/report.html"; fi
