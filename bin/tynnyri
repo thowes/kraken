@@ -8,11 +8,11 @@ case $1 in
 			*k*) tynnyri -p; tynnyri -l;;
 			*l*) if [ -f $DIR_TTY/tynnyri.check ]; then rm $DIR_TTY/tynnyri.check; fi;;
 			*n)
-					if [ -d $DIR_TEMP/$TYNNYRI_TTY/ ]; then
-						echo $2 > $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check
+					if [ -d $DIR_TTY/ ]; then
+						echo $2 > $DIR_TTY/tynnyri.check
 					else
-						cd $DIR_TEMP/; pwd; mkdir tynnyri
-						echo $2 > $DIR_TEMP/$TYNNYRI_TTY/tynnyri.check
+						#cd $DIR_TEMP/; pwd; mkdir tynnyri
+						echo $2 > $DIR_TTY/tynnyri.check
 					fi;;
 			*p*) echo $(cat $DIR_TTY/tynnyri.check|tr "\n" ",");;
 			*u*|*d*) echo $2 >> $DIR_TTY/tynnyri.check; tynnyri -k;;
