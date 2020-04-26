@@ -3,7 +3,7 @@ KR_DIR_BUA=$(asetus dir:bua)
 
 case $1 in
 	all) tyhjenna menu; tyhjenna startup; tyhjenna exit;;
-	desktop)
+	d*t*)
 		if [ -d $KR_DIR_BUA/DESKTOP/ ]; then
 			KR_DIR_DT=$(asetus dir:dt)
 			KR_NAME_LNK=$(asetus str:lnk)
@@ -35,14 +35,15 @@ case $1 in
 		fi;;
 	tty)
 			VERKKO_TTY=$(verkko tty); KR_DIR_TEMP=$(asetus dir:temp); TEMP=$KR_DIR_TEMP/$VERKKO_TTY
+			if [ -f "$TEMP/.DS_Store" ]; then rm $TEMP/.DS_Store; fi
 			if [ -f "$TEMP/geckodriver-1.log" ]; then rm $TEMP/geckodriver-*.log; fi
-			if [ -f "$TEMP/hakemisto.lst" ]; then rm "$TEMP/*.lst"; fi
-			if [ -f "$TEMP/indb.lst" ]; then rm "$TEMP/*.lst"; fi
+			if [ -f "$TEMP/hakemisto.lst" ]; then rm $TEMP/*.lst; fi
+			if [ -f "$TEMP/indb.lst" ]; then rm $TEMP/*.lst; fi
 			if [ -f "$TEMP/log.html" ]; then rm "$TEMP/log.html"; fi
 			if [ -f "$TEMP/output.xml" ]; then rm "$TEMP/output.xml"; fi
 			if [ -f "$TEMP/report.html" ]; then rm "$TEMP/report.html"; fi
 			if [ -f "$TEMP/selenium-screenshot-1.png" ]; then rm $TEMP/selenium-screenshot-*.png; fi
-			if [ -f "$TEMP/tynnyri.check" ]; then rm "$TEMP/*.check"; fi
+			if [ -f "$TEMP/tynnyri.check" ]; then rm $TEMP/*.check; fi
 			;;
 	*) tyhjenna desktop; tyhjenna tty;;
 esac
