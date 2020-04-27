@@ -1,6 +1,6 @@
 #!/bin/sh
-TEMP=$(asetus dir:temp)
 TTY=$(verkko tty)
+TEMP=$(asetus dir:temp)/$TTY
 if [ -f $TEMP/$TTY.proj ]; then
 	case $1 in
 		-d*) cat $TEMP/$TTY.proj | grep "KR_DIRPO=";;
