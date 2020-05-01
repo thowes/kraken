@@ -45,6 +45,7 @@ case $1 in
 			if [ -f "$TEMP/selenium-screenshot-1.png" ]; then rm $TEMP/selenium-screenshot-*.png; fi
 			if [ -f "$TEMP/$VERKKO_TTY.proj" ]; then rm "$TEMP/$VERKKO_TTY.proj"; fi
 			if [ -f "$TEMP/tynnyri.check" ]; then rm $TEMP/*.check; fi
+			if [ -d "$TEMP/" ]; then echo rmdir "$TEMP/"; fi
 			;;
 	*) tyhjenna desktop; tyhjenna tty;;
 esac
