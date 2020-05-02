@@ -1,4 +1,5 @@
 #!/bin/sh
+
 TTY=tty
 TEMP=$(asetus dir:temp)/$(verkko tty)
 if [ -f $TEMP/$TTY.proj ]; then
