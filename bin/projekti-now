@@ -3,11 +3,11 @@
 TTY=tty
 TEMP=$(asetus dir:temp)/$(verkko tty)
 TTY_FILE=tty_proj.check
-if [ -f $TEMP/$TTY.proj ]; then
+if [ -f $TEMP/TTY_FILE.check ]; then
 	case $1 in
-		-d*) cat $TEMP/$TTY.proj | grep "KR_DIRPO=";;
-		-l*) cat $TEMP/$TTY.proj | grep "LINE=";;
-		-p*) cat $TEMP/$TTY.proj | grep "PROJECT=";;
-		*) cat $TEMP/$TTY.proj | grep "LINE=";;
+		-d*) cat $TEMP/TTY_FILE.check | grep "KR_DIRPO=";;
+		-l*) cat $TEMP/TTY_FILE.check | grep "LINE=";;
+		-p*) cat $TEMP/TTY_FILE.check | grep "PROJECT=";;
+		*) cat $TEMP/TTY_FILE.check | grep "LINE=";;
 	esac
 fi
