@@ -1,6 +1,5 @@
 #!/bin/sh
 
-TTY=tty
 TEMP=$(asetus dir:temp)/$(verkko tty)
 TTY_FILE=tty_proj.check
 if [ -f $TEMP/$TTY_FILE ]; then
