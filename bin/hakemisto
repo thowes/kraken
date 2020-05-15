@@ -20,6 +20,7 @@ DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); INIT_STRING="$HOSTNAME $(pwd) $(
 KAYTTIS=$(kayttis)
 if [ -z "$DB" ]; then DB="$(asetus path:db)"; fi
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
+echo "DB=$DB TABLE=$TABLE kannassa" "\$1"
 echo $INIT_STRING > $TEMP/changed.lst
 echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
@@ -61,9 +62,9 @@ while read p; do
 			esac
 			if [ -d "$FILE" ]; then nada; else
 				SUMMA=$(summa "$FILE"); RIVI="$SUMMA,$FILE"
-				if [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "false" ]; then
-					if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="MM"; fi
-					#echo "$SUMMA,$FILE" >> $TEMP/missing.lst
+				if [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" == "false" ]; then
+					if [ "$FILE_STATUS" == "OK" ]; then FILE_STATUS="MM"; fi
+					echo "$SUMMA,$FILE" >> $TEMP/missing.lst
 				fi
 				if [ -f hakemisto.lst ]; then
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA" | grep -v "$RIVI" )
