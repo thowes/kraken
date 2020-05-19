@@ -36,7 +36,7 @@ case $1 in
 	tty)
 			VERKKO_TTY=$(verkko tty); KR_DIR_TEMP=$(asetus dir:temp); TEMP=$KR_DIR_TEMP/$VERKKO_TTY
 			if [ -d "$TEMP/" ]; then 
-			if [ -f "$TEMP/.DS_Store" ]; then rm $TEMP/.DS_Store; fi
+				if [ -f "$TEMP/.DS_Store" ]; then rm $TEMP/.DS_Store; fi
 			if [ -f "$TEMP/geckodriver-1.log" ]; then rm $TEMP/geckodriver-*.log; fi
 			if [ -f "$TEMP/hakemisto.lst" ]; then rm $TEMP/*.lst; fi
 			if [ -f "$TEMP/indb.lst" ]; then rm $TEMP/*.lst; fi
@@ -44,9 +44,9 @@ case $1 in
 			if [ -f "$TEMP/output.xml" ]; then rm "$TEMP/output.xml"; fi
 			if [ -f "$TEMP/report.html" ]; then rm "$TEMP/report.html"; fi
 			if [ -f "$TEMP/selenium-screenshot-1.png" ]; then rm $TEMP/selenium-screenshot-*.png; fi
-			if [ -f "$TEMP/tty_proj.check" ]; then rm $TEMP/*.check; fi
+				if [ -f "$TEMP/tty_proj.check" ]; then rm $TEMP/*.check; fi
 			if [ -f "$TEMP/tynnyri.check" ]; then rm $TEMP/*.check; fi
-				TEMP_CONTENT=$(ls -A $TEMP); if [ -z "$TEMP_CONTENT" ]; then kaiku TYHJENNA rmdir "$TEMP"; else virhe "DIR: $TEMP not empty"; tauko; fi
+				TEMP_CONTENT=$(ls -A $TEMP); if [ -z "$TEMP_CONTENT" ]; then rmdir "$TEMP"; else virhe "DIR: $TEMP not empty"; tauko; fi
 			fi;;
 	*) tyhjenna desktop; tyhjenna tty;;
 esac
