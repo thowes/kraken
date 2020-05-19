@@ -17,7 +17,23 @@ projekti() {
 		case $KRN_PROJ_FUNCTION in
 			-o) open .;;
 			-u) if [ -d .git/ ]; then projekti-update; fi;;
-			*) if [ -d .git/ ]; then git status --short; else if [ -d ../.git/ ]; then git status --short; else if [ -d ../../.git/ ]; then git status --short; else ls; fi; fi; fi;;
+			*)
+				if [ -d .git/ ]; then
+					git status --short
+				else 
+					if [ -d ../.git/ ]; then
+						git status --short
+					else
+						if [ -d ../../.git/ ]; then
+							git status --short
+						else
+							case $KAYTTIS in
+								darwin) gls;;
+								*) ls;;
+							esac
+						fi
+					fi
+				fi;;
 		esac
 		compu_proj $KRN_PROJ_FUNCTION $KRN_PROJ_INPUT
 	else 
