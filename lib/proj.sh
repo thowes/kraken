@@ -27,8 +27,8 @@ projekti() {
 						if [ -d ../../.git/ ]; then
 							git status --short
 						else
-							case $KAYTTIS in
-								darwin) gls;;
+							case $(uname) in
+								Darwin*) gls;;
 								*) ls;;
 							esac
 						fi
