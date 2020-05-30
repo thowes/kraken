@@ -2,7 +2,7 @@
 if [ -z "$1" ]; then
 	nada
 else
-	EXCL=$(asetus dir:excl)
+	if [ -z "$EXCL" ]; then EXCL=$(asetus dir:excl); fi
 	N=$(cat $EXCL/default.lst | grep "$1" | wc -l | tr -s " ")
 	if [ $N == 0 ]; then printf "false\n"; else printf "true\n"; fi
 fi
