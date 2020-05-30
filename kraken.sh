@@ -17,7 +17,6 @@ if [ -f $2 ]; then
 	#KIRJASTOT
 	if [ -f $KR_DIR_LIB/kr_network.sh ]; then . $KR_DIR_LIB/kr_network.sh; fi
 	if [ -f $KR_DIR_LIB/proj.sh ]; then . $KR_DIR_LIB/proj.sh; fi
-	if [ -f $KR_DIR_LIB/../bin/projekti ]; then . $KR_DIR_LIB/../bin/projekti; fi
 
 	#OTHER FUNCTIONS
 	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FUNK /w"; fi
