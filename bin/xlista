@@ -4,5 +4,6 @@ if [ -z "$1" ]; then
 else
 	if [ -z "$EXCL" ]; then EXCL=$(asetus dir:excl); fi
 	N=$(cat $EXCL/default.lst | grep "$1" | wc -l | tr -s " ")
-	if [ $N == 0 ]; then printf "false\n"; else printf "true\n"; fi
+	if [ $N == 0 ]; then VALUE=false; else VALUE=true; fi
+	printf "$VALUE\n"; #virhe "$VALUE" "$EXCL"
 fi

@@ -28,8 +28,9 @@ echo $INIT_STRING > $TEMP/junk.lst
 echo $INIT_STRING > $TEMP/missing.lst
 echo $INIT_STRING > $TEMP/roskat.lst
 ls -1R > $TEMP/ls.lst
+EXCL=$(asetus dir:excl)
 while read p; do
-	EXCLUDE_LISTED=$(xlista $p)
+	EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); echo $EXCLUDE_LISTED
 	case $p in
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
