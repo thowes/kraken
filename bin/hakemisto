@@ -29,6 +29,7 @@ echo $INIT_STRING > $TEMP/missing.lst
 echo $INIT_STRING > $TEMP/roskat.lst
 ls -1R > $TEMP/ls.lst
 while read p; do
+	EXCLUDE_LISTED=$(xlista $p)
 	case $p in
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
@@ -52,7 +53,7 @@ while read p; do
 		*"LOCK"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"ls.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"missing.lst"*) nada;;
-		#*"Notes.txt"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"Notes.txt"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		"total "*) nada;;
 		*)
 			FILE_STATUS="OK"; FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }')
