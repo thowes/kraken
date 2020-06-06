@@ -53,6 +53,7 @@ while read p; do
 		*"levy.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"LOCK"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"ls.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"metadata.opf"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"missing.lst"*) nada;;
 		*"Notes.txt"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		"total "*) nada;;
