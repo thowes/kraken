@@ -35,7 +35,6 @@ while read p; do
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"backup.log"*) nada;;
 		*"changed.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"changed.lst"*) nada;;
 		*"cover.jpg"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
@@ -91,6 +90,7 @@ cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.lst ./hakemisto.lst
 cp $TEMP/junk.lst ./junk.lst
 cp $TEMP/missing.lst ./missing.lst
+subl missing.lst
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
