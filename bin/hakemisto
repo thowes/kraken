@@ -30,7 +30,7 @@ echo $INIT_STRING > $TEMP/roskat.lst
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
 while read p; do
-	EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); #echo $EXCLUDE_LISTED
+	EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); if [ "$EXCLUDE_LISTED" = "false" ]; then #echo $EXCLUDE_LISTED
 	case $p in
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
@@ -83,7 +83,7 @@ while read p; do
 				fi
 				echo "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" >> $TEMP/hakemisto.lst
 			fi;;
-	esac
+	esac; fi
 done < $TEMP/ls.lst
 cp $TEMP/changed.lst ./changed.lst
 cp $TEMP/duplicate.lst ./duplicate.lst
