@@ -36,14 +36,11 @@ while read p; do
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"changed.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"changed.lst"*) nada;;
 		*"cover.jpg"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"cover.png"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*".DS_Store"*) echo "$DIR/$p" >> $TEMP/junk.lst;; 
 		*"duplicate.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"duplicate.lst"*) nada;;
 		*"esktop.ini"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"hakemisto.lst"*) nada;;
 		*"humbs.db"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"junk.lst"*) nada;;
 		*"Icon"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
@@ -51,9 +48,7 @@ while read p; do
 		*"levy.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"levy.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"LOCK"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"ls.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"metadata.opf"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"missing.lst"*) nada;;
 		*"Notes.txt"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		"total "*) nada;;
 		*)
@@ -88,7 +83,7 @@ done < $TEMP/ls.lst
 cp $TEMP/changed.lst ./changed.lst
 cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.lst ./hakemisto.lst
-cp $TEMP/junk.lst ./junk.lst
+cp $TEMP/roskat.lst ./junk.lst
 cp $TEMP/missing.lst ./missing.lst
 subl missing.lst
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
