@@ -16,6 +16,7 @@ fi
 if [ -f missing.lst ]; then nada; else
 	if [ -f indb.lst ]; then mv indb.lst missing.lst; fi
 fi
+if [ -f roina.lst ]; then nada; else	if [ -f junk.lst ]; then mv junk.lst roina.lst; fi; fi
 DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); INIT_STRING="$HOSTNAME $(pwd) $(pvm)" #pvm=date +"%F %R"
 KAYTTIS=$(kayttis)
 if [ -z "$DB" ]; then DB="$(asetus path:db)"; fi
@@ -79,7 +80,7 @@ done < $TEMP/ls.lst
 cp $TEMP/changed.lst ./changed.lst
 cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.lst ./hakemisto.lst
-cp $TEMP/roina.lst ./junk.lst
+cp $TEMP/roina.lst ./roina.lst
 cp $TEMP/missing.lst ./missing.lst
 #subl missing.lst
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
