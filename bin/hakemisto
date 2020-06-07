@@ -26,29 +26,28 @@ echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
 echo $INIT_STRING > $TEMP/junk.lst
 echo $INIT_STRING > $TEMP/missing.lst
-echo $INIT_STRING > $TEMP/roskat.lst
+echo $INIT_STRING > $TEMP/roina.lst
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
 while read p; do
-	EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); if [ "$EXCLUDE_LISTED" = "false" ]; then #echo $EXCLUDE_LISTED
+	EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); if [ "$EXCLUDE_LISTED" = "false" ]; then
 	case $p in
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
-		*"._"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"changed.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"cover.jpg"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"cover.png"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*".DS_Store"*) echo "$DIR/$p" >> $TEMP/junk.lst;; 
-		*"duplicate.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"duplicate.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"esktop.ini"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"humbs.db"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"junk.lst"*) nada;;
+		*"junk.lst"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"Icon"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"indb.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"levy.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"levy.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"levy.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		*"LOCK"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
-		*"metadata.opf"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"metadata.opf"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"Notes.txt"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
 		"total "*) nada;;
 		*)
@@ -83,7 +82,7 @@ done < $TEMP/ls.lst
 cp $TEMP/changed.lst ./changed.lst
 cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.lst ./hakemisto.lst
-cp $TEMP/roskat.lst ./junk.lst
+cp $TEMP/roina.lst ./junk.lst
 cp $TEMP/missing.lst ./missing.lst
 subl missing.lst
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
@@ -92,4 +91,4 @@ if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
 if [ -f $TEMP/junk.lst ]; then rm $TEMP/junk.lst; fi
 if [ -f $TEMP/ls.lst ]; then rm $TEMP/ls.lst; fi
 if [ -f $TEMP/missing.lst ]; then rm $TEMP/missing.lst; fi
-if [ -f $TEMP/roskat.lst ]; then rm $TEMP/roskat.lst; fi
+if [ -f $TEMP/roina.lst ]; then rm $TEMP/roina.lst; fi
