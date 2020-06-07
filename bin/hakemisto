@@ -24,7 +24,6 @@ echo "DB=$DB TABLE=$TABLE kannassa" "\$1"
 echo $INIT_STRING > $TEMP/changed.lst
 echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
-echo $INIT_STRING > $TEMP/junk.lst
 echo $INIT_STRING > $TEMP/missing.lst
 echo $INIT_STRING > $TEMP/roina.lst
 ls -1R > $TEMP/ls.lst
@@ -36,7 +35,7 @@ while read p; do
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"changed.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*".DS_Store"*) echo "$DIR/$p" >> $TEMP/junk.lst;; 
+		*".DS_Store"*) echo "$DIR/$p" >> $TEMP/roina.lst;; 
 		*"duplicate.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"esktop.ini"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"humbs.db"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
@@ -82,11 +81,10 @@ cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.lst ./hakemisto.lst
 cp $TEMP/roina.lst ./junk.lst
 cp $TEMP/missing.lst ./missing.lst
-subl missing.lst
+#subl missing.lst
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
-if [ -f $TEMP/junk.lst ]; then rm $TEMP/junk.lst; fi
 if [ -f $TEMP/ls.lst ]; then rm $TEMP/ls.lst; fi
 if [ -f $TEMP/missing.lst ]; then rm $TEMP/missing.lst; fi
 if [ -f $TEMP/roina.lst ]; then rm $TEMP/roina.lst; fi
