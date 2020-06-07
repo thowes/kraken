@@ -35,17 +35,17 @@ while read p; do
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*"changed.log"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"changed.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*".DS_Store"*) echo "$DIR/$p" >> $TEMP/junk.lst;; 
 		*"duplicate.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"esktop.ini"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*"humbs.db"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"humbs.db"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"junk.lst"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"Icon"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*"indb.lst"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"indb.lst"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"levy.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"levy.lst"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*"LOCK"*) echo "$DIR/$p" >> $TEMP/junk.lst;;
+		*"LOCK"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"metadata.opf"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		"total "*) nada;;
 		*)
