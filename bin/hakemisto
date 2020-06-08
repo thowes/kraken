@@ -13,9 +13,7 @@ if [ -f hakemisto.lst ]; then nada; else
 	if [ -f levy.log ]; then mv levy.log hakemisto.lst; fi
 	if [ -f levy.lst ]; then mv levy.lst hakemisto.lst; fi
 fi
-if [ -f missing.lst ]; then nada; else
-	if [ -f indb.lst ]; then mv indb.lst missing.lst; fi
-fi
+if [ -f missing.lst ]; then nada; else if [ -f indb.lst ]; then mv indb.lst missing.lst; fi; fi
 if [ -f roina.lst ]; then nada; else	if [ -f junk.lst ]; then mv junk.lst roina.lst; fi; fi
 DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); INIT_STRING="$HOSTNAME $(pwd) $(pvm)" #pvm=date +"%F %R"
 KAYTTIS=$(kayttis)
