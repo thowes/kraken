@@ -39,7 +39,6 @@ while read p; do
 		*"esktop.ini"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"humbs.db"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"junk.lst"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*"Icon"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"indb.lst"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"levy.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"levy.lst"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
