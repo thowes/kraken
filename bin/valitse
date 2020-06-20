@@ -1,5 +1,5 @@
 #!/bin/bash
-CFG=$(asetus dir:cfg)
+CFG=$(asetus dir:cfg); TTY=$(verkko tty)
 kaiku VALITSE $1
 #prints to screen list projects valid for current location
 cat $CFG/proj.csv|\grep $1|awk -F, '{ print " "$1"\t" $2 }'
@@ -18,4 +18,4 @@ else
 fi
 LINE=$(cat $CFG/proj.csv|\grep $PROJECT)
 DIRPO=$(echo $LINE|awk -F, '{print $4}')
-printf "PROJECT=$PROJECT \nLINE=$LINE \nDIRPO=$DIRPO" > $(asetus dir:temp)/$(verkko tty).proj
+printf "PROJECT=$PROJECT \nLINE=$LINE \nDIRPO=$DIRPO" > $(asetus dir:temp)/$TTY/tty_proj.check
