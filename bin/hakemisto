@@ -28,8 +28,7 @@ echo $INIT_STRING > $TEMP/roina.lst
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
 while read p; do
-	EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); if [ "$EXCLUDE_LISTED" = "false" ]; then
-	case $p in
+	EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); if [ "$EXCLUDE_LISTED" = "false" ]; then case $p in
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
