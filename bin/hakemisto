@@ -52,8 +52,8 @@ while read p; do
 			esac
 			if [ -d "$FILE" ]; then nada; else
 				SUMMA=$(summa "$FILE"); RIVI="$SUMMA,$FILE"
-				if [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" == "false" ]; then
-					if [ "$FILE_STATUS" == "OK" ]; then FILE_STATUS="MM"; fi
+				if [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "false" ]; then
+					if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="MM"; fi
 					echo "$SUMMA,$FILE" >> $TEMP/missing.lst
 				fi
 				if [ -f hakemisto.lst ]; then

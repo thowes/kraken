@@ -3,7 +3,7 @@ COUNT="0"
 if [ -z "$DB" ]; then DB="$(asetus path:db)"; fi
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 COUNT=$(DB=$DB kanta -t:$TABLE|grep "$1"|tr -s " "|wc -l)
-if [ $COUNT == 0 ]; then
+if [ $COUNT = 0 ]; then
 	printf "false\n"
 else
 	printf "true\n"
