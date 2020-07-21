@@ -19,7 +19,7 @@ DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); INIT_STRING="$HOSTNAME $(pwd) $(
 KAYTTIS=$(kayttis)
 if [ -z "$DB" ]; then DB="$(asetus path:db)"; fi
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
-echo "DB=$DB TABLE=$TABLE kannassa" "\$1"
+#echo "DB=$DB TABLE=$TABLE kannassa" "\$1"
 echo $INIT_STRING > $TEMP/changed.lst
 echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
@@ -27,7 +27,7 @@ echo $INIT_STRING > $TEMP/missing.lst
 echo $INIT_STRING > $TEMP/roina.lst
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
-while read p; do
+while read p; do # doublespaces "  " not read
 	EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); if [ "$EXCLUDE_LISTED" = "false" ]; then case $p in
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
