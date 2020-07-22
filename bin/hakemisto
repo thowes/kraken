@@ -76,8 +76,8 @@ done < $TEMP/ls.lst
 cp $TEMP/changed.lst ./changed.lst
 cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.lst ./hakemisto.lst
-cp $TEMP/roina.lst ./roina.lst
 cp $TEMP/missing.lst ./missing.lst
+cp $TEMP/roina.lst ./roina.lst
 #subl missing.lst
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
