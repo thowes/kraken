@@ -1,5 +1,6 @@
 alias ..='cd ..'
 alias ...='cd ..; cd ..'
+alias 1st='bulog -1'
 alias +a='chmod a+rwx'
 alias a="git add -A; git commit -m"
 alias "a-"='chmod a-rwx'
@@ -24,6 +25,7 @@ alias clone='git clone'
 alias co='git checkout'
 alias d=diff
 alias dc=cd
+alias dox='LISTA=~/Documents/hakemisto.lst listalla'
 alias dwl='synkronoi dwl'
 alias e=echo
 alias ed=muokkaa
@@ -41,6 +43,7 @@ alias g+w='chmod g+w'
 alias g+x='chmod g+x'
 alias gdf='git df'
 alias gl='git log'
+alias gmv='git mv'
 alias grep='grep --color'                     # show differences in colour
 alias h1='head -1'
 alias h=heroku
@@ -58,6 +61,7 @@ alias ll='ls -la'
 alias llg='ls -la|grep'
 alias lll='ls -la|less'
 alias loki='GIT_PAGER=cat git log --pretty=oneline'
+alias m=less
 alias md=mkdir
 alias merge='git merge'
 alias migrate='rails db:migrate'
