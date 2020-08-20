@@ -1,9 +1,9 @@
 #!/bin/bash
 if [ -d "$1" ]; then cd "$1"; fi
 if [ -f hakemisto.db ]; then nada; else
-	if [ -f changed.old ]; then mv changed.old changed.lst; fi
+	if [ -f changed.old ]; then mv changed.old hakemisto.db; fi
 	if [ -f changed.log ]; then mv changed.log changed.lst; fi
-	if [ -f changed.lst ]; then mv changed.log hakemisto.db; fi
+	if [ -f changed.lst ]; then mv changed.lst hakemisto.db; fi
 fi
 if [ -f duplicate.lst ]; then nada; else
 	if [ -f duplicate.old ]; then mv duplicate.old duplicate.lst; fi
@@ -75,8 +75,8 @@ while read p; do # doublespaces "  " not read
 			fi;;
 	esac; fi
 done < $TEMP/ls.lst
-cp $TEMP/hakemisto.db ./hakemisto.db
 cp $TEMP/duplicate.lst ./duplicate.lst
+cp $TEMP/hakemisto.db ./hakemisto.db
 cp $TEMP/hakemisto.lst ./hakemisto.lst
 cp $TEMP/missing.lst ./missing.lst
 cp $TEMP/roina.lst ./roina.lst
