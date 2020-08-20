@@ -1,8 +1,9 @@
 #!/bin/bash
 if [ -d "$1" ]; then cd "$1"; fi
-if [ -f changed.lst ]; then nada; else
+if [ -f hakemisto.db ]; then nada; else
 	if [ -f changed.old ]; then mv changed.old changed.lst; fi
 	if [ -f changed.log ]; then mv changed.log changed.lst; fi
+	if [ -f changed.lst ]; then mv changed.log hakemisto.db; fi
 fi
 if [ -f duplicate.lst ]; then nada; else
 	if [ -f duplicate.old ]; then mv duplicate.old duplicate.lst; fi
@@ -20,7 +21,7 @@ KAYTTIS=$(kayttis)
 if [ -z "$DB" ]; then DB="$(asetus path:db)"; fi
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 #echo "DB=$DB TABLE=$TABLE kannassa" "\$1"
-echo $INIT_STRING > $TEMP/changed.lst
+echo $INIT_STRING > $TEMP/hakemisto.db
 echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
 echo $INIT_STRING > $TEMP/missing.lst
@@ -32,7 +33,7 @@ while read p; do # doublespaces "  " not read
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*"changed.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
+		*"changed.l"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*".DS_Store"*) echo "$DIR/$p" >> $TEMP/roina.lst;; 
 		*"duplicate.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"esktop.ini"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
@@ -70,10 +71,11 @@ while read p; do # doublespaces "  " not read
 					fi; fi
 				fi
 				echo "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" >> $TEMP/hakemisto.lst
+				#DB=$TEMP/hakemisto.db kanta
 			fi;;
 	esac; fi
 done < $TEMP/ls.lst
-cp $TEMP/changed.lst ./changed.lst
+cp $TEMP/hakemisto.db ./hakemisto.db
 cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.lst ./hakemisto.lst
 cp $TEMP/missing.lst ./missing.lst
@@ -81,6 +83,7 @@ cp $TEMP/roina.lst ./roina.lst
 #subl missing.lst
 if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
+if [ -f $TEMP/hakemisto.db ]; then rm $TEMP/hakemisto.db; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
 if [ -f $TEMP/ls.lst ]; then rm $TEMP/ls.lst; fi
 if [ -f $TEMP/missing.lst ]; then rm $TEMP/missing.lst; fi
