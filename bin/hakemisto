@@ -16,11 +16,10 @@ if [ -f hakemisto.lst ]; then nada; else
 fi
 if [ -f missing.lst ]; then nada; else if [ -f indb.lst ]; then mv indb.lst missing.lst; fi; fi
 if [ -f roina.lst ]; then nada; else	if [ -f junk.lst ]; then mv junk.lst roina.lst; fi; fi
-DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); PVM=$(pvm); INIT_STRING="$HOSTNAME $(pwd) $PVM" #pvm=date +"%F %R"
+DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); PWD=$(pwd); PVM=$(pvm); INIT_STRING="$HOSTNAME $PWD $PVM" #pvm=date +"%F %R"
 KAYTTIS=$(kayttis)
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 DB=$TEMP/hakemisto.db kanta -g:"Documents" "file_status TEXT, ls_time DATETIME, summa TEXT, file_path TEXT" #DB="$TEMP/hakemisto.db" TABLE="Documents" kanta add "(file_status DIR, ls_time $PVM, summa 00, file_path $1)"
-echo $INIT_STRING > $TEMP/hakemisto.db
 echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
 echo $INIT_STRING > $TEMP/missing.lst
@@ -70,7 +69,7 @@ while read p; do # doublespaces "  " not read
 					fi; fi
 				fi
 				echo "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" >> $TEMP/hakemisto.lst
-				#DB="$TEMP/hakemisto.db" TABLE="$TABLE" kanta insert (file_status "$FILE_STATUS", ls_time "$LS_TIME", summa "$SUMMA", file_path "$FILE")
+				#DB="$TEMP/hakemisto.db" TABLE="Documents" kanta -a:"file_status,ls_time,file_path" "$FILE_STATUS, $LS_TIME, $SUMMA, $FILE"
 			fi;;
 	esac; fi
 done < $TEMP/ls.lst
