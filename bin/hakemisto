@@ -16,10 +16,10 @@ if [ -f hakemisto.lst ]; then nada; else
 fi
 if [ -f missing.lst ]; then nada; else if [ -f indb.lst ]; then mv indb.lst missing.lst; fi; fi
 if [ -f roina.lst ]; then nada; else	if [ -f junk.lst ]; then mv junk.lst roina.lst; fi; fi
-DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); INIT_STRING="$HOSTNAME $(pwd) $(pvm)" #pvm=date +"%F %R"
+DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); PVM=$(pvm); INIT_STRING="$HOSTNAME $(pwd) $PVM" #pvm=date +"%F %R"
 KAYTTIS=$(kayttis)
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
-#DB="$TEMP/hakemisto.db" TABLE="$TABLE" kanta init "\$1"
+DB=$TEMP/hakemisto.db kanta -g:"Documents" "file_status TEXT, ls_time DATETIME, summa TEXT, file_path TEXT" #DB="$TEMP/hakemisto.db" TABLE="Documents" kanta add "(file_status DIR, ls_time $PVM, summa 00, file_path $1)"
 echo $INIT_STRING > $TEMP/hakemisto.db
 echo $INIT_STRING > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
