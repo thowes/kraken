@@ -16,24 +16,24 @@ if [ -f hakemisto.lst ]; then nada; else
 fi
 if [ -f missing.lst ]; then nada; else if [ -f indb.lst ]; then mv indb.lst missing.lst; fi; fi
 if [ -f roina.lst ]; then nada; else	if [ -f junk.lst ]; then mv junk.lst roina.lst; fi; fi
-DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); PWD=$(pwd); PVM=$(pvm); INIT_STRING="$HOSTNAME $PWD $PVM" #pvm=date +"%F %R"
+DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); PWD=$(pwd); PVM=$(pvm); INIT_STRING="$HOSTNAME $PVM $PWD" #pvm=date +"%F %R"
 KAYTTIS=$(kayttis)
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 DB=$TEMP/hakemisto.db kanta -g:"Documents" "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"; DB=$TEMP/hakemisto.db TABLE="Documents" kanta -a:"status,ls_time,summa,path" "'DIR', '$PVM', '0,0', '$PWD'"
-echo $INIT_STRING > $TEMP/duplicate.lst
+echo $INIT_STRING/duplicate.lst > $TEMP/duplicate.lst
 echo $INIT_STRING > $TEMP/hakemisto.lst
-echo $INIT_STRING > $TEMP/missing.lst
+echo $INIT_STRING/missing.lst > $TEMP/missing.lst
 echo $INIT_STRING > $TEMP/roina.lst
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
 while read p; do # doublespaces "  " not read
 	EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); if [ "$EXCLUDE_LISTED" = "false" ]; then case $p in
 		".:") DIR=".";;
-		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }');; #\
+		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }') ;; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"changed.l"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*".DS_Store"*) echo "$DIR/$p" >> $TEMP/roina.lst;; 
-		*"duplicate.log"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
+		*"duplicate.l"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"esktop.ini"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"humbs.db"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"junk.lst"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
@@ -42,18 +42,19 @@ while read p; do # doublespaces "  " not read
 		*"levy.lst"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"LOCK"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"metadata.opf"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
+		*"missing.l"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		"total "*) nada;;
 		*)
 			FILE_STATUS="OK"; FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }')
 			case "$KAYTTIS" in
-				darwin*) LS_TIME=$(gls -l --time-style=full-iso "$FILE"|awk '{print $6 "T" $7 $8 }');;
+				darwin*) LS_TIME=$(gls -l --time-style=full-iso "$FILE"|awk '{print $6 "T" $7 $8 }') ;;
 				* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 "T" $7 $8 }');;
 			esac
 			if [ -d "$FILE" ]; then nada; else
 				SUMMA=$(summa "$FILE"); RIVI="$SUMMA,$FILE"
 				if [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "false" ]; then
 					if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="MM"; fi
-					echo "$SUMMA,$FILE" >> $TEMP/missing.lst
+					#echo "$SUMMA,$FILE" >> $TEMP/missing.lst
 				fi
 				if [ -f hakemisto.lst ]; then
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA" | grep -v "$RIVI" )
@@ -63,7 +64,7 @@ while read p; do # doublespaces "  " not read
 							if [ "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
 								if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="N2"; fi
 								if [ "$FILE_STATUS" = "MM" ]; then FILE_STATUS="M2"; fi
-								echo "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" >> $TEMP/duplicate.lst
+								#echo "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" >> $TEMP/duplicate.lst
 							fi
 						fi
 					fi; fi
