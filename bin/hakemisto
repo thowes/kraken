@@ -21,9 +21,9 @@ KAYTTIS=$(kayttis)
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 DB=$TEMP/hakemisto.db kanta -g:"Documents" "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"; DB=$TEMP/hakemisto.db TABLE="Documents" kanta -a:"status,ls_time,summa,path" "'DIR', '$PVM', '0,0', '$PWD'"
 echo $INIT_STRING/duplicate.lst > $TEMP/duplicate.lst
-echo $INIT_STRING > $TEMP/hakemisto.lst
+echo $INIT_STRING/hakemisto.lst > $TEMP/hakemisto.lst
 echo $INIT_STRING/missing.lst > $TEMP/missing.lst
-echo $INIT_STRING > $TEMP/roina.lst
+echo $INIT_STRING/roina.lst > $TEMP/roina.lst
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
 while read p; do # doublespaces "  " not read
@@ -54,7 +54,6 @@ while read p; do # doublespaces "  " not read
 				SUMMA=$(summa "$FILE"); RIVI="$SUMMA,$FILE"
 				if [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "false" ]; then
 					if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="MM"; fi
-					#echo "$SUMMA,$FILE" >> $TEMP/missing.lst
 				fi
 				if [ -f hakemisto.lst ]; then
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA" | grep -v "$RIVI" )
@@ -64,7 +63,6 @@ while read p; do # doublespaces "  " not read
 							if [ "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
 								if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="N2"; fi
 								if [ "$FILE_STATUS" = "MM" ]; then FILE_STATUS="M2"; fi
-								#echo "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" >> $TEMP/duplicate.lst
 							fi
 						fi
 					fi; fi
