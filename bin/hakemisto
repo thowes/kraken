@@ -78,7 +78,6 @@ cp $TEMP/hakemisto.lst ./hakemisto.lst
 cp $TEMP/missing.lst ./missing.lst
 cp $TEMP/roina.lst ./roina.lst
 #subl missing.lst
-if [ -f $TEMP/changed.lst ]; then rm $TEMP/changed.lst; fi
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/hakemisto.db ]; then rm $TEMP/hakemisto.db; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
