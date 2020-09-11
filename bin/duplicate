@@ -1,2 +1,9 @@
 #!/bin/sh
 echo DUPLICATE
+DB=hakemisto.db
+if [ -z "$1" ]; then
+	SUMMA="0,0"
+else
+	SUMMA=$(summa "$1")
+fi
+#DB=$DB TABLE=Documents kanta -f:$SUMMA
