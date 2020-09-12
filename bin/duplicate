@@ -6,4 +6,4 @@ else
 	SUMMA=$(summa "$1")
 fi
 #DB=$DB TABLE=Documents kanta -f:$SUMMA
-echo DUPLICATE
+echo DUPLICATE $SUMMA
