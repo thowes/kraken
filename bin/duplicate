@@ -2,14 +2,12 @@
 DB=hakemisto.db
 if [ -z "$1" ]; then
 	SUMMA="0,0"
-else
 	SUMMA=$(summa "$1")
 fi
-echo DUPLICATE $UMMA
 
 if [ "$SUMMA" = "0,0" ]; then
-	nada; DB=$DB TABLE=Documents kanta -s:M2|grep M2
+	nada; DB=$DB TABLE=Documents kanta -s:status|grep M2
 else
-#DB=$DB TABLE=Documents kanta -s:summa "$SUMMA"
+	DB=$DB TABLE=Documents kanta -s:summa|grep "$SUMMA"
 	nada
 fi
