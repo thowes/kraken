@@ -1,9 +1,8 @@
 #!/bin/sh
 DB=hakemisto.db
 if [ -z "$1" ]; then
-	nada; DB=$DB TABLE=Documents kanta -s:status|grep M2
+	DB=$DB TABLE=Documents kanta -s:status|grep M2
 else
 	SUMMA=$(summa "$1")
 	DB=$DB TABLE=Documents kanta -s:summa|grep "$SUMMA"
-	nada
 fi
