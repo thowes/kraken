@@ -5,5 +5,11 @@ if [ -z "$1" ]; then
 else
 	SUMMA=$(summa "$1")
 fi
-#DB=$DB TABLE=Documents kanta -f:$SUMMA
-echo DUPLICATE $SUMMA
+#DB=$DB TABLE=Documents kanta -s:summa "$SUMMA"
+echo DUPLICATE $UMMA
+
+if [ "$SUMMA" = "0,0" ]; then
+	nada; DB=$DB TABLE=Documents kanta -s:M2|grep M2
+else
+	nada
+fi
