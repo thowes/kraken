@@ -1,7 +1,6 @@
 #!/bin/sh
 DB=hakemisto.db
 if [ -z "$1" ]; then
-	SUMMA="0,0"
 
 
 
