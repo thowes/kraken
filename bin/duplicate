@@ -2,9 +2,9 @@
 DB=hakemisto.db
 if [ -z "$1" ]; then
 	SUMMA="0,0"
-fi
 
-if [ "$SUMMA" = "0,0" ]; then
+
+
 	nada; DB=$DB TABLE=Documents kanta -s:status|grep M2
 else
 	SUMMA=$(summa "$1")
