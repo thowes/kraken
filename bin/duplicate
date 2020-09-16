@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ -z "$DB" ]; then
-DB=hakemisto.db
+	DB=hakemisto.db
 fi
 if [ -z "$1" ]; then
 	DB=$DB TABLE=Documents kanta -s:status|grep M2
