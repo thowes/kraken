@@ -1,2 +1,11 @@
 #!/bin/sh
+if [ -z "$DB" ]; then
+	DB=hakemisto.db
+fi
+if [ -z "$1" ]; then
+	DB=$DB TABLE=Documents kanta -s:status|grep MM
+else
+	SUMMA=$(summa "$1")
+	DB=$DB TABLE=Documents kanta -s:summa|grep "$SUMMA"
+fi
 echo PUUTTUU
