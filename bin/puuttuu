@@ -8,4 +8,3 @@ else
 	SUMMA=$(summa "$1")
 	DB=$DB TABLE=Documents kanta -s:summa|grep "$SUMMA"
 fi
-echo PUUTTUU
