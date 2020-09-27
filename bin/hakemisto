@@ -77,7 +77,7 @@ done < $TEMP/ls.lst
 cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.db ./hakemisto.db
 cp $TEMP/hakemisto.lst ./hakemisto.lst
-cp $TEMP/missing.lst ./missing.lst
+#cp $TEMP/missing.lst ./missing.lst
 cp $TEMP/roina.lst ./roina.lst
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/hakemisto.db ]; then rm $TEMP/hakemisto.db; fi
