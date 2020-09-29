@@ -24,7 +24,6 @@ if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 DB=$TEMP/hakemisto.db kanta -g:"Documents" "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"; DB=$TEMP/hakemisto.db TABLE="Documents" kanta -a:"status,ls_time,summa,path" "'DIR', '$PVM', '0,0', '$PWD'"
 echo $INIT_STRING/duplicate.lst > $TEMP/duplicate.lst
 echo $INIT_STRING/hakemisto.lst > $TEMP/hakemisto.lst
-echo $INIT_STRING/missing.lst > $TEMP/missing.lst
 echo $INIT_STRING/roina.lst > $TEMP/roina.lst
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
@@ -77,7 +76,6 @@ done < $TEMP/ls.lst
 cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.db ./hakemisto.db
 cp $TEMP/hakemisto.lst ./hakemisto.lst
-#cp $TEMP/missing.lst ./missing.lst
 cp $TEMP/roina.lst ./roina.lst
 if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/hakemisto.db ]; then rm $TEMP/hakemisto.db; fi
