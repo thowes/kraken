@@ -68,7 +68,7 @@ while read p; do # doublespaces "  " not read
 						fi
 					fi; fi
 				fi
-				echo "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" >> $TEMP/hakemisto.lst
+				if [ "$1" = "-t" ]; then RIVI="$FILE_STATUS,$SUMMA,$FILE"; else RIVI="$FILE_STATUS,$LS_TIME,$SUMMA,$FILE"; fi; echo "$RIVI" >> $TEMP/hakemisto.lst
 				DB=$TEMP/hakemisto.db TABLE="Documents" kanta -a:"status,ls_time,summa,path" "'$FILE_STATUS', '$LS_TIME', '$SUMMA', '$FILE'"
 			fi;;
 	esac; fi
