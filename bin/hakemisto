@@ -25,6 +25,7 @@ DB=$TEMP/hakemisto.db kanta -g:"Documents" "status TEXT, ls_time DATETIME, summa
 echo $INIT_STRING/duplicate.lst > $TEMP/duplicate.lst
 echo $INIT_STRING/hakemisto.lst > $TEMP/hakemisto.lst
 echo $INIT_STRING/roina.lst > $TEMP/roina.lst
+kaiku $INIT_STRING
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
 while read p; do # doublespaces "  " not read
