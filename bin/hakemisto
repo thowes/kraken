@@ -58,7 +58,7 @@ while read p; do # doublespaces "  " not read
 					if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="MM"; fi
 				fi
 				if [ -f hakemisto.lst ]; then
-					#RIVIT=$(DB=$TEMP/hakemisto.db TABLE="Documents" kanta -f)
+					#EKA_RIVI=$(DB=hakemisto.db TABLE="Documents" kanta -s:summa|grep DIR)
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA" | grep -v "$RIVI" )
 					if [ "$RIVIT" = "" ]; then nada; else
 					if [ "$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
