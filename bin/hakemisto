@@ -29,7 +29,7 @@ kaiku $INIT_STRING
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
 while read p; do # doublespaces "  " not read
-	EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); if [ "$EXCLUDE_LISTED" = "false" ]; then case $p in
+	FILE_STATUS="OK"; EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); if [ "$EXCLUDE_LISTED" = "false" ]; then case $p in
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }') ;; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
@@ -47,7 +47,7 @@ while read p; do # doublespaces "  " not read
 		*"missing.l"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		"total "*) nada;;
 		*)
-			FILE_STATUS="OK"; FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }')
+			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }')
 			case "$KAYTTIS" in
 				darwin*) LS_TIME=$(gls -l --time-style=full-iso "$FILE"|awk '{print $6 "T" $7 $8 }') ;;
 				* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 "T" $7 $8 }');;
@@ -83,5 +83,4 @@ if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/hakemisto.db ]; then rm $TEMP/hakemisto.db; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
 if [ -f $TEMP/ls.lst ]; then rm $TEMP/ls.lst; fi
-if [ -f $TEMP/missing.lst ]; then rm $TEMP/missing.lst; fi
 if [ -f $TEMP/roina.lst ]; then rm $TEMP/roina.lst; fi
