@@ -6,7 +6,7 @@ case $KAYTTIS in
 	ubuntu) DIR="/media/$USER";;
 	wsl) DIR="/mnt";;
 esac
-if [ -z "$KR_DEBUG" ]; then KR_DEBUG=$(asetus bool:debug); else KR_DEBUG=$KR_DEBUG; fi; KR_DEBUG=$KR_DEBUG debug "TTCM $TC_ARGS	1:$1 2:$2 5:$5 4:$4 3:$3"
+if [ -z "$KR_DEBUG" ]; then KR_DEBUG=$(asetus bool:debug); else KR_DEBUG=$KR_DEBUG; fi; KR_DEBUG=$KR_DEBUG debug "TTCM $TC_ARGS 1:$1 2:$2 5:$5 4:$4 3:$3"
 case $KAYTTIS in
 	darwin)
 		case $1 in
