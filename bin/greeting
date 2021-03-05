@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+require "thor"
+
+class Greeting < Thor
+	desc "hello NAME", "say hello to NAME"
+  long_desc <<-LONGDESC
+    `greeting hello` will print out a message to a person of your choosing.
+  LONGDESC
+	def hello(name=nil)
+		#language = ask("Language: ")
+		greet("Hello", name)
+	end
+
+	desc "goodbye NAME", "say goodbye to NAME"
+  long_desc <<-LONGDESC
+    `greeting goodbye` will print out a bye message to a person of your choosing.
+  LONGDESC
+	def bye(name=nil)
+		greet("Goodbye", name)
+	end
+
+	desc "goodbye NAME", "say goodbye to NAME"
+  long_desc <<-LONGDESC
+    `greeting goodbye` will print out a goodbye message to a person of your choosing.
+  LONGDESC
+	def goodbye(name=nil)
+		greet("Goodbye", name)
+	end
+
+private
+	def greet(greeting, name=nil, from=nil)
+		say "#{greeting}, world!" unless name
+		say "#{greeting}, #{name.upcase}!" if name
+	end
+end
+
+#puts "hello, world!", "how's it going?"
+Greeting.start(ARGV)
