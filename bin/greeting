@@ -2,6 +2,11 @@
 require "thor"
 
 class Greeting < Thor
+	desc "bye NAME", "say bye to NAME"
+  long_desc <<-LONGDESC
+    `greeting bye` will print out a bye message to a person of your choosing.
+  LONGDESC
+
 	desc "hello NAME", "say hello to NAME"
   long_desc <<-LONGDESC
     `greeting hello` will print out a message to a person of your choosing.
