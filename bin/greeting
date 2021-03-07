@@ -24,7 +24,7 @@ class Greeting < Thor
     `greeting hola` will print out ¡Hola! message to a person of your choosing.
   LONGDESC
 	def hola(name=nil)
-		greet("Goodbye", name)
+		greet("¡Hola", name)
 	end
 
 	desc "goodbye NAME", "say goodbye to NAME"
