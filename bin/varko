@@ -2,6 +2,7 @@
 if [ $1 != "" ] && [ $2 != "" ]; then DIR_TEMP=$(asetus dir:temp);
 	if [ -d $1 ]; then DIR=$1; PKG=$2; fi
 	if [ -d $2 ]; then DIR=$2; PKG=$1; fi
+	if [ -z "$IGNORE" ]; then IGNORE="\"*/\\.DS_Store\" *humbs.db backup.log"; else IGNORE="\"*/\\.DS_Store\" *humbs.db backup.log $IGNORE"; fi
 	# Delete and rename old backups, if they exist.
 	if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.old ]; then \rm $DIR_TEMP/$PKG.$USER.$HOSTNAME.old; fi
 	BU_LATEST_MD5="nada"; BU_TODAY_MD5=md5
@@ -21,13 +22,13 @@ if [ $1 != "" ] && [ $2 != "" ]; then DIR_TEMP=$(asetus dir:temp);
 		KR_DIR_EXCL=$(asetus dir:excl)
 		# Creating new zip from the directory without backup.log file
 		if [ -f $KR_DIR_EXCL/$PKG.lst ]; then
-			zip -q -r $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+			zip -q -r $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/$PKG.lst -x $IGNORE
 		else
 			KR_DIR_INCL=$(asetus dir:incl)
 			if [ -f $KR_DIR_INCL/$PKG.lst ]; then
-				zip -q -r $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -i@$KR_DIR_INCL/$PKG.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+				zip -q -r $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -i@$KR_DIR_INCL/$PKG.lst -x $IGNORE
 			else
-				zip -q -r $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x@$KR_DIR_EXCL/default.lst -x *backup.log* -x *Thumbs.db* -x "*.DS_Store"
+				zip -q -r $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR -x $IGNORE
 			fi
 		fi
 		if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip ]; then
@@ -44,7 +45,7 @@ if [ $1 != "" ] && [ $2 != "" ]; then DIR_TEMP=$(asetus dir:temp);
 				KR_RECIPIENT=$(asetus str:recipient)
 				gpg --encrypt -r $KR_RECIPIENT $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip
 			fi
-		else debug "varko:47" $PKG "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
+		else debug "varko:55" $PKG "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
 		fi
 		# Removing the created zip file.
 		if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip ]; then \rm $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip; fi
