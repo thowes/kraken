@@ -58,6 +58,4 @@ if [ $1 != "" ] && [ $2 != "" ]; then DIR_TEMP=$(asetus dir:temp);
 			\mv $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip.gpg $KR_DIR_BUC/$PKG.cbc
 		fi
 	else debug "varko:62" $PKG "L:$BU_LATEST_DATE" "T:$BU_TODAY_DATE" $DIR; fi
-else
 else virhe "Arguments" $1 $2 "not valid!"; fi
-fi
