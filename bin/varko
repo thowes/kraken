@@ -43,9 +43,9 @@ if [ $1 != "" ] && [ $2 != "" ]; then DIR_TEMP=$(asetus dir:temp);
 			if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip ]; then
 				debug "$BU_LATEST_MD5" "v" "$BU_TODAY_MD5"
 				KR_RECIPIENT=$(asetus str:recipient)
-				gpg --encrypt -r $KR_RECIPIENT $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip
+				gpg --encrypt -r "$KR_RECIPIENT" $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip
 			fi
-		else debug "varko:55" $PKG "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"
+		else debug "varko:48" $PKG "L:$BU_LATEST_MD5" "T:$BU_TODAY_MD5"; fi
 		fi
 		# Removing the created zip file.
 		if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip ]; then \rm $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip; fi
