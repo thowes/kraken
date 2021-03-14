@@ -2,6 +2,14 @@
 require "thor"
 
 class Greeting < Thor
+  desc "adieu NAME", "say adieu to NAME"
+  long_desc <<-LONGDESC
+    `greeting adieu` will print out an adieu message to a person of your choosing.
+  LONGDESC
+  def adieu(name=nil)
+    greet("Adieu", name)
+  end
+  
 	desc "bye NAME", "say bye to NAME"
   long_desc <<-LONGDESC
     `greeting bye` will print out a bye message to a person of your choosing.
