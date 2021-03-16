@@ -9,6 +9,14 @@ class Greeting < Thor
   def adieu(name=nil)
     greet("Adieu", name)
   end
+  
+  desc "adios NAME", "say adios to NAME"
+  long_desc <<-LONGDESC
+    `greeting adios` will print out an adios message to a person of your choosing.
+  LONGDESC
+  def adios(name=nil)
+    greet("Adios", name)
+  end
 
   desc "bye NAME", "say bye to NAME"
   long_desc <<-LONGDESC
