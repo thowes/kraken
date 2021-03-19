@@ -26,6 +26,14 @@ class Greeting < Thor
     greet("Bye", name)
   end
 
+  desc "byebye NAME", "say byebye to NAME"
+  long_desc <<-LONGDESC
+    `greeting byebye` will print out a byebye message to a person of your choosing.
+  LONGDESC
+  def byebye(name=nil)
+    greet("Byebye", name)
+  end
+
   desc "ciao NAME", "say ciao to NAME"
   long_desc <<-LONGDESC
     `greeting ciao` will print out a ciao message to a person of your choosing.
