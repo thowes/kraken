@@ -2,6 +2,7 @@
 require "thor"
 
 class Greeting < Thor
+
   desc "adieu NAME", "say adieu to NAME"
   long_desc <<-LONGDESC
     `greeting adieu` will print out an adieu message to a person of your choosing.
@@ -69,6 +70,7 @@ class Greeting < Thor
 
 private
   def greet(greeting, name=nil, from=nil)
+    name = ENV['USER']
     say "#{greeting}, world!" unless name
     say "#{greeting}, #{name.upcase}!" if name
   end
