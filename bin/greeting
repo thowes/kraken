@@ -2,6 +2,7 @@
 require "thor"
 
 class Greeting < Thor
+	#
 
   desc "adieu NAME", "say adieu to NAME"
   long_desc <<-LONGDESC
