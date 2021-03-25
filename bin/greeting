@@ -2,7 +2,7 @@
 require "thor"
 
 class Greeting < Thor
-	#
+	option :yell, :type => :boolean
 
   desc "adieu NAME", "say adieu to NAME"
   long_desc <<-LONGDESC
@@ -71,9 +71,9 @@ class Greeting < Thor
 
 private
   def greet(greeting, name=nil, from=nil)
-    name = ENV['USER']
+    name = name || ENV['USER'] || "world"
     say "#{greeting}, world!" unless name
-    say "#{greeting}, #{name.upcase}!" if name
+    say "#{greeting.upcase}, #{name.upcase}!" if name
   end
 end
 
