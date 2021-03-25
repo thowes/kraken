@@ -72,8 +72,8 @@ class Greeting < Thor
 private
   def greet(greeting, name=nil, from=nil)
     name = name || ENV['USER'] || "world"
-    output = "#{greeting.upcase}, #{name.upcase}" if name
     say "#{greeting}, world!" unless name
+    output = "#{greeting.upcase}, #{name.upcase}" if name
     say "#{output.upcase}!"
   end
 end
