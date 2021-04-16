@@ -9,20 +9,19 @@ if [ -f duplicate.lst ]; then nada; else
 	if [ -f duplicate.old ]; then mv duplicate.old duplicate.lst; fi
 	if [ -f duplicate.log ]; then mv duplicate.log duplicate.lst; fi
 fi
-#if [ -f backup.log ]; then nada; else if [ -f duplicate.lst ]; then mv duplicate.lst backup.log; fi; fi
+if [ -f backup.log ]; then nada; else if [ -f duplicate.lst ]; then mv duplicate.lst backup.log; fi; fi
 if [ -f hakemisto.lst ]; then nada; else
 	if [ -f levy.old ]; then mv levy.old hakemisto.lst; fi
 	if [ -f levy.log ]; then mv levy.log hakemisto.lst; fi
 	if [ -f levy.lst ]; then mv levy.lst hakemisto.lst; fi
 fi
-#if [ -f missing.lst ]; then nada; else if [ -f indb.lst ]; then mv indb.lst missing.lst; fi; fi
 if [ -f backup.log ]; then nada; else if [ -f missing.lst ]; then mv missing.lst backup.log; fi; fi
 if [ -f roina.lst ]; then nada; else if [ -f junk.lst ]; then mv junk.lst roina.lst; fi; fi
 DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); PWD=$(pwd); PVM=$(pvm); INIT_STRING="$HOSTNAME $PVM $PWD" #pvm=date +"%F %R"
 KAYTTIS=$(kayttis)
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 DB=$TEMP/hakemisto.db kanta -g:"Documents" "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"; DB=$TEMP/hakemisto.db TABLE="Documents" kanta -a:"status,ls_time,summa,path" "'DIR', '$PVM', '0,0', '$PWD'"
-echo $INIT_STRING/duplicate.lst > $TEMP/duplicate.lst
+#echo $INIT_STRING/duplicate.lst > $TEMP/duplicate.lst
 echo $INIT_STRING/hakemisto.lst > $TEMP/hakemisto.lst
 echo $INIT_STRING/roina.lst > $TEMP/roina.lst
 kaiku $INIT_STRING
@@ -75,7 +74,6 @@ while read p; do # doublespaces "  " not read
 			fi;;
 	esac; fi
 done < $TEMP/ls.lst
-cp $TEMP/duplicate.lst ./duplicate.lst
 cp $TEMP/hakemisto.db ./hakemisto.db
 cp $TEMP/hakemisto.lst ./hakemisto.lst
 cp $TEMP/roina.lst ./roina.lst
