@@ -18,7 +18,7 @@ fi
 if [ -f backup.log ]; then nada; else if [ -f missing.lst ]; then mv missing.lst backup.log; fi; fi
 if [ -f roina.lst ]; then nada; else if [ -f junk.lst ]; then mv junk.lst roina.lst; fi; fi
 TEMP=$(asetus dir:temp)/$(verkko tty); #retrieve temp-dir from settings. during the run output files are stored in tty-specific dir under temp dir.
-TEMP=$(asetus dir:temp)/$(verkko tty); DIR="."; PWD=$(pwd); PVM=$(pvm); INIT_STRING="$HOSTNAME $PVM $PWD" #pvm=date +"%F %R"
+DIR="."; PWD=$(pwd); PVM=$(pvm); INIT_STRING="$HOSTNAME $PVM $PWD" #pvm=date +"%F %R"
 KAYTTIS=$(kayttis)
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 DB=$TEMP/hakemisto.db kanta -g:"Documents" "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"; DB=$TEMP/hakemisto.db TABLE="Documents" kanta -a:"status,ls_time,summa,path" "'DIR', '$PVM', '0,0', '$PWD'"
