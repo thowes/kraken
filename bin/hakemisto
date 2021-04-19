@@ -1,9 +1,9 @@
 #!/bin/bash
 if [ -d "$1" ]; then cd "$1"; fi
 if [ -f backup.log ]; then nada; else
-	if [ -f changed.old ]; then mv changed.old hakemisto.db; fi
+	if [ -f changed.old ]; then mv changed.old backup.log; fi
 	if [ -f changed.log ]; then mv changed.log backup.log; fi
-	if [ -f changed.lst ]; then mv changed.lst hakemisto.db; fi
+	if [ -f changed.lst ]; then mv changed.lst backup.log; fi
 fi
 if [ -f duplicate.lst ]; then nada; else
 	if [ -f duplicate.old ]; then mv duplicate.old duplicate.lst; fi
@@ -17,6 +17,7 @@ if [ -f hakemisto.lst ]; then nada; else
 fi
 if [ -f backup.log ]; then nada; else if [ -f missing.lst ]; then mv missing.lst backup.log; fi; fi
 if [ -f roina.lst ]; then nada; else if [ -f junk.lst ]; then mv junk.lst roina.lst; fi; fi
+TEMP=$(asetus dir:temp)/$(verkko tty); #retrieve temp-dir from settings. during the run output files are stored in tty-specific dir under temp dir.
 TEMP=$(asetus dir:temp)/$(verkko tty); DIR="."; PWD=$(pwd); PVM=$(pvm); INIT_STRING="$HOSTNAME $PVM $PWD" #pvm=date +"%F %R"
 KAYTTIS=$(kayttis)
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
@@ -46,6 +47,7 @@ while read p; do # doublespaces "  " not read
 		"total "*) nada;;
 		*)
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }')
+			#if [ "$(roina $FILE)" ]; then FILE_STATUS="RR"; fi
 			case "$KAYTTIS" in
 				darwin*) LS_TIME=$(gls -l --time-style=full-iso "$FILE"|awk '{print $6 "T" $7 $8 }') ;;
 				* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 "T" $7 $8 }');;
@@ -69,10 +71,11 @@ while read p; do # doublespaces "  " not read
 					fi; fi
 				fi
 				if [ "$1" = "-t" ]; then RIVI="$FILE_STATUS,$SUMMA,$FILE"; else RIVI="$FILE_STATUS,$LS_TIME,$SUMMA,$FILE"; fi; echo "$RIVI" >> $TEMP/hakemisto.lst
-				DB=$TEMP/hakemisto.db TABLE="Documents" kanta -a:"status,ls_time,summa,path" "'$FILE_STATUS', '$LS_TIME', '$SUMMA', '$FILE'"
+				DB=$TEMP/hakemisto.db TABLE="Documents" kanta -a:"status,ls_time,summa,path" "'$FILE_STATUS', '$LS_TIME', '$SUMMA', '$FILE'" #problem with filenames that include '
 			fi;;
 	esac; fi
 done < $TEMP/ls.lst
+# output files move to a directory in question
 cp $TEMP/hakemisto.db ./hakemisto.db
 cp $TEMP/hakemisto.lst ./hakemisto.lst
 cp $TEMP/roina.lst ./roina.lst
