@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ -d "$1" ]; then cd "$1"; fi
-if [ -f hakemisto.db ]; then nada; else
+if [ -f backup.log ]; then nada; else
 	if [ -f changed.old ]; then mv changed.old hakemisto.db; fi
-	if [ -f changed.log ]; then mv changed.log hakemisto.db; fi
+	if [ -f changed.log ]; then mv changed.log backup.log; fi
 	if [ -f changed.lst ]; then mv changed.lst hakemisto.db; fi
 fi
 if [ -f duplicate.lst ]; then nada; else
@@ -17,11 +17,10 @@ if [ -f hakemisto.lst ]; then nada; else
 fi
 if [ -f backup.log ]; then nada; else if [ -f missing.lst ]; then mv missing.lst backup.log; fi; fi
 if [ -f roina.lst ]; then nada; else if [ -f junk.lst ]; then mv junk.lst roina.lst; fi; fi
-DIR="."; TEMP=$(asetus dir:temp)/$(verkko tty); PWD=$(pwd); PVM=$(pvm); INIT_STRING="$HOSTNAME $PVM $PWD" #pvm=date +"%F %R"
+TEMP=$(asetus dir:temp)/$(verkko tty); DIR="."; PWD=$(pwd); PVM=$(pvm); INIT_STRING="$HOSTNAME $PVM $PWD" #pvm=date +"%F %R"
 KAYTTIS=$(kayttis)
 if [ -z "$TABLE" ]; then TABLE="$(asetus str:table)"; fi
 DB=$TEMP/hakemisto.db kanta -g:"Documents" "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"; DB=$TEMP/hakemisto.db TABLE="Documents" kanta -a:"status,ls_time,summa,path" "'DIR', '$PVM', '0,0', '$PWD'"
-#echo $INIT_STRING/duplicate.lst > $TEMP/duplicate.lst
 echo $INIT_STRING/hakemisto.lst > $TEMP/hakemisto.lst
 echo $INIT_STRING/roina.lst > $TEMP/roina.lst
 kaiku $INIT_STRING
