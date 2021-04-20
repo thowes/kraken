@@ -5,6 +5,7 @@ if [ -f backup.log ]; then nada; else
 	if [ -f changed.log ]; then mv changed.log backup.log; fi
 	if [ -f changed.lst ]; then mv changed.lst backup.log; fi
 fi
+if [ -f backup.log ]; then nada; else if [ -f changed.lst ]; then mv changed.lst backup.log; fi; fi
 if [ -f duplicate.lst ]; then nada; else
 	if [ -f duplicate.old ]; then mv duplicate.old duplicate.lst; fi
 	if [ -f duplicate.log ]; then mv duplicate.log duplicate.lst; fi
@@ -79,7 +80,7 @@ done < $TEMP/ls.lst
 cp $TEMP/hakemisto.db ./hakemisto.db
 cp $TEMP/hakemisto.lst ./hakemisto.lst
 cp $TEMP/roina.lst ./roina.lst
-if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
+#if [ -f $TEMP/duplicate.lst ]; then rm $TEMP/duplicate.lst; fi
 if [ -f $TEMP/hakemisto.db ]; then rm $TEMP/hakemisto.db; fi
 if [ -f $TEMP/hakemisto.lst ]; then rm $TEMP/hakemisto.lst; fi
 if [ -f $TEMP/ls.lst ]; then rm $TEMP/ls.lst; fi
