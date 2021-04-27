@@ -5,8 +5,8 @@ if [ -z "$1" ]; then
 else
 	if [ -z "$EXCL" ]; then #EXCL="$(asetus dir:excl)/default.lst"
 		case "$1" in
+			*lst) VALUE=true;;
 			*) nada;;
-
 		esac
 	else
 		N=$(cat $EXCL | grep "$1" | wc -l | tr -s " ")
