@@ -29,7 +29,7 @@ kaiku $INIT_STRING
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
 while read p; do # doublespaces "  " not read
-	FILE_STATUS="OK"; EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst xlista $p); if [ "$EXCLUDE_LISTED" = "false" ]; then case $p in
+	FILE_STATUS="OK"; EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst roina $p); if [ "$EXCLUDE_LISTED" = "false" ]; then case $p in
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }') ;; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
@@ -48,7 +48,7 @@ while read p; do # doublespaces "  " not read
 		"total "*) nada;;
 		*)
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }')
-			#if [ "$(roina $FILE)" ]; then FILE_STATUS="RR"; fi
+			if [ "$(roina $FILE)" ]; then FILE_STATUS="RR"; fi
 			case "$KAYTTIS" in
 				darwin*) LS_TIME=$(gls -l --time-style=full-iso "$FILE"|awk '{print $6 "T" $7 $8 }') ;;
 				* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 "T" $7 $8 }');;
