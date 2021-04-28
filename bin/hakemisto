@@ -67,6 +67,7 @@ while read p; do # doublespaces "  " not read
 							if [ "$FILE_STATUS,$LS_TIME,$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
 								if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="N2"; fi
 								if [ "$FILE_STATUS" = "MM" ]; then FILE_STATUS="M2"; fi
+								if [ "$FILE_STATUS" = "RR" ]; then FILE_STATUS="R2"; fi
 							fi
 						fi
 					fi; fi
