@@ -5,7 +5,9 @@ if [ -z "$1" ]; then
 else
 	if [ -z "$EXCL" ]; then #EXCL="$(asetus dir:excl)/default.lst"
 		case "$1" in
+			*"changed.l"*) VALUE=true;;
 			*lst) VALUE=true;;
+			*"missing.l"*) VALUE=true;;
 			*) nada;;
 		esac
 	else
