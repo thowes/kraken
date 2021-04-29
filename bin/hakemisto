@@ -33,7 +33,6 @@ while read p; do # doublespaces "  " not read
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }') ;; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*"changed.l"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*".DS_Store"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"duplicate.l"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"esktop.ini"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
@@ -44,7 +43,6 @@ while read p; do # doublespaces "  " not read
 		*"levy.lst"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"LOCK"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"metadata.opf"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*"missing.l"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		"total "*) nada;;
 		*)
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }')
