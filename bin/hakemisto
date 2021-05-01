@@ -34,7 +34,6 @@ while read p; do # doublespaces "  " not read
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }') ;; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*".DS_Store"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*"duplicate.l"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"esktop.ini"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"humbs.db"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"junk.lst"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
