@@ -1,14 +1,18 @@
 #!/bin/sh
 VALUE=false
 if [ -z "$1" ]; then
-	nada
+	nada #DB=$DB TABLE=Documents kanta -s:status|grep RR
 else
 	if [ -z "$EXCL" ]; then #EXCL="$(asetus dir:excl)/default.lst"
 		case "$1" in
 			*"changed.l"*) VALUE=true;;
+			*"esktop.ini"*) VALUE=true;;
 			*"duplicate.l"*) VALUE=true;;
+			*"hakemisto."*) VALUE=true;;
 			*lst) VALUE=true;;
+			*"metadata.opf"*) VALUE=true;;
 			*"missing.l"*) VALUE=true;;
+			*"humbs.db"*) VALUE=true;;
 			*) nada;;
 		esac
 	else
