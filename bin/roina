@@ -12,6 +12,7 @@ else
 			*lst) VALUE=true;;
 			*"metadata.opf"*) VALUE=true;;
 			*"missing.l"*) VALUE=true;;
+			*"roina.lst"*) VALUE=true;;
 			*"humbs.db"*) VALUE=true;;
 			*) nada;;
 		esac
