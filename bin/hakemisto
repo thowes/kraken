@@ -42,7 +42,7 @@ while read p; do # doublespaces "  " not read
 		"total "*) nada;;
 		*)
 			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }')
-			if [ "$(roina "$FILE")" = "true" ]; then FILE_STATUS="RR"; fi
+			if [ $(roina "$FILE") = "true" ]; then FILE_STATUS="RR"; fi
 			case "$KAYTTIS" in
 				darwin*) LS_TIME=$(gls -l --time-style=full-iso "$FILE"|awk '{print $6 "T" $7 $8 }') ;;
 				* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 "T" $7 $8 }');;
