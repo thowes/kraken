@@ -9,6 +9,7 @@ else
 			*"esktop.ini"*) VALUE=true;;
 			*"duplicate.l"*) VALUE=true;;
 			*"hakemisto."*) VALUE=true;;
+			*"levy.l"*) VALUE=true;;
 			*lst) VALUE=true;;
 			*"metadata.opf"*) VALUE=true;;
 			*"missing.l"*) VALUE=true;;
