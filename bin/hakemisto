@@ -36,7 +36,6 @@ while read p; do # doublespaces "  " not read
 		*".DS_Store"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"junk.lst"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"indb.lst"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
-		*"levy.log"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"levy.lst"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		*"LOCK"*) FILE_STATUS="R"; echo "$DIR/$p" >> $TEMP/roina.lst;;
 		"total "*) nada;;
