@@ -30,7 +30,7 @@ ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
 while read p; do # doublespaces "  " not read
 	FILE_STATUS="OK"; #EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst roina $p); if [ "$EXCLUDE_LISTED" = "false" ]; then
-	#case $p in
+	case $p in
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }') ;; #\
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
