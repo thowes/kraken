@@ -4,6 +4,7 @@ if [ -z "$DB" ]; then
 fi
 if [ -z "$1" ]; then
 	DB=$DB TABLE=Documents kanta -s:status|grep M2
+	DB=$DB TABLE=Documents kanta -s:status|grep N2
 else
 	SUMMA=$(summa "$1")
 	DB=$DB TABLE=Documents kanta -s:summa|grep "$SUMMA"
