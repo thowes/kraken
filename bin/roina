@@ -1,6 +1,7 @@
 #!/bin/sh
 VALUE=false
 if [ -z "$1" ]; then
+	DB=$DB TABLE=Documents kanta -s:status|grep R2
 	DB=$DB TABLE=Documents kanta -s:status|grep RR
 else
 	if [ -z "$EXCL" ]; then #EXCL="$(asetus dir:excl)/default.lst"
@@ -14,6 +15,7 @@ else
 			*"indb.lst"*) VALUE=true;;
 			*"junk.lst"*) VALUE=true;;
 			*"levy.l"*) VALUE=true;;
+			*"LOCK"*) VALUE=true;;
 			*lst) VALUE=true;;
 			*"metadata.opf"*) VALUE=true;;
 			*"missing.l"*) VALUE=true;;
