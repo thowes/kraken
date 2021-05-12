@@ -8,8 +8,8 @@ else
 		case "$1" in
 			*"changed.l"*) VALUE=true;;
 			*".DS_Store"*) VALUE=true;;
-			*"esktop.ini"*) VALUE=true;;
 			*"duplicate.l"*) VALUE=true;;
+			*"esktop.ini"*) VALUE=true;;
 			*"hakemisto."*) VALUE=true;;
 			*"humbs.db"*) VALUE=true;;
 			*"indb.lst"*) VALUE=true;;
