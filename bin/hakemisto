@@ -29,7 +29,7 @@ kaiku $INIT_STRING
 ls -1R > $TEMP/ls.lst
 EXCL=$(asetus dir:excl)
 while read p; do # doublespaces "  " not read
-	FILE_STATUS="OK"; #EXCLUDE_LISTED=$(EXCL=$EXCL/default.lst roina $p); if [ "$EXCLUDE_LISTED" = "false" ]; then
+	FILE_STATUS="OK"
 	case $p in
 		".:") DIR=".";;
 		"./"*":"*) DIR=$(echo "$p"|awk -F':' '{ print $1 $2 }') ;; #\
@@ -64,7 +64,7 @@ while read p; do # doublespaces "  " not read
 				if [ "$1" = "-t" ]; then RIVI="$FILE_STATUS,$SUMMA,$FILE"; else RIVI="$FILE_STATUS,$LS_TIME,$SUMMA,$FILE"; fi; echo "$RIVI" >> $TEMP/hakemisto.lst
 				DB=$TEMP/hakemisto.db TABLE="Documents" kanta -a:"status,ls_time,summa,path" "'$FILE_STATUS', '$LS_TIME', '$SUMMA', '$FILE'" #problem with filenames that include '
 			fi;;
-	esac; #fi
+	esac
 done < $TEMP/ls.lst
 # output files move to a directory in question
 cp $TEMP/hakemisto.db ./hakemisto.db
