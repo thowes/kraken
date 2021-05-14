@@ -36,19 +36,19 @@ while read p; do # doublespaces "  " not read
 		*"._"*) echo "$DIR/$p" >> $TEMP/roina.lst;;
 		"total "*) nada;;
 		*)
-			FILE=$DIR/$(echo $p|awk -F'*' '{ print $1 }')
+			FILE="$DIR/$(echo $p|awk -F'*' '{ print $1 }')"
 			if [ $(roina "$FILE") = "true" ]; then FILE_STATUS="RR"; fi
+			if [ -d "$FILE" ]; then nada; else
 			case "$KAYTTIS" in
 				darwin*) LS_TIME=$(gls -l --time-style=full-iso "$FILE"|awk '{print $6 "T" $7 $8 }') ;;
-				* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 "T" $7 $8 }');;
+					* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 "T" $7 $8 }');;
 			esac
-			if [ -d "$FILE" ]; then nada; else
 				SUMMA=$(summa "$FILE"); RIVI="$SUMMA,$FILE"
 				if [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "false" ]; then
 					if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="MM"; fi
 				fi
 				if [ -f hakemisto.lst ]; then
-					#EKA_RIVI=$(DB=hakemisto.db TABLE="Documents" kanta -s:summa|grep DIR)
+					#RIVIT=$(DB=hakemisto.db TABLE="Documents" kanta -s:summa|grep "$SUMMA"| grep -v "$FILE")
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA" | grep -v "$RIVI" )
 					if [ "$RIVIT" = "" ]; then nada; else
 					if [ "$SUMMA,$FILE" = "$RIVIT" ]; then nada; else
