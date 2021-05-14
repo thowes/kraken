@@ -45,7 +45,7 @@ while read p; do # doublespaces "  " not read
 				esac
 				SUMMA=$(summa "$FILE"); RIVI="$SUMMA,$FILE"
 				if [ "$FILE_STATUS" = "OK" ] && [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "false" ]; then FILE_STATUS="MM"; fi
-					echo $FILE_STATUS "$FILE"
+				#echo $SUMMA $FILE_STATUS "$FILE"
 				if [ -f hakemisto.lst ]; then
 					#RIVIT=$(DB=hakemisto.db TABLE="Documents" kanta -s:summa|grep "$SUMMA"| grep -v "$FILE")
 					RIVIT=$(cat hakemisto.lst | grep "$SUMMA" | grep -v "$RIVI" )
