@@ -37,15 +37,16 @@ while read p; do # doublespaces "  " not read
 		"total "*) nada;;
 		*)
 			FILE="$DIR/$(echo $p|awk -F'*' '{ print $1 }')"
-				if [ $(roina "$FILE") = "true" ]; then FILE_STATUS="RR"; fi
 			if [ -d "$FILE" ]; then nada; else
+				if [ $(roina "$FILE") = "true" ]; then FILE_STATUS="RR"; fi
 				case "$KAYTTIS" in
-				darwin*) LS_TIME=$(gls -l --time-style=full-iso "$FILE"|awk '{print $6 "T" $7 $8 }') ;;
+					darwin*) LS_TIME=$(gls -l --time-style=full-iso "$FILE"|awk '{print $6 "T" $7 $8 }') ;;
 					* ) LS_TIME=$(ls --full-time "$FILE"|awk '{print $6 "T" $7 $8 }');;
 				esac
 				SUMMA=$(summa "$FILE"); RIVI="$SUMMA,$FILE"
-				if [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "false" ]; then
+				if [ "$FILE_STATUS" = "OK" ] && [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "false" ]; then FILE_STATUS="MM"
 					if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="MM"; fi
+					echo $FILE_STATUS "$FILE"
 				fi
 				if [ -f hakemisto.lst ]; then
 					#RIVIT=$(DB=hakemisto.db TABLE="Documents" kanta -s:summa|grep "$SUMMA"| grep -v "$FILE")
