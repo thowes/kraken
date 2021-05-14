@@ -45,7 +45,6 @@ while read p; do # doublespaces "  " not read
 				esac
 				SUMMA=$(summa "$FILE"); RIVI="$SUMMA,$FILE"
 				if [ "$FILE_STATUS" = "OK" ] && [ "$(DB=$DB TABLE=$TABLE kannassa $FILE)" = "false" ]; then FILE_STATUS="MM"
-					if [ "$FILE_STATUS" = "OK" ]; then FILE_STATUS="MM"; fi
 					echo $FILE_STATUS "$FILE"
 				fi
 				if [ -f hakemisto.lst ]; then
