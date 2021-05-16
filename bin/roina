@@ -7,7 +7,7 @@ else
 	if [ -z "$EXCL" ]; then #EXCL="$(asetus dir:excl)/default.lst"
 		case "$1" in
 			*"changed.l"*) VALUE=true;;
-			*"cover.png"*) VALUE=true;;
+			*"cover."*) VALUE=true;;
 			*".DS_Store"*) VALUE=true;;
 			*"duplicate.l"*) VALUE=true;;
 			*"esktop.ini"*) VALUE=true;;
