@@ -28,5 +28,5 @@ else
 		N=$(cat $EXCL | grep "$1" | wc -l | tr -s " ")
 		if [ $N = 0 ]; then VALUE=false; else VALUE=true; fi
 	fi
-	printf "$VALUE\n"; #virhe "$VALUE" "$EXCL"
+	printf "$VALUE\n"
 fi
