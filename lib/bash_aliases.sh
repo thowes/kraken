@@ -44,7 +44,9 @@ alias g+w='chmod g+w'
 alias g+x='chmod g+x'
 alias gdf='git df'
 alias gl='git log'
+alias glog='GIT_PAGER=cat git log --pretty=oneline'
 alias gmv='git mv'
+alias go+rwx='chmod go+rwx'
 alias grep='grep --color'                     # show differences in colour
 alias h1='head -1'
 alias h=heroku
@@ -65,6 +67,7 @@ alias loki='GIT_PAGER=cat git log --pretty=oneline'
 alias m=less
 alias md=mkdir
 alias merge='git merge'
+alias mig='rails db:migrate'
 alias migrate='rails db:migrate'
 alias mk=make
 alias more=less
@@ -81,6 +84,7 @@ alias o+w='chmod o+w'
 alias o+x='chmod o+x'
 alias "og-"='chmod og-rwx'
 alias og-rwx='chmod og-rwx'
+alias og+rwx='chmod og+rwx'
 alias origin='git remote -v|grep origin'
 alias og+rwx='chmod og-rwx'
 alias ole=olemassa
