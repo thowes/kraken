@@ -63,7 +63,6 @@ alias l3='ls -la|less'
 alias ll='ls -la'
 alias llg='ls -la|grep'
 alias lll='ls -la|less'
-alias loki='GIT_PAGER=cat git log --pretty=oneline'
 alias m=less
 alias md=mkdir
 alias merge='git merge'
