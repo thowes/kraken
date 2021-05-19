@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require "thor"
+
+class Loki < Thor
+  desc "latest PATH", "print latest backup date for PATH"
+  long_desc <<-LONGDESC
+    `loki latest` will print out the latest backup date for PATH.
+  LONGDESC
+  def latest(path=nil)
+    #read last line of PATH/backup.log
+  end
+
+  desc "today PATH", "print today to PATH"
+  long_desc <<-LONGDESC
+    `loki today` will print out a boolean value about if backup for PATH has been run today.
+  LONGDESC
+  def today(path=nil)
+    latest(path) #if latest = today return true else false
+  end
+end
+
+Loki.start(ARGV)
