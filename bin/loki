@@ -2,6 +2,14 @@
 require "thor"
 
 class Loki < Thor
+  desc "add PATH", "add a log line to backup.log in PATH"
+  long_desc <<-LONGDESC
+    `loki add` will add a log line to backup.log in PATH.
+  LONGDESC
+  def add(path=nil)
+    #add a line to PATH/backup.log
+  end
+
   desc "latest PATH", "print latest backup date for PATH"
   long_desc <<-LONGDESC
     `loki latest` will print out the latest backup date for PATH.
