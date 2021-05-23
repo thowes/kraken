@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require "thor"
-#require "fileutils"
+require "fileutils"
 
 class Loki < Thor
   desc "add PATH", "add a log line to backup.log in PATH"
