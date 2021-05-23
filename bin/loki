@@ -16,7 +16,7 @@ class Loki < Thor
     `loki latest` will print out the latest backup date for PATH.
   LONGDESC
   def latest(path=nil)
-    latest = `head -1 backup.log`; puts latest
+    latest = `tail -1 backup.log`
     puts latest
   end
 
