@@ -17,6 +17,7 @@ class Loki < Thor
   LONGDESC
   def latest(path=nil)
     latest = `head -1 backup.log`; puts latest
+    puts latest
   end
 
   desc "today PATH", "print today to PATH"
