@@ -2,7 +2,9 @@
 require "thor"
 #require "fileutils"
 
+# Loki here is named after the finnish word 'loki', meaning a log(file).
 class Loki < Thor
+  # default:latest
   desc "add PATH", "add a log line to backup.log in PATH"
   long_desc <<-LONGDESC
     `loki add` will add a log line to backup.log in PATH.
@@ -16,7 +18,7 @@ class Loki < Thor
     `loki latest` will print out the latest backup date for PATH.
   LONGDESC
   def latest(path=nil)
-    puts `tail -1 backup.log`
+    puts `tail -1 backup.log` #retrieves the last line of backup.log using system tools
   end
 
   desc "today PATH", "print today to PATH"
