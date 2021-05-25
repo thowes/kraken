@@ -22,7 +22,7 @@ class Loki < Thor
   LONGDESC
   def latest(path=nil)
     unless path.nil? then FileUtils.cd(path); end
-    today_date = `tail -1 backup.log`; puts today_date #retrieves the last line of backup.log using system tools
+    today_date = `tail -1 backup.log` #retrieves the last line of backup.log using system tools
     puts today_date
   end
 
