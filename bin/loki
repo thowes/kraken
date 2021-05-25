@@ -31,7 +31,7 @@ class Loki < Thor
   LONGDESC
   def today(path=nil)
     today_date = Date.today
-    latest(path) #if latest = today return true else false
+    latest_date = latest(path) #if latest = today return true else false
     puts today_date
   end
 end
