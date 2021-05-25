@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require "thor"
-#require "fileutils"
+require "fileutils"
 require "date"
 
 # Loki here is named after the finnish word 'loki', meaning a log(file).
@@ -12,6 +12,7 @@ class Loki < Thor
     `loki add` will add a log line to backup.log in PATH.
   LONGDESC
   def add(path=nil)
+    unless path.nil? then FileUtils.cd(path); end
     #add a line to PATH/backup.log
   end
 
@@ -20,7 +21,7 @@ class Loki < Thor
     `loki latest` will print out the latest backup date for PATH.
   LONGDESC
   def latest(path=nil)
-    #unless path.nil? fileutils.cd path
+    unless path.nil? then FileUtils.cd(path); end
     puts `tail -1 backup.log` #retrieves the last line of backup.log using system tools
   end
 
