@@ -30,8 +30,9 @@ class Loki < Thor
     `loki today` will print out a boolean value about if backup for PATH has been run today.
   LONGDESC
   def today(path=nil)
-    today = Date.today
+    today_date = Date.today
     latest(path) #if latest = today return true else false
+    puts today_date
   end
 end
 
