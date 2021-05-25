@@ -22,7 +22,7 @@ class Loki < Thor
   LONGDESC
   def latest(path=nil)
     unless path.nil? then FileUtils.cd(path); end
-    puts `tail -1 backup.log` #retrieves the last line of backup.log using system tools
+    today_date = `tail -1 backup.log`; puts today_date #retrieves the last line of backup.log using system tools
   end
 
   desc "today PATH", "print true if backup has been run for PATH today"
@@ -31,6 +31,7 @@ class Loki < Thor
   LONGDESC
   def today(path=nil)
     latest_date = latest(path).to_s.include? Date.today.to_s; puts latest_date
+    puts latest_date
   end
 end
 
