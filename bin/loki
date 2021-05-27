@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require "thor"
-require "fileutils"
+require 'fileutils'
 require "date"
 
 # Loki here is named after the finnish word 'loki', meaning a log(file).
