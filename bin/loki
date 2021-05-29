@@ -24,6 +24,7 @@ class Loki < Thor
     unless path.nil? then FileUtils.cd(path); end
     #if exists backup.log
     today_date = `tail -1 backup.log` #retrieves the last line of backup.log using system tools
+    #else/elif/end
     puts today_date
   end
 
