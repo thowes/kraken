@@ -25,6 +25,7 @@ class Loki < Thor
     #if exists backup.log
       today_date = `tail -1 backup.log` #retrieves the last line of backup.log using system tools
     #else/elif/end
+      #today_date = '0000-00-00 00:00 ver xyz'
     #end
     puts today_date
   end
