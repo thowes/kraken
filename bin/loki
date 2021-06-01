@@ -22,9 +22,9 @@ class Loki < Thor
   LONGDESC
   def latest(path=nil)
     unless path.nil? then FileUtils.cd(path); end
-    #if exists backup.log
+    #if File.file?('backup.log')
       today_date = `tail -1 backup.log` #retrieves the last line of backup.log using system tools
-    #else/elif/end
+    #else
       #today_date = '0000-00-00 00:00 ver xyz'
     #end
     puts today_date
