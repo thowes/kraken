@@ -2,6 +2,7 @@
 require 'thor'
 require 'fileutils'
 require 'date'
+#require 'file'
 
 # Loki here is named after the finnish word 'loki', meaning a log(file).
 class Loki < Thor
@@ -38,6 +39,7 @@ class Loki < Thor
     latest_date = latest(path).to_s.include? Date.today.to_s
     puts latest_date
   end
+
 end
 
 Loki.start(ARGV)
