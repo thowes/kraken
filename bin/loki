@@ -14,7 +14,9 @@ class Loki < Thor
   LONGDESC
   def add(path=nil)
     unless path.nil? then FileUtils.cd(path); end
+    #open('backup.log') do |f|  #YYYY-MM-DD HH:MM:SS.N ver text
     #add a line to PATH/backup.log
+    #end
   end
 
   desc "latest PATH", "print latest backup date for PATH"
@@ -22,7 +24,7 @@ class Loki < Thor
     `loki latest` will print out the latest backup date for PATH.
   LONGDESC
   def latest(path=nil)
-    puts latest_line(path) #today_date
+    puts latest_line(path)
   end
 
   desc "today PATH", "print true if backup has been run for PATH today"
