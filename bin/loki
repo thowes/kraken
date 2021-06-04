@@ -15,9 +15,9 @@ class Loki < Thor
   def add(path=nil)
     unless path.nil? then FileUtils.cd(path); end
     line = "YYYY-MM-DD HH:MM:SS.N ver text"
-    #open('backup.log') do |f|  #YYYY-MM-DD HH:MM:SS.N ver text
+    open('backup.log') do |f|
       f.puts line
-    #end
+    end
   end
 
   desc "latest PATH", "print latest backup date for PATH"
