@@ -14,8 +14,9 @@ class Loki < Thor
   LONGDESC
   def add(path=nil)
     unless path.nil? then FileUtils.cd(path); end
+    line = "YYYY-MM-DD HH:MM:SS.N ver text"
     #open('backup.log') do |f|  #YYYY-MM-DD HH:MM:SS.N ver text
-    #add a line to PATH/backup.log
+      f.puts line
     #end
   end
 
