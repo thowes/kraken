@@ -13,11 +13,13 @@ class Loki < Thor
     `loki add` will add a log line to backup.log in PATH.
   LONGDESC
   def add(path=nil)
+    filename = 'backup.log'; FileUtils.touch(filename)
     unless path.nil? then FileUtils.cd(path); end
     line = "YYYY-MM-DD HH:MM:SS.N ver text"
-    open('backup.log') do |f|
+    File.open('backup.log', 'a') do |f|
       f.puts line
     end
+    puts line
   end
 
   desc "latest PATH", "print latest backup date for PATH"
@@ -43,7 +45,7 @@ private
     if File.file?('backup.log')
       `tail -1 backup.log`.to_s #retrieves the last line of backup.log using system tools
     else
-      '0000-00-00 00:00 ver xyz'.to_s
+      '0000-00-00 00:00:00 xyz ver xyz'.to_s
     end
   end
 end
