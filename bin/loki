@@ -40,6 +40,10 @@ class Loki < Thor
     puts latest_date
   end
 
+private
+  def latest_line(path=nil)
+    #
+  end
 end
 
 Loki.start(ARGV)
