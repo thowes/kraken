@@ -37,12 +37,12 @@ class Loki < Thor
 
 private
   def latest_line(path=nil)
-    #if File.file?('backup.log')
+    if File.file?('backup.log')
       `tail -1 backup.log`.to_s #retrieves the last line of backup.log using system tools
     #
-    #else
+    else
       #today_date = '0000-00-00 00:00 ver xyz'
-    #end
+    end
   end
 end
 
