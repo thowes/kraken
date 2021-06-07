@@ -3,6 +3,7 @@ require 'thor'
 require 'fileutils'
 require 'date'
 #require 'file'
+require 'socket'
 
 # Loki here is named after the finnish word 'loki', meaning a log(file).
 class Loki < Thor
@@ -12,10 +13,11 @@ class Loki < Thor
   long_desc <<-LONGDESC
     `loki add` will add a log line to backup.log in PATH.
   LONGDESC
-  def add(path=nil)
+  def add(path=nil, comment=nil)
     filename = 'backup.log'; FileUtils.touch(filename)
+    comment = comment || Socket.gethostname || 'xyz'
     unless path.nil? then FileUtils.cd(path); end
-    line = Time.now.to_s + " xyz ver xyz"
+    line = Time.now.to_s + " xyz ver " + comment
     File.open('backup.log', 'a') do |f|
       f.puts line
     end
