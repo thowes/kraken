@@ -2,7 +2,6 @@
 require 'thor'
 require 'fileutils'
 require 'date'
-#require 'file'
 require 'socket'
 
 # Loki here is named after the finnish word 'loki', meaning a log(file).
