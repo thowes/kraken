@@ -13,8 +13,8 @@ class Loki < Thor
     `loki add` will add a log line to backup.log in PATH.
   LONGDESC
   def add(path=nil, comment=nil)
-    filename = 'backup.log'
     comment = comment || Socket.gethostname || 'xyz'
+    filename = 'backup.log'
     unless path.nil? then FileUtils.cd(path); end
     FileUtils.touch(filename)
     line = Time.now.to_s + " xyz ver " + comment
