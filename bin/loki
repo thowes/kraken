@@ -6,18 +6,21 @@ require 'socket'
 
 # Loki here is named after the finnish word 'loki', meaning a log(file).
 class Loki < Thor
+  class_option :path
   default_task :latest
 
   desc "add PATH", "add a log line to backup.log in PATH"
   long_desc <<-LONGDESC
     `loki add` will add a log line to backup.log in PATH.
   LONGDESC
-  def add(path=nil, comment=nil)
+  def add(project=nil, comment=nil, path=nil)
     comment = comment || Socket.gethostname || 'xyz'
+    project = project || 'proj'
     filename = 'backup.log'
+    path = options[:path] || path
     unless path.nil? then FileUtils.cd(path); end
     FileUtils.touch(filename)
-    line = Time.now.to_s + " xyz ver " + comment
+    line = Time.now.to_s + " " + project + " ver " + comment
     File.open('backup.log', 'a') do |f|
       f.puts line
     end
@@ -43,6 +46,7 @@ class Loki < Thor
 
 private
   def latest_line(path=nil)
+    path = options[:path] || path
     unless path.nil? then FileUtils.cd(path); end
     if File.file?('backup.log')
       `tail -1 backup.log`.to_s #retrieves the last line of backup.log using system tools
