@@ -14,6 +14,7 @@ class Loki < Thor
     `loki add` will add a log line to backup.log in PATH.
   LONGDESC
   def add(project=nil, comment=nil, path=nil)
+    #option :comment
     comment = comment || Socket.gethostname || 'xyz'
     project = project || 'proj'
     filename = 'backup.log'
