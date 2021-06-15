@@ -15,6 +15,7 @@ class Loki < Thor
   LONGDESC
   def add(project=nil, comment=nil, path=nil)
     #option :comment
+    #option :project
     comment = comment || Socket.gethostname || 'xyz'
     project = project || 'proj'
     filename = 'backup.log'
