@@ -16,7 +16,7 @@ class Loki < Thor
   def add(project=nil, comment=nil, path=nil)
     #option :comment
     #option :project
-    comment = comment || Socket.gethostname || 'xyz'
+    comment = comment || Socket.gethostname || 'xyz' #|| options[:comment]
     project = project || 'proj'
     filename = 'backup.log'
     path = options[:path] || path
