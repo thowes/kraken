@@ -7,7 +7,7 @@ require 'socket'
 # Loki here is named after the finnish word 'loki', meaning a log(file).
 class Loki < Thor
   class_option :path
-    #option :comment
+  option :project #:comment
   default_task :latest
 
   desc "add PATH", "add a log line to backup.log in PATH"
@@ -15,9 +15,8 @@ class Loki < Thor
     `loki add` will add a log line to backup.log in PATH.
   LONGDESC
   def add(project=nil, comment=nil, path=nil)
-    #option :project
     comment = comment || Socket.gethostname || 'xyz' #|| options[:comment]
-    project = project || 'proj'
+    project = options[:project] || project || 'proj'
     filename = 'backup.log'
     path = options[:path] || path
     unless path.nil? then FileUtils.cd(path); end
