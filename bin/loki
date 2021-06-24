@@ -8,7 +8,6 @@ require 'socket'
 class Loki < Thor
   class_option :path, :desc => 'include directory PATH for backup.log.'
   option :project
-  #option :comment
   default_task :latest
 
   desc "add PATH", "add a log line to backup.log in PATH"
