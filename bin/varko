@@ -12,7 +12,7 @@ if [ $1 != "" ] && [ $2 != "" ]; then DIR_TEMP=$(asetus dir:temp);
 			*) BU_LATEST_MD5=$(md5sum $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip|awk '{print $1}');;
 		esac; \mv $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip $DIR_TEMP/$PKG.$USER.$HOSTNAME.old
 	fi
-	BU_LATEST_LOGLINE=$(latest $DIR) # Getting the last row of backup.log
+	BU_LATEST_LOGLINE="$(loki latest $DIR)" # Getting the last row of backup.log
 	# Splitting BU_LATEST_LOGLINE the retrieve the parts of the string for md5 sum and latest backup date.
 	BU_LATEST_DATE=$(echo $BU_LATEST_LOGLINE|awk '{print $1}')
 	if [ $BU_LATEST_MD5 == "nada" ]; then BU_LATEST_MD5=$(echo $BU_LATEST_LOGLINE|awk '{print $5}'); fi
@@ -51,7 +51,7 @@ if [ $1 != "" ] && [ $2 != "" ]; then DIR_TEMP=$(asetus dir:temp);
 		# Moving the created gpg file to the backup directory.
 		if [ -f $DIR_TEMP/$PKG.$USER.$HOSTNAME.zip.gpg ]; then tynnyri $PKG
 			# Update the backup.log file and copy it to the backup.logs directory.
-			bulog -a $DIR $PKG $BU_TODAY_MD5
+			loki add --path $DIR $PKG $BU_TODAY_MD5
 			KR_DIR_LOGS=$(asetus dir:logs)
 			\cp $DIR/backup.log $KR_DIR_LOGS/$PKG.log
 			if [ "_$KR_DIR_BUC" == "_" ]; then KR_DIR_BUC=$(asetus dir:buc); fi
