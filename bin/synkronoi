@@ -56,9 +56,8 @@ case $1 in
 					RDIR=$(echo $LINE|awk -F\; '{print $6}')
 					if [ -d $LDIR ]; then
 						# Getting the last row of backup.log and splitting it to retrieve the part of the string for latest backup date.
-						BU_LATEST_DATE="$(loki latest $LDIR|awk '{print $1}')"; BU_TODAY_DATE=$(date +"%F")
 						# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
-						if [ "$(loki today $LDIR)" != "false" ]; then
+						if [ "$(loki today $LDIR)" = "false" ]; then
 							kaiku SY $1 $2 $KR_SYNK_USER@$SERVER
 							loki add --path $LDIR $2 $HOSTNAME $KR_SYNK_USER@$SERVER:$RDIR
 							rsync $PARAM $LDIR $KR_SYNK_USER@$SERVER:$RDIR --exclude-from $EXCL
