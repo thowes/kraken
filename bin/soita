@@ -3,14 +3,14 @@ require 'thor'
 require 'fileutils'
 
 class Soita < Thor
-  #default_task :default
+  default_task :default
 
   desc "add PATH", "add music file in PATH to playlist."
   long_desc <<-LONGDESC
     `soita add` will add music file(s) in the PATH to playlist.
   LONGDESC
   def add(path=nil)
-    puts "soita add"
+    puts "soita add " + path
   end
 
   desc "default PATH", "add or play depending whether PATH included."
@@ -18,7 +18,7 @@ class Soita < Thor
     `soita default` will do add or play depending whether PATH included.
   LONGDESC
   def default(path=nil)
-    puts "soita default"
+    puts "soita default " + path
   end
 
 private
@@ -26,4 +26,5 @@ private
 	#
 	end
 end
+
 Soita.start(ARGV)
