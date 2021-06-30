@@ -18,8 +18,9 @@ class Soita < Thor
     `soita default` will do add or play depending on attributes.
   LONGDESC
   #def default(path=nil)
-    #puts "soita default"
+    puts "soita default"
   #end
+
 private
 	def background
 	#
