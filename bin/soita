@@ -3,6 +3,9 @@ require 'thor'
 require 'fileutils'
 
 class Soita < Thor
+
 	private
+	def background
 	#
+	end
 end
