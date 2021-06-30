@@ -3,5 +3,6 @@ require 'thor'
 require 'fileutils'
 
 class Soita < Thor
+	private
 	#
 end
