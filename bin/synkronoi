@@ -15,7 +15,7 @@ case $1 in
 					LDIR=$(echo $LINE|awk -F\; '{print $5}')
 					RDIR=$(echo $LINE|awk -F\; '{print $6}')
 					if [ -d $LDIR ]; then
-						# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
+						# Check if latest line in backup.log is not today, then continue. Doesn't do backup runs if already backed up today.
 						if [ "$(loki today $LDIR)" = "false" ]; then
 							kaiku SY $1 $2 $KR_SYNK_USER@$SERVER
 							loki add --path $LDIR $2 $KR_SYNK_USER@$SERVER:$RDIR
@@ -53,7 +53,7 @@ case $1 in
 					LDIR=$(echo $LINE|awk -F\; '{print $5}')
 					RDIR=$(echo $LINE|awk -F\; '{print $6}')
 					if [ -d $LDIR ]; then
-						# Compare the date in latest line of backup.log, if not today, then continue. Doesn't do backup runs if already backed up today (checkup happens in bulog)
+						# Check if latest line in backup.log is not today, then continue. Doesn't do backup runs if already backed up today.
 						if [ "$(loki today $LDIR)" = "false" ]; then
 							kaiku SY $1 $2 $KR_SYNK_USER@$SERVER
 							loki add --path $LDIR $2 $HOSTNAME $KR_SYNK_USER@$SERVER:$RDIR
