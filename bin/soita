@@ -3,6 +3,7 @@ require 'thor'
 require 'fileutils'
 
 class Soita < Thor
+  #default_task :default
   desc "add PATH", "add music file in PATH to playlist"
   long_desc <<-LONGDESC
     `soita add` will add music file(s) in the PATH to playlist.
@@ -11,7 +12,7 @@ class Soita < Thor
     #
   end
 
-	private
+private
 	def background
 	#
 	end
