@@ -21,6 +21,10 @@ class Soita < Thor
     puts "soita default " + path
   end
 
+  desc "play PATH", "play music in PATH."
+  long_desc <<-LONGDESC
+    `soita play` will play music in PATH.
+  LONGDESC
   def play(path=nil)
     puts "play " + path
   end
