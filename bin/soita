@@ -21,6 +21,10 @@ class Soita < Thor
     puts "soita default " + path
   end
 
+  def play(path=nil)
+    puts "play " + path
+  end
+
 private
 	def background
 	#
