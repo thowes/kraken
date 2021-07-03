@@ -31,7 +31,7 @@ class Soita < Thor
 
 private
 	def background
-	#
+   temp_dir = "~/Projects/temp/" #(asetus dir:temp)
 	end
 end
 
