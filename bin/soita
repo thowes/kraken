@@ -32,6 +32,7 @@ class Soita < Thor
 private
 	def background
    temp_dir = "~/Projects/temp/" #(asetus dir:temp)
+   if File.file?(temp_dir) then puts "TEMP_DIR OK"; else puts "TEMP_DIR NOT_OK"; end
 	end
 end
 
