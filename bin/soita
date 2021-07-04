@@ -3,6 +3,7 @@ require 'thor'
 require 'fileutils'
 
 class Soita < Thor
+  #
   default_task :default
 
   desc "add PATH", "add music file in PATH to playlist."
@@ -10,7 +11,9 @@ class Soita < Thor
     `soita add` will add music file(s) in the PATH to playlist.
   LONGDESC
   def add(path=nil)
+    temp_dir = `asetus dir:temp`.to_s || "~/Projects/temp/"
     puts "soita add " + path
+    if File.file?(temp_dir) then puts "TEMP_DIR OK: " + temp_dir; else puts "TEMP_DIR NOT_OK: " + temp_dir; end #check dir not file
   end
 
   desc "default PATH", "add or play depending whether PATH included."
@@ -33,6 +36,7 @@ private
 	def background
    temp_dir = "~/Projects/temp/" #(asetus dir:temp)
    if File.file?(temp_dir) then puts "TEMP_DIR OK"; else puts "TEMP_DIR NOT_OK"; end
+   #
 	end
 end
 
