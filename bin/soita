@@ -33,6 +33,10 @@ class Soita < Thor
   end
 
 private
+  def playlist
+   #
+  end
+
 	def background
    temp_dir = `asetus dir:temp`.to_s || "~/Projects/temp/" #(asetus dir:temp)
    if File.file?(temp_dir) then puts "TEMP_DIR OK"; else puts "TEMP_DIR NOT_OK"; end
