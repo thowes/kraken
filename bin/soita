@@ -11,7 +11,7 @@ class Soita < Thor
     `soita add` will add music file(s) in the PATH to playlist.
   LONGDESC
   def add(path=nil)
-
+    #playlist
   end
 
   desc "default PATH", "add or play depending whether PATH included."
