@@ -11,7 +11,7 @@ class Soita < Thor
     `soita add` will add music file(s) in the PATH to playlist.
   LONGDESC
   def add(path=nil)
-    #playlist
+    playlist
   end
 
   desc "default PATH", "add or play depending whether PATH included."
@@ -35,13 +35,14 @@ private
     temp_dir = `asetus dir:temp`.to_s || "~/Projects/temp"
     playlist_file = temp_dir.strip + '/playlist.lst'
    #
-    if File.file?(playlist_file) then puts "TEMP_DIR OK: " + playlist_file; else puts "TEMP_DIR NOT_OK: " + playlist_file; end #check dir not file
+    if File.file?(playlist_file) then puts "TEMP_DIR OK: " + playlist_file; else puts "TEMP_DIR NOT_OK: " + playlist_file; end
     #
+    #else/end
   end
 
 	def background
    temp_dir = `asetus dir:temp`.to_s || "~/Projects/temp/" #(asetus dir:temp)
-   if File.file?(temp_dir) then puts "TEMP_DIR OK"; else puts "TEMP_DIR NOT_OK"; end
+   if File.file?(temp_dir) then puts "TEMP_DIR OK"; else puts "TEMP_DIR NOT_OK"; end #check dir not file
    #
 	end
 end
