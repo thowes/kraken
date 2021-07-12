@@ -38,6 +38,7 @@ private
     if File.file?(playlist_file) then puts "TEMP_DIR OK: " + playlist_file; else puts "TEMP_DIR NOT_OK: " + playlist_file; end
     #
     #else/end
+    #end
   end
 
 	def background
