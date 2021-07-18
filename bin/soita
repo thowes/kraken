@@ -39,7 +39,7 @@ private
     else
       puts "TEMP_DIR NOT_OK: " + playlist_file
     end
-   #
+    #return playlist_file
   end
 
 	def background
