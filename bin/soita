@@ -12,6 +12,7 @@ class Soita < Thor
   LONGDESC
   def add(path=nil)
     playlist_file = playlist
+    if File.file?(temp_dir); then puts "OK: add PATH to playlist"; else puts "NOT: do nothing"; end
     puts path.to_s if options[:verbose]
   end
 
