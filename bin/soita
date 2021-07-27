@@ -14,9 +14,9 @@ class Soita < Thor
     playlist_file = playlist
     if File.file?(playlist_file); then
       if File.file?(path); then
-        #if File.directory?(path); then
+        if Dir.exists?(path); then
         puts "ADD: " + path.to_s if options[:verbose]
-        #end
+        end
       else
         puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
       end
@@ -33,6 +33,7 @@ class Soita < Thor
     if path.nil?; then
       #play
     puts "soita default " + path
+    else
       #add(path)
     end
   end
