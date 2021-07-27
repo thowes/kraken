@@ -13,7 +13,7 @@ class Soita < Thor
   def add(path=nil)
     playlist_file = playlist
     if File.file?(temp_dir); then puts "OK: add PATH to playlist"; else puts "NOT: do nothing"
-    puts path.to_s if options[:verbose]
+      puts "ADD: " + path.to_s if options[:verbose]
     #else/end
     end
   end
