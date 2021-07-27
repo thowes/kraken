@@ -15,6 +15,7 @@ class Soita < Thor
     if File.file?(playlist_file); then
       if File.file?(path); then
         puts "ADD: " + path.to_s if options[:verbose]
+      else
         puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
       end
     else
@@ -27,7 +28,9 @@ class Soita < Thor
     `soita default` will do add or play depending whether PATH included.
   LONGDESC
   def default(path=nil)
+    if path.nil?; then
     puts "soita default " + path
+    end
   end
 
   desc "play PATH", "play music in PATH."
