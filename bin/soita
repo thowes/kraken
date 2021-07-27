@@ -17,7 +17,7 @@ class Soita < Thor
         if Dir.exists?(path); then
           puts "ADD DIR: " + path.to_s #if options[:verbose]
         else
-          puts "ADD: " + path.to_s if options[:verbose]
+          puts "ADD: " + path.to_s #if options[:verbose]
         end
       else
         puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
@@ -32,9 +32,9 @@ class Soita < Thor
     `soita default` will do add or play depending whether PATH included.
   LONGDESC
   def default(path=nil)
-      puts "SOITA default"
+    puts "SOITA default"
     if path.nil?; then
-      #play
+      play
     else
       add(path)
     end
