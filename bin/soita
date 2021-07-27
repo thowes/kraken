@@ -14,7 +14,9 @@ class Soita < Thor
     playlist_file = playlist
     if File.file?(playlist_file); then
       if File.file?(path); then
+        #if File.directory?(path); then
         puts "ADD: " + path.to_s if options[:verbose]
+        #end
       else
         puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
       end
@@ -29,7 +31,9 @@ class Soita < Thor
   LONGDESC
   def default(path=nil)
     if path.nil?; then
+      #play
     puts "soita default " + path
+      #add(path)
     end
   end
 
