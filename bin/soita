@@ -17,7 +17,9 @@ class Soita < Thor
         if Dir.exists?(path); then
           puts "ADD DIR: " + path.to_s #if options[:verbose]
         else
+          #File.open('backup.log', 'a') do |f|
           puts "ADD: " + path.to_s #if options[:verbose]
+          #end
         end
       else
         puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
