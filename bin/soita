@@ -18,8 +18,9 @@ class Soita < Thor
           puts "ADD DIR: " + path.to_s #if options[:verbose]
         else
           #File.open('backup.log', 'a') do |f|
-          puts "ADD: " + path.to_s #if options[:verbose]
+            puts "ADD: " + path.to_s #if options[:verbose]
           #end
+          #f.close
         end
       else
         puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
@@ -51,6 +52,7 @@ class Soita < Thor
   end
 
 private
+
   def playlist
     temp_dir = `asetus dir:temp`.to_s || "~/Projects/temp"
     playlist_file = temp_dir.strip + '/playlist.lst'
