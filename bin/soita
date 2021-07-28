@@ -17,9 +17,9 @@ class Soita < Thor
         if Dir.exists?(path); then
           puts "ADD DIR: " + path.to_s #if options[:verbose]
         else
-          File.open(playlist_file, 'a+') do |f|
+          File.open(playlist_file, 'a') do |f|
             puts "ADD: " + path.to_s #if options[:verbose]
-            #f.puts path #full_path
+            f.puts path #full_path
           end
           #f.close # is this really needed?
         end
@@ -53,9 +53,9 @@ class Soita < Thor
   end
 
 private
-  #def is_music
+  def is_music
     #
-  #end
+  end
 
   def playlist
     temp_dir = `asetus dir:temp`.to_s || "~/Projects/temp"
