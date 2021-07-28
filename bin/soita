@@ -17,10 +17,11 @@ class Soita < Thor
         if Dir.exists?(path); then
           puts "ADD DIR: " + path.to_s #if options[:verbose]
         else
-          #File.open('backup.log', 'a') do |f|
+          #File.open(playlist_file, 'a') do |f|
             puts "ADD: " + path.to_s #if options[:verbose]
+            f.puts path
           #end
-          #f.close
+          f.close
         end
       else
         puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
