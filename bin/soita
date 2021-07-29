@@ -21,9 +21,7 @@ class Soita < Thor
             puts "ADD: " + path.to_s #if options[:verbose]
             f.puts path #full_path
           end
-          #ensure
           #f.close # is this really needed?
-          #end
         end
       else
         puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
