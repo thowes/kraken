@@ -13,15 +13,15 @@ class Soita < Thor
   def add(path=nil)
     playlist_file = playlist
     if File.file?(playlist_file); then
+      full_path = path #how to find full path?
       if File.file?(path); then
         if Dir.exists?(path); then
-          puts "ADD DIR: " + path.to_s #if options[:verbose]
+          puts "ADD DIR: " + full_path.to_s #if options[:verbose]
         else
-          File.open(playlist_file, 'a') do |f|
+          File.open(playlist_file, 'a') do |pl|
             puts "ADD: " + path.to_s #if options[:verbose]
-            f.puts path #full_path
+            pl.puts full_path if is_music(full_path)
           end
-          #f.close # is this really needed?
         end
       else
         puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
@@ -53,8 +53,9 @@ class Soita < Thor
   end
 
 private
-  def is_music
+  def is_music(path)
     #
+    return true
   end
 
   def playlist
