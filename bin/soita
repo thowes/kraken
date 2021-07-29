@@ -20,7 +20,7 @@ class Soita < Thor
             puts "ADD DIR: " + full_path.to_s #if options[:verbose]
           else
             puts "ADD: " + full_path.to_s #if options[:verbose]
-            pl.puts full_path if is_music(full_path)
+            pl.puts full_path if is_music?(full_path)
           end
         end #File.open
       else
@@ -53,11 +53,13 @@ class Soita < Thor
   end
 
 private
-  def is_music(path) #this doesn't cover situations where file endings include ".cue" or macos dotfiles.
+  def is_music?(path) #this doesn't cover situations where file endings include ".cue" or macos dotfiles.
     return true if path.downcase.include?(".flac")
+    return true if path.downcase.include?(".midi")
     return true if path.downcase.include?(".mp3")
     return true if path.downcase.include?(".ogg")
     return true if path.downcase.include?(".wav")
+    return true if path.downcase.include?(".wma")
     return false
   end
 
