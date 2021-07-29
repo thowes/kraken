@@ -15,14 +15,14 @@ class Soita < Thor
     if File.file?(playlist_file); then
       full_path = path #how to find full path?
       if File.file?(full_path); then
-        if Dir.exists?(full_path); then
-          puts "ADD DIR: " + full_path.to_s #if options[:verbose]
-        else
         File.open(playlist_file, 'a') do |pl|
+        if Dir.exists?(full_path); then
+            puts "ADD DIR: " + full_path.to_s #if options[:verbose]
+        else
             puts "ADD: " + full_path.to_s #if options[:verbose]
             pl.puts full_path if is_music(full_path)
-        end #File.open
         end
+        end #File.open
       else
         puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
       end
@@ -54,8 +54,8 @@ class Soita < Thor
 
 private
   def is_music(path)
-    return true if path.downcase.include?(".mp3")
     return true if path.downcase.include?(".flac")
+    return true if path.downcase.include?(".mp3")
     return false
   end
 
