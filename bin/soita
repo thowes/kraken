@@ -15,16 +15,16 @@ class Soita < Thor
     if File.file?(playlist_file); then
       File.open(playlist_file, 'a') do |pl|
         full_path = File.expand_path(path)
-      if File.file?(full_path); then
+        if File.file?(full_path); then
           if Dir.exists?(full_path); then
             puts "ADD DIR: " + full_path.to_s #if options[:verbose]
           else
             puts "ADD: " + full_path.to_s if is_music?(full_path)
             pl.puts full_path if is_music?(full_path)
           end
-      else
+        else
           puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
-      end
+        end
       end #File.open
     else
       puts "DO NOTHING (playlist_file not found): " + path.to_s if options[:verbose]
@@ -78,7 +78,6 @@ private
 	def background
    temp_dir = `asetus dir:temp`.to_s || "~/Projects/temp/" #(asetus dir:temp)
    if File.file?(temp_dir) then puts "TEMP_DIR OK"; else puts "TEMP_DIR NOT_OK"; end #check dir not file
-   #
 	end
 end
 
