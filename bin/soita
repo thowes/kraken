@@ -13,13 +13,13 @@ class Soita < Thor
   def add(path=nil)
     playlist_file = playlist
     if File.file?(playlist_file); then
-        full_path = File.expand_path(path) #how to find full path?
+        full_path = File.expand_path(path)
       if File.file?(full_path); then
       File.open(playlist_file, 'a') do |pl|
           if Dir.exists?(full_path); then
             puts "ADD DIR: " + full_path.to_s #if options[:verbose]
           else
-            puts "ADD: " + full_path.to_s #if options[:verbose]
+            puts "ADD: " + full_path.to_s if is_music?(full_path)
             pl.puts full_path if is_music?(full_path)
           end
       end #File.open
@@ -36,7 +36,7 @@ class Soita < Thor
     `soita default` will do add or play depending whether PATH included.
   LONGDESC
   def default(path=nil)
-    puts "SOITA default"
+    puts "SOITA default" if options[:verbose]
     if path.nil?; then
       play
     else
@@ -49,7 +49,7 @@ class Soita < Thor
     `soita play` will play music in PATH.
   LONGDESC
   def play(path=nil)
-    puts "play " + path
+    puts "SOITA play " + path.to_s
   end
 
 private
