@@ -50,6 +50,11 @@ class Soita < Thor
   LONGDESC
   def play(path=nil)
     puts "SOITA play " + path.to_s
+    playlist_file = playlist
+    File.readlines(playlist_file).each do |line|
+      puts line if is_music?(line)
+    end #File.readlines
+    File.delete(playlist_file) if File.exist? playlist_file
   end
 
 private
