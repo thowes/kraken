@@ -17,13 +17,11 @@ class Soita < Thor
         if Dir.exist?(full_path)
           puts "ADD DIR: #{full_path}" # if options[:verbose]
         elsif music?(full_path)
-          if music?(full_path)
             puts "ADD: #{full_path}"
           pl.puts full_path
-          end
         end
       elsif options[:verbose]
-        puts "DO NOTHING (path not found): #{path}" if options[:verbose]
+        puts "DO NOTHING (path not found): #{path}"
       end
     end
   end
