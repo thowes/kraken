@@ -57,7 +57,9 @@ class Soita < Thor
   end
 
 private
+
   def music?(path) # this doesn't cover situations where file endings include ".cue" or macos dotfiles.
+    # this doesn't cover situations where file endings include ".cue" or macos dotfiles.
     return true if path.downcase.include?('.flac')
     return true if path.downcase.include?('.midi')
     return true if path.downcase.include?('.mp3')
@@ -71,9 +73,9 @@ private
     temp_dir = `asetus dir:temp`.to_s || '~/Projects/temp'
     playlist_file = "#{temp_dir.strip}/playlist.lst"
     if File.file?(playlist_file)
-      puts 'PLAYLIST OK: ' + playlist_file if options[:verbose]
+      puts "PLAYLIST OK: #{playlist_file}" if options[:verbose]
     else
-      puts 'PLAYLIST NOT_OK: ' + playlist_file if options[:verbose]
+      puts "PLAYLIST NOT_OK: #{playlist_file}" if options[:verbose]
       FileUtils.touch(playlist_file)
     end
     playlist_file
