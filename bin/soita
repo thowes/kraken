@@ -68,15 +68,15 @@ private
   end
 
   def playlist
-    temp_dir = `asetus dir:temp`.to_s || "~/Projects/temp"
+    temp_dir = `asetus dir:temp`.to_s || '~/Projects/temp'
     playlist_file = temp_dir.strip + '/playlist.lst'
     unless File.file?(playlist_file) then
-      puts "PLAYLIST NOT_OK: " + playlist_file if options[:verbose]
+      puts 'PLAYLIST NOT_OK: ' + playlist_file if options[:verbose]
       FileUtils.touch(playlist_file)
     else
-      puts "PLAYLIST OK: " + playlist_file if options[:verbose]
+      puts 'PLAYLIST OK: ' + playlist_file if options[:verbose]
     end
-    return playlist_file
+    playlist_file
   end
 
   def background
