@@ -14,15 +14,15 @@ class Soita < Thor
     File.open(playlist, 'a') do |pl|
       full_path = File.expand_path(path)
       if File.file?(full_path)
-        if Dir.exists?(full_path)
+        if Dir.exist?(full_path)
           puts "ADD DIR: #{full_path}" # if options[:verbose]
-        else
+        elsif music?(full_path)
           if music?(full_path)
             puts "ADD: #{full_path}"
-            pl.puts full_path
+          pl.puts full_path
           end
         end
-      else
+      elsif options[:verbose]
         puts "DO NOTHING (path not found): #{path}" if options[:verbose]
       end
     end
