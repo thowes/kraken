@@ -17,16 +17,16 @@ class Soita < Thor
         if Dir.exists?(full_path)
           puts 'ADD DIR: ' + full_path.to_s # if options[:verbose]
         else
-          if is_music?(full_path)
+          if music?(full_path)
             puts 'ADD: ' + full_path.to_s
             pl.puts full_path
           end
-        end # Dir.exists?
+        end
       else
         puts 'DO NOTHING (path not found): ' + path.to_s if options[:verbose]
-      end # File.file?
+      end
     end # File.open
-  end # def add
+  end
 
   desc "default PATH", "add or play depending whether PATH included."
   long_desc <<-LONGDESC
@@ -49,15 +49,15 @@ class Soita < Thor
     puts "SOITA play " + path.to_s
     playlist_file = playlist
     File.readlines(playlist_file).each do |line|
-      if is_music?(line)
+      if music?(line)
         puts line if RUBY_PLATFORM.include?('darwin')
       end
-    end #File.readlines
+    end
     File.delete(playlist_file) if File.exist? playlist_file
   end
 
 private
-  def is_music?(path) # this doesn't cover situations where file endings include ".cue" or macos dotfiles.
+  def music?(path) # this doesn't cover situations where file endings include ".cue" or macos dotfiles.
     return true if path.downcase.include?('.flac')
     return true if path.downcase.include?('.midi')
     return true if path.downcase.include?('.mp3')
@@ -72,10 +72,10 @@ private
     playlist_file = "#{temp_dir.strip}/playlist.lst"
     if File.file?(playlist_file)
       puts 'PLAYLIST OK: ' + playlist_file if options[:verbose]
-      puts 'PLAYLIST NOT_OK: ' + playlist_file if options[:verbose]
     else
+      puts 'PLAYLIST NOT_OK: ' + playlist_file if options[:verbose]
       FileUtils.touch(playlist_file)
-    end # File.file?
+    end
     playlist_file
   end
 
