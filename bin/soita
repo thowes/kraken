@@ -55,7 +55,7 @@ class Soita < Thor
     playlist_file = playlist
     File.readlines(playlist_file).each do |line|
       if is_music?(line)
-      puts line if is_music?(line)
+        puts line if RUBY_PLATFORM.include?('darwin')
       end
     end #File.readlines
     File.delete(playlist_file) if File.exist? playlist_file
