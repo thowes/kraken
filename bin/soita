@@ -15,18 +15,18 @@ class Soita < Thor
       full_path = File.expand_path(path)
       if File.file?(full_path)
         if Dir.exists?(full_path)
-            puts "ADD DIR: " + full_path.to_s #if options[:verbose]
+          puts 'ADD DIR: ' + full_path.to_s # if options[:verbose]
         else
             if is_music?(full_path)
-              puts "ADD: " + full_path.to_s
+            puts 'ADD: ' + full_path.to_s
               pl.puts full_path
-            end
+          end
         end
       else
-          puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
+        puts 'DO NOTHING (path not found): ' + path.to_s if options[:verbose]
       end
     end # File.open
-  end
+  end # def add
 
   desc "default PATH", "add or play depending whether PATH included."
   long_desc <<-LONGDESC
