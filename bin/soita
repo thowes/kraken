@@ -6,26 +6,26 @@ class Soita < Thor
   class_option :verbose, :type => :boolean, :desc => 'use verbose mode.'
   default_task :default
 
-  desc "add PATH", "add music file in PATH to playlist."
+  desc 'add PATH', 'add music file in PATH to playlist.'
   long_desc <<-LONGDESC
     `soita add` will add music file(s) in the PATH to playlist.
   LONGDESC
-  def add(path=nil)
+  def add(path = nil)
     File.open(playlist, 'a') do |pl|
       full_path = File.expand_path(path)
       if File.file?(full_path)
         if Dir.exists?(full_path)
-          puts 'ADD DIR: ' + full_path.to_s # if options[:verbose]
+          puts "ADD DIR: #{full_path}" # if options[:verbose]
         else
           if music?(full_path)
-            puts 'ADD: ' + full_path.to_s
+            puts "ADD: #{full_path}"
             pl.puts full_path
           end
         end
       else
-        puts 'DO NOTHING (path not found): ' + path.to_s if options[:verbose]
+        puts "DO NOTHING (path not found): #{path}" if options[:verbose]
       end
-    end # File.open
+    end
   end
 
   desc 'default PATH', 'add or play depending whether PATH included.'
@@ -33,7 +33,7 @@ class Soita < Thor
     `soita default` will do add or play depending whether PATH included.
   LONGDESC
   def default(path = nil)
-    puts "SOITA default" if options[:verbose]
+    puts 'SOITA default' if options[:verbose]
     if path.nil?
       play
     else
