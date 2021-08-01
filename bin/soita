@@ -56,9 +56,9 @@ class Soita < Thor
     File.delete(playlist_file) if File.exist? playlist_file
   end
 
-private
+  private
 
-  def music?(path) # this doesn't cover situations where file endings include ".cue" or macos dotfiles.
+  def music?(path)
     # this doesn't cover situations where file endings include ".cue" or macos dotfiles.
     return true if path.downcase.include?('.flac')
     return true if path.downcase.include?('.midi')
