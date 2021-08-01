@@ -46,14 +46,15 @@ class Soita < Thor
     `soita play` will play music in PATH.
   LONGDESC
   def play(path=nil)
-    puts "SOITA play " + path.to_s
+    puts "SOITA play #{path} + playlist"
     playlist_file = playlist
     File.readlines(playlist_file).each do |line|
       if music?(line)
+        puts "PLAY: #{line}"
         puts line if RUBY_PLATFORM.include?('darwin')
       end
     end
-    File.delete(playlist_file) if File.exist? playlist_file
+    File.delete(playlist_file) if File.exist?(playlist_file)
   end
 
   private
@@ -66,6 +67,7 @@ class Soita < Thor
     return true if path.downcase.include?('.ogg')
     return true if path.downcase.include?('.wav')
     return true if path.downcase.include?('.wma')
+
     false
   end
 
