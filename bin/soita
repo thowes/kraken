@@ -2,6 +2,7 @@
 require 'thor'
 require 'fileutils'
 
+# soita is finnish for 'play (something that produces sound)'.
 class Soita < Thor
   class_option :verbose, :type => :boolean, :desc => 'use verbose mode.'
   default_task :default
@@ -17,7 +18,7 @@ class Soita < Thor
         if Dir.exist?(full_path)
           puts "ADD DIR: #{full_path}" # if options[:verbose]
         elsif music?(full_path)
-            puts "ADD: #{full_path}"
+          puts "ADD: #{full_path}"
           pl.puts full_path
         end
       elsif options[:verbose]
