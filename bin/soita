@@ -17,14 +17,14 @@ class Soita < Thor
         if Dir.exists?(full_path)
           puts 'ADD DIR: ' + full_path.to_s # if options[:verbose]
         else
-            if is_music?(full_path)
+          if is_music?(full_path)
             puts 'ADD: ' + full_path.to_s
-              pl.puts full_path
+            pl.puts full_path
           end
-        end
+        end # Dir.exists?
       else
         puts 'DO NOTHING (path not found): ' + path.to_s if options[:verbose]
-      end
+      end # File.file?
     end # File.open
   end # def add
 
