@@ -41,14 +41,14 @@ class Soita < Thor
     end
   end
 
-  desc "play PATH", "play music in PATH."
+  desc 'play PATH', 'play music in PATH.'
   long_desc <<-LONGDESC
     `soita play` will play music in PATH.
   LONGDESC
   def play(path=nil)
     add(path) unless path.nil?
-    puts "SOITA play #{path} + playlist"
     playlist_file = playlist
+    puts "SOITA play #{path} + playlist"
     File.readlines(playlist_file).each do |line|
       if music?(line)
         puts "PLAY: #{line}"
