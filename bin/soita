@@ -12,9 +12,9 @@ class Soita < Thor
   LONGDESC
   def add(path=nil)
     playlist_file = playlist
-      File.open(playlist_file, 'a') do |pl|
+    File.open(playlist, 'a') do |pl|
         full_path = File.expand_path(path)
-        if File.file?(full_path) then
+      if File.file?(full_path)
           if Dir.exists?(full_path)
             puts "ADD DIR: " + full_path.to_s #if options[:verbose]
           else
@@ -23,10 +23,10 @@ class Soita < Thor
               pl.puts full_path
             end
           end
-        else
+      else
           puts "DO NOTHING (path not found): " + path.to_s if options[:verbose]
         end
-      end #File.open
+    end # File.open
       puts "DO NOTHING (playlist_file not found): " + path.to_s if options[:verbose]
   end
 
