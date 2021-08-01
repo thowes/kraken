@@ -28,13 +28,13 @@ class Soita < Thor
     end # File.open
   end
 
-  desc "default PATH", "add or play depending whether PATH included."
+  desc 'default PATH', 'add or play depending whether PATH included.'
   long_desc <<-LONGDESC
     `soita default` will do add or play depending whether PATH included.
   LONGDESC
-  def default(path=nil)
+  def default(path = nil)
     puts "SOITA default" if options[:verbose]
-    if path.nil?; then
+    if path.nil?
       play
     else
       add(path)
@@ -45,10 +45,10 @@ class Soita < Thor
   long_desc <<-LONGDESC
     `soita play` will play music in PATH.
   LONGDESC
-  def play(path=nil)
+  def play(path = nil)
     add(path) unless path.nil?
     playlist_file = playlist
-    puts "SOITA play #{path} + playlist"
+    puts "SOITA PLAY: playlist #{playlist_file}"
     File.readlines(playlist_file).each do |line|
       if music?(line)
         puts "PLAY: #{line}"
