@@ -20,7 +20,7 @@ class Soita < Thor
         elsif File.file?(full_path) && music?(full_path)
           puts "ADD: #{full_path}"
           pl.puts full_path
-      elsif options[:verbose]
+        elsif options[:verbose]
         puts "DO NOTHING (path not found): #{path}"
         end
       end
