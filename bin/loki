@@ -10,11 +10,11 @@ class Loki < Thor
   option :project
   default_task :latest
 
-  desc "add PATH", "add a log line to backup.log in PATH"
+  desc 'add PATH', 'add a log line to backup.log in PATH.'
   long_desc <<-LONGDESC
     `loki add` will add a log line to backup.log in PATH.
   LONGDESC
-  def add(project=nil, comment=nil, path=nil)
+  def add(project = nil, comment = nil, path = nil)
     comment = comment || Socket.gethostname || 'xyz' # || options[:comment]
     project = options[:project] || project || 'proj'
     filename = 'backup.log'
