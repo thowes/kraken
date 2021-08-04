@@ -15,39 +15,39 @@ class Loki < Thor
     `loki add` will add a log line to backup.log in PATH.
   LONGDESC
   def add(project=nil, comment=nil, path=nil)
-    comment = comment || Socket.gethostname || 'xyz' #|| options[:comment]
+    comment = comment || Socket.gethostname || 'xyz' # || options[:comment]
     project = options[:project] || project || 'proj'
     filename = 'backup.log'
     path = options[:path] || path
     FileUtils.cd(path) unless path.nil?
     FileUtils.touch(filename)
-    line = Time.now.to_s + " " + project + " ver " + comment
+    line = "#{Time.now} #{project} ver #{comment}"
     File.open('backup.log', 'a') do |f|
       f.puts line
     end
     puts line
   end
 
-  desc "latest PATH", "print latest backup date for PATH"
+  desc 'latest PATH', 'print latest backup date for PATH.'
   long_desc <<-LONGDESC
     `loki latest` will print out the latest backup date for PATH.
   LONGDESC
-  def latest(path=nil)
+  def latest(path = nil)
     puts latest_line(path)
   end
 
-  desc "today PATH", "print true if backup has been run for PATH today"
+  desc 'today PATH', 'print true if backup has been run for PATH today.'
   long_desc <<-LONGDESC
     `loki today` will print out a boolean value about if backup for PATH has been run today.
   LONGDESC
-  def today(path=nil)
+  def today(path = nil)
     latest_date = latest_line(path).to_s.include? Date.today.to_s
     puts latest_date
   end
 
-private
+  private
 
-  def latest_line(path=nil)
+  def latest_line(path = nil)
     path = options[:path] || path
     FileUtils.cd(path) unless path.nil?
     if File.file?('backup.log')
