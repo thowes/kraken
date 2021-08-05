@@ -17,12 +17,10 @@ class Loki < Thor
   def add(project = nil, comment = nil, path = nil)
     comment = comment || Socket.gethostname || 'xyz' # || options[:comment]
     project = options[:project] || project || 'proj'
-    filename = 'backup.log'
     path = options[:path] || path
     FileUtils.cd(path) unless path.nil?
-    FileUtils.touch(filename)
     line = "#{Time.now} #{project} ver #{comment}"
-    File.open('backup.log', 'a') do |f|
+    File.open('backup.log', 'a+') do |f|
       f.puts line
     end
     puts line
