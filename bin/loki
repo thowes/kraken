@@ -6,7 +6,7 @@ require 'socket'
 
 # Loki here is named after the finnish word 'loki', meaning a log(file).
 class Loki < Thor
-  class_option :path, :desc => 'include directory PATH for backup.log.'
+  class_option :path, desc: 'include directory PATH for backup.log.'
   option :project
   default_task :latest
 
