@@ -4,7 +4,7 @@ require 'fileutils'
 
 # soita is finnish for 'play (something that produces sound)'.
 class Soita < Thor
-  class_option :verbose, :type => :boolean, :desc => 'use verbose mode.'
+  class_option :verbose, type: :boolean, desc: 'use verbose mode.'
   default_task :default
 
   desc 'add PATH', 'add music file in PATH to playlist.'
