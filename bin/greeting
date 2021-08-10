@@ -1,76 +1,78 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require "thor"
 
 class Greeting < Thor
-  class_option :yell, :type => :boolean
+  class_option :yell, type: :boolean
 
-  desc "adieu NAME", "say adieu to NAME"
+  desc 'adieu NAME', 'say adieu to NAME'
   long_desc <<-LONGDESC
     `greeting adieu` will print out an adieu message to a person of your choosing.
   LONGDESC
-  def adieu(name=nil)
+  def adieu(name = nil)
     greet("Adieu", name)
   end
 
-  desc "adios NAME", "say adios to NAME"
+  desc 'adios NAME', 'say adios to NAME'
   long_desc <<-LONGDESC
     `greeting adios` will print out an adios message to a person of your choosing.
   LONGDESC
-  def adios(name=nil)
+  def adios(name = nil)
     greet("Adios", name)
   end
 
-  desc "bye NAME", "say bye to NAME"
+  desc 'bye NAME', 'say bye to NAME'
   long_desc <<-LONGDESC
     `greeting bye` will print out a bye message to a person of your choosing.
   LONGDESC
-  def bye(name=nil)
+  def bye(name = nil)
     greet("Bye", name)
   end
 
-  desc "byebye NAME", "say byebye to NAME"
+  desc 'byebye NAME', 'say byebye to NAME'
   long_desc <<-LONGDESC
     `greeting byebye` will print out a byebye message to a person of your choosing.
   LONGDESC
-  def byebye(name=nil)
+  def byebye(name = nil)
     greet("Byebye", name)
   end
 
-  desc "ciao NAME", "say ciao to NAME"
+  desc 'ciao NAME', 'say ciao to NAME'
   long_desc <<-LONGDESC
     `greeting ciao` will print out a ciao message to a person of your choosing.
   LONGDESC
-  def ciao(name=nil)
+  def ciao(name = nil)
     greet("Ciao", name)
   end
 
-  desc "hello NAME", "say hello to NAME"
+  desc 'hello NAME', 'say hello to NAME'
   long_desc <<-LONGDESC
     `greeting hello` will print out a message to a person of your choosing.
   LONGDESC
-  def hello(name=nil)
+  def hello(name = nil)
     #language = ask("Language: ")
-    greet("Hello", name)
+    greet('Hello', name)
   end
 
-  desc "hola NAME", "say hola to NAME"
+  desc 'hola NAME', 'say hola to NAME'
   long_desc <<-LONGDESC
     `greeting hola` will print out ¡Hola! message to a person of your choosing.
   LONGDESC
-  def hola(name=nil)
+  def hola(name = nil)
     greet("¡Hola", name)
   end
 
-  desc "goodbye NAME", "say goodbye to NAME"
+  desc 'goodbye NAME', 'say goodbye to NAME'
   long_desc <<-LONGDESC
     `greeting goodbye` will print out a goodbye message to a person of your choosing.
   LONGDESC
-  def goodbye(name=nil)
+  def goodbye(name = nil)
     greet("Goodbye", name)
   end
 
 private
-  def greet(greeting, name=nil, from=nil)
+  def greet(greeting, name = nil, from = nil)
     name = name || ENV['USER'].capitalize || "world"
     output = "#{greeting}, #{name}" unless options[:yell]
     output = "#{greeting.upcase}, #{name.upcase}" if options[:yell]
@@ -78,5 +80,5 @@ private
   end
 end
 
-#puts "hello, world!", "how's it going?"
+# puts "hello, world!", "how's it going?"
 Greeting.start(ARGV)
