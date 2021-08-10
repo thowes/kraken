@@ -72,13 +72,14 @@ class Greeting < Thor
     greet('Goodbye', name)
   end
 
-private
+  private
 
   def greet(greeting, name = nil, from = nil)
     name = name || ENV['USER'].capitalize || 'world'
     output = "#{greeting}, #{name}" unless options[:yell]
     output = "#{greeting.upcase}, #{name.upcase}" if options[:yell]
     say "#{output}!" if from.nil?
+    say "#{output} from #{from}!" unless from.nil?
   end
 end
 
