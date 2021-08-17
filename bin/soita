@@ -16,7 +16,6 @@ class Soita < Thor
   LONGDESC
   def add(path = nil)
     File.open(playlist, 'a') do |pl|
-      full_path = File.expand_path(path)
       if Dir.exist?(path)
         puts "ADD DIR: #{path}" # if options[:verbose]
       elsif File.file?(path) && music?(path)
@@ -52,7 +51,7 @@ class Soita < Thor
     File.readlines(playlist_file).each do |line|
       if music?(line)
         puts "PLAY: #{line}"
-        system("afinfo -b #{line}") if RUBY_PLATFORM.include?('darwin')
+        system("afplay #{line}") if RUBY_PLATFORM.include?('darwin')
       end
     end
     File.delete(playlist_file) if File.exist?(playlist_file)
@@ -61,6 +60,7 @@ class Soita < Thor
   private
 
   def music?(path)
+    return false if path.downcase.include?('._')
     # this doesn't cover situations where file endings include ".cue" or macos dotfiles.
     return true if path.downcase.include?('.flac')
     return true if path.downcase.include?('.midi')
