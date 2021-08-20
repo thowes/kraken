@@ -57,6 +57,14 @@ class Soita < Thor
     File.delete(playlist_file) if File.exist?(playlist_file)
   end
 
+  desc 'stop', 'stop playing'
+  long_desc <<-LONGDESC
+    `soita stop` will stop playing music.
+  LONGDESC
+  def stop(path = nil)
+    #
+  end
+
   private
 
   def music?(path)
