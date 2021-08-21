@@ -62,7 +62,7 @@ class Soita < Thor
     `soita stop` will stop playing music.
   LONGDESC
   def stop(path = nil)
-    # add stuff here
+    # system("killall soita play+ afplay")
   end
 
   private
