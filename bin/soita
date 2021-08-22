@@ -62,9 +62,9 @@ class Soita < Thor
     `soita stop` will stop playing music.
   LONGDESC
   def stop(*)
-    system('killall ruby "soita default"')
     system('killall afplay') if RUBY_PLATFORM.include?('darwin')
     # system('killall aplay') if RUBY_PLATFORM.include?('linux')
+    system('killall ruby "soita default"')
   end
 
   private
