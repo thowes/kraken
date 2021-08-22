@@ -61,9 +61,9 @@ class Soita < Thor
   long_desc <<-LONGDESC
     `soita stop` will stop playing music.
   LONGDESC
-  def stop(path = nil)
+  def stop(*)
     # system("killall soita play+ afplay")
-    system("killall afplay") if RUBY_PLATFORM.include?('darwin')
+    system('killall afplay') if RUBY_PLATFORM.include?('darwin')
   end
 
   private
