@@ -63,6 +63,7 @@ class Soita < Thor
   LONGDESC
   def stop(path = nil)
     # system("killall soita play+ afplay")
+    system("killall afplay") if RUBY_PLATFORM.include?('darwin')
   end
 
   private
