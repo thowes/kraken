@@ -70,11 +70,11 @@ class Soita < Thor
 
   def music?(path)
     return false if path.downcase.include?('._')
-    # this doesn't cover situations where file endings include ".cue" or macos dotfiles.
+    # this doesn't cover situations where file endings include ".cue".
     return true if path.downcase.include?('.flac')
-    return true if path.downcase.include?('.midi')
+    return true if path.downcase.include?('.midi') # .ogg
     return true if path.downcase.include?('.mp3')
-    return true if path.downcase.include?('.ogg')
+    return true if path.downcase.include?('.aac')
     return true if path.downcase.include?('.wav')
 
     false
