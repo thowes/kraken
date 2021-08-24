@@ -74,7 +74,7 @@ class Soita < Thor
     return true if path.downcase.include?('.flac')
     return true if path.downcase.include?('.midi') # .ogg
     return true if path.downcase.include?('.mp3')
-    return true if path.downcase.include?('.aac')
+    return true if path.downcase.include?('.aac') && RUBY_PLATFORM.include?('darwin')
     return true if path.downcase.include?('.wav')
 
     false
