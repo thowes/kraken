@@ -69,13 +69,13 @@ class Soita < Thor
   private
 
   def music?(path)
+    extension = File.extname(path).downcase
     return false if path.downcase.include?('._')
     # this doesn't cover situations where file endings include ".cue".
-    return true if path.downcase.include?('.flac') # .mp3|.wav
+    return true if extension.match(/flac|mp3|wav/) # .mp3|.wav
     return true if path.downcase.include?('.midi') # .ogg
-    return true if path.downcase.include?('.mp3')
     return true if path.downcase.include?('.aac') && RUBY_PLATFORM.include?('darwin')
-    return true if path.downcase.include?('.wav')
+    return true if path.downcase.include?('.wma') && RUBY_PLATFORM.include?('mswin')
 
     false
   end
