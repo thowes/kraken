@@ -39,6 +39,7 @@ class Soita < Thor
       add(path)
     end
   end
+  
 
   desc 'play PATH', 'play music in PATH.'
   long_desc <<-LONGDESC
