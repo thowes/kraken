@@ -39,7 +39,7 @@ class Soita < Thor
       add(path)
     end
   end
-  
+
   # def list
   # system("cat playlist.lst")
   # end
@@ -77,7 +77,7 @@ class Soita < Thor
     return false if path.downcase.include?('._')
     # this doesn't cover situations where file endings include ".cue".
     return true if extension.match(/flac|mp3|wav/) # .mp3|.wav
-    return true if path.downcase.include?('.midi') # .ogg
+    # return true if path.downcase.include?('.midi') # .ogg
     return true if path.downcase.include?('.aac') && RUBY_PLATFORM.include?('darwin')
     return true if path.downcase.include?('.wma') && RUBY_PLATFORM.include?('mswin')
 
