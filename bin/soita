@@ -40,8 +40,12 @@ class Soita < Thor
     end
   end
 
+  desc 'list', 'list the contents of the playlist file.'
+  long_desc <<-LONGDESC
+    `soita list` lists the contents of the playlist file.
+  LONGDESC
   def list
-  # system("cat playlist.lst")
+    # system("cat playlist.lst")
   end
 
   desc 'play PATH', 'play music in PATH.'
