@@ -40,9 +40,9 @@ class Soita < Thor
     end
   end
 
-  # def list
+  def list
   # system("cat playlist.lst")
-  # end
+  end
 
   desc 'play PATH', 'play music in PATH.'
   long_desc <<-LONGDESC
