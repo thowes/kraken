@@ -45,7 +45,9 @@ class Soita < Thor
     `soita list` lists the contents of the playlist file.
   LONGDESC
   def list
+    File.open(playlist, 'r') do |pl|
     # system("cat playlist.lst")
+    end
   end
 
   desc 'play PATH', 'play music in PATH.'
