@@ -46,7 +46,7 @@ class Soita < Thor
   LONGDESC
   def list
     File.open(playlist, 'r').each do |pl|
-    # system("cat playlist.lst")
+      puts pl.to_s
     end
   end
 
