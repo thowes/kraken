@@ -1,0 +1,46 @@
+#!/bin/sh
+TEMP="$(asetus dir:temp)"; SOITTOLISTA="$TEMP/soita_temp.lst"
+if [ -z "$1" ]; then
+	case "$(uname)" in
+		CYGWIN*|*Microsoft*) # Play FLAC files in foobar2000
+			case $(ls -la | grep cue | wc -l) in
+				0) screen -d -m foobar *.flac;;
+				*) screen -d -m foobar *.flac.cue;;
+			esac;;
+		Darwin*)
+			ps aux | grep -v grep | grep afplay
+			if [ "$(running afplay)" == "true" ]; then
+				kaiku "$STY" "$(pvm)" "SOITA: is running"
+			else
+				echo "$STY" "SOITA: not running"
+				while read p; do
+					if [ -f "$p" ]; then
+						echo "$(pvm)" "SOITA START:" "$p"
+						afplay "$p"
+						echo "$(pvm)" "SOITA DONE:" "$p"
+					else
+						echo "$STY" "SOITA NF:" "$p"
+					fi
+				done < "$SOITTOLISTA"
+				rm "$SOITTOLISTA"
+			fi;;
+	esac
+else
+	case "$1" in
+		-l*) if [ -f "$SOITTOLISTA" ]; then cat "$SOITTOLISTA"; else virhe "NF" "$SOITTOLISTA"; fi;;
+		-*) echo "$1" "$STY";;
+		*)
+			if [ -d "$1" ]; then
+				cd "$1"; ls -1A > $TEMP/p_dir.lst
+			else
+				ls -1A $1 > $TEMP/p_dir.lst
+			fi; DIR=$(pwd)
+			while read p; do
+				case $p in
+					*flac) echo "$DIR/$p" >> $SOITTOLISTA;;
+					*mp3) echo "$DIR/$p" >> $SOITTOLISTA;;
+				esac
+			done < $TEMP/p_dir.lst
+			if [ -f "$TEMP/p_dir.lst" ]; then rm "$TEMP/p_dir.lst"; fi;;
+	esac
+fi
