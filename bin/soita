@@ -10,7 +10,7 @@ class Soita < Thor
   # :verbose, type: :boolean, desc: 'use verbose mode.'
   default_task :default
 
-  desc 'add PATH', 'add music file in PATH to playlist.'
+  desc 'add [PATH]', 'add music file in PATH to playlist.'
   long_desc <<-LONGDESC
     `soita add` will add music file(s) in the PATH to playlist.
   LONGDESC
@@ -27,7 +27,7 @@ class Soita < Thor
     end
   end
 
-  desc 'default PATH', 'add or play depending whether PATH included.'
+  desc 'default [PATH]', 'add or play depending whether PATH included.'
   long_desc <<-LONGDESC
     `soita default` will do add or play depending whether PATH included.
   LONGDESC
@@ -50,7 +50,7 @@ class Soita < Thor
     end
   end
 
-  desc 'play PATH', 'play music in PATH.'
+  desc 'play [PATH]', 'play music in PATH.'
   long_desc <<-LONGDESC
     `soita play` will play music in PATH.
   LONGDESC
