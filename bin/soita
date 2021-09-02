@@ -35,8 +35,10 @@ class Soita < Thor
     puts 'SOITA default' if options[:verbose]
     if path.nil?
       play
+    elsif path == 'list'
+      list
     else
-        add(path)
+      add(path)
     end
   end
 
