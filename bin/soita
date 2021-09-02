@@ -36,7 +36,7 @@ class Soita < Thor
     if path.nil?
       play
     else
-      add(path)
+        add(path)
     end
   end
 
