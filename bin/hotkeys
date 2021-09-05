@@ -49,7 +49,7 @@ class Hotkeys < Thor
   private
 
   def path
-    db_file_path = " #{`asetus dir:db`.to_s || '~/Projects/temp/DB/'} + hotkeys.db"
+    db_file_path = "#{`asetus dir:db`.strip}/hotkeys.db"
     unless File.exist?(db_file_path)
       begin
         db = SQLite3::Database.new(db_file_path)
@@ -60,7 +60,7 @@ class Hotkeys < Thor
         db&.close if db
       end
     end
-    puts "YES: #{db_file_path}" if options[:verbose]
+    puts "HOTKEYS: #{db_file_path}" if options[:verbose]
     db_file_path
   end
 end
