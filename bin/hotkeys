@@ -1,0 +1,68 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'thor'
+require 'sqlite3'
+require 'fileutils'
+
+# This program/class is for keeping note of various of hotkey combinations in different systems.
+class Hotkeys < Thor
+  class_option :verbose, type: :boolean, desc: 'use verbose mode.'
+  # :verbose, type: :boolean, desc: 'use verbose mode.'
+
+  desc 'add [COMMAND]', 'add a new hotkey command to the database.'
+  long_desc <<-LONGDESC
+    `hotkeys add` will add a new hotkey command to the database.
+  LONGDESC
+  def add
+    db = SQLite3::Database.new(path)
+  rescue SQLite3::Exception => e
+    puts "Exception ocurred: #{e}"
+  ensure
+    db&.close if db
+  end
+
+  desc 'search [COMMAND]', 'search hotkey commands from database.'
+  long_desc <<-LONGDESC
+    `hotkeys search` will search hotkey commands from the database.
+  LONGDESC
+  def search
+    db = SQLite3::Database.new(path)
+  rescue SQLite3::Exception => e
+    puts "Exception ocurred: #{e}"
+  ensure
+    db&.close if db
+  end
+
+  desc 'edit [COMMAND]', 'edit a hotkey command from the database.'
+  long_desc <<-LONGDESC
+    `hotkeys edit` will start the edit command to change a hotkey command from the database.
+  LONGDESC
+  def edit
+    db = SQLite3::Database.new(path)
+  rescue SQLite3::Exception => e
+    puts "Exception ocurred: #{e}"
+  ensure
+    db&.close if db
+  end
+
+  private
+
+  def path
+    db_file_path = " #{`asetus dir:db`.to_s || '~/Projects/temp/DB/'} + hotkeys.db"
+    unless File.exist?(db_file_path)
+      begin
+        db = SQLite3::Database.new(db_file_path)
+        db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Mod1 TEXT, Mod2 TEXT, Mod3 TEXT, Key TEXT, App TEXT, Function TEXT)'
+      rescue SQLite3::Exception => e
+        puts "Exception ocurred: #{e}"
+      ensure
+        db&.close if db
+      end
+    end
+    puts "YES: #{db_file_path}" if options[:verbose]
+    db_file_path
+  end
+end
+
+Hotkeys.start(ARGV)
