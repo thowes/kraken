@@ -16,6 +16,7 @@ class Hotkeys < Thor
   LONGDESC
   def add
     db = SQLite3::Database.new(path)
+    # db.execute(INSERT)
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
   ensure
@@ -28,6 +29,7 @@ class Hotkeys < Thor
   LONGDESC
   def search
     db = SQLite3::Database.new(path)
+    # db.execute(SELECT * FROM Hotkeys)
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
   ensure
