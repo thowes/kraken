@@ -50,13 +50,14 @@ class Hotkeys < Thor
 
   private
 
-  # def db_add(mod1, mod2, mod3, key, app, function, os=nil)
+  def db_add(mod1, mod2, mod3, key, app, function, os=nil)
   # db.execute "INSERT INTO Hotkeys (Mod1, Mod2, Mod3, Key, Function, App, OS) VALUES (?, ?, ?, ?, ?, ?, ?),
-  # end
+  end
 
   def path
     db_file_path = "#{`asetus dir:db`.strip}/hotkeys.db"
     unless File.exist?(db_file_path)
+    # end
       begin
         db = SQLite3::Database.new(db_file_path)
         db.execute <<-SQL
@@ -71,7 +72,7 @@ class Hotkeys < Thor
             Operating_system VARCHAR(10)
           );
         SQL
-        db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Mod1 TEXT, Mod2 TEXT, Mod3 TEXT, Key TEXT, App TEXT, Function TEXT)'
+        # db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Mod1 TEXT, Mod2 TEXT, Mod3 TEXT, Key TEXT, App TEXT, Function TEXT)'
       rescue SQLite3::Exception => e
         puts "Exception ocurred: #{e}"
       ensure
