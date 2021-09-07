@@ -9,6 +9,7 @@ require 'fileutils'
 class Hotkeys < Thor
   class_option :app, desc: 'define application for the hotkey.'
   class_option :os, desc: 'define operating system context.'
+  class_option :path, desc: 'define the path for the hotkeys database.'
   class_option :verbose, type: :boolean, desc: 'use verbose mode.'
 
   desc 'add [COMMAND]', 'add a new hotkey command to the database.'
@@ -54,7 +55,6 @@ class Hotkeys < Thor
 
   def db_insert(hkey, cmd, app)
     puts "ADD: #{hkey} | #{app} | #{cmd}"; e = "e"
-    path = db_path
     SQLite3::Database.new(path) do |db|
       db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
       db.execute "INSERT INTO Hotkeys (Hkey, Cmd, App, Context) VALUES ('#{hkey}', '#{cmd}', '#{app}', '#{RUBY_PLATFORM}')"
@@ -62,9 +62,8 @@ class Hotkeys < Thor
   end
 
   def db_path
-    FileUtils.cd('/')
+    FileUtils.cd("/")
     File.expand_path(`asetus dir:db` + "/hotkeys.db")
-    puts "DB: #{path}" # if options[:verbose]
     'hotkeys.db'
   end
 
@@ -84,4 +83,5 @@ class Hotkeys < Thor
   end
 end
 
+FileUtils.cd(`asetus dir:db`)
 Hotkeys.start(ARGV)
