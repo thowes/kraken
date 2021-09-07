@@ -16,7 +16,9 @@ class Hotkeys < Thor
     `hotkeys add` will add a new hotkey command to the database.
   LONGDESC
   def add(user_input=nil)
+    if user_input.nil?
     mod_one = gets
+    end
     db_add("Hotkey+combo", "Command function", "App", "MyOS")
   end
 
@@ -71,16 +73,17 @@ class Hotkeys < Thor
       #CREATE TABLE Hotkeys(
         #Id INTEGER PRIMARY KEY,
         #Hotkey TEXT,
-        #Mod2 VARCHAR(10),
+        #Command TEXT,
         #App TEXT, Function TEXT, Operating_system VARCHAR(10)
      # );
     #SQL
-    db.execute "CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, HotKey TEXT, Command TEXT, App TEXT, Context TEXT)"
+    db.execute "CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)"
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
   ensure
     db&.close if db
   end
+  # class ends
 end
 
 Hotkeys.start(ARGV)
