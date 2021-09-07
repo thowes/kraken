@@ -54,7 +54,7 @@ class Hotkeys < Thor
   private
 
   def db_insert(hkey, cmd, app)
-    puts "ADD: #{hkey} | #{app} | #{cmd}"; e = "e"
+    puts "ADD: #{hkey} | #{app} | #{cmd}"
     SQLite3::Database.new(path) do |db|
       db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
       db.execute "INSERT INTO Hotkeys (Hkey, Cmd, App, Context) VALUES ('#{hkey}', '#{cmd}', '#{app}', '#{RUBY_PLATFORM}')"
@@ -62,7 +62,6 @@ class Hotkeys < Thor
   end
 
   def db_path
-    FileUtils.cd("/")
     File.expand_path(`asetus dir:db` + "/hotkeys.db")
     'hotkeys.db'
   end
