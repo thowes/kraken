@@ -19,13 +19,14 @@ class Hotkeys < Thor
   def add(hotkey = nil)
     if hotkey.nil?
       puts 'What is the hotkey combo? '
-      hotkey = gets.strip
+      hotkey = $stdin.read
     end
     if options[:app].nil?
-    puts "What app is this hotkey (#{hotkey}) for?"
+      puts "What app is this hotkey (#{hotkey}) for?"
     else
-    app = "App" # gets.strip
+      app = options[:app] # gets.strip
     end
+    puts "What command function is this hotkey (#{hotkey}) in the application (#{app}) for?"
     # db_add(hotkey, "Command function", "App")
   end
 
@@ -77,7 +78,6 @@ class Hotkeys < Thor
   def create_db(db_file_path)
     File.touch(db_file_path)
     db = SQLite3::Database.new(db_file_path)
-     # );
     db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)'
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
