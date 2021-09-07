@@ -57,13 +57,13 @@ class Hotkeys < Thor
 
   def path
     db_file_path = "#{`asetus dir:db`.strip}/hotkeys.db"
-    unless File.exist?(db_file_path)
+    create_db(db_file_path) unless File.exist?(db_file_path)
       create_table(db_file_path)
     puts "HOTKEYS: #{db_file_path}" if options[:verbose]
     db_file_path
   end
 
-  def create_table(db_file_path)
+  def create_db(db_file_path)
     db = SQLite3::Database.new(db_file_path)
     db.execute <<-SQL
       CREATE TABLE Hotkeys(
@@ -82,9 +82,7 @@ class Hotkeys < Thor
       puts "Exception ocurred: #{e}"
   ensure
       db&.close if db
-  end
     end
-  end
 end
 
 Hotkeys.start(ARGV)
