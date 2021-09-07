@@ -62,8 +62,10 @@ class Hotkeys < Thor
   end
 
   def db_path
+    FileUtils.cd('/')
     File.expand_path(`asetus dir:db` + "/hotkeys.db")
     puts "DB: #{path}" # if options[:verbose]
+    'hotkeys.db'
   end
 
   def db_create(path)
