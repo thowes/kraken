@@ -55,11 +55,10 @@ class Hotkeys < Thor
   def db_insert(hkey, cmd, app)
     puts "ADD: #{hkey} | #{app} | #{cmd}"; e = "e"
     path = db_path
-    SQLite3::Database.new(path) do |db|
+    SQLite3::Database.new(db_path) do |db|
     db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
       db.execute "INSERT INTO Hotkeys (Hkey, Cmd, App, Context) VALUES ('#{hkey}', '#{cmd}', '#{app}', '#{RUBY_PLATFORM}')"
   end
-    puts "Exception ocurred: #{e}"
     puts "DB: #{path}" # if options[:verbose]
   end
 
