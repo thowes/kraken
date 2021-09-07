@@ -57,6 +57,7 @@ class Hotkeys < Thor
   private
 
   def db_add(hotkey, command, app)
+    db_create(path)
     db = SQLite3::Database.open(path)
     puts "ADD: #{hotkey} | #{app} | #{command}"
     # db.execute("INSERT INTO Hotkeys (Hotkey, Command, App, Context) VALUES (?, ?, ?, ?, ?, ?, ?),
@@ -66,15 +67,14 @@ class Hotkeys < Thor
     db&.close if db
   end
 
-  def path
+  def db_path
     db_file_path = "#{`asetus dir:db`.strip}/hotkeys.db"
     puts "DB: #{db_file_path}" # if options[:verbose]
-    #create_db(db_file_path) unless File.exist?(db_file_path)
     db_file_path
   end
 
-  def create_db(db_file_path)
-    File.touch(db_file_path)
+  def db_create(db_file_path)
+    File.touch(db_file_path) unless File.exist?(path)
     db = SQLite3::Database.open(db_file_path)
     db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)'
   rescue SQLite3::Exception => e
