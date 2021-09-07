@@ -16,7 +16,6 @@ class Hotkeys < Thor
     `hotkeys add` will add a new hotkey command to the database.
   LONGDESC
   def add(hotkey = nil)
-    db_create(db_path) unless File.exist?(db_path)
     hotkey = collect_input 'What is the hotkey combo you want to add?' if hotkey.nil?
     if options[:app].nil?
       app = collect_input "What app is this hotkey (#{hotkey}) for?"
@@ -57,10 +56,9 @@ class Hotkeys < Thor
   private
 
   def db_insert(hotkey, command, app)
-    path = db_path
-    # db_create(path) unless File.exist?(path)
-    db = SQLite3::Database.open(path)
     puts "ADD: #{hotkey} | #{app} | #{command}"
+    path = db_path
+    db = SQLite3::Database.open(path)
     # db.execute("INSERT INTO Hotkeys (Hotkey, Command, App, Context) VALUES (?, ?, ?, ?, ?, ?, ?),
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
@@ -69,13 +67,13 @@ class Hotkeys < Thor
   end
 
   def db_path
-    db_file_path = "#{`asetus dir:db`.strip}/hotkeys.db"
+    `asetus dir:db`.strip + '/DB/hotkeys.db'
   end
 
   def db_create(path)
-    File.touch(path) unless File.exist?(path)
+    FileUtils.touch(path) unless File.exist?(path)
     db = SQLite3::Database.open(path)
-    db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)'
+    db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)'
     puts "DB: #{path}" # if options[:verbose]
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
