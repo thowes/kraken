@@ -23,7 +23,6 @@ class Hotkeys < Thor
       app = options[:app]
     end
     command = collect_input "What command function is this hotkey (#{hotkey}) in the application (#{app}) for?"
-    # db_add(hotkey, "Command function", "App")
     db_add(hotkey, command, app)
     puts "This hotkey (#{hotkey}) doing this command (#{command}) in the application (#{app})"
   end
@@ -57,6 +56,7 @@ class Hotkeys < Thor
   private
 
   def db_add(hotkey, command, app)
+    path = db_path
     db_create(path)
     db = SQLite3::Database.open(path)
     puts "ADD: #{hotkey} | #{app} | #{command}"
@@ -69,14 +69,14 @@ class Hotkeys < Thor
 
   def db_path
     db_file_path = "#{`asetus dir:db`.strip}/hotkeys.db"
-    puts "DB: #{db_file_path}" # if options[:verbose]
     db_file_path
   end
 
-  def db_create(db_file_path)
+  def db_create(path)
     File.touch(db_file_path) unless File.exist?(path)
-    db = SQLite3::Database.open(db_file_path)
+    db = SQLite3::Database.open(path)
     db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)'
+    puts "DB: #{db_file_path}" # if options[:verbose]
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
   ensure
