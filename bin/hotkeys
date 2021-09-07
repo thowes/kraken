@@ -7,24 +7,24 @@ require 'fileutils'
 
 # This program/class is for keeping note of various of hotkey combinations in different systems.
 class Hotkeys < Thor
-  class_option :verbose, type: :boolean, desc: 'use verbose mode.'
   class_option :app, desc: 'define application for the hotkey.'
-  # :verbose, type: :boolean, desc: 'use verbose mode.'
   class_option :os, desc: 'define operating system context.'
+  class_option :verbose, type: :boolean, desc: 'use verbose mode.'
 
   desc 'add [COMMAND]', 'add a new hotkey command to the database.'
   long_desc <<-LONGDESC
     `hotkeys add` will add a new hotkey command to the database.
   LONGDESC
   def add(hotkey = nil)
-    hotkey = user_input 'What is the hotkey combo?' if hotkey.nil?
+    hotkey = collect_input 'What is the hotkey combo you want to add?' if hotkey.nil?
     if options[:app].nil?
-      app = user_input "What app is this hotkey (#{hotkey}) for?"
+      app = collect_input "What app is this hotkey (#{hotkey}) for?"
     else
       app = options[:app]
     end
-    command = user_input "What command function is this hotkey (#{hotkey}) in the application (#{app}) for?"
+    command = collect_input "What command function is this hotkey (#{hotkey}) in the application (#{app}) for?"
     # db_add(hotkey, "Command function", "App")
+    db_add(hotkey, command, app)
     puts "This hotkey (#{hotkey}) doing this command (#{command}) in the application (#{app})"
   end
 
@@ -56,7 +56,7 @@ class Hotkeys < Thor
 
   private
 
-  def db_add(hotkey, app, command)
+  def db_add(hotkey, command, app)
     db = SQLite3::Database.open(path)
     puts "ADD: #{hotkey} | #{app} | #{command}"
     # db.execute("INSERT INTO Hotkeys (Hotkey, Command, App, Context) VALUES (?, ?, ?, ?, ?, ?, ?),
@@ -69,13 +69,13 @@ class Hotkeys < Thor
   def path
     db_file_path = "#{`asetus dir:db`.strip}/hotkeys.db"
     puts "DB: #{db_file_path}" # if options[:verbose]
-    create_db(db_file_path) unless File.exist?(db_file_path)
+    #create_db(db_file_path) unless File.exist?(db_file_path)
     db_file_path
   end
 
   def create_db(db_file_path)
     File.touch(db_file_path)
-    db = SQLite3::Database.new(db_file_path)
+    db = SQLite3::Database.open(db_file_path)
     db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)'
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
@@ -83,8 +83,9 @@ class Hotkeys < Thor
     db&.close if db
   end
 
-  def user_input(prompt = nil)
+  def collect_input(prompt = nil)
     puts prompt
+    $stdin.readline.strip
   end
 end
 
