@@ -17,17 +17,14 @@ class Hotkeys < Thor
     `hotkeys add` will add a new hotkey command to the database.
   LONGDESC
   def add(hotkey = nil)
-    if hotkey.nil?
       puts 'What is the hotkey combo? '
-      hotkey = user_input 'What is the hotkey combo?'
+    hotkey = user_input 'What is the hotkey combo?' if hotkey.nil?
     end
     if options[:app].nil?
-      puts "What app is this hotkey (#{hotkey}) for?"
       app = user_input "What app is this hotkey (#{hotkey}) for?"
     else
       app = options[:app]
     end
-    puts "What command function is this hotkey (#{hotkey}) in the application (#{app}) for?"
     command = user_input "What command function is this hotkey (#{hotkey}) in the application (#{app}) for?"
     # db_add(hotkey, "Command function", "App")
     puts "This hotkey (#{hotkey}) doing this command (#{command}) in the application (#{app})"
@@ -88,9 +85,9 @@ class Hotkeys < Thor
     db&.close if db
   end
 
-  # def user_input(prompt = nil)
+  def user_input(prompt = nil)
   # puts prompt
-  # class ends
+  end
 end
 
 Hotkeys.start(ARGV)
