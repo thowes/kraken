@@ -15,11 +15,11 @@ class Hotkeys < Thor
   long_desc <<-LONGDESC
     `hotkeys add` will add a new hotkey command to the database.
   LONGDESC
-  def add(user_input=nil)
+  def add(hotkey=nil)
     if user_input.nil?
-    mod_one = gets
+      hotkey = gets
     end
-    db_add("Hotkey+combo", "Command function", "App", "MyOS")
+    # db_add(hotkey, "Command function", "App")
   end
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
@@ -50,11 +50,12 @@ class Hotkeys < Thor
 
   private
 
-  def db_add(mod1, mod2, mod3, key, app, function, os=nil)
+  def db_add(hotkey, app, command)
     db = SQLite3::Database.new(path)
-    puts "Exception ocurred: #{e}"
+    puts "ADD: " + hotkey + " | " + app + " | " + command
   rescue SQLite3::Exception => e
     # db.execute("INSERT INTO Hotkeys (Hotkey, Command, App, Context) VALUES (?, ?, ?, ?, ?, ?, ?),
+    puts "Exception ocurred: #{e}"
   ensure
     db&.close if db
   end
