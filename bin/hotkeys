@@ -19,15 +19,18 @@ class Hotkeys < Thor
   def add(hotkey = nil)
     if hotkey.nil?
       puts 'What is the hotkey combo? '
-      hotkey = $stdin.read
+      hotkey = $stdin.readline.strip
     end
     if options[:app].nil?
       puts "What app is this hotkey (#{hotkey}) for?"
+      app = $stdin.readline.strip
     else
-      app = options[:app] # gets.strip
+      app = options[:app]
     end
     puts "What command function is this hotkey (#{hotkey}) in the application (#{app}) for?"
+    command = $stdin.readline.strip
     # db_add(hotkey, "Command function", "App")
+    puts "This hotkey (#{hotkey}) doing this command (#{command}) in the application (#{app})"
   end
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
@@ -84,6 +87,8 @@ class Hotkeys < Thor
   ensure
     db&.close if db
   end
+
+  # def user_input(prompt = nil)
   # class ends
 end
 
