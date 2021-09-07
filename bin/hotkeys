@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'fileutils'
 require 'thor'
 require 'sqlite3'
-require 'fileutils'
 
 # This program/class is for keeping note of various of hotkey combinations in different systems.
 class Hotkeys < Thor
@@ -17,6 +17,7 @@ class Hotkeys < Thor
     `hotkeys add` will add a new hotkey command to the database.
   LONGDESC
   def add(hotkey = nil)
+    FileUtils.cd(options[:path]) unless options[:path].nil?
     hotkey = collect_input 'What is the hotkey combo you want to add?' if hotkey.nil?
     app = options[:app]
     app = collect_input "What app is this hotkey (#{hotkey}) for?" if app.nil?
@@ -54,11 +55,11 @@ class Hotkeys < Thor
   private
 
   def db_insert(hkey, cmd, app)
-    puts "ADD: #{hkey} | #{app} | #{cmd}"
     SQLite3::Database.new('hotkeys.db') do |db|
       db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
       db.execute "INSERT INTO Hotkeys (Hkey, Cmd, App, Context) VALUES ('#{hkey}', '#{cmd}', '#{app}', '#{RUBY_PLATFORM}')"
     end
+    puts "ADD: #{hkey} | #{app} | #{cmd}"
   end
 
   def db_path
@@ -81,5 +82,4 @@ class Hotkeys < Thor
   end
 end
 
-FileUtils.cd(`asetus dir:db`)
 Hotkeys.start(ARGV)
