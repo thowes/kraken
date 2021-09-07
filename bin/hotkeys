@@ -16,7 +16,7 @@ class Hotkeys < Thor
   LONGDESC
   def add
     db = SQLite3::Database.new(path)
-    # db.execute(INSERT)
+    # db.execute "INSERT INTO Hotkeys (Mod1, Mod2, Mod3, Key, Function, App, OS) VALUES (?, ?, ?, ?, ?, ?, ?),
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
   ensure
@@ -29,7 +29,7 @@ class Hotkeys < Thor
   LONGDESC
   def search
     db = SQLite3::Database.new(path)
-    # db.execute(SELECT * FROM Hotkeys)
+    # db.execute "SELECT * FROM Hotkeys WHERE App=?"
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
   ensure
@@ -42,6 +42,7 @@ class Hotkeys < Thor
   LONGDESC
   def edit
     db = SQLite3::Database.new(path)
+    # db.execute "UPDATE Hotkeys SET Function=? WHERE id=?", 1, new_text
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
   ensure
@@ -49,6 +50,8 @@ class Hotkeys < Thor
   end
 
   private
+  # def db_add(mod1, mod2, mod3, key, app, function, os=nil)
+  # end
 
   def path
     db_file_path = "#{`asetus dir:db`.strip}/hotkeys.db"
