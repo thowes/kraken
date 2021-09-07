@@ -8,20 +8,24 @@ require 'fileutils'
 # This program/class is for keeping note of various of hotkey combinations in different systems.
 class Hotkeys < Thor
   class_option :verbose, type: :boolean, desc: 'use verbose mode.'
+  class_option :app, desc: 'define application for the hotkey.'
   # :verbose, type: :boolean, desc: 'use verbose mode.'
-  # :os, type: :string, desc: 'define operating system context.'
+  class_option :os, desc: 'define operating system context.'
 
   desc 'add [COMMAND]', 'add a new hotkey command to the database.'
   long_desc <<-LONGDESC
     `hotkeys add` will add a new hotkey command to the database.
   LONGDESC
-  def add(hotkey=nil)
+  def add(hotkey = nil)
     if hotkey.nil?
       puts 'What is the hotkey combo? '
-      hotkey = gets
+      hotkey = gets.strip
     end
+    if options[:app].nil?
     puts "What app is this hotkey (#{hotkey}) for?"
+    else
     app = "App" # gets.strip
+    end
     # db_add(hotkey, "Command function", "App")
   end
 
@@ -73,7 +77,6 @@ class Hotkeys < Thor
   def create_db(db_file_path)
     File.touch(db_file_path)
     db = SQLite3::Database.new(db_file_path)
-        #Id INTEGER PRIMARY KEY,
      # );
     db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)'
   rescue SQLite3::Exception => e
