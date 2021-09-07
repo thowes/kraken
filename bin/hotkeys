@@ -17,9 +17,10 @@ class Hotkeys < Thor
   LONGDESC
   def add(hotkey=nil)
     if hotkey.nil?
+      puts 'What is the hotkey combo? '
       hotkey = gets
     end
-    puts "HK: " + hotkey
+    puts "What app is this hotkey (#{hotkey}) for?"
     # db_add(hotkey, "Command function", "App")
   end
 
@@ -72,14 +73,11 @@ class Hotkeys < Thor
     File.touch(db_file_path)
     db = SQLite3::Database.new(db_file_path)
     # db.execute <<-SQL
-      #CREATE TABLE Hotkeys(
         #Id INTEGER PRIMARY KEY,
-        #Hotkey TEXT,
         #Command TEXT,
-        #App TEXT, Function TEXT, Operating_system VARCHAR(10)
      # );
     #SQL
-    db.execute "CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)"
+    db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)'
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
   ensure
