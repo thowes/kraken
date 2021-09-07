@@ -21,6 +21,7 @@ class Hotkeys < Thor
       hotkey = gets
     end
     puts "What app is this hotkey (#{hotkey}) for?"
+    app = "App" # gets.strip
     # db_add(hotkey, "Command function", "App")
   end
 
@@ -54,7 +55,7 @@ class Hotkeys < Thor
 
   def db_add(hotkey, app, command)
     db = SQLite3::Database.open(path)
-    puts "ADD: " + hotkey + " | " + app + " | " + command
+    puts "ADD: #{hotkey} | #{app} | #{command}"
     # db.execute("INSERT INTO Hotkeys (Hotkey, Command, App, Context) VALUES (?, ?, ?, ?, ?, ?, ?),
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
@@ -64,7 +65,7 @@ class Hotkeys < Thor
 
   def path
     db_file_path = "#{`asetus dir:db`.strip}/hotkeys.db"
-    puts "HOTKEYS: #{db_file_path}" if options[:verbose]
+    puts "DB: #{db_file_path}" # if options[:verbose]
     create_db(db_file_path) unless File.exist?(db_file_path)
     db_file_path
   end
@@ -72,11 +73,8 @@ class Hotkeys < Thor
   def create_db(db_file_path)
     File.touch(db_file_path)
     db = SQLite3::Database.new(db_file_path)
-    # db.execute <<-SQL
         #Id INTEGER PRIMARY KEY,
-        #Command TEXT,
      # );
-    #SQL
     db.execute 'CREATE TABLE Hotkeys(Id INTEGER PRIMARY KEY, Hotkey TEXT, Command TEXT, App TEXT, Context TEXT)'
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
