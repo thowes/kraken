@@ -17,9 +17,7 @@ class Hotkeys < Thor
     `hotkeys add` will add a new hotkey command to the database.
   LONGDESC
   def add(hotkey = nil)
-      puts 'What is the hotkey combo? '
     hotkey = user_input 'What is the hotkey combo?' if hotkey.nil?
-    end
     if options[:app].nil?
       app = user_input "What app is this hotkey (#{hotkey}) for?"
     else
@@ -86,7 +84,7 @@ class Hotkeys < Thor
   end
 
   def user_input(prompt = nil)
-  # puts prompt
+    puts prompt
   end
 end
 
