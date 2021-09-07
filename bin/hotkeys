@@ -59,11 +59,12 @@ class Hotkeys < Thor
       db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
       db.execute "INSERT INTO Hotkeys (Hkey, Cmd, App, Context) VALUES ('#{hkey}', '#{cmd}', '#{app}', '#{RUBY_PLATFORM}')"
     end
-    puts "DB: #{path}" # if options[:verbose]
   end
 
   def db_path
-    File.expand_path(`asetus dir:db`) + "/hotkeys.db"
+    path = File.expand_path(`asetus dir:db`) + "/hotkeys.db"
+    puts "DB: #{path}" # if options[:verbose]
+    path
   end
 
   def db_create(path)
