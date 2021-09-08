@@ -64,11 +64,10 @@ class Hotkeys < Thor
   end
 
   def db_select(path)
-    FileUtils.touch(path) unless File.exist?(path)
     SQLite3::Database.open(db_filename) do |db|
-    db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
+      db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
     # db.execute "SELECT * FROM Hotkeys WHERE App=?"
-    puts "Exception ocurred: #{e}"
+      puts "Exception ocurred: #{app}"
     end
   end
 
