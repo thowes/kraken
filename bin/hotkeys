@@ -31,11 +31,9 @@ class Hotkeys < Thor
     `hotkeys search` will search hotkey commands from the database.
   LONGDESC
   def search(hotkey = nil, app = nil)
-    db = SQLite3::Database.new(path)
     FileUtils.cd(options[:path]) unless options[:path].nil?
-    # db.execute "SELECT * FROM Hotkeys WHERE App=?"
     puts "Exception ocurred: #{e}"
-    db&.close if db
+    db_insert(hotkey, app, command, os)
   end
 
   desc 'edit [COMMAND]', 'edit a hotkey command from the database.'
@@ -57,8 +55,8 @@ class Hotkeys < Thor
     SQLite3::Database.new(db_filename) do |db|
       db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
       db.execute "INSERT INTO Hotkeys (Hkey, Cmd, App, Context) VALUES ('#{hkey}', '#{cmd}', '#{app}', '#{RUBY_PLATFORM}')"
-    end
     puts "ADD: #{hkey} | #{app} | #{cmd}"
+    end
   end
 
   def db_filename
@@ -67,11 +65,11 @@ class Hotkeys < Thor
 
   def db_select(path)
     FileUtils.touch(path) unless File.exist?(path)
-    SQLite3::Database.open(hotkeys.db) do |db|
+    SQLite3::Database.open(db_filename) do |db|
     db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
+    # db.execute "SELECT * FROM Hotkeys WHERE App=?"
     puts "Exception ocurred: #{e}"
     end
-    db&.close if db
   end
 
   def collect_input(prompt = nil)
