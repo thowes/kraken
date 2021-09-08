@@ -32,7 +32,7 @@ class Hotkeys < Thor
   LONGDESC
   def search(hotkey = nil, app = nil)
     FileUtils.cd(options[:path]) unless options[:path].nil?
-    puts "Exception ocurred: #{e}"
+    puts "Exception ocurred: #{app}"
     db_insert(hotkey, app, command, os)
   end
 
@@ -63,10 +63,10 @@ class Hotkeys < Thor
     'hotkeys.db'
   end
 
-  def db_select(path)
+  def db_select(hotkey = nil, app = nil)
     SQLite3::Database.open(db_filename) do |db|
       db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
-    # db.execute "SELECT * FROM Hotkeys WHERE App=?"
+      # db.execute "SELECT * FROM Hotkeys WHERE App=?"
       puts "Exception ocurred: #{app}"
     end
   end
