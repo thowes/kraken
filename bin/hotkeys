@@ -32,8 +32,9 @@ class Hotkeys < Thor
   LONGDESC
   def search(hotkey = nil, app = nil)
     FileUtils.cd(options[:path]) unless options[:path].nil?
+    app = collect_input 'What is the app you want to search hotkey combos for?' if options[:app].nil?
     hotkey = collect_input 'What is the hotkey combo you want to search for?' if hotkey.nil?
-    puts "Exception ocurred: #{app}"
+    puts "SEARCH: app: #{app}, hk: #{hotkey}"
     db_insert(hotkey, app, command, os)
   end
 
