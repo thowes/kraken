@@ -8,6 +8,7 @@ require 'sqlite3'
 # This program/class is for keeping note of various of hotkey combinations in different systems.
 class Hotkeys < Thor
   class_option :app, desc: 'define application for the hotkey.'
+  class_option :hk, desc: 'define operating system context.'
   class_option :os, desc: 'define operating system context.'
   class_option :path, desc: 'define the path for the hotkeys database.'
   class_option :verbose, type: :boolean, desc: 'use verbose mode.'
@@ -30,10 +31,11 @@ class Hotkeys < Thor
   long_desc <<-LONGDESC
     `hotkeys search` will search hotkey commands from the database.
   LONGDESC
-  def search(hotkey = nil, app = nil)
+  def search(search_word = nil)
     FileUtils.cd(options[:path]) unless options[:path].nil?
+    os = RUBY_PLATFORM if options[:app].nil?
     app = collect_input 'What is the app you want to search hotkey combos for?' if options[:app].nil?
-    hotkey = collect_input 'What is the hotkey combo you want to search for?' if hotkey.nil?
+    hotkey = collect_input 'What is the hotkey combo you want to search for?' if options[:hk].nil?
     puts "SEARCH: app: #{app}, hk: #{hotkey}"
     db_insert(hotkey, app, command, os)
   end
