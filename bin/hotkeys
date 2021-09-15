@@ -37,7 +37,7 @@ class Hotkeys < Thor
     app = collect_input 'What is the app you want to search hotkey combos for?' if options[:app].nil?
     hotkey = collect_input 'What is the hotkey combo you want to search for?' if options[:hk].nil?
     puts "SEARCH: app: #{app}, hk: #{hotkey}"
-    db_insert(hotkey, app, command, os)
+    db_select(hotkey, app, command, os)
   end
 
   desc 'edit [COMMAND]', 'edit a hotkey command from the database.'
@@ -67,7 +67,7 @@ class Hotkeys < Thor
     'hotkeys.db'
   end
 
-  def db_select(hotkey = nil, app = nil)
+  def db_select(hotkey = nil, app = nil, os = nil)
     SQLite3::Database.open(db_filename) do |db|
       db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
       # db.execute "SELECT * FROM Hotkeys WHERE App=?"
