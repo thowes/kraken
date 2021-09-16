@@ -34,9 +34,9 @@ class Hotkeys < Thor
   def search(search_word = nil)
     FileUtils.cd(options[:path]) unless options[:path].nil?
     os = options[:app] || RUBY_PLATFORM
-    app = collect_input 'What is the app you want to search hotkey combos for?' if options[:app].nil?
+    app = options[:app] || collect_input 'What is the app you want to search hotkey combos for?'
     hotkey = collect_input 'What is the hotkey combo you want to search for?' if options[:hk].nil?
-    puts "SEARCH: app: #{app}, hk: #{hotkey}"
+    puts "SEARCH: app: #{app}, hk: #{hotkey}, os: #{os}"
     db_select(hotkey, app, command, os)
   end
 
@@ -67,7 +67,7 @@ class Hotkeys < Thor
     'hotkeys.db'
   end
 
-  def db_select(hotkey = nil, app = nil, os = nil)
+  def db_select(hotkey = nil, app = nil, command = nil, os = nil)
     SQLite3::Database.open(db_filename) do |db|
       db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
       # db.execute "SELECT * FROM Hotkeys WHERE App=?"
