@@ -32,13 +32,14 @@ class Hotkeys < Thor
     `hotkeys default` will go the default command.
   LONGDESC
   def default(hotkey = nil)
+    FileUtils.cd(options[:path]) unless options[:path].nil?
     if hotkey.nil?
       search
-    elsif path == 'add'
+    elsif hotkey == 'add'
       add
-    elsif path == 'list'
+    elsif hotkey == 'list'
       # list
-    elsif path == 'search'
+    elsif hotkey == 'search'
       search
     else
       add(hotkey)
@@ -89,7 +90,7 @@ class Hotkeys < Thor
     puts "SELECT: #{app}, #{hotkey}, #{command}, #{os}"
     SQLite3::Database.open(db_filename) do |db|
       db.execute('SELECT * FROM Hotkeys') do |line|
-        puts line
+        p line
       end
     end
   end
