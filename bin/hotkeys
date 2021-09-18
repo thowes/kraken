@@ -22,8 +22,9 @@ class Hotkeys < Thor
     hotkey = collect_input 'What is the hotkey combo you want to add?' if hotkey.nil?
     app = options[:app]
     app = collect_input "What app is this hotkey (#{hotkey}) for?" if app.nil?
+    os = options[:app] || RUBY_PLATFORM
     command = collect_input "What command function is this hotkey (#{hotkey}) in the application (#{app}) for?"
-    db_insert(hotkey, command, app)
+    db_insert(hotkey, command, app, os)
     puts "This hotkey (#{hotkey}) doing this command (#{command}) in the application (#{app})"
   end
 
@@ -35,7 +36,7 @@ class Hotkeys < Thor
     FileUtils.cd(options[:path]) unless options[:path].nil?
     os = options[:os] || RUBY_PLATFORM
     app = options[:app] || collect_input('What is the app you want to search hotkey combos for?') || 'any'
-    hotkey = options[:hk] || collect_input 'What is the hotkey combo you want to search for?' || 'any'
+    hotkey = options[:hk] || collect_input('What is the hotkey combo you want to search for?') || 'any'
     puts "SEARCH: app: #{app}, hk: #{hotkey}, os: #{os}"
     # db_select(hotkey, app, command, os)
   end
@@ -55,10 +56,10 @@ class Hotkeys < Thor
 
   private
 
-  def db_insert(hkey, cmd, app)
+  def db_insert(hkey, cmd, app, os)
     SQLite3::Database.new(db_filename) do |db|
       db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
-      db.execute "INSERT INTO Hotkeys (Hkey, Cmd, App, Context) VALUES ('#{hkey}', '#{cmd}', '#{app}', '#{RUBY_PLATFORM}')"
+      db.execute "INSERT INTO Hotkeys (Hkey, Cmd, App, Context) VALUES ('#{hkey}', '#{cmd}', '#{app}', '#{os}')"
     puts "ADD: #{hkey} | #{app} | #{cmd}"
     end
   end
@@ -69,9 +70,8 @@ class Hotkeys < Thor
 
   def db_select(hotkey = nil, app = nil, command = nil, os = nil)
     SQLite3::Database.open(db_filename) do |db|
-      db.execute 'CREATE TABLE IF NOT EXISTS Hotkeys(Id INTEGER PRIMARY KEY, Hkey TEXT, Cmd TEXT, App TEXT, Context TEXT)'
       # db.execute "SELECT * FROM Hotkeys WHERE App=?"
-      puts "Exception ocurred: #{app}"
+      puts "SEARCH: #{app}, #{hotkey}, #{command}, #{os}"
     end
   end
 
