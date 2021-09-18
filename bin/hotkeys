@@ -13,7 +13,7 @@ class Hotkeys < Thor
   class_option :path, desc: 'define the path for the hotkeys database.'
   class_option :verbose, type: :boolean, desc: 'use verbose mode.'
 
-  desc 'add [COMMAND]', 'add a new hotkey command to the database.'
+  desc 'add [HOTKEY]', 'add a new hotkey command to the database.'
   long_desc <<-LONGDESC
     `hotkeys add` will add a new hotkey command to the database.
   LONGDESC
@@ -26,13 +26,18 @@ class Hotkeys < Thor
     db_insert(hotkey, command, app, os)
     puts "This hotkey (#{hotkey}) doing this command (#{command}) in the application (#{app})"
   end
+
+  desc 'default [HOTKEY/COMMAND]', 'the default command.'
+  long_desc <<-LONGDESC
+    `hotkeys default` will go the default command.
+  LONGDESC
   def default(hotkey = nil)
     if hotkey.nil?
       search
     elsif path == 'add'
       add
     elsif path == 'list'
-      #
+      # list
     elsif path == 'search'
       search
     else
@@ -83,7 +88,7 @@ class Hotkeys < Thor
   def db_select(hotkey, app, command, os)
     puts "SELECT: #{app}, #{hotkey}, #{command}, #{os}"
     SQLite3::Database.open(db_filename) do |db|
-      db.execute("SELECT * FROM Hotkeys") do |line|
+      db.execute('SELECT * FROM Hotkeys') do |line|
         puts line
       end
     end
