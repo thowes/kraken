@@ -36,9 +36,8 @@ class Hotkeys < Thor
     os = options[:os] || RUBY_PLATFORM
     app = options[:app] || collect_input('What is the app you want to search hotkey combos for?') || 'any'
     hotkey = options[:hk] || collect_input('What is the hotkey combo you want to search for?') || 'any'
-    command = ''
     puts "SEARCH: app: #{app}, hk: #{hotkey}, os: #{os}"
-    # db_select(hotkey, app, command, os)
+    # db_select(hotkey, app, 'any', os)
   end
 
   desc 'edit [COMMAND]', 'edit a hotkey command from the database.'
@@ -69,9 +68,9 @@ class Hotkeys < Thor
   end
 
   def db_select(hotkey = nil, app = nil, command = nil, os = nil)
-      puts "SEARCH: #{app}, #{hotkey}, #{command}, #{os}"
+    puts "SEARCH: #{app}, #{hotkey}, #{command}, #{os}"
     SQLite3::Database.open(db_filename) do |db|
-      db.execute('SELECT * FROM Hotkeys') do |line| # {}WHERE App=?"
+      db.execute('SELECT * FROM Hotkeys').each do |line| # {}WHERE App=?"
         puts line
       end
     end
