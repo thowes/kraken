@@ -31,11 +31,12 @@ class Hotkeys < Thor
   long_desc <<-LONGDESC
     `hotkeys search` will search hotkey commands from the database.
   LONGDESC
-  def search(search_word = nil)
+  def search(_search_word = nil)
     FileUtils.cd(options[:path]) unless options[:path].nil?
     os = options[:os] || RUBY_PLATFORM
     app = options[:app] || collect_input('What is the app you want to search hotkey combos for?') || 'any'
     hotkey = options[:hk] || collect_input('What is the hotkey combo you want to search for?') || 'any'
+    command = ''
     puts "SEARCH: app: #{app}, hk: #{hotkey}, os: #{os}"
     # db_select(hotkey, app, command, os)
   end
@@ -68,9 +69,9 @@ class Hotkeys < Thor
   end
 
   def db_select(hotkey = nil, app = nil, command = nil, os = nil)
+      puts "SEARCH: #{app}, #{hotkey}, #{command}, #{os}"
     SQLite3::Database.open(db_filename) do |db|
       db.execute('SELECT * FROM Hotkeys') do |line| # {}WHERE App=?"
-      puts "SEARCH: #{app}, #{hotkey}, #{command}, #{os}"
         puts line
       end
     end
