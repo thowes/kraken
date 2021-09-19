@@ -70,7 +70,9 @@ class Hotkeys < Thor
   end
 
   private
+  def db_filename
   # 'hotkeys.db'
+  end
 
   def db_insert(hkey, cmd, app, os)
     SQLite3::Database.new(db_filename) do |db|
@@ -81,9 +83,7 @@ class Hotkeys < Thor
     end
   end
 
-  def db_filename
     # 'hotkeys.db'
-  end
 
   def db_select(hotkey, app, command, os)
     puts "SELECT: #{app}, #{hotkey}, #{command}, #{os}"
