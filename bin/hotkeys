@@ -86,8 +86,9 @@ class Hotkeys < Thor
 
   def db_select(hotkey, app, command, os)
     puts "SELECT: #{app}, #{hotkey}, #{command}, #{os}"
+    select_line = 'SELECT * FROM Hotkeys'
     SQLite3::Database.open(db_filename) do |db|
-      db.execute('SELECT * FROM Hotkeys') do |line|
+      db.execute(select_line) do |line|
         p line
       end
     end
