@@ -83,7 +83,6 @@ class Hotkeys < Thor
       puts "ADD: #{hkey} | #{app} | #{cmd}"
     end
   end
-    # 'hotkeys.db'
 
   def db_select(hotkey, app, command, os)
     puts "SELECT: #{app}, #{hotkey}, #{command}, #{os}"
