@@ -49,7 +49,9 @@ class Hotkeys < Thor
     db = SQLite3::Database.new(path)
     # db.execute "UPDATE Hotkeys SET Function=? WHERE id=?", 1, new_text
   rescue SQLite3::Exception => e
+    puts "Exception ocurred: #{e}"
   ensure
+  end
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
   long_desc <<-LONGDESC
@@ -64,9 +66,7 @@ class Hotkeys < Thor
     db_select(hotkey, app, 'any', os)
   end
 
-    puts "Exception ocurred: #{e}"
     db&.close if db
-  end
 
   # def list
   # todo:list
