@@ -40,6 +40,7 @@ class Hotkeys < Thor
       add(hotkey)
     end
   end
+  desc 'edit [COMMAND]', 'edit a hotkey command from the database.'
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
   long_desc <<-LONGDESC
@@ -54,7 +55,6 @@ class Hotkeys < Thor
     db_select(hotkey, app, 'any', os)
   end
 
-  desc 'edit [COMMAND]', 'edit a hotkey command from the database.'
   long_desc <<-LONGDESC
     `hotkeys edit` will start the edit command to change a hotkey command from the database.
   LONGDESC
@@ -66,6 +66,7 @@ class Hotkeys < Thor
   ensure
     db&.close if db
   end
+  # def list
 
   private
 
