@@ -67,7 +67,6 @@ class Hotkeys < Thor
     db_select(hotkey, app, 'any', os)
   end
 
-
   # def list
   # todo:list
   # end
