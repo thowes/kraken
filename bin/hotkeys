@@ -45,7 +45,9 @@ class Hotkeys < Thor
   long_desc <<-LONGDESC
     `hotkeys edit` will start the edit command to change a hotkey command from the database.
   LONGDESC
+  def edit
     # db.execute "UPDATE Hotkeys SET Function=? WHERE id=?", 1, new_text
+  rescue SQLite3::Exception => e
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
   long_desc <<-LONGDESC
@@ -60,9 +62,7 @@ class Hotkeys < Thor
     db_select(hotkey, app, 'any', os)
   end
 
-  def edit
     db = SQLite3::Database.new(path)
-  rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
   ensure
     db&.close if db
