@@ -51,6 +51,7 @@ class Hotkeys < Thor
   rescue SQLite3::Exception => e
     puts "Exception ocurred: #{e}"
   ensure
+    db&.close if db
   end
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
@@ -66,7 +67,6 @@ class Hotkeys < Thor
     db_select(hotkey, app, 'any', os)
   end
 
-    db&.close if db
 
   # def list
   # todo:list
