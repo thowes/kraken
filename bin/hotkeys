@@ -53,12 +53,13 @@ class Hotkeys < Thor
   ensure
     db&.close if db
   end
+
   desc 'list [APP]', 'list hotkey commands from the database.'
   long_desc <<-LONGDESC
     `hotkeys list` will list hotkey commands from the database.
   LONGDESC
   def list
-    #
+    FileUtils.cd(options[:path]) unless options[:path].nil?
   end
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
@@ -73,9 +74,7 @@ class Hotkeys < Thor
     puts "SEARCH: app: #{app}, hk: #{hotkey}, os: #{os}"
     db_select(hotkey, app, 'any', os)
   end
-
   # todo:list
-
   private
 
   def db_filename
