@@ -60,6 +60,7 @@ class Hotkeys < Thor
   LONGDESC
   def list
     FileUtils.cd(options[:path]) unless options[:path].nil?
+    os = options[:os] || RUBY_PLATFORM
   end
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
@@ -74,7 +75,7 @@ class Hotkeys < Thor
     puts "SEARCH: app: #{app}, hk: #{hotkey}, os: #{os}"
     db_select(hotkey, app, 'any', os)
   end
-  # todo:list
+
   private
 
   def db_filename
