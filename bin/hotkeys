@@ -61,6 +61,7 @@ class Hotkeys < Thor
   def list
     FileUtils.cd(options[:path]) unless options[:path].nil?
     os = options[:os] || RUBY_PLATFORM
+    app = options[:app]
   end
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
