@@ -61,7 +61,6 @@ class Hotkeys < Thor
   def list(*)
     FileUtils.cd(options[:path]) unless options[:path].nil?
     os = options[:os] || RUBY_PLATFORM
-    app = options[:app]
     db_select(options[:hk], options[:app], 'any', os)
   end
 
