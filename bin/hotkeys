@@ -58,10 +58,11 @@ class Hotkeys < Thor
   long_desc <<-LONGDESC
     `hotkeys list` will list hotkey commands from the database.
   LONGDESC
-  def list
+  def list(*)
     FileUtils.cd(options[:path]) unless options[:path].nil?
     os = options[:os] || RUBY_PLATFORM
     app = options[:app]
+    db_select(options[:hk], options[:app], 'any', os)
   end
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
