@@ -92,11 +92,11 @@ class Hotkeys < Thor
     end
   end
 
-  def db_select(hotkey, app, command, os)
+  def db_select(hkey, app, cmd, os)
     puts "SELECT: #{app}, #{hkey}, #{cmd}, #{os}"
-    select_line = 'SELECT * FROM Hotkeys' if hotkey.nil? && app.nil? && command.nil?
+    select_line = 'SELECT * FROM Hotkeys' if hkey.nil? && app.nil? && cmd.nil?
     select_line = 'SELECT * FROM Hotkeys' if app.not_nil? && hkey.nil? && cmd.nil? # WHERE App=?, app
-    select_line = 'SELECT * FROM Hotkeys' unless hotkey.nil? # WHERE Hkey=?, app
+    select_line = 'SELECT * FROM Hotkeys' unless hkey.nil? # WHERE Hkey=?, app
     SQLite3::Database.open(db_filename) do |db|
       db.execute(select_line) do |line|
         p line
