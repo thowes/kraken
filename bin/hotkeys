@@ -61,7 +61,7 @@ class Hotkeys < Thor
   def list(*)
     FileUtils.cd(options[:path]) unless options[:path].nil?
     os = options[:os] || RUBY_PLATFORM
-    db_select(options[:hk], options[:app], 'any', os)
+    db_select(options[:hk], 'any', options[:app], os)
   end
 
   desc 'search [COMMAND]', 'search hotkey commands from database.'
@@ -74,7 +74,7 @@ class Hotkeys < Thor
     app = options[:app] || collect_input('What is the app you want to search hotkey combos for?')
     hotkey = options[:hk] || collect_input('What is the hotkey combo you want to search for?')
     puts "SEARCH: app: #{app}, hk: #{hotkey}, os: #{os}"
-    db_select(hotkey, app, 'any', os)
+    db_select(hotkey, 'any', app, os)
   end
 
   private
@@ -92,7 +92,7 @@ class Hotkeys < Thor
     end
   end
 
-  def db_select(hkey, app, cmd, os)
+  def db_select(hkey, cmd, app, os)
     puts "SELECT: #{app}, #{hkey}, #{cmd}, #{os}"
     select_line = 'SELECT * FROM Hotkeys' if hkey.nil? && app.nil? && cmd.nil?
     select_line = 'SELECT * FROM Hotkeys' if app.not_nil? && hkey.nil? && cmd.nil? # WHERE App=?, app
