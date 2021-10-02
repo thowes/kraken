@@ -32,10 +32,12 @@ class Hotkeys < Thor
     `hotkeys default` will go the default command.
   LONGDESC
   def default(hotkey = nil)
-    if hotkey.nil? || hotkey == 'list' || hotkey == 'search'
+    if hotkey.nil? || hotkey == 'find' || hotkey == 'search'
       search
     elsif hotkey == 'add'
       add
+    elsif hotkey == 'list'
+      list
     else
       add(hotkey)
     end
