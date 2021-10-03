@@ -107,7 +107,7 @@ class Hotkeys < Thor
   end
 
   def collect_input(prompt = nil)
-    puts prompt
+    puts prompt unless prompt.nil?
     $stdin.readline.strip
   end
 end
