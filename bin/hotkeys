@@ -93,6 +93,7 @@ class Hotkeys < Thor
       puts "ADD: #{hkey} | #{app} | #{cmd}"
     end
   end
+  # def db_safe
 
   def db_select(hkey, cmd, app, os)
     puts "SELECT: #{app}, #{hkey}, #{cmd}, #{os}"
@@ -103,7 +104,7 @@ class Hotkeys < Thor
           p line
         end
       else
-      select_line = "SELECT * FROM Hotkeys WHERE Cmd=?, #{cmd}" unless cmd.nil?
+        select_line = "SELECT * FROM Hotkeys WHERE Cmd=?, #{cmd}" unless cmd.nil?
         select_line = "SELECT * FROM Hotkeys  WHERE App=?, #{app}" unless app.nil?
         select_line = "SELECT * FROM Hotkeys WHERE Hkey=?, #{hkey}" unless hkey.nil?
       end
@@ -115,7 +116,6 @@ class Hotkeys < Thor
     $stdin.readline.strip
   end
 
-  # def db_safe
   # test/edit/stuff
   # end
 end
