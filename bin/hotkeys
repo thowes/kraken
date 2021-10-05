@@ -95,6 +95,7 @@ class Hotkeys < Thor
   end
   
   # def db_safe
+  # test/edit/stuff
   # end
 
   def db_select(hkey, cmd, app, os)
@@ -118,7 +119,6 @@ class Hotkeys < Thor
     $stdin.readline.strip
   end
 
-  # test/edit/stuff
 end
 
 Hotkeys.start(ARGV)
