@@ -93,7 +93,7 @@ class Hotkeys < Thor
       puts "ADD: #{hkey} | #{app} | #{cmd}"
     end
   end
-  
+
   # def db_safe
   # test/edit/stuff
   # end
@@ -118,7 +118,6 @@ class Hotkeys < Thor
     puts prompt unless prompt.nil?
     $stdin.readline.strip
   end
-
 end
 
 Hotkeys.start(ARGV)
