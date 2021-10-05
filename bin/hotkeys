@@ -93,7 +93,9 @@ class Hotkeys < Thor
       puts "ADD: #{hkey} | #{app} | #{cmd}"
     end
   end
+  
   # def db_safe
+  # end
 
   def db_select(hkey, cmd, app, os)
     puts "SELECT: #{app}, #{hkey}, #{cmd}, #{os}"
@@ -117,7 +119,6 @@ class Hotkeys < Thor
   end
 
   # test/edit/stuff
-  # end
 end
 
 Hotkeys.start(ARGV)
