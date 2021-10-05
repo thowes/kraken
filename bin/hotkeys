@@ -100,11 +100,13 @@ class Hotkeys < Thor
     select_line = 'SELECT * FROM Hotkeys' unless app.nil? # WHERE App=?, app
     select_line = 'SELECT * FROM Hotkeys' unless hkey.nil? # WHERE Hkey=?, app
     select_line = 'SELECT * FROM Hotkeys' unless cmd.nil? # WHERE Cmd=?, cmd
+    # if hkey.nil? && app.nil? && cmd.nil?
     SQLite3::Database.open(db_filename) do |db|
-      db.execute(select_line) do |line|
+        db.execute(select_line) do |line|
         p line
-      end
+        end
     end
+    # end
   end
 
   def collect_input(prompt = nil)
