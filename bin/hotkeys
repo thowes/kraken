@@ -81,6 +81,7 @@ class Hotkeys < Thor
 
   private
   def collect_input(prompt = nil)
+    $stdin.readline.strip
 
   def db_filename
     'hotkeys.db'
@@ -116,7 +117,6 @@ class Hotkeys < Thor
   end
 
     puts prompt unless prompt.nil?
-    $stdin.readline.strip
   end
 end
 
