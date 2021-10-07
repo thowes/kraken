@@ -114,7 +114,7 @@ class Hotkeys < Thor
         db.execute(select_line) do |line|
           p line
         end
-      else
+      # else
       end
     end
   end
