@@ -101,9 +101,9 @@ class Hotkeys < Thor
     end
   end
 
-  # def db_safe
+  def db_safe
   # test/edit/stuff
-  # end
+  end
 
   def db_select(hkey, cmd, app, os)
     puts "SELECT: #{app}, #{hkey}, #{cmd}, #{os}"
