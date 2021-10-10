@@ -102,7 +102,7 @@ class Hotkeys < Thor
   end
 
   def db_safe
-  # test/edit/stuff
+    # test/edit/stuff
   end
 
   def db_select(hkey, cmd, app, os)
