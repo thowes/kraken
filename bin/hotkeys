@@ -101,7 +101,7 @@ class Hotkeys < Thor
     end
   end
 
-  def db_safe
+  def db_safe(input_string)
     # test/edit/stuff
   end
 
