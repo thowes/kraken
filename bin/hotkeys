@@ -36,7 +36,7 @@ class Hotkeys < Thor
       search
     elsif hotkey == 'add'
       add
-    elsif hotkey == 'list'
+    elsif hotkey == 'list' || hotkey == 'playlist'
       list
     else
       add(hotkey)
