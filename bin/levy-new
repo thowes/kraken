@@ -9,10 +9,11 @@ class Levy < Thor
   class_option :letter, desc: 'define the drive letter.'
 
   def berg
-    # stuff that happens inside berg
+    # stuff that happens inside berg command.
   end
 
 	private
+
 end
 
 Levy.start(ARGV)
