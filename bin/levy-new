@@ -4,7 +4,7 @@
 require 'thor'
 # For mounting disks and related issues in nix-based cmdl systems.
 class Levy < Thor
-	# def berg
+	def berg
 	# stuff that happens inside berg
-	# end
+	end
 end
