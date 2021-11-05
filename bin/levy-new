@@ -2,13 +2,16 @@
 # frozen_string_literal: true
 
 require 'thor'
+# require 'fileutils'
 
-# For mounting disks and related issues in nix-based cmdl systems.
+# For mounting disks and related issues in nix-based cmdl systems. Run as 'sudo'.
 class Levy < Thor
+  class_option :letter, desc: 'define the drive letter.'
 
 	def berg
     # stuff that happens inside berg
 	end
 
 end
+
 Levy.start(ARGV)
