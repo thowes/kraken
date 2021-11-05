@@ -2,9 +2,13 @@
 # frozen_string_literal: true
 
 require 'thor'
+
 # For mounting disks and related issues in nix-based cmdl systems.
 class Levy < Thor
+
 	def berg
-	# stuff that happens inside berg
+    # stuff that happens inside berg
 	end
+
 end
+Levy.start(ARGV)
