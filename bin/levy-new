@@ -8,6 +8,7 @@ require 'thor'
 class Levy < Thor
   class_option :letter, desc: 'define the drive letter.'
 
+  desc 'berg LETTER', 'mount LETTER'
   def berg
     # stuff that happens inside berg command.
   end
