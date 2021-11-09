@@ -8,14 +8,18 @@ require 'thor'
 class Levy < Thor
   class_option :letter, desc: 'define the drive letter.'
 
-  desc 'berg LETTER', 'mount LETTER'
+  desc 'berg LETTER', 'mount drive LETTER'
   long_desc <<-LONGDESC
     `levy berg` will mount drive to LETTER.
   LONGDESC
-  def berg
+  def berg(letter = nil)
     mnt_path = "/mnt/#{letter}"
     # stuff that happens inside berg command.
+    puts "sudo mount -t drvfs #{letter}: /mnt/#{letter}"
   end
+  # desc 'default LETTER', 'mount LETTER'
+  # def default
+  # end #
 
 	private
 
