@@ -4,12 +4,16 @@
 require 'thor'
 # require 'fileutils'
 
-# For mounting disks and related issues in nix-based cmdl systems. Run as 'sudo'.
+# For mounting disks and related issues in nix-based cmdl systems (WSL for now). Run as 'sudo'.
 class Levy < Thor
   class_option :letter, desc: 'define the drive letter.'
 
   desc 'berg LETTER', 'mount LETTER'
+  long_desc <<-LONGDESC
+    `levy berg` will mount drive to LETTER.
+  LONGDESC
   def berg
+    mnt_path = "/mnt/#{letter}"
     # stuff that happens inside berg command.
   end
 
