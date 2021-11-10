@@ -18,7 +18,7 @@ class Levy < Thor
     puts "sudo mount -t drvfs #{letter}: /mnt/#{letter}"
   end
 
-  # desc 'default LETTER', 'mount LETTER'
+  desc 'default LETTER', 'mount LETTER'
   # def default
   # default
   # end #
