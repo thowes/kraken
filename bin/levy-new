@@ -19,9 +19,9 @@ class Levy < Thor
   end
 
   desc 'default LETTER', 'mount LETTER'
-  # def default
+  def default
   # default
-  # end #
+  end #
 
 	private
 
