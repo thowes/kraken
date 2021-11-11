@@ -24,7 +24,7 @@ class Levy < Thor
   LONGDESC
   def default
     # default
-  end #
+  end
 
 	private
 
