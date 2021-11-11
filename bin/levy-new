@@ -19,8 +19,11 @@ class Levy < Thor
   end
 
   desc 'default LETTER', 'mount LETTER'
+  long_desc <<-LONGDESC
+    `levy default` default command.
+  LONGDESC
   def default
-  # default
+    # default
   end #
 
 	private
