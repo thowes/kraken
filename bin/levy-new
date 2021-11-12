@@ -14,8 +14,9 @@ class Levy < Thor
   LONGDESC
   def berg(letter = nil)
     mnt_path = "/mnt/#{letter}"
+    mnt_path = "/mnt/#{letter}" if RUBY_PLATFORM
     # stuff that happens inside berg command.
-    puts "sudo mount -t drvfs #{letter}: /mnt/#{letter}"
+    puts "sudo mount -t drvfs #{letter}: #{mnt_path}"
   end
 
   desc 'default LETTER', 'mount LETTER'
