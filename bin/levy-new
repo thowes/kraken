@@ -14,7 +14,7 @@ class Levy < Thor
   LONGDESC
   def berg(letter = nil)
     mnt_path = "/mnt/#{letter}"
-    mnt_path = "/mnt/#{letter}" if RUBY_PLATFORM
+    mnt_path = "/Volumes/#{letter}" if RUBY_PLATFORM.include?('darwin')
     # stuff that happens inside berg command.
     puts "sudo mount -t drvfs #{letter}: #{mnt_path}"
   end
@@ -27,8 +27,11 @@ class Levy < Thor
     # default
   end
 
-	private
+  private
 
+  def mount
+    # actions inside def mouny
+  end
 end
 
 Levy.start(ARGV)
