@@ -34,7 +34,7 @@ class Soita < Thor
     puts 'SOITA default' if options[:verbose]
     if path.nil?
       play
-    elsif path == 'list' || path == 'playlist'
+    elsif %w[list playlist].include?(path)
       list
     else
       add(path)
