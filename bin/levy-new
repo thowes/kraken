@@ -15,7 +15,7 @@ class Levy < Thor
   def berg(letter = nil)
     mnt_path = "/mnt/#{letter}" unless RUBY_PLATFORM.include?('darwin')
     mnt_path = "/Volumes/#{letter}" if RUBY_PLATFORM.include?('darwin')
-    mount(letter, mnt_path)
+    mount(mnt_path, letter)
     # stuff that happens inside berg command.
   end
 
@@ -29,7 +29,7 @@ class Levy < Thor
 
   private
 
-  def mount(letter, mnt_path)
+  def mount(mnt_path, letter = nil)
     # actions inside def mouny
     puts "sudo mount -t drvfs #{letter}: #{mnt_path}"
   end
