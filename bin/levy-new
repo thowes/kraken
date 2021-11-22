@@ -16,7 +16,6 @@ class Levy < Thor
     mnt_path = "/mnt/#{letter}" unless RUBY_PLATFORM.include?('darwin')
     mnt_path = "/Volumes/#{letter}" if RUBY_PLATFORM.include?('darwin')
     mount(mnt_path, letter)
-    # stuff that happens inside berg command.
   end
 
   desc 'default LETTER', 'mount LETTER'
