@@ -29,7 +29,7 @@ class Levy < Thor
   private
 
   def mount(mnt_path, letter = nil)
-    # actions inside def mouny
+    puts "sudo mount #{mnt_path}" if RUBY_PLATFORM.include?('darwin')
     puts "sudo mount -t drvfs #{letter}: #{mnt_path}" unless RUBY_PLATFORM.include?('darwin')
   end
 end
