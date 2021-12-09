@@ -26,6 +26,7 @@ class Levy < Thor
   LONGDESC
   def default(stuff = nil)
     # if letter.nil? 
+    # end
     if argument == 'berg'
       # default
     end
