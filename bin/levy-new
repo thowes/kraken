@@ -24,12 +24,14 @@ class Levy < Thor
   long_desc <<-LONGDESC
     `levy default` default command.
   LONGDESC
-  def default(letter = nil)
+  def default(letter = nil, a2 = nil)
     if letter.nil?
       # berg
     elsif letter == 'berg'
+      berg a2
     elsif letter == 'levy'
       # default
+    else
     end
   end
 
