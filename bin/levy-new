@@ -28,6 +28,7 @@ class Levy < Thor
     if letter.nil?
       # berg
     elsif letter == 'berg'
+    elsif letter == 'levy'
       # default
     end
   end
