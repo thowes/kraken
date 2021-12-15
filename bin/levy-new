@@ -27,7 +27,6 @@ class Levy < Thor
   def default(letter = nil)
     if letter.nil?
       # berg
-    end
     elsif letter == 'berg'
       # default
     end
