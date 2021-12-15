@@ -25,9 +25,9 @@ class Levy < Thor
     `levy default` default command.
   LONGDESC
   def default(letter = nil)
-    # if letter.nil? 
+    if letter.nil?
     # berg
-    # end
+    end
     if letter == 'berg'
       # default
     end
