@@ -32,6 +32,7 @@ class Levy < Thor
     elsif letter == 'levy'
       # default
     else
+      berg a1
     end
   end
 
