@@ -17,6 +17,8 @@ class Levy < Thor
     mnt_path = "/Volumes/#{letter}" if RUBY_PLATFORM.include?('darwin')
     if Dir.empty?(mnt_path)
       mount(mnt_path, letter)
+    else
+      puts "Directory not empty: /mnt/#{letter}/"
     end
   end
 
@@ -26,7 +28,7 @@ class Levy < Thor
   LONGDESC
   def default(a1 = nil, a2 = nil)
     if a1.nil?
-      # berg
+      berg 'b'
     elsif a1 == 'berg'
       berg a2
     elsif a1 == 'levy'
