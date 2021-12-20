@@ -29,7 +29,7 @@ class Levy < Thor
   def default(argu1 = nil, argu2 = nil)
     if argu1.nil?
       berg 'b'
-    elsif ( argu1 == 'berg' || argu1 == 'levy' ) && !argu2.nil?
+    elsif %w[berg levy].include?(argu1) && !argu2.nil?
       berg argu2
     elsif !argu1.nil?
       berg argu1
