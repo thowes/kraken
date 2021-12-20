@@ -31,7 +31,6 @@ class Levy < Thor
       berg 'b'
     elsif ( argu1 == 'berg' || argu1 == 'levy' ) && !argu2.nil?
       berg argu2
-      berg argu2
     elsif !argu1.nil?
       berg argu1
     else
