@@ -18,7 +18,7 @@ class Levy < Thor
     if Dir.empty?(mnt_path)
       mount(mnt_path, letter)
     else
-      puts "Directory not empty: /mnt/#{letter}/"
+      puts "Directory not empty: #{mnt_path}/"
     end
   end
 
