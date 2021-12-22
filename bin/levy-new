@@ -32,6 +32,7 @@ class Levy < Thor
     elsif %w[berg levy].include?(argu1) && !argu2.nil?
       berg argu2
     # elsif %w[umount unmount].include?(argu1) && !argu2.nil?
+    # unmount argu2
     elsif !argu1.nil?
       berg argu1
     else
@@ -46,9 +47,9 @@ class Levy < Thor
     system("sudo mount -t drvfs #{letter}: #{mnt_path}") unless RUBY_PLATFORM.include?('darwin')
   end
 
-  # def unmount
+  def unmount
   # system("sudo umount -v -t drvfs #{letter}: #{mnt_path}") unless RUBY_PLATFORM.include?('darwin')
-  # end
+  end
 end
 
 Levy.start(ARGV)
