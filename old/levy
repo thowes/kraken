@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+	virhe NO ATTR
+else
+	if [ -d /mnt/$1 ]; then
+		if [ -z "$(ls -A /mnt/$1)" ]; then
+			sudo mount -t drvfs $1: /mnt/$1
+		else
+			virhe ALREADY /mnt/$1
+		fi
+	else
+		sudo mkdir /mnt/$1
+		sudo mount -t drvfs $1: /mnt/$1
+	fi
+fi
+
