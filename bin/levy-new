@@ -15,9 +15,7 @@ class Levy < Thor
   def berg(letter = nil)
     mnt_path = "/mnt/#{letter}" unless RUBY_PLATFORM.include?('darwin')
     mnt_path = "/Volumes/#{letter}" if RUBY_PLATFORM.include?('darwin')
-    if Dir.empty?(mnt_path)
     mount(mnt_path, letter) if Dir.empty?(mnt_path)
-    end
   end
 
   desc 'default LETTER', 'mount LETTER'
