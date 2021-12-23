@@ -17,7 +17,6 @@ class Levy < Thor
     mnt_path = "/Volumes/#{letter}" if RUBY_PLATFORM.include?('darwin')
     if Dir.empty?(mnt_path)
       mount(mnt_path, letter)
-      # puts "Directory not empty: #{mnt_path}/"
     end
   end
 
