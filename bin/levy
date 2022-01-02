@@ -38,7 +38,7 @@ class Levy < Thor
 
   def mount(mnt_path, letter = nil)
     proc_version = nil
-    # if File.exist?('/proc/version')
+    # File.foreach("test.txt") { |each_line| puts each_line } if File.exist?('/proc/version')
     puts "sudo mount #{mnt_path}" if RUBY_PLATFORM.include?('darwin')
     system("sudo mount -t drvfs #{letter}: #{mnt_path}") unless RUBY_PLATFORM.include?('darwin')
   end
