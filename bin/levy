@@ -34,6 +34,7 @@ class Levy < Thor
     end
   end
 
+  desc 'umount LETTER', 'umount LETTER'
   # def umount
   # stuff
   # end
