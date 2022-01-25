@@ -45,7 +45,7 @@ class Levy < Thor
 
   def path(letter = nil)
     "/Volumes/#{letter}" if RUBY_PLATFORM.include?('darwin')
-    mnt_path = "/mnt/#{letter}" unless RUBY_PLATFORM.include?('darwin')
+    "/mnt/#{letter}" unless RUBY_PLATFORM.include?('darwin')
     # return mnt_path
   end
 
