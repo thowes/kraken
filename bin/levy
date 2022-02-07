@@ -46,6 +46,7 @@ class Levy < Thor
   def path(letter)
     path_return = "/mnt/#{letter}" unless RUBY_PLATFORM.include?('darwin')
     path_return = "/Volumes/#{letter}" if RUBY_PLATFORM.include?('darwin')
+    # rubocop thinks this return is unnecessary, but it isn't
     return path_return
   end
 
