@@ -13,7 +13,7 @@ class Levy < Thor
     `levy berg` will mount drive to LETTER.
   LONGDESC
   def berg(letter)
-    mnt_path = path letter # "/mnt/#{letter}" unless RUBY_PLATFORM.include?('darwin')
+    mnt_path = path letter
     mount(mnt_path, letter) if Dir.empty?(mnt_path)
   end
 
