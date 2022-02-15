@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require 'thor'
-# require 'fileutils'
 
 # For mounting disks and related issues in nix-based cmdl systems (only WSL for now).
 class Levy < Thor
