@@ -3,12 +3,12 @@
 KR_OUTPUT=false
 case $(uname -a) in
 	CYGWIN*|*Microsoft*)
+		#KR_APPCHECKER_RUNNING="$(ps aux | grep $1 | grep -v running | grep -v grep)"
 		KR_APPCHECKER_RUNNING="$(tasklist.exe | tr -s " " | grep $1)" # | awk '{print $1 " " $3}'
-		case $KR_APPCHECKER_RUNNING in
+		case "$KR_APPCHECKER_RUNNING" in
 			*Console*) KR_OUTPUT=true;;
 			*Session*) KR_OUTPUT=true;;
 			*Services*) KR_OUTPUT=true;;
-		#KR_APPCHECKER_RUNNING="$(ps aux | grep $1 | grep -v running | grep -v grep)"
 		#case "$KR_APPCHECKER_RUNNING" in
 		#*0*) KR_OUTPUT=true;;
 		#esac
