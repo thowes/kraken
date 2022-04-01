@@ -16,7 +16,6 @@ case $(uname -a) in
 				*Services*) KR_OUTPUT=true;;
 			esac
 		fi;;
-		;;
 	Darwin*)
 		KR_APPCHECKER_RUNNING="$(ps aux | grep $1 | grep -v running | grep -v grep)"
 		case $KR_APPCHECKER_RUNNING in
