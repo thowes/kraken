@@ -14,7 +14,7 @@ case $(uname -a) in
 				*Console*) KR_OUTPUT=true;;
 				*Session*) KR_OUTPUT=true;;
 				*Services*) KR_OUTPUT=true;;
-			esac;; # fi;;
+			esac;;
 		#fi;;
 	Darwin*)
 		KR_APPCHECKER_RUNNING="$(ps aux | grep $1 | grep -v running | grep -v grep)"
