@@ -1,7 +1,7 @@
 #!/bin/sh
 
 KR_OUTPUT=false
-case $(uname -a) in
+case "$(uname -a)" in
 	CYGWIN*|*Microsoft*)
 		KR_APPCHECKER_RUNNING="$(ps aux | grep $1 | grep -v running | grep -v grep)"
 		case "$KR_APPCHECKER_RUNNING" in
