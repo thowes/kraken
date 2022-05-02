@@ -9,7 +9,7 @@ require 'socket'
 # Loki here is named after the finnish word 'loki', meaning a log(file).
 class Loki < Thor
   class_option :path, desc: 'include directory PATH for backup.log.'
-  # class_option :verbose, boolean, desc: 'more ouput if verbose true.'
+  class_option :verbose, :type => :boolean, desc: 'print more ouput if verbose true.'
   option :project
   default_task :latest
 
@@ -26,7 +26,7 @@ class Loki < Thor
     File.open('backup.log', 'a+') do |f|
       f.puts line
     end
-    puts line # verbose
+    puts line # if options[:verbose]
   end
 
   desc 'latest PATH', 'print latest backup date for PATH.'
