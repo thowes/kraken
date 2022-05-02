@@ -26,7 +26,7 @@ class Loki < Thor
     File.open('backup.log', 'a+') do |f|
       f.puts line
     end
-    puts line # if options[:verbose]
+    puts line if options[:verbose]
   end
 
   desc 'latest PATH', 'print latest backup date for PATH.'
