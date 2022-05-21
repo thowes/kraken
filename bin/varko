@@ -3,8 +3,11 @@
 require 'fileutils'
 # require 'optparse'
 
+# def varko(path = nil)
 begin
+  FileUtils.cd(path) unless path.nil?
   #
+  system(loki add --path $DIR "$TIEDOSTO" $SUMMA)
 rescue File::Error => e
   puts e.message
 end
