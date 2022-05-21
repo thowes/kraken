@@ -2,3 +2,9 @@
 
 require 'fileutils'
 # require 'optparse'
+
+begin
+  #
+rescue File::Error => e
+  puts e.message
+end
