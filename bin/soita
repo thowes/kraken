@@ -104,8 +104,6 @@ class Soita < Thor
     end
     playlist_file
   end
-
-    # placeholder
 end
 
 Soita.start(ARGV)
