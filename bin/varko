@@ -5,6 +5,7 @@ require 'fileutils'
 
 # def varko(path = nil)
 begin
+  path = options[:path] || path
   FileUtils.cd(path) unless path.nil?
   #
   system(loki add --path $DIR "$TIEDOSTO" $SUMMA)
