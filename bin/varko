@@ -6,9 +6,11 @@ require 'fileutils'
 # def varko(path = nil)
 begin
   path = options[:path] || path
+  filename = options[:filename] || filename
   FileUtils.cd(path) unless path.nil?
-  #
+  # if SUMMA1 == SUMMA2 
   system(loki add --path $DIR "$TIEDOSTO" $SUMMA)
+  # fi
 rescue File::Error => e
   puts e.message
 end
