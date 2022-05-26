@@ -8,7 +8,7 @@ require 'sqlite3'
 # This program/class is for keeping note of various of hotkey combinations in different systems.
 class Hotkeys < Thor
   class_option :app, desc: 'define application for the hotkey.'
-  class_option :hk, desc: 'define operating system context.'
+  class_option :hk, desc: 'define the hotkey combination.'
   class_option :os, desc: 'define operating system context.'
   class_option :path, desc: 'define the path for the hotkeys database.'
   class_option :verbose, type: :boolean, desc: 'use verbose mode.'
@@ -36,6 +36,8 @@ class Hotkeys < Thor
       search
     elsif hotkey == 'add'
       add
+    elsif hotkey == 'help'
+      help
     elsif hotkey == 'list'
       list
     else
