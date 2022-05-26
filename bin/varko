@@ -10,9 +10,10 @@ begin
   FileUtils.cd(dir) unless dir.nil?
   #log_old = system("loki latest --path #{dir}")
   unless log_old.include?(Today) # check formatting for today 
-  # if SUMMA1 == SUMMA2 
+    if !log_old.include?(summa)
       system("loki add --path #{dir} #{filename} $SUMMA")
     system("tynnyri #{filename}")
+    end
   fi # if log_old.include?(summa)
 rescue File::Error => e
   puts e.message
