@@ -10,9 +10,10 @@ begin
   FileUtils.cd(dir) unless dir.nil?
   log_old = system("loki latest --path #{dir}")
   unless log_old.include?(Today) # check formatting for today 
+    buc = system('asetus dir:buc')
     summa = system("summa #{asetus dir:buc}/#{filename}.7z")
     if !log_old.include?(summa)
-      system("loki add --path #{dir} #{filename} $SUMMA")
+      system("loki add --path #{dir} #{filename} #{summa}")
       system("tynnyri #{filename}")
     end
   end
