@@ -17,13 +17,13 @@ begin
     temp = options[:temp] || system('asetus dir:temp')
     buc = system('asetus dir:buc')
     system("7z a #{dir} #{temp}/#{filename}.7z #{ignore}|tail -3|grep is") # tarkista
-    summa = system("summa #{buc}/#{filename}.7z")
+    summa = system("summa #{temp}/#{filename}.7z")
     if !log_old.include?(summa)
       system("mv #{temp}/#{filename}.7z #{buc}/#{filename}.cbc")
       system("loki add --path #{dir} #{filename} #{summa}")
       system("tynnyri #{filename}")
     end
-    #rm #{temp}/#{filename}.7z if FIle.exists("#{temp}/#{filename}.7z")
+    #rm #{temp}/#{filename}.7z if File.exists("#{temp}/#{filename}.7z")
   end
 rescue File::Error => e
   puts e.message
