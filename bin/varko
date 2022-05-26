@@ -8,13 +8,14 @@ begin
   dir = options[:dir] || dir
   filename = options[:filename] || filename
   FileUtils.cd(dir) unless dir.nil?
-  #log_old = system("loki latest --path #{dir}")
+  log_old = system("loki latest --path #{dir}")
   unless log_old.include?(Today) # check formatting for today 
+    summa = system("summa #{asetus dir:buc}/#{filename}.7z")
     if !log_old.include?(summa)
       system("loki add --path #{dir} #{filename} $SUMMA")
-    system("tynnyri #{filename}")
+      system("tynnyri #{filename}")
     end
-  fi # if log_old.include?(summa)
+  end
 rescue File::Error => e
   puts e.message
 end
