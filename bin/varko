@@ -3,15 +3,17 @@
 require 'fileutils'
 # require 'optparse'
 
+# not sure if all of this is proper code yet. work in progress
+
 # def varko(path = nil)
 begin
   dir = options[:dir] || dir
   filename = options[:filename] || filename
   FileUtils.cd(dir) unless dir.nil?
   log_old = system("loki latest --path #{dir}")
-  unless log_old.include?(Today) # check formatting for today 
+  if !log_old.include?(Today) # check formatting for today 
     buc = system('asetus dir:buc')
-    summa = system("summa #{asetus dir:buc}/#{filename}.7z")
+    summa = system("summa #{buc}/#{filename}.7z")
     if !log_old.include?(summa)
       system("loki add --path #{dir} #{filename} #{summa}")
       system("tynnyri #{filename}")
