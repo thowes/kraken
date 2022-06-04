@@ -17,14 +17,14 @@ if ARGV.length == 2
     pw = ENV['PW'] || options[:pw] || pw
     puts "7z a #{dir} #{temp}/#{file}.7z #{ignore}|tail -3|grep is" # tarkista
     summa = `summa #{temp}/#{file}.7z`.to_s if File.exist?("#{temp}/#{file}.7z")
-    # if !log_old.include?(summa)
+    if File.exist?("#{temp}/#{file}.7z") && !log_old.include?(summa)
       # system("mv #{temp}/#{filename}.7z #{buc}/#{filename}.cbc")
-      # system("loki add --path #{dir} #{filename} #{summa}")
+      system("loki add --path #{dir} #{file} #{summa}")
       system("tynnyri #{file}")
-    # end
+    end
     File.delete("#{temp}/#{file}.7z") if File.exist?("#{temp}/#{file}.7z")
   end
-# rescue File::Error => e
+rescue File::Error => e
   # puts e.message
 end
 
