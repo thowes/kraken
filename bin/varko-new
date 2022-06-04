@@ -6,17 +6,17 @@ require 'fileutils'
 # not sure if all of this is proper code yet. work in progress
 
 if ARGV.length == 2
-  dir = options[:dir] || ENV['DIR'] || ARGV[1] || dir
+  dir = options[:dir] || ENV['DIR'] || ARGV[1]
   FileUtils.cd(dir) unless dir.nil?
   log_old = system("loki latest --path #{dir}")
   puts log_old vs dir
-  if !log_old.include?(Today) # check formatting for today 
+  # if !log_old.include?(Today) # check formatting for today 
     # buc = system('asetus dir:buc')
-    filename = options[:filename] || ENV['FILE'] || ARGV[0] || filename
+    # filename = options[:filename] || ENV['FILE'] || ARGV[0] || filename
     ignore = options[:ignore] || ENV['IGNORE'] || ignore || "-x!*.DS_Store" # komennon parametri?
-    temp = options[:temp] || system('asetus dir:temp')
+    #temp = options[:temp] || system('asetus dir:temp')
     pw = options[:pw] || ENV['PW'] || pw
-    puts "7z a #{dir} #{temp}/#{filename}.7z #{ignore}|tail -3|grep is" # tarkista
+    # puts "7z a #{dir} #{temp}/#{filename}.7z #{ignore}|tail -3|grep is" # tarkista
     # summa = system("summa #{temp}/#{filename}.7z")
     # if !log_old.include?(summa)
       # system("mv #{temp}/#{filename}.7z #{buc}/#{filename}.cbc")
@@ -24,7 +24,7 @@ if ARGV.length == 2
       # system("tynnyri #{filename}")
     # end
     #rm #{temp}/#{filename}.7z if File.exists("#{temp}/#{filename}.7z")
-  end
+  # end
 rescue File::Error => e
   puts e.message
 end
