@@ -7,15 +7,15 @@ require 'date'
 # not sure if all of this is proper code yet. work in progress
 if ARGV.length == 2
   dir = ENV['DIR'] || ARGV[1] || options[:dir] || dir
-  filename = ENV['FILE'] || ARGV[0] || options[:filename] || filename
+  file = ENV['FILE'] || ARGV[0] || options[:file] || file
   FileUtils.cd(dir) unless dir.nil?
   log_old = `loki latest --path #{dir}`.to_s # Date.today
-  #if !log_old.include?(Today) # check formatting for today 
+  if !`loki latest --path #{dir}`.to_s.include?(Date.today.to_s)
     buc = `asetus dir:buc`.to_s
     ignore = ENV['IGNORE'] || options[:ignore] || ignore || "-x!*.DS_Store" # komennon parametri?
     temp = ENV['TEMP'] || `asetus dir:temp`.to_s || options[:temp] || temp
     pw = ENV['PW'] || options[:pw] || pw
-    puts "7z a #{dir} #{temp}/#{filename}.7z #{ignore}|tail -3|grep is" # tarkista
+    puts "7z a #{dir} #{temp}/#{file}.7z #{ignore}|tail -3|grep is" # tarkista
     # summa = system("summa #{temp}/#{filename}.7z")
     # if !log_old.include?(summa)
       # system("mv #{temp}/#{filename}.7z #{buc}/#{filename}.cbc")
@@ -23,7 +23,7 @@ if ARGV.length == 2
       # system("tynnyri #{filename}")
     # end
     #rm #{temp}/#{filename}.7z if File.exists("#{temp}/#{filename}.7z")
-  #end
+  end
 # rescue File::Error => e
   # puts e.message
 end
