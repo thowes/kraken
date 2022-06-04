@@ -8,24 +8,25 @@ require 'fileutils'
 # def varko(path = nil)
 begin
   dir = options[:dir] || ENV['DIR'] || dir
-  pw = options[:pw] || pw
+    pw = options[:pw] || ENV['PW'] || pw
   filename = options[:filename] || filename
-  ignore = options[:ignore] || ignore || "-x!*.DS_Store" # komennon parametri?
+    ignore = options[:ignore] || ENV['IGNORE'] || ignore || "-x!*.DS_Store" # komennon parametri?
   FileUtils.cd(dir) unless dir.nil?
   log_old = system("loki latest --path #{dir}")
   if !log_old.include?(Today) # check formatting for today 
     temp = options[:temp] || system('asetus dir:temp')
-    buc = system('asetus dir:buc')
+    # buc = system('asetus dir:buc')
     puts "7z a #{dir} #{temp}/#{filename}.7z #{ignore}|tail -3|grep is" # tarkista
     summa = system("summa #{temp}/#{filename}.7z")
     if !log_old.include?(summa)
-      system("mv #{temp}/#{filename}.7z #{buc}/#{filename}.cbc")
+      # system("mv #{temp}/#{filename}.7z #{buc}/#{filename}.cbc")
       system("loki add --path #{dir} #{filename} #{summa}")
-      system("tynnyri #{filename}")
+      # system("tynnyri #{filename}")
     end
     #rm #{temp}/#{filename}.7z if File.exists("#{temp}/#{filename}.7z")
   end
 rescue File::Error => e
   puts e.message
 end
+
 #ARGS
