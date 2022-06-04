@@ -5,11 +5,12 @@ require 'fileutils'
 
 # not sure if all of this is proper code yet. work in progress
 
-# def varko(path = nil)
-begin
-  dir = options[:dir] || ENV['DIR'] || dir
+if ARGV.length == 2
+begin  
+  dir = options[:dir] || ENV['DIR'] || ARGV[1]
   FileUtils.cd(dir) unless dir.nil?
   log_old = system("loki latest --path #{dir}")
+  puts log_old vs dir
   if !log_old.include?(Today) # check formatting for today 
     # buc = system('asetus dir:buc')
     filename = options[:filename] || ENV['FILE'] || filename
@@ -27,6 +28,6 @@ begin
   end
 rescue File::Error => e
   puts e.message
-end
+end; end
 
 #ARGS
