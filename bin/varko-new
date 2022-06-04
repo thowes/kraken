@@ -2,18 +2,19 @@
 
 require 'fileutils'
 # require 'optparse'
+require 'date'
 
 # not sure if all of this is proper code yet. work in progress
 if ARGV.length == 2
   dir = ENV['DIR'] || ARGV[1] || options[:dir] || dir
-    filename = ENV['FILE'] || ARGV[0] || options[:filename] || filename
+  filename = ENV['FILE'] || ARGV[0] || options[:filename] || filename
   FileUtils.cd(dir) unless dir.nil?
-  # log_old = system("loki latest --path #{dir}")
+  log_old = `loki latest --path #{dir}`.to_s # Date.today
   #if !log_old.include?(Today) # check formatting for today 
-    # buc = system('asetus dir:buc')
+    buc = `asetus dir:buc`.to_s
     ignore = ENV['IGNORE'] || options[:ignore] || ignore || "-x!*.DS_Store" # komennon parametri?
     temp = ENV['TEMP'] || `asetus dir:temp`.to_s || options[:temp] || temp
-    # pw = options[:pw] || ENV['PW'] || pw
+    pw = ENV['PW'] || options[:pw] || pw
     puts "7z a #{dir} #{temp}/#{filename}.7z #{ignore}|tail -3|grep is" # tarkista
     # summa = system("summa #{temp}/#{filename}.7z")
     # if !log_old.include?(summa)
