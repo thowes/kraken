@@ -4,7 +4,7 @@
 # require 'optparse'
 
 # not sure if all of this is proper code yet. work in progress
-if ARGV.length == 2
+#if ARGV.length == 2
   # dir = options[:dir] || ENV['DIR'] || ARGV[1]
   #FileUtils.cd(dir) unless dir.nil?
   # log_old = system("loki latest --path #{dir}")
@@ -26,6 +26,6 @@ if ARGV.length == 2
   # end
 # rescue File::Error => e
   # puts e.message
-end
+#end
 
 #ARGS
