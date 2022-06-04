@@ -6,14 +6,13 @@ require 'fileutils'
 # not sure if all of this is proper code yet. work in progress
 
 if ARGV.length == 2
-begin  
-  dir = options[:dir] || ENV['DIR'] || ARGV[1]
+  dir = options[:dir] || ENV['DIR'] || ARGV[1] || dir
   FileUtils.cd(dir) unless dir.nil?
   log_old = system("loki latest --path #{dir}")
   puts log_old vs dir
   if !log_old.include?(Today) # check formatting for today 
     # buc = system('asetus dir:buc')
-    filename = options[:filename] || ENV['FILE'] || filename
+    filename = options[:filename] || ENV['FILE'] || ARGV[0] || filename
     ignore = options[:ignore] || ENV['IGNORE'] || ignore || "-x!*.DS_Store" # komennon parametri?
     temp = options[:temp] || system('asetus dir:temp')
     pw = options[:pw] || ENV['PW'] || pw
@@ -28,6 +27,6 @@ begin
   end
 rescue File::Error => e
   puts e.message
-end; end
+end
 
 #ARGS
