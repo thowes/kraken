@@ -1,19 +1,19 @@
 #!/usr/bin/env ruby
 
-# require 'fileutils'
+require 'fileutils'
 # require 'optparse'
 
 # not sure if all of this is proper code yet. work in progress
-#if ARGV.length == 2
-  # dir = options[:dir] || ENV['DIR'] || ARGV[1]
+if ARGV.length == 2
+  dir = ENV['DIR'] || ARGV[1] || options[:dir] || dir
   #FileUtils.cd(dir) unless dir.nil?
   # log_old = system("loki latest --path #{dir}")
-  # puts log_old vs dir
+  puts "#{ARGV[0]} #{ARGV[1]}"
   # if !log_old.include?(Today) # check formatting for today 
     # buc = system('asetus dir:buc')
-    # filename = options[:filename] || ENV['FILE'] || ARGV[0] || filename
+    filename = ENV['FILE'] || ARGV[0] || options[:filename] || filename
     # ignore = options[:ignore] || ENV['IGNORE'] || ignore || "-x!*.DS_Store" # komennon parametri?
-    # temp = options[:temp] || system('asetus dir:temp')
+    temp = ENV['TEMP'] || system('asetus dir:temp') || options[:temp] || temp
     # pw = options[:pw] || ENV['PW'] || pw
     # puts "7z a #{dir} #{temp}/#{filename}.7z #{ignore}|tail -3|grep is" # tarkista
     # summa = system("summa #{temp}/#{filename}.7z")
@@ -26,6 +26,6 @@
   # end
 # rescue File::Error => e
   # puts e.message
-#end
+end
 
 #ARGS
