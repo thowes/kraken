@@ -2,28 +2,31 @@
 # frozen_string_literal: true
 
 require 'fileutils'
-# require 'optparse'
 require 'date'
 
 # not sure if all of this is proper code yet. work in progress
 if ARGV.length == 2
+
   dir = ENV['DIR'] || ARGV[1] || options[:dir] || dir
   filename = ENV['FILE'] || ARGV[0] || options[:file] || filename
+
   FileUtils.cd(dir) unless dir.nil?
-  log_old = `loki latest --path #{dir}`.to_s # Date.today
+  log_old = `loki latest --path #{dir}`.to_s
   if !log_old.include?(Date.today.to_s)
     buc = ENV['BUC'] || `asetus dir:buc`.to_s || options[:file] || buc
     ignore = ENV['IGNORE'] || options[:ignore] || ignore || "-x!*.DS_Store"
     temp = ENV['TEMP'] || `asetus dir:temp`.to_s || options[:temp] || temp
     file = "#{temp}/#{file}.7z"
     pw = ENV['PW'] || options[:pw] || pw
-    puts "7z a #{dir} #{file} #{ignore}|tail -3|grep is" # tarkista
+    system("7z a -p#{pw} #{ignore} -mhe=on #{file} #{dir}|tail -3|grep is")
     summa = `summa #{file}`.to_s if File.exist?(file)
-    if File.exist?("#{temp}/#{file}.7z") && !log_old.include?(summa)
+    if File.exist?(file) && !log_old.include?(summa)
       FileUtils.mv(file, "#{buc}/#{filename}.cbc")
       system("loki add --path #{dir} #{filename} #{summa}")
       system("tynnyri #{filename}")
     end
+
     File.delete(file) if File.exist?(file)
   end
+
 end
