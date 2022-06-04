@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'fileutils'
+# require 'fileutils'
 # require 'optparse'
 
 # not sure if all of this is proper code yet. work in progress
@@ -26,7 +26,7 @@ if ARGV.length == 2
     #rm #{temp}/#{filename}.7z if File.exists("#{temp}/#{filename}.7z")
   # end
 # rescue File::Error => e
-  puts e.message
+  # puts e.message
 end
 
 #ARGS
