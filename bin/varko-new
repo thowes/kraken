@@ -8,12 +8,12 @@ require 'fileutils'
 # def varko(path = nil)
 begin
   dir = options[:dir] || ENV['DIR'] || dir
-    filename = options[:filename] || ENV['FILE'] || filename
   FileUtils.cd(dir) unless dir.nil?
   log_old = system("loki latest --path #{dir}")
   if !log_old.include?(Today) # check formatting for today 
     temp = options[:temp] || system('asetus dir:temp')
     # buc = system('asetus dir:buc')
+    filename = options[:filename] || ENV['FILE'] || filename
     ignore = options[:ignore] || ENV['IGNORE'] || ignore || "-x!*.DS_Store" # komennon parametri?
     pw = options[:pw] || ENV['PW'] || pw
     puts "7z a #{dir} #{temp}/#{filename}.7z #{ignore}|tail -3|grep is" # tarkista
