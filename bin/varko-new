@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'fileutils'
 # require 'optparse'
@@ -7,25 +8,24 @@ require 'date'
 # not sure if all of this is proper code yet. work in progress
 if ARGV.length == 2
   dir = ENV['DIR'] || ARGV[1] || options[:dir] || dir
-  file = ENV['FILE'] || ARGV[0] || options[:file] || file
+  filename = ENV['FILE'] || ARGV[0] || options[:file] || filename
   FileUtils.cd(dir) unless dir.nil?
   log_old = `loki latest --path #{dir}`.to_s # Date.today
-  if log_old.include?(Date.today.to_s)
+  if !log_old.include?(Date.today.to_s)
     buc = ENV['BUC'] || `asetus dir:buc`.to_s || options[:file] || buc
     ignore = ENV['IGNORE'] || options[:ignore] || ignore || "-x!*.DS_Store"
     temp = ENV['TEMP'] || `asetus dir:temp`.to_s || options[:temp] || temp
+    file = "#{temp}/#{file}.7z"
     pw = ENV['PW'] || options[:pw] || pw
-    puts "7z a #{dir} #{temp}/#{file}.7z #{ignore}|tail -3|grep is" # tarkista
+    puts "7z a #{dir} #{file} #{ignore}|tail -3|grep is" # tarkista
     summa = `summa #{temp}/#{file}.7z`.to_s if File.exist?("#{temp}/#{file}.7z")
     if File.exist?("#{temp}/#{file}.7z") && !log_old.include?(summa)
-      # system("mv #{temp}/#{filename}.7z #{buc}/#{filename}.cbc")
+      FileUtils.mv(file, "#{buc}/#{filename}.cbc")
       system("loki add --path #{dir} #{file} #{summa}")
-      system("tynnyri #{file}")
+      system("tynnyri #{filename}")
     end
-    File.delete("#{temp}/#{file}.7z") if File.exist?("#{temp}/#{file}.7z")
+    File.delete(file) if File.exist?(file)
   end
-rescue File::Error => e
   # puts e.message
 end
-
 #ARGS
