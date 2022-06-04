@@ -11,18 +11,18 @@ if ARGV.length == 2
   FileUtils.cd(dir) unless dir.nil?
   log_old = `loki latest --path #{dir}`.to_s # Date.today
   if !`loki latest --path #{dir}`.to_s.include?(Date.today.to_s)
-    buc = `asetus dir:buc`.to_s
+    buc = ENV['BUC'] || `asetus dir:buc`.to_s || options[:file] || buc
     ignore = ENV['IGNORE'] || options[:ignore] || ignore || "-x!*.DS_Store" # komennon parametri?
     temp = ENV['TEMP'] || `asetus dir:temp`.to_s || options[:temp] || temp
     pw = ENV['PW'] || options[:pw] || pw
     puts "7z a #{dir} #{temp}/#{file}.7z #{ignore}|tail -3|grep is" # tarkista
-    # summa = system("summa #{temp}/#{filename}.7z")
+    summa = `summa #{temp}/#{file}.7z`.to_s if File.exist?("#{temp}/#{file}.7z")
     # if !log_old.include?(summa)
       # system("mv #{temp}/#{filename}.7z #{buc}/#{filename}.cbc")
       # system("loki add --path #{dir} #{filename} #{summa}")
       # system("tynnyri #{filename}")
     # end
-    #rm #{temp}/#{filename}.7z if File.exists("#{temp}/#{filename}.7z")
+    File.delete("#{temp}/#{file}.7z") if File.exist?("#{temp}/#{file}.7z")
   end
 # rescue File::Error => e
   # puts e.message
