@@ -18,14 +18,12 @@ if ARGV.length == 2
     file = "#{temp}/#{file}.7z"
     pw = ENV['PW'] || options[:pw] || pw
     puts "7z a #{dir} #{file} #{ignore}|tail -3|grep is" # tarkista
-    summa = `summa #{temp}/#{file}.7z`.to_s if File.exist?("#{temp}/#{file}.7z")
+    summa = `summa #{file}`.to_s if File.exist?(file)
     if File.exist?("#{temp}/#{file}.7z") && !log_old.include?(summa)
       FileUtils.mv(file, "#{buc}/#{filename}.cbc")
-      system("loki add --path #{dir} #{file} #{summa}")
+      system("loki add --path #{dir} #{filename} #{summa}")
       system("tynnyri #{filename}")
     end
     File.delete(file) if File.exist?(file)
   end
-  # puts e.message
 end
-#ARGS
