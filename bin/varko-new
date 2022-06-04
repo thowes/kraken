@@ -12,14 +12,18 @@ if ARGV.length == 2
 
   FileUtils.cd(dir) unless dir.nil?
   log_old = `loki latest --path #{dir}`.to_s
+
   if !log_old.include?(Date.today.to_s)
+
     buc = ENV['BUC'] || `asetus dir:buc`.to_s || options[:file] || buc
     ignore = ENV['IGNORE'] || options[:ignore] || ignore || "-x!*.DS_Store"
     temp = ENV['TEMP'] || `asetus dir:temp`.to_s || options[:temp] || temp
     file = "#{temp}/#{file}.7z"
     pw = ENV['PW'] || options[:pw] || pw
+
     system("7z a -p#{pw} #{ignore} -mhe=on #{file} #{dir}|tail -3|grep is")
     summa = `summa #{file}`.to_s if File.exist?(file)
+
     if File.exist?(file) && !log_old.include?(summa)
       FileUtils.mv(file, "#{buc}/#{filename}.cbc")
       system("loki add --path #{dir} #{filename} #{summa}")
