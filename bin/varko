@@ -16,9 +16,9 @@ if ARGV.length == 2
   if !log_old.include?(Date.today.to_s)
 
     buc = ENV['BUC'] || `asetus dir:buc`.to_s.strip || options[:file] || buc
-    ignore = ENV['IGNORE'] || options[:ignore] || ignore || "-x!*.DS_Store"
+    ignore = ENV['IGNORE'] || ignore || "-x!*ackup.log -x!*.DS_Store -x!*humbs.db"
     temp = ENV['TEMP'] || `asetus dir:temp`.to_s.strip || options[:temp] || temp
-    file = "#{temp}/#{file}.7z"
+    file = "#{temp}/#{filename}.7z"
     pw = ENV['PW'] || options[:pw] || pw
 
     system("7z a -p#{pw} #{ignore} -mhe=on #{file} #{dir}|tail -3|grep is")
