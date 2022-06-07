@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'thor'
+
+# HAKEMISTO class: scans contents of a dir and counts checksums.
+class Hakemisto < Thor
+  default_task :duplicate
+
+  desc 'default', 'default function.'
+  def duplicate
+    # stuff
+  end
+
+  private
+
+  def sqlite
+    #
+  end
+
+end
+
+Kirjanmerkit.start(ARGV)
