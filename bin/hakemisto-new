@@ -10,10 +10,13 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(db_file = nil)
+    # db_file = "#{db_file}/hakemisto.db" if db_file.dir?
     db = database(db_file) # check filename?
+    # temp = system("asetus dir:temp")
     files.each do |f|
       #
     end
+    # FileUtils.mv("#{temp}/hakemisto.db", db_file)
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
@@ -22,8 +25,9 @@ class Hakemisto < Thor
   end
 
   desc 'missing', 'look for missing files in the DB.'
-  def missing; end
+  def missing
     #
+  end
 
   private
 
