@@ -8,13 +8,16 @@ class Hakemisto < Thor
   default_task :duplicate
 
   desc 'default', 'default function.'
+  desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate
     # stuff
   end
 
+  desc 'missing', 'look for missing files in the DB.'
+  def missing; end
   private
 
-  def sqlite
+  def database
     #
   end
 
