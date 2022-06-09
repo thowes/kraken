@@ -33,7 +33,7 @@ alias dwl='synkronoi dwl'
 alias e=echo
 alias ed=muokkaa
 alias egrep='egrep --color=auto'              # show differences in colour
-alias fgrep='fgrep --color=auto'              # show differences in colour
+alias fgrep='fgrep --color=auto' # show differences in colour
 alias +g='chmod g+rwx'
 alias g=grep
 alias "g-"='chmod g-rwx'
@@ -49,7 +49,7 @@ alias gl='git log'
 alias glog='GIT_PAGER=cat git log --pretty=oneline'
 alias gmv='git mv'
 alias go+rwx='chmod go+rwx'
-alias grep='grep --color'                     # show differences in colour
+alias grep='grep --color=auto' # show differences in colour, check for darwin
 alias h1='head -1'
 alias h=heroku
 alias hak=hakemisto
@@ -58,11 +58,11 @@ alias k=kill
 alias k80=kaiku80
 alias k9='kill -9'
 alias ker=kerain
-alias l='ls -A'
+alias l='ls -A' # ls -CF
 alias la='ls -olA'
 #alias levy='df -h'
 alias l3='ls -la|less'
-alias ll='ls -la'
+alias ll='ls -al'  # ls -alF
 alias llg='ls -la|grep'
 alias lll='ls -la|less'
 alias m=less
