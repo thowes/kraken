@@ -2,15 +2,19 @@
 # frozen_string_literal: true
 
 require 'thor'
+require 'sqlite3'
 
 # HAKEMISTO class: scans contents of a dir and counts checksums.
 class Hakemisto < Thor
   default_task :duplicate
 
   desc 'default', 'default function.'
+  def default(db_file = nil)
+    db = database(db_file) # check filename?
+  end
 
   desc 'duplicate', 'look for duplicates in the DB.'
-  def duplicate
+  def duplicate(filename = nil)
     db = database(db_file)
   end
 
@@ -20,9 +24,9 @@ class Hakemisto < Thor
   private
 
   def database(filename = nil)
-    #
+    db_file = 'hakemisto.db' if db_file.nil?
   end
 
 end
 
-Kirjanmerkit.start(ARGV)
+Hakemisto.start(ARGV)
