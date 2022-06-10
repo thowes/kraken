@@ -6,11 +6,11 @@ require 'sqlite3'
 
 # HAKEMISTO class: scans contents of a dir and counts checksums.
 class Hakemisto < Thor
-  default_task :duplicate
+  default_task :default
 
   desc 'default', 'default function.'
   def default(db_file = nil)
-    # db_file = "#{db_file}/hakemisto.db" if db_file.dir?
+    db_file = "#{db_file}/hakemisto.db" if File.directory?(db_file)
     db = database(db_file) # check filename?
     # temp = system("asetus dir:temp")
     files.each do |f|
