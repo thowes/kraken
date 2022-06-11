@@ -10,9 +10,8 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(db_file = nil)
-    db_file = "#{db_file}/hakemisto.db" if File.directory?(db_file)
     db = database(db_file) # check filename?
-    # temp = system("asetus dir:temp")
+    temp = system("asetus dir:temp")
     files.each do |f|
       #
     end
@@ -32,6 +31,7 @@ class Hakemisto < Thor
   private
 
   def database(filename = nil)
+    db_file = "#{db_file}/hakemisto.db" if File.directory?(db_file)
     db_file = 'hakemisto.db' if db_file.nil?
     # db_file = 'hakemisto.db' if db_file.dir?
   end
