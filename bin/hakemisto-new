@@ -32,9 +32,9 @@ class Hakemisto < Thor
   private
 
   def database(filename = nil)
-    db_file = "#{db_file}/hakemisto.db" if File.directory?(db_file)
+    db_file = "#{db_file}/hakemisto.db" if File.directory?(db_file) && !db_file.nil?
     db_file = 'hakemisto.db' if db_file.nil?
-    # db_file = 'hakemisto.db' if db_file.dir?
+    SQLite3::Database.open db_file
   end
 
 end
