@@ -13,22 +13,25 @@ class Hakemisto < Thor
   def default(db_file = nil)
     db = database(db_file) # check filename?
     temp = system("asetus dir:temp")
+    insert = "INSERT INTO Documents (path, sum)"
     files.each do |f|
-      summa_md5 = Digest::MD5.file file_path unless filename.nil?
+      md5 = Digest::MD5.file file_path
       summa_256 = Digest::SHA256.file filename unless filename.nil?
-      # db.exec("INSERT INTO Documents ... ") # add to DB
+      db.exec("#{insert} ('#{f}', '#{md5},#{s256}') ")
     end
+    db&.close
     # FileUtils.mv("#{temp}/hakemisto.db", db_file)
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
     db_file = db_file || ENV['DB'] || 'hakemisto.db'
-    db = database(db_file)
+    db = database(db_file) # non-changing
     if !filename.nil?
       s256 = Digest::SHA256.file filename unless filename.nil?
-    summa_md5 = Digest::MD5.file file_path unless filename.nil?
+      md5 = Digest::MD5.file file_path
       # db.exec("SELECT * FROM Documents WHERE sum='#{md5},#{s256}';")
+    end
   end
 
   desc 'missing', 'look for missing files in the DB.'
@@ -39,6 +42,7 @@ class Hakemisto < Thor
   private
 
   def database(filename = nil)
+    temp = ENV['DB'] || system("asetus dir:temp") || '~/Projects/temp'
     db_file = "#{db_file}/hakemisto.db" if File.directory?(db_file) && !db_file.nil?
     db_file = 'hakemisto.db' if db_file.nil?
     SQLite3::Database.open db_file
