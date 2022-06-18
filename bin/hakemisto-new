@@ -28,8 +28,8 @@ class Hakemisto < Thor
     db_file = db_file || ENV['DB'] || 'hakemisto.db'
     db = database(db_file) # non-changing
     if !filename.nil?
-      s256 = Digest::SHA256.file filename
       md5 = Digest::MD5.file filename
+      s256 = Digest::SHA256.file filename
       # db.exec("SELECT * FROM Documents WHERE sum='#{md5},#{s256}';")
     end
   end
