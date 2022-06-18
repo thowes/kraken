@@ -16,7 +16,7 @@ class Hakemisto < Thor
     files.each do |f|
       summa_md5 = Digest::MD5.file file_path unless filename.nil?
       summa_256 = Digest::SHA256.file filename unless filename.nil?
-      # checksums, add to DB
+      # db.exec("INSERT INTO Documents ... ") # add to DB
     end
     # FileUtils.mv("#{temp}/hakemisto.db", db_file)
   end
@@ -26,9 +26,9 @@ class Hakemisto < Thor
     db_file = db_file || ENV['DB'] || 'hakemisto.db'
     db = database(db_file)
     if !filename.nil?
-    summa_256 = Digest::SHA256.file filename unless filename.nil?
+      s256 = Digest::SHA256.file filename unless filename.nil?
     summa_md5 = Digest::MD5.file file_path unless filename.nil?
-    # checksum unless filename.nil?
+      # db.exec("SELECT * FROM Documents WHERE sum='#{md5},#{s256}';")
   end
 
   desc 'missing', 'look for missing files in the DB.'
