@@ -3,6 +3,7 @@
 
 require 'thor'
 require 'sqlite3'
+require 'digest'
 
 # HAKEMISTO class: scans contents of a dir and counts checksums.
 class Hakemisto < Thor
@@ -13,15 +14,20 @@ class Hakemisto < Thor
     db = database(db_file) # check filename?
     temp = system("asetus dir:temp")
     files.each do |f|
+      summa_md5 = Digest::MD5.file file_path unless filename.nil?
       # checksums, add to DB
+      summa_256 = Digest::SHA256.file filename unless filename.nil?
     end
     # FileUtils.mv("#{temp}/hakemisto.db", db_file)
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
+    db_file = db_file || ENV['DB'] || 'hakemisto.db'
     db = database(db_file)
+    summa_256 = Digest::SHA256.file filename unless filename.nil?
     # checksum unless filename.nil?
+    summa_md5 = Digest::MD5.file file_path unless filename.nil?
   end
 
   desc 'missing', 'look for missing files in the DB.'
