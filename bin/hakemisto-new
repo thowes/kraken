@@ -15,7 +15,7 @@ class Hakemisto < Thor
     temp =  ENV['DB'] || system("asetus dir:temp") || '~/Projects/temp'
     insert = "INSERT INTO Documents (path, sum)"
     files.each do |f|
-      md5 = Digest::MD5.file file_path
+      md5 = Digest::MD5.file f
       summa_256 = Digest::SHA256.file f
       db.exec("#{insert} ('#{f}', '#{md5},#{s256}') ")
     end
@@ -29,7 +29,7 @@ class Hakemisto < Thor
     db = database(db_file) # non-changing
     if !filename.nil?
       s256 = Digest::SHA256.file filename
-      md5 = Digest::MD5.file file_path
+      md5 = Digest::MD5.file filename
       # db.exec("SELECT * FROM Documents WHERE sum='#{md5},#{s256}';")
     end
   end
