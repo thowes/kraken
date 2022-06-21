@@ -17,7 +17,7 @@ class Hakemisto < Thor
     files.each do |f|
       md5 = Digest::MD5.file f
       summa_256 = Digest::SHA256.file f
-      db.exec("#{insert} ('#{f}', '#{md5},#{s256}') ")
+      db.exec("#{insert} ('#{f}', '#{md5},#{s256}') ") # check db schema
     end
     db&.close
     # FileUtils.mv("#{temp}/hakemisto.db", db_file)
