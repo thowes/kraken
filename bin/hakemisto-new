@@ -14,10 +14,11 @@ class Hakemisto < Thor
     db = database(db_file) # check filename?
     # old = database(db_file) # pwd
     temp =  ENV['DB'] || system("asetus dir:temp") || '~/Projects/temp'
-    insert = "INSERT INTO Documents (path, sum) values"
+    insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     files.each do |f|
       md5 = Digest::MD5.file f
       summa_256 = Digest::SHA256.file f
+      old.exec("#{select_line}='#{md5},#{s256}'")
       puts "db.exec" "#{insert} ('#{f}', '#{md5},#{s256}')") # check db schema, timestamp
     end
     db&.close
@@ -31,7 +32,7 @@ class Hakemisto < Thor
     if !filename.nil?
       md5 = Digest::MD5.file filename
       s256 = Digest::SHA256.file filename
-      # db.exec("SELECT * FROM Documents WHERE sum='#{md5},#{s256}';")
+      duplicate_lines(old, "#{md5},#{s256}")
     end
   end
 
@@ -43,11 +44,14 @@ class Hakemisto < Thor
   private
 
   def database(filename = nil)
+    insert = "INSERT INTO Documents (status TEXT, ls_time DATETIME, path, summa TEXT) values"
     file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
     db_file = 'hakemisto.db' if db_file.nil?
     db_return = SQLite3::Database.open file
   end
+  def uplicate; end
 
+    select_line = "SELECT * FROM Documents WHERE summa"
 end
 
 Hakemisto.start(ARGV)
