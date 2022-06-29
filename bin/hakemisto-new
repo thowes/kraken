@@ -12,14 +12,14 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
+    temp =  ENV['DB'] || system("asetus dir:temp") || '~/Projects/temp'
     new_db = database("#{temp}/#{db_file}") # check filename?
     old_db = database(dir) if !dir.nil? # pwd for nil
-    temp =  ENV['DB'] || system("asetus dir:temp") || '~/Projects/temp'
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     files.each do |f|
       md5 = Digest::MD5.file f
-      duplicate_count = duplicate_lines(old_db, "#{md5},#{s256}").count
       summa_256 = Digest::SHA256.file f
+      duplicate_count = duplicate_lines(old_db, "#{md5},#{s256}").count
       puts "new_db.exec" "#{insert} ('NA', '#{Time.now}', '#{md5},#{s256}', #{f}')") # read timestamp from file
     end
     db&.close
@@ -47,7 +47,7 @@ class Hakemisto < Thor
   def database(filename = nil)
     insert = "CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT)"
     file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
-    db_file = 'hakemisto.db' if db_file.nil?
+    file = 'hakemisto.db' if file.nil?
     db_return = SQLite3::Database.open file
     db_return(insert)
     db_return
@@ -55,7 +55,7 @@ class Hakemisto < Thor
 
   def duplicate_lines(old, checksum)
     select_line = "SELECT * FROM Documents WHERE summa"
-      old.exec("#{select_line}='#{md5},#{s256}'")
+    old.exec("#{select_line}='#{checksum}'")
   end
 
 end
