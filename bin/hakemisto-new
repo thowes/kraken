@@ -40,15 +40,17 @@ class Hakemisto < Thor
 
   desc 'missing', 'look for missing files in the DB.'
   def missing(filename = nil)
+    if !filename.nil?
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
     db = db_read(db_file) # non-changing
+    end
   end
 
   private
 
   def db_create
     insert = "CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT)"
-    db_return = SQLite3::Database.open new_file
+    db_return = SQLite3::Database.open path_new
     db_return(insert)
     db_return
   end
@@ -65,10 +67,10 @@ class Hakemisto < Thor
 
   def path_new
     temp =  ENV['TEMP'] || system("asetus dir:temp") || '~/Projects/temp'
-    new_file = "#{temp}/#{Process.pid}.db"
+    "#{temp}/#{Process.pid}.db"
   end
 
-  def path_old(dir = nil)
+  def path_old(file = nil)
     file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
     file = 'hakemisto.db' if file.nil?
     return file
