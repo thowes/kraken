@@ -17,10 +17,10 @@ class Hakemisto < Thor
     old_db = db_read(dir) if !dir.nil? # pwd for nil
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     files.each do |f|
+      checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       md5 = Digest::MD5.file f
-      s256 = Digest::SHA256.file f
       duplicate_count = duplicate_lines(old_db, "#{md5},#{s256}").count
-      puts "new_db.exec" "#{insert} ('NA', '#{Time.now}', '#{md5},#{s256}', #{f}')") # read timestamp from file
+      puts "new_db.exec" "#{insert} ('NA', '#{Time.now}', '#{checksums}', #{f}')") # read timestamp from file
     end
     db&.close
     # FileUtils.mv("#{temp}/hakemisto.db", db_file)
@@ -55,8 +55,9 @@ class Hakemisto < Thor
     db_return
   end
 
-  def db_read(file = nil); end
+  def db_read(file = nil)
   # stuff
+  end
 
   def duplicate_lines(old, checksum)
     select_line = "SELECT * FROM Documents WHERE summa"
