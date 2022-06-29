@@ -11,7 +11,7 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(db_file = nil)
-    db = database(db_file) # check filename?
+    new_db = database("#{temp}/#{db_file}") # check filename?
     # old = database(db_file) # pwd
     temp =  ENV['DB'] || system("asetus dir:temp") || '~/Projects/temp'
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
@@ -19,7 +19,7 @@ class Hakemisto < Thor
       md5 = Digest::MD5.file f
       summa_256 = Digest::SHA256.file f
       old.exec("#{select_line}='#{md5},#{s256}'")
-      puts "db.exec" "#{insert} ('#{f}', '#{md5},#{s256}')") # check db schema, timestamp
+      puts "new_db.exec" "#{insert} ('NA', '#{Time.now}', '#{md5},#{s256}', #{f}')") # read timestamp from file
     end
     db&.close
     # FileUtils.mv("#{temp}/hakemisto.db", db_file)
@@ -44,14 +44,17 @@ class Hakemisto < Thor
   private
 
   def database(filename = nil)
-    insert = "INSERT INTO Documents (status TEXT, ls_time DATETIME, path, summa TEXT) values"
+    insert = "CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT)"
     file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
     db_file = 'hakemisto.db' if db_file.nil?
     db_return = SQLite3::Database.open file
+    db_return(insert)
+    db_return
   end
-  def uplicate; end
+  def duplicate_lines(old_db, checksum)
 
     select_line = "SELECT * FROM Documents WHERE summa"
+  end
 end
 
 Hakemisto.start(ARGV)
