@@ -12,12 +12,13 @@ class Hakemisto < Thor
   desc 'default', 'default function.'
   def default(db_file = nil)
     db = database(db_file) # check filename?
+    # old = database(db_file) # pwd
     temp =  ENV['DB'] || system("asetus dir:temp") || '~/Projects/temp'
     insert = "INSERT INTO Documents (path, sum) values"
     files.each do |f|
       md5 = Digest::MD5.file f
       summa_256 = Digest::SHA256.file f
-      db.exec("#{insert} ('#{f}', '#{md5},#{s256}')") # check db schema, timestamp
+      puts "db.exec" "#{insert} ('#{f}', '#{md5},#{s256}')") # check db schema, timestamp
     end
     db&.close
     # FileUtils.mv("#{temp}/hakemisto.db", db_file)
@@ -42,9 +43,9 @@ class Hakemisto < Thor
   private
 
   def database(filename = nil)
-    db_file = "#{db_file}/hakemisto.db" if File.directory?(db_file) && !db_file.nil?
+    file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
     db_file = 'hakemisto.db' if db_file.nil?
-    SQLite3::Database.open db_file
+    db_return = SQLite3::Database.open file
   end
 
 end
