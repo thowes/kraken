@@ -29,10 +29,10 @@ class Hakemisto < Thor
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
-  def duplicate(filename = nil)
+  def duplicate(filename)
     if !filename.nil?
       db_file = ENV['DB'] || 'hakemisto.db' # pwd
-      db = database(db_file) # non-changing
+      db = db_read(db_file) # non-changing
       checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
       duplicate_lines(old, "#{checksums}")
     end
@@ -41,14 +41,12 @@ class Hakemisto < Thor
   desc 'missing', 'look for missing files in the DB.'
   def missing(filename)
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
-    #
     db = db_read(db_file) # non-changing
   end
 
   private
 
   def db_create
-    temp =  ENV['TEMP'] || system("asetus dir:temp") || '~/Projects/temp'
     new_file = "#{temp}/#{Process.pid}.db"
     insert = "CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT)"
     db_return = SQLite3::Database.open new_file
@@ -58,7 +56,6 @@ class Hakemisto < Thor
 
   def db_read(file = nil)
     file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
-    file = 'hakemisto.db' if file.nil?
     db_return = SQLite3::Database.read file
     db_return
   end
@@ -68,9 +65,11 @@ class Hakemisto < Thor
     old.exec("#{select_line}='#{checksum}'")
   end
   def path_new; end
+    temp =  ENV['TEMP'] || system("asetus dir:temp") || '~/Projects/temp'
   # end
 
   def path_old(dir = nil)
+    file = 'hakemisto.db' if file.nil?
   end
 
 end
