@@ -31,11 +31,10 @@ class Hakemisto < Thor
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
-    db = database(db_file) # non-changing
+      db = database(db_file) # non-changing
     if !filename.nil?
-      checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
+      checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
       md5 = Digest::MD5.file filename
-      s256 = Digest::SHA256.file filename
       duplicate_lines(old, "#{checksums}")
     end
   end
@@ -59,7 +58,6 @@ class Hakemisto < Thor
   def db_read(file = nil)
     file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
     file = 'hakemisto.db' if file.nil?
-  # stuff
     db_return = SQLite3::Database.read file
     db_return
   end
