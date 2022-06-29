@@ -14,18 +14,18 @@ class Hakemisto < Thor
   desc 'default', 'default function.'
   def default(dir = nil)
     temp =  ENV['TEMP'] || system("asetus dir:temp") || '~/Projects/temp'
+    new_file = "#{temp}/#{Process.pid}.db"
     new_db = db_create("#{temp}/#{Process.pid}.db")
     old_db = db_read(dir) if !dir.nil? # pwd for nil
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     files.each do |f|
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
-      md5 = Digest::MD5.file f
       ts = Time.new # read actual f timestamp
       duplicate_count = duplicate_lines(old_db, "#{checksums}").count
       puts "new_db.exec" "#{insert} ('NA', '#{ts}', '#{checksums}', #{f}')")
     end
     db&.close
-    # FileUtils.mv("#{temp}/hakemisto.db", db_file)
+    FileUtils.mv(new_file, db_file)
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
@@ -33,9 +33,10 @@ class Hakemisto < Thor
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
     db = database(db_file) # non-changing
     if !filename.nil?
+      checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       md5 = Digest::MD5.file filename
       s256 = Digest::SHA256.file filename
-      duplicate_lines(old, "#{md5},#{s256}")
+      duplicate_lines(old, "#{checksums}")
     end
   end
 
@@ -50,7 +51,6 @@ class Hakemisto < Thor
 
   def db_create(file)
     insert = "CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT)"
-    file = 'hakemisto.db' if file.nil?
     db_return = SQLite3::Database.open file
     db_return(insert)
     db_return
@@ -58,8 +58,10 @@ class Hakemisto < Thor
 
   def db_read(file = nil)
     file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
+    file = 'hakemisto.db' if file.nil?
   # stuff
     db_return = SQLite3::Database.read file
+    db_return
   end
 
   def duplicate_lines(old, checksum)
