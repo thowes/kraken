@@ -4,21 +4,22 @@
 require 'thor'
 require 'sqlite3'
 require 'digest'
+require 'time'
 
 # HAKEMISTO class: scans contents of a dir and counts checksums.
 class Hakemisto < Thor
   default_task :default
 
   desc 'default', 'default function.'
-  def default(db_file = nil)
+  def default(dir = nil)
     new_db = database("#{temp}/#{db_file}") # check filename?
-    # old = database(db_file) # pwd
+    old_db = database(dir) if !dir.nil? # pwd for nil
     temp =  ENV['DB'] || system("asetus dir:temp") || '~/Projects/temp'
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     files.each do |f|
       md5 = Digest::MD5.file f
+      duplicate_count = duplicate_lines(old_db, "#{md5},#{s256}").count
       summa_256 = Digest::SHA256.file f
-      old.exec("#{select_line}='#{md5},#{s256}'")
       puts "new_db.exec" "#{insert} ('NA', '#{Time.now}', '#{md5},#{s256}', #{f}')") # read timestamp from file
     end
     db&.close
@@ -51,10 +52,12 @@ class Hakemisto < Thor
     db_return(insert)
     db_return
   end
-  def duplicate_lines(old_db, checksum)
 
+  def duplicate_lines(old, checksum)
     select_line = "SELECT * FROM Documents WHERE summa"
+      old.exec("#{select_line}='#{md5},#{s256}'")
   end
+
 end
 
 Hakemisto.start(ARGV)
