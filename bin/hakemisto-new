@@ -13,17 +13,18 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
-    new_file = "#{temp}/#{Process.pid}.db"
     new_db = db_create
-    old_db = db_read(dir) if !dir.nil? # pwd for nil
+    old_db = db_read(dir)
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     files.each do |f|
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = Time.new # read actual f timestamp
       duplicate_count = duplicate_lines(old_db, "#{checksums}").count
+      # status = status(duplicate_count, f)
       puts "new_db.exec" "#{insert} ('NA', '#{ts}', '#{checksums}', #{f}')")
     end
     db&.close
+    old_db&.close
     FileUtils.mv(new_file, db_file)
   end
 
@@ -46,10 +47,11 @@ class Hakemisto < Thor
 
   private
 
-  def db_create(file)
+  def db_create
     temp =  ENV['TEMP'] || system("asetus dir:temp") || '~/Projects/temp'
+    new_file = "#{temp}/#{Process.pid}.db"
     insert = "CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT)"
-    db_return = SQLite3::Database.open file
+    db_return = SQLite3::Database.open new_file
     db_return(insert)
     db_return
   end
@@ -65,7 +67,9 @@ class Hakemisto < Thor
     select_line = "SELECT * FROM Documents WHERE summa"
     old.exec("#{select_line}='#{checksum}'")
   end
+  def path_new; end
 
+  def path_old(dir = nil)
 end
 
 Hakemisto.start(ARGV)
