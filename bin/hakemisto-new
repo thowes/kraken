@@ -13,12 +13,12 @@ class Hakemisto < Thor
   desc 'default', 'default function.'
   def default(dir = nil)
     temp =  ENV['DB'] || system("asetus dir:temp") || '~/Projects/temp'
-    new_db = database("#{temp}/#{db_file}") # check filename?
+    new_db = db_create("#{temp}/#{db_file}") # check filename?
     old_db = database(dir) if !dir.nil? # pwd for nil
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     files.each do |f|
       md5 = Digest::MD5.file f
-      summa_256 = Digest::SHA256.file f
+      s256 = Digest::SHA256.file f
       duplicate_count = duplicate_lines(old_db, "#{md5},#{s256}").count
       puts "new_db.exec" "#{insert} ('NA', '#{Time.now}', '#{md5},#{s256}', #{f}')") # read timestamp from file
     end
@@ -28,7 +28,7 @@ class Hakemisto < Thor
 
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
-    db_file = db_file || ENV['DB'] || 'hakemisto.db'
+    db_file = ENV['DB'] || 'hakemisto.db' # pwd
     db = database(db_file) # non-changing
     if !filename.nil?
       md5 = Digest::MD5.file filename
@@ -38,13 +38,14 @@ class Hakemisto < Thor
   end
 
   desc 'missing', 'look for missing files in the DB.'
-  def missing
+  def missing(filename)
     #
+    db = db_read(db_file) # non-changing
   end
 
   private
 
-  def database(filename = nil)
+  def db_create(file = nil)
     insert = "CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT)"
     file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
     file = 'hakemisto.db' if file.nil?
@@ -52,6 +53,7 @@ class Hakemisto < Thor
     db_return(insert)
     db_return
   end
+  def db_read(file = nil); end
 
   def duplicate_lines(old, checksum)
     select_line = "SELECT * FROM Documents WHERE summa"
