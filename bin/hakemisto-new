@@ -14,7 +14,7 @@ class Hakemisto < Thor
   desc 'default', 'default function.'
   def default(dir = nil)
     new_db = db_create
-    old_db = db_read(dir)
+    old_db = db_read(path_old(dir))
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     files.each do |f|
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
@@ -23,7 +23,7 @@ class Hakemisto < Thor
       # status = status(duplicate_count, f)
       puts "new_db.exec" "#{insert} ('NA', '#{ts}', '#{checksums}', #{f}')")
     end
-    db&.close
+    new_db&.close
     old_db&.close
     FileUtils.mv(new_file, db_file)
   end
@@ -31,7 +31,7 @@ class Hakemisto < Thor
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
     if !filename.nil?
-    db_file = ENV['DB'] || 'hakemisto.db' # pwd
+      db_file = ENV['DB'] || 'hakemisto.db' # pwd
       db = database(db_file) # non-changing
       checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
       duplicate_lines(old, "#{checksums}")
@@ -68,8 +68,11 @@ class Hakemisto < Thor
     old.exec("#{select_line}='#{checksum}'")
   end
   def path_new; end
+  # end
 
   def path_old(dir = nil)
+  end
+
 end
 
 Hakemisto.start(ARGV)
