@@ -55,7 +55,6 @@ class Hakemisto < Thor
   end
 
   def db_read(file = nil)
-    file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
     db_return = SQLite3::Database.read file
     db_return
   end
@@ -64,12 +63,14 @@ class Hakemisto < Thor
     select_line = "SELECT * FROM Documents WHERE summa"
     old.exec("#{select_line}='#{checksum}'")
   end
-  def path_new; end
+  def path_new
     temp =  ENV['TEMP'] || system("asetus dir:temp") || '~/Projects/temp'
-  # end
+  end
 
   def path_old(dir = nil)
+    file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
     file = 'hakemisto.db' if file.nil?
+    return file
   end
 
 end
