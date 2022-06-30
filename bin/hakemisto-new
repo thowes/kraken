@@ -57,7 +57,7 @@ class Hakemisto < Thor
   end
 
   def db_insert(db, status, ts, checksum, file)
-  #
+    #
   end
 
   def db_read(file = nil)
@@ -82,7 +82,7 @@ class Hakemisto < Thor
   end
 
   def status(checksums, filename)
-  #
+    #
   end
 
 end
