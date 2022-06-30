@@ -81,8 +81,9 @@ class Hakemisto < Thor
     return file
   end
 
-  def status(checksums, filename); end
+  def status(checksums, filename)
   #
+  end
 
 end
 
