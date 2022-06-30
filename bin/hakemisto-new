@@ -56,8 +56,9 @@ class Hakemisto < Thor
     db_return
   end
 
-  def db_insert(db, status, ts, checksum, file); end
+  def db_insert(db, status, ts, checksum, file)
   #
+  end
 
   def db_read(file = nil)
     db_return = SQLite3::Database.read file
@@ -81,6 +82,7 @@ class Hakemisto < Thor
   end
 
   def status(checksums, filename); end
+  #
 
 end
 
