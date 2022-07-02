@@ -32,9 +32,11 @@ class Hakemisto < Thor
   def duplicate(filename = nil)
     if !filename.nil?
       db_file = ENV['DB'] || 'hakemisto.db' # pwd
+      puts "DB=#{db_file} hakemisto-new duplicate #{filename}"
       db = db_read(db_file) # non-changing
       checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
       duplicate_lines(old, "#{checksums}")
+    else
     end
   end
 
@@ -82,6 +84,7 @@ class Hakemisto < Thor
   end
 
   def status(checksums, filename)
+
     #
   end
 
