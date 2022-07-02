@@ -32,11 +32,13 @@ class Hakemisto < Thor
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
     db = db_read(db_file) # non-changing
     if filename.nil?
+      select_line = "SELECT * FROM Documents WHERE status='DD';"
       puts "DB=#{db_file} hakemisto-new duplicate #{filename}"
+      db.execute(select_line)
     else
       select_line = "SELECT * FROM Documents WHERE summa"
     checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
-      db.exec("#{select_line}='#{checksums}'") # duplicate_lines(old&, "#{checksums}")
+      db.execute("#{select_line}='#{checksums}'") # duplicate_lines(old&, "#{checksums}")
     end
     db&.close
   end
@@ -65,7 +67,6 @@ class Hakemisto < Thor
 
   def db_read(file = nil)
     SQLite3::Database.open file # howto do read-only?
-    db_return
   end
 
   def duplicate_lines(old, checksum)
