@@ -55,7 +55,6 @@ class Hakemisto < Thor
 
   private
 
-  #
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
   end
@@ -66,7 +65,7 @@ class Hakemisto < Thor
   end
 
   def path_old(file = nil)
-    return file.to_s
+  #
   end
 
   def status(count, filename)
