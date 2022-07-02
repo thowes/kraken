@@ -31,9 +31,9 @@ class Hakemisto < Thor
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
-      db = db_read(db_file) # non-changing
+    db = db_read(db_file) # non-changing
       checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
-    if !filename.nil?
+    if filename.nil?
       puts "DB=#{db_file} hakemisto-new duplicate #{filename}"
     else
       duplicate_lines(old, "#{checksums}")
