@@ -12,10 +12,11 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
+    polku = path_new
     FileUtils.cd(dir) unless dir.nil?
-    uusi = db_create # new db
+    uusi = db_read(polku) # new db
     db = db_read('hakemisto.db')
-    insert = "INSERT INTO Documents (status, ls_time, summa, path) values"; puts uusi
+    insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("*").each do |f|
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = File.ctime f
@@ -25,12 +26,12 @@ class Hakemisto < Thor
     end
     uusi&.close
     db&.close
-    puts "FileUtils.mv #{path_new}, ./hakemisto.db)"
+    puts "FileUtils.mv #{polku}, ./hakemisto.db)"
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
-    db_file = ENV['DB'] || 'hakemisto.db' # pwd
+    db_file = ENV['DB'] || 'hakemisto.db'
     db = db_read(db_file) # non-changing
     if filename.nil?
       db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
@@ -57,17 +58,16 @@ class Hakemisto < Thor
     insert = "CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT)"
     db_return = SQLite3::Database.open path_new
     db_return(insert)
-    db_return
+    return db_return
   end
 
   def db_insert(db, status, ts, checksum, file)
-    db.exec("INSERT INTO Documents ('#{status}', '#{ts}', '#{checksum}', '#{file}');")
+  #
   end
 
-  def db_read(file = nil)
+  def db_read(file)
     SQLite3::Database.open file # howto do read-only?
   end
-
 
   def path_new
     temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || '~/Projects/temp'
