@@ -13,17 +13,17 @@ class Hakemisto < Thor
   desc 'default', 'default function.'
   def default(dir = nil)
     # new_db = db_create
-    old_db = db_read(path_old dir.to_s)
+    db = db_read(path_old dir.to_s)
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("*").each do |f|
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = File.ctime f # read actual f timestamp
-      count = old_db.execute("SELECT * FROM Documents WHERE summa='#{checksums}'").count
+      count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';").count
       tila = status(count, f)
       puts "#{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');"
     end
     # new_db&.close
-    old_db&.close
+    db&.close
     # FileUtils.mv(path_new, path_old(dir))
   end
 
@@ -79,6 +79,7 @@ class Hakemisto < Thor
   def path_old(file = nil)
     file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
     file = 'hakemisto.db' if file.nil?
+    puts file
     return file.to_s
   end
 
