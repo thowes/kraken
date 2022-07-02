@@ -15,6 +15,7 @@ class Hakemisto < Thor
     polku = path_new
     FileUtils.cd(dir) unless dir.nil?
     uusi = db_read(polku) # new db
+    uusi.execute("CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT);")
     db = db_read('hakemisto.db')
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("*").each do |f|
@@ -55,15 +56,11 @@ class Hakemisto < Thor
   private
 
   def db_create(*)
-    insert = "CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT)"
     db_return = SQLite3::Database.open path_new
-    db_return(insert)
     return db_return
   end
 
-  def db_insert(db, status, ts, checksum, file)
   #
-  end
 
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
