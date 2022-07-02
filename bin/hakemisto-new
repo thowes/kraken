@@ -32,14 +32,13 @@ class Hakemisto < Thor
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
-    db = db_read(db_file) # non-changing
+    db = SQLite3::Database.open(db_file) # non-changing
     if filename.nil?
       select_line = "SELECT * FROM Documents WHERE status='M2';"
-      db.execute(select_line)
+      db.execute(select_line) do |l| puts l; end
     else
-      select_line = "SELECT * FROM Documents WHERE summa"
       checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
-    puts "DB=#{db_file} hakemisto-new duplicate #{filename}"
+      select_line = "SELECT * FROM Documents WHERE summa='#{checksums.to_s}'"
       db.execute("#{select_line}='#{checksums}'") # duplicate_lines(old&, "#{checksums}")
     end
     db&.close
@@ -51,6 +50,7 @@ class Hakemisto < Thor
       db_file = ENV['DB'] || 'hakemisto.db' # pwd
       db = db_read(db_file) # non-changing, is this line needed?
       # ref_db = db_read() # reference db
+      db&.close
     end
   end
 
