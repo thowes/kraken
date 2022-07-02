@@ -19,7 +19,7 @@ class Hakemisto < Thor
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = Time.now # read actual f timestamp
       count = 0 # duplicate_lines(old_db, "#{checksums}").count
-      tila = status(duplicate_count, f)
+      tila = status(count, f)
       puts "#{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');"
     end
     # new_db&.close
@@ -83,9 +83,9 @@ class Hakemisto < Thor
   end
 
   def status(count, filename)
-      tila = 'DD' if duplicate_count > 1
     tila = 'NA'
     tila = 'RR' if %w[backup.log .DS_Store hakemisto.db hakemisto.lst roina.lst].include?(filename)
+      tila = 'DD' if duplicate_count > 1
     return tila
   end
 
