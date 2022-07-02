@@ -5,7 +5,6 @@ require 'thor'
 require 'sqlite3'
 require 'digest'
 require 'time'
-require 'process'
 
 # HAKEMISTO class: scans contents of a dir and counts checksums.
 class Hakemisto < Thor
@@ -21,7 +20,7 @@ class Hakemisto < Thor
       ts = Time.new # read actual f timestamp
       duplicate_count = duplicate_lines(old_db, "#{checksums}").count
       # status = status(duplicate_count, f)
-      puts "new_db.exec" "#{insert} ('NA', '#{ts}', '#{checksums}', #{f}')")
+      puts ("new_db.exec" "#{insert} ('NA', '#{ts}', '#{checksums}', #{f}');")
     end
     new_db&.close
     old_db&.close
@@ -35,9 +34,11 @@ class Hakemisto < Thor
     if filename.nil?
       puts "DB=#{db_file} hakemisto-new duplicate #{filename}"
     else
+      select_line = "SELECT * FROM Documents WHERE summa"
     checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
-      duplicate_lines(old, "#{checksums}")
+      db.exec("#{select_line}='#{checksums}'") # duplicate_lines(old&, "#{checksums}")
     end
+    db&.close
   end
 
   desc 'missing', 'look for missing files in the DB.'
@@ -59,11 +60,11 @@ class Hakemisto < Thor
   end
 
   def db_insert(db, status, ts, checksum, file)
-    #
+    db.exec("INSERT INTO Documents ('#{status}', '#{ts}', '#{checksum}', '#{file}');")
   end
 
   def db_read(file = nil)
-    db_return = SQLite3::Database.read file
+    SQLite3::Database.open file # howto do read-only?
     db_return
   end
 
@@ -84,7 +85,6 @@ class Hakemisto < Thor
   end
 
   def status(checksums, filename)
-
     #
   end
 
