@@ -18,7 +18,7 @@ class Hakemisto < Thor
     Dir.glob("*").each do |f|
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = Time.now # read actual f timestamp
-      duplicate_count = 0 # duplicate_lines(old_db, "#{checksums}").count
+      count = 0 # duplicate_lines(old_db, "#{checksums}").count
       tila = status(duplicate_count, f)
       puts "#{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');"
     end
@@ -82,8 +82,9 @@ class Hakemisto < Thor
     return file.to_s
   end
 
-  def status(checksums, filename)
+  def status(count, filename)
       tila = 'DD' if duplicate_count > 1
+    tila = 'NA'
     tila = 'RR' if %w[backup.log .DS_Store hakemisto.db hakemisto.lst roina.lst].include?(filename)
     return tila
   end
