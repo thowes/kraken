@@ -35,11 +35,11 @@ class Hakemisto < Thor
     db = SQLite3::Database.open(db_file) # non-changing
     if filename.nil?
       select_line = "SELECT * FROM Documents WHERE status='M2';"
-      db.execute(select_line) do |l| puts l; end
+      db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
     else
       checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
       select_line = "SELECT * FROM Documents WHERE summa='#{checksums.to_s}'"
-      db.execute("#{select_line}='#{checksums}'") # duplicate_lines(old&, "#{checksums}")
+      db.execute(select_line)
     end
     db&.close
   end
