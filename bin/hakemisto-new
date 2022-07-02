@@ -30,20 +30,20 @@ class Hakemisto < Thor
 
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
-    if !filename.nil?
       db_file = ENV['DB'] || 'hakemisto.db' # pwd
+    if !filename.nil?
       puts "DB=#{db_file} hakemisto-new duplicate #{filename}"
       db = db_read(db_file) # non-changing
       checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
-      duplicate_lines(old, "#{checksums}")
     else
+      duplicate_lines(old, "#{checksums}")
     end
   end
 
   desc 'missing', 'look for missing files in the DB.'
   def missing(filename = nil)
-      db_file = ENV['DB'] || 'hakemisto.db' # pwd
     if !filename.nil?
+      db_file = ENV['DB'] || 'hakemisto.db' # pwd
       db = db_read(db_file) # non-changing, is this line needed?
       # ref_db = db_read() # reference db
     end
