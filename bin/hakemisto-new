@@ -16,11 +16,13 @@ class Hakemisto < Thor
     old_db = db_read(path_old(dir))
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     files.each do |f|
+      tila = 'NA'
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = Time.new # read actual f timestamp
       duplicate_count = duplicate_lines(old_db, "#{checksums}").count
+      tila = 'DD' if duplicate_count > 1
       # status = status(duplicate_count, f)
-      puts ("new_db.exec" "#{insert} ('NA', '#{ts}', '#{checksums}', #{f}');")
+      puts ("new_db.exec" "#{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');")
     end
     new_db&.close
     old_db&.close
@@ -31,13 +33,13 @@ class Hakemisto < Thor
   def duplicate(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
     db = db_read(db_file) # non-changing
+      puts "DB=#{db_file} hakemisto-new duplicate #{filename}"
     if filename.nil?
       select_line = "SELECT * FROM Documents WHERE status='DD';"
-      puts "DB=#{db_file} hakemisto-new duplicate #{filename}"
       db.execute(select_line)
     else
       select_line = "SELECT * FROM Documents WHERE summa"
-    checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
+      checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
       db.execute("#{select_line}='#{checksums}'") # duplicate_lines(old&, "#{checksums}")
     end
     db&.close
