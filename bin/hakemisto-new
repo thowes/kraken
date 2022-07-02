@@ -17,7 +17,7 @@ class Hakemisto < Thor
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("*").each do |f|
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
-      ts = Time.now # read actual f timestamp
+      ts = File.ctime f # read actual f timestamp
       count = 0 # duplicate_lines(old_db, "#{checksums}").count
       tila = status(count, f)
       puts "#{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');"
@@ -83,12 +83,13 @@ class Hakemisto < Thor
   end
 
   def status(count, filename)
+    # tila = 'MM' if missing(filename) && tila = 'NA'
     tila = 'NA'
-    tila = 'D2' if count > 1 && tila = 'NA'
     tila = 'RR' if %w[backup.log .DS_Store hakemisto.db hakemisto.lst roina.lst].include?(filename)
+    tila = 'D2' if count > 1 && tila = 'NA'
     tila = 'R2' if count > 1 && tila = 'RR'
+    tila = 'M2' if count > 1 && tila = 'MM'
     return tila
-    # tila = 'M2' if count > 1 && tila = 'MM'
   end
 
 end
