@@ -16,11 +16,9 @@ class Hakemisto < Thor
     old_db = db_read(path_old dir.to_s)
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("*").each do |f|
-      tila = 'NA'
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = Time.now # read actual f timestamp
       duplicate_count = 0 # duplicate_lines(old_db, "#{checksums}").count
-      tila = 'DD' if duplicate_count > 1
       tila = status(duplicate_count, f)
       puts "#{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');"
     end
@@ -85,7 +83,9 @@ class Hakemisto < Thor
   end
 
   def status(checksums, filename)
+      tila = 'DD' if duplicate_count > 1
     tila = 'RR' if %w[backup.log .DS_Store hakemisto.db hakemisto.lst roina.lst].include?(filename)
+    return tila
   end
 
 end
