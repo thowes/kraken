@@ -54,14 +54,10 @@ class Hakemisto < Thor
   end
 
   private
-
   def db_create(*)
-    db_return = SQLite3::Database.open path_new
     return db_return
   end
-
   #
-
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
   end
