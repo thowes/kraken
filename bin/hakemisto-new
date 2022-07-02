@@ -12,19 +12,20 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
+    FileUtils.cd(dir) unless dir.nil?
     # new_db = db_create
-    db = db_read(path_old dir.to_s)
+    db = db_read('hakemisto.db')
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("*").each do |f|
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
-      ts = File.ctime f # read actual f timestamp
+      ts = File.ctime f
       count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';").count
       tila = status(count, f)
-      puts "#{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');"
+      puts "new.execute #{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');"
     end
     # new_db&.close
     db&.close
-    # FileUtils.mv(path_new, path_old(dir))
+    puts "FileUtils.mv #{path_new}, ./hakemisto.db)"
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
@@ -84,11 +85,11 @@ class Hakemisto < Thor
   end
 
   def status(count, filename)
-    # tila = 'MM' if missing(filename) && tila == 'NA'
     tila = 'NA'
     tila = 'RR' if %w[backup.log .DS_Store hakemisto.db hakemisto.lst roina.lst].include?(filename)
+    # tila = 'MM' if missing(filename) && tila == 'NA'
     tila = 'D2' if count > 1 && tila == 'NA'
-    tila = 'R2' if count > 1 && tila = 'RR'
+    tila = 'R2' if count > 1 && tila == 'RR'
     tila = 'M2' if count > 1 && tila == 'MM'
     return tila
   end
