@@ -12,7 +12,7 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
-    new_db = db_create
+    # new_db = db_create
     old_db = db_read(path_old dir)
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("*.jpg").each do |f|
@@ -22,9 +22,9 @@ class Hakemisto < Thor
       duplicate_count = 0 # duplicate_lines(old_db, "#{checksums}").count
       tila = 'DD' if duplicate_count > 1
       # status = status(duplicate_count, f)
-      puts ("new_db.exec" "#{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');")
+      puts "('#{tila}', '#{ts}', '#{checksums}', #{f}');"
     end
-    new_db&.close
+    # new_db&.close
     old_db&.close
     FileUtils.mv(path_new, path_old(dir))
   end
@@ -37,7 +37,6 @@ class Hakemisto < Thor
       db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
     else
       checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
-      select_line = "SELECT * FROM Documents WHERE summa='#{checksums.to_s}'"
       db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';") do |l| puts l.to_s; end
     end
     db&.close
