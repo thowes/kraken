@@ -64,9 +64,7 @@ class Hakemisto < Thor
     "#{temp}/#{Process.pid}.db"
   end
 
-  def path_old(file = nil)
   #
-  end
 
   def status(count, filename)
     tila = 'NA'
