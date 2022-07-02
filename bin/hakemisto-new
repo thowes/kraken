@@ -19,7 +19,7 @@ class Hakemisto < Thor
       tila = 'NA'
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = Time.new # read actual f timestamp
-      duplicate_count = 0 # duplicate_lines(old_db, "#{checksums}").count
+      duplicate_count = duplicate_lines(old_db, "#{checksums}").count
       tila = 'DD' if duplicate_count > 1
       # status = status(duplicate_count, f)
       puts "#{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');"
