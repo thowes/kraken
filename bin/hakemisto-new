@@ -13,13 +13,13 @@ class Hakemisto < Thor
   desc 'default', 'default function.'
   def default(dir = nil)
     new_db = db_create
-    old_db = db_read(path_old(dir))
+    old_db = db_read(path_old dir)
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
-    files.each do |f|
+    Dir.glob("*.jpg").each do |f|
       tila = 'NA'
-      checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
+      checksums = "123,234567890" #{}"#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = Time.new # read actual f timestamp
-      duplicate_count = duplicate_lines(old_db, "#{checksums}").count
+      duplicate_count = 0 # duplicate_lines(old_db, "#{checksums}").count
       tila = 'DD' if duplicate_count > 1
       # status = status(duplicate_count, f)
       puts ("new_db.exec" "#{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');")
@@ -32,14 +32,13 @@ class Hakemisto < Thor
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
-    db = SQLite3::Database.open(db_file) # non-changing
+    db = db_read(db_file) # non-changing
     if filename.nil?
-      select_line = "SELECT * FROM Documents WHERE status='M2';"
       db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
     else
       checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
       select_line = "SELECT * FROM Documents WHERE summa='#{checksums.to_s}'"
-      db.execute(select_line)
+      db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';") do |l| puts l.to_s; end
     end
     db&.close
   end
