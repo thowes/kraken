@@ -26,7 +26,7 @@ alias cdcd=cd
 alias cim='git commit -m'
 alias clone='git clone'
 alias co='git checkout'
-alias d=diff
+#alias d=diff
 alias dc=cd
 alias dox='LISTA=~/Documents/hakemisto.lst listalla'
 alias dwl='synkronoi dwl'

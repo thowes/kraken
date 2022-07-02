@@ -13,9 +13,9 @@ class Hakemisto < Thor
   desc 'default', 'default function.'
   def default(dir = nil)
     FileUtils.cd(dir) unless dir.nil?
-    # uusi = db_create # new db
+    uusi = db_create # new db
     db = db_read('hakemisto.db')
-    insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
+    insert = "INSERT INTO Documents (status, ls_time, summa, path) values"; puts uusi
     Dir.glob("*").each do |f|
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = File.ctime f
@@ -23,7 +23,7 @@ class Hakemisto < Thor
       tila = status(count, f)
       puts "uusi.execute #{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');"
     end
-    # uusi&.close
+    uusi&.close
     db&.close
     puts "FileUtils.mv #{path_new}, ./hakemisto.db)"
   end
@@ -68,10 +68,9 @@ class Hakemisto < Thor
     SQLite3::Database.open file # howto do read-only?
   end
 
-    old.exec("#{select_line}='#{checksum}'")
 
   def path_new
-    temp =  ENV['TEMP'] || `asetus dir:temp`.to_s || '~/Projects/temp'
+    temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || '~/Projects/temp'
     "#{temp}/#{Process.pid}.db"
   end
 
