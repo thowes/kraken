@@ -16,9 +16,10 @@ class Hakemisto < Thor
     old_db = db_read(path_old dir.to_s)
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("*").each do |f|
+      duplicates = 0
       tila = 'NA'
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
-      ts = Time.new # read actual f timestamp
+      ts = Time.now # read actual f timestamp
       duplicate_count = duplicate_lines(old_db, "#{checksums}").count
       tila = 'DD' if duplicate_count > 1
       # status = status(duplicate_count, f)
@@ -70,7 +71,6 @@ class Hakemisto < Thor
   end
 
   def duplicate_lines(old, checksum)
-    select_line = "SELECT * FROM Documents WHERE summa"
     old.exec("#{select_line}='#{checksum}'")
   end
 
