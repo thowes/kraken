@@ -84,9 +84,11 @@ class Hakemisto < Thor
 
   def status(count, filename)
     tila = 'NA'
+    tila = 'D2' if count > 1 && tila = 'NA'
     tila = 'RR' if %w[backup.log .DS_Store hakemisto.db hakemisto.lst roina.lst].include?(filename)
-      tila = 'DD' if duplicate_count > 1
+    tila = 'R2' if count > 1 && tila = 'RR'
     return tila
+    # tila = 'M2' if count > 1 && tila = 'MM'
   end
 
 end
