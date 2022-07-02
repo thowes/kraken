@@ -54,9 +54,7 @@ class Hakemisto < Thor
   end
 
   private
-  def db_create(*)
     return db_return
-  end
   #
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
@@ -68,9 +66,7 @@ class Hakemisto < Thor
   end
 
   def path_old(file = nil)
-    file = "#{file}/hakemisto.db" if File.directory?(file) && !file.nil?
     file = 'hakemisto.db' if file.nil?
-    puts file
     return file.to_s
   end
 
