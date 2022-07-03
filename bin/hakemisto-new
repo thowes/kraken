@@ -20,9 +20,9 @@ class Hakemisto < Thor
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
-        checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
+        checksums = summa(f).to_s # "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
         count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';").count
-        puts "uusi.execute #{insert} ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', #{f}');"
+        puts("uusi.execute(#{insert} ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', #{f}');")
       end
     end
     uusi&.close
@@ -46,14 +46,16 @@ class Hakemisto < Thor
 
   desc 'missing', 'look for missing files in the DB.'
   def missing(filename = nil)
-    if !filename.nil?
       db_file = ENV['DB'] || 'hakemisto.db' # pwd
       db = db_read(db_file) # non-changing, is this line needed?
+    if !filename.nil?
       # ref_db = db_read() # reference db
-      db&.close
     end
+      db&.close
   end
+  desc 'roina', 'look for roina files in the DB.'
   def roina(filename = nil); end
+  #
 
   private
 
