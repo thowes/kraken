@@ -5,6 +5,7 @@ require 'thor'
 require 'sqlite3'
 require 'digest'
 require 'time'
+require 'fileutils'
 
 # HAKEMISTO class: scans contents of a dir and counts checksums.
 class Hakemisto < Thor
@@ -27,7 +28,7 @@ class Hakemisto < Thor
     end
     uusi&.close
     db&.close
-    puts "FileUtils.mv #{polku}, ./hakemisto.db)"
+    FileUtils.mv(polku, './hakemisto.db')
     File.delete(polku) if File.exist?(polku)
   end
 
@@ -36,7 +37,7 @@ class Hakemisto < Thor
     db_file = ENV['DB'] || 'hakemisto.db'
     db = db_read(db_file) # non-changing
     if filename.nil?
-      db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
+      db.execute("SELECT * FROM Documents WHERE status='D2';") do |l| puts l.to_s; end
     else
       checksums = summa(filename)
       db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';") do |l| puts l.to_s; end
