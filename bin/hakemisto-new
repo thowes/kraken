@@ -17,12 +17,11 @@ class Hakemisto < Thor
     uusi = db_read(polku) # new db
     uusi.execute("CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT);")
     db = db_read('hakemisto.db')
-    insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         checksums = summa(f)
         count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';").count
-        puts("uusi.execute(#{insert} ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', #{f}');")
+        uusi.execute("INSERT INTO Documents (status, ls_time, summa, path) values ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', #{f.to_s}');")
       end
     end
     uusi&.close
