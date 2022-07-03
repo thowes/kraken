@@ -12,16 +12,17 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
+    insert = 'INSERT INTO Documents (status, ls_time, summa, path) values'
     polku = path_new
     FileUtils.cd(dir) unless dir.nil?
+    db = db_read('hakemisto.db')
     uusi = db_read(polku) # new db
     uusi.execute("CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT);")
-    db = db_read('hakemisto.db')
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         checksums = summa(f)
         count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';").count
-        uusi.execute("INSERT INTO Documents (status, ls_time, summa, path) values ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', #{f.to_s}');")
+        uusi.execute("#{insert} ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', '#{f.to_s}');")
       end
     end
     uusi&.close
@@ -58,6 +59,7 @@ class Hakemisto < Thor
   desc 'roina', 'look for roina files in the DB.'
   def roina(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db'
+    db = db_read(db_file) # non-changing, is this line needed?
   end
 
   private
@@ -86,6 +88,7 @@ class Hakemisto < Thor
   end
 
   def tulosta(row); end
+  #
 end
 
 Hakemisto.start(ARGV)
