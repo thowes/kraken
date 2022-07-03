@@ -21,7 +21,7 @@ class Hakemisto < Thor
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         checksums = summa(f)
-        count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';").count
+        count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';").count
         puts("uusi.execute(#{insert} ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', #{f}');")
       end
     end
@@ -39,25 +39,27 @@ class Hakemisto < Thor
       db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
     else
       checksums = summa(filename)
-      db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';") do |l| puts l.to_s; end
+      db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';") do |l| puts l.to_s; end
     end
     db&.close
   end
 
   desc 'missing', 'look for missing files in the DB.'
   def missing(filename = nil)
-      db_file = ENV['DB'] || 'hakemisto.db' # pwd
+    db_file = ENV['DB'] || 'hakemisto.db' # pwd
     db = db_read(db_file) # non-changing, is this line needed?
     if !filename.nil?
       db.execute("SELECT * FROM Documents WHERE status='MM';") do |l| puts l.to_s; end
-      # ref_db = db_read() # reference db
     else
+      # ref_db = db_read() # reference db
     end
     db&.close
   end
+
   desc 'roina', 'look for roina files in the DB.'
-  def roina(filename = nil); end
+  def roina(filename = nil)
   #
+  end
 
   private
 
