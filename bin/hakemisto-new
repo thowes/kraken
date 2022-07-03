@@ -20,7 +20,7 @@ class Hakemisto < Thor
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
-        checksums = summa(f).to_s # "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
+        checksums = summa(f)
         count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';").count
         puts("uusi.execute(#{insert} ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', #{f}');")
       end
@@ -38,7 +38,7 @@ class Hakemisto < Thor
     if filename.nil?
       db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
     else
-      checksums = "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
+      checksums = summa(filename)
       db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';") do |l| puts l.to_s; end
     end
     db&.close
@@ -47,11 +47,13 @@ class Hakemisto < Thor
   desc 'missing', 'look for missing files in the DB.'
   def missing(filename = nil)
       db_file = ENV['DB'] || 'hakemisto.db' # pwd
-      db = db_read(db_file) # non-changing, is this line needed?
+    db = db_read(db_file) # non-changing, is this line needed?
     if !filename.nil?
+      db.execute("SELECT * FROM Documents WHERE status='MM';") do |l| puts l.to_s; end
       # ref_db = db_read() # reference db
+    else
     end
-      db&.close
+    db&.close
   end
   desc 'roina', 'look for roina files in the DB.'
   def roina(filename = nil); end
@@ -79,7 +81,7 @@ class Hakemisto < Thor
   end
 
   def summa(filename)
-    "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
+    "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}".to_s
   end
 
 end
