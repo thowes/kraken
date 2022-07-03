@@ -21,9 +21,7 @@ class Hakemisto < Thor
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
-        ts = File.ctime f
         count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';").count
-        tila = status(count, f)
         puts "uusi.execute #{insert} ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', #{f}');"
       end
     end
@@ -55,6 +53,7 @@ class Hakemisto < Thor
       db&.close
     end
   end
+  def roina(filename = nil); end
 
   private
 
@@ -78,7 +77,7 @@ class Hakemisto < Thor
   end
 
   def summa(filename)
-  #
+    "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}"
   end
 
 end
