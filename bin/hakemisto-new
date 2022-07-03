@@ -19,6 +19,7 @@ class Hakemisto < Thor
     db = db_read('hakemisto.db')
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("*").each do |f|
+      puts f
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}"
       ts = File.ctime f
       count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';").count
@@ -63,9 +64,7 @@ class Hakemisto < Thor
     temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || '~/Projects/temp'
     "#{temp}/#{Process.pid}.db"
   end
-
   #
-
   def status(count, filename)
     tila = 'NA'
     tila = 'RR' if %w[backup.log .DS_Store hakemisto.db hakemisto.lst roina.lst].include?(filename)
@@ -75,6 +74,7 @@ class Hakemisto < Thor
     tila = 'M2' if count > 1 && tila == 'MM'
     return tila
   end
+  def summa(filename); end
 
 end
 
