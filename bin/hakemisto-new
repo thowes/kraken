@@ -20,7 +20,7 @@ class Hakemisto < Thor
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("*").each do |f|
       checksums = "d41d8cd98f00b204e9800998ecf8427e,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-      puts  f
+      puts "DIR: #{f}"
       checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}" if File.exist?(f)
       ts = File.ctime f
       count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';").count
@@ -76,8 +76,9 @@ class Hakemisto < Thor
     return tila
   end
 
-  def summa(filename); end
+  def summa(filename)
   #
+  end
 
 end
 
