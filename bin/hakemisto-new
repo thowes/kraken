@@ -20,12 +20,13 @@ class Hakemisto < Thor
     insert = "INSERT INTO Documents (status, ls_time, summa, path) values"
     Dir.glob("**/*.*").each do |f|
       checksums = "d41d8cd98f00b204e9800998ecf8427e,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-      puts "DIR: #{f}"
+      if !File.directory?(f)
         checksums = "#{Digest::MD5.file f},#{Digest::SHA256.file f}" if !File.directory?(f)
-      ts = File.ctime f
+        ts = File.ctime f
         count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums.to_s}';").count
-      tila = status(count, f)
+        tila = status(count, f)
         puts "uusi.execute #{insert} ('#{tila}', '#{ts}', '#{checksums}', #{f}');"
+      end
     end
     uusi&.close
     db&.close
@@ -68,7 +69,7 @@ class Hakemisto < Thor
 
   def status(count, filename)
     tila = 'NA'
-    tila = 'RR' if %w[backup.log .DS_Store hakemisto.db hakemisto.lst roina.lst].include?(filename)
+    tila = 'RR' if %w[backup.log .DS_Store hakemisto.db hakemisto.lst OK.txt roina.lst Thumbs.db].include?(filename)
     # tila = 'MM' if missing(filename) && tila == 'NA'
     tila = 'D2' if count > 1 && tila == 'NA'
     tila = 'R2' if count > 1 && tila == 'RR'
