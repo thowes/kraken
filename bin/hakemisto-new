@@ -12,17 +12,17 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
-    insert = 'INSERT INTO Documents (status, ls_time, summa, path) values'
     polku = path_new
     FileUtils.cd(dir) unless dir.nil?
     db = db_read('hakemisto.db')
     uusi = db_read(polku) # new db
     uusi.execute("CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT);")
+    insert = 'INSERT INTO Documents (status, ls_time, summa, path) values'
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         checksums = summa(f)
         count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';").count
-        uusi.execute("#{insert} ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', '#{f.to_s}');")
+        uusi.execute("#{insert} ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', '#{f}');")
       end
     end
     uusi&.close
@@ -87,8 +87,9 @@ class Hakemisto < Thor
     "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}".to_s
   end
 
-  def tulosta(row); end
+  def tulosta(row)
   #
+  end
 end
 
 Hakemisto.start(ARGV)
