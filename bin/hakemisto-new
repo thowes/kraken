@@ -28,7 +28,7 @@ class Hakemisto < Thor
     uusi&.close
     db&.close
     puts "FileUtils.mv #{polku}, ./hakemisto.db)"
-    #FileUtils.delete(polku) if File.exist?(polku)
+    File.delete(polku) if File.exist?(polku)
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
@@ -58,7 +58,7 @@ class Hakemisto < Thor
 
   desc 'roina', 'look for roina files in the DB.'
   def roina(filename = nil)
-  #
+    db_file = ENV['DB'] || 'hakemisto.db'
   end
 
   private
@@ -86,6 +86,7 @@ class Hakemisto < Thor
     "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}".to_s
   end
 
+  def tulosta(row); end
 end
 
 Hakemisto.start(ARGV)
