@@ -15,19 +15,20 @@ class Hakemisto < Thor
   def default(dir = nil)
     polku = path_new
     FileUtils.cd(dir) unless dir.nil?
-    db = db_read('hakemisto.db')
+    db = db_read('hakemisto.db') if File.exist?('hakemisto.db')
     uusi = db_read(polku) # new db
     uusi.execute("CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT);")
     insert = 'INSERT INTO Documents (status, ls_time, summa, path) values'
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
+        count = 0
         checksums = summa(f)
-        count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';").count
+        count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';").count if File.exist?('hakemisto.db')
         uusi.execute("#{insert} ('#{status(count, f)}', '#{File.ctime f}', '#{checksums}', '#{f}');")
       end
     end
     uusi&.close
-    db&.close
+    db&.close if File.exist?('hakemisto.db')
     FileUtils.mv(polku, './hakemisto.db')
     File.delete(polku) if File.exist?(polku)
   end
