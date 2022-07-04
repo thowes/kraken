@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'thor'
+# require 'fileutils'
+
+# PROJEKTI class: list projects and their directories.
+class Projekti < Thor
+  default_task :go
+
+  desc 'go', 'go to the project directory.'
+  def go
+    #
+  end
+
+  private
+
+  def status
+    #
+  end
+
+end
+
+Projekti.start(ARGV)
