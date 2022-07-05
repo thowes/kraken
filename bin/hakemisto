@@ -24,7 +24,7 @@ class Hakemisto < Thor
         count = 0
         checksums = summa(f)
         count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';").count if File.exist?('hakemisto.db')
-        uusi.execute("#{insert} ('#{status(count, f)}', '#{File.stat(f).mtime}', '#{checksums}', '#{f}');")
+        uusi.execute("#{insert} ('#{status(count, f)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
       end
     end
     uusi&.close
