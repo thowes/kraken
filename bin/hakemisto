@@ -31,6 +31,7 @@ class Hakemisto < Thor
     db&.close if File.exist?('hakemisto.db')
     FileUtils.mv(polku, './hakemisto.db')
     File.delete(polku) if File.exist?(polku)
+    puts polku
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
