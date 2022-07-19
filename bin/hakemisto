@@ -70,9 +70,11 @@ class Hakemisto < Thor
     end
     db&.close
   end
+
   desc 'this_machine', 'checks if given DB was created on this machine (NOTE: work in progress).'
-  def this_machine(filename = nil); return true; end
+  def this_machine(filename = nil); return true
     # return true
+  end
 
   private
 
