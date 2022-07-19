@@ -72,10 +72,11 @@ class Hakemisto < Thor
   end
 
   desc 'this_machine', 'checks if given DB was created on this machine (NOTE: work in progress).'
-  def this_machine(filename = nil); return true
+  def this_machine(filename = nil)
     db_file = filename || ENV['DB'] || 'hakemisto.db'
-    # return true
+    db = db_read(db_file) # non-changing?
     db&.close
+    true
   end
 
   private
