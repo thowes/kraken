@@ -19,6 +19,7 @@ class Hakemisto < Thor
     uusi = db_read(polku) # new db
     uusi.execute("CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT);")
     insert = 'INSERT INTO Documents (status, ls_time, summa, path) values'
+    # uusi.execute("#{insert} ('DIR', '#{Time.now}', '0,0', 'hostname:dir_path')")
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         count = 0
@@ -75,6 +76,7 @@ class Hakemisto < Thor
   def this_machine(filename = nil)
     db_file = filename || ENV['DB'] || 'hakemisto.db'
     db = db_read(db_file) # non-changing?
+    line = db.execute("SELECT * FROM Documents WHERE status='DIR';")
     db&.close
     true
   end
