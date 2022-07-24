@@ -6,6 +6,7 @@ require 'sqlite3'
 require 'digest'
 require 'time'
 require 'fileutils'
+require 'socket'
 
 # HAKEMISTO class: scans contents of a dir and counts checksums.
 class Hakemisto < Thor
@@ -78,7 +79,7 @@ class Hakemisto < Thor
     db = db_read(db_file) # non-changing?
     line = db.execute("SELECT * FROM Documents WHERE status='DIR';")
     db&.close
-    true
+    true if line.to_s.include?(Socket.gethostname)
     false
   end
 
