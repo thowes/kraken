@@ -79,6 +79,7 @@ class Hakemisto < Thor
     line = db.execute("SELECT * FROM Documents WHERE status='DIR';")
     db&.close
     true
+    false
   end
 
   private
