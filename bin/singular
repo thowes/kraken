@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+
+class Singular < Thor
+	# default
+	desc 'def', 'is the default command.'
+	def edit(filename)
+		puts "Whats a name?"
+		name = $stdin.readline
+		puts "name is " + name
+	end
+
+end
+
+Singular.start(ARGV)
