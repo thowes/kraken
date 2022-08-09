@@ -6,6 +6,7 @@ require 'thor'
 # single line text editor for the command line. work in progress
 class Singular < Thor
   default_task :edit
+
 	desc 'def', 'is the default command.'
 	def edit(filename)
 		puts "Whats a name?"
