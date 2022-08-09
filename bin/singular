@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'thor'
+#require 'fileutils'
 
 # single line text editor for the command line. work in progress
 class Singular < Thor
