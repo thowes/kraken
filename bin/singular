@@ -7,7 +7,7 @@ require 'thor'
 class Singular < Thor
   default_task :edit
 
-	desc 'def', 'is the default command.'
+	desc 'edit', 'edit text file.'
 	def edit(filename)
 		puts "Whats a name?"
 		name = $stdin.readline
