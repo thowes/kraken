@@ -4,17 +4,17 @@
 require 'thor'
 #require 'fileutils'
 
-ARGV.each do|url|; end
+# ARGV.each do|file|; end
 # single line text editor for the command line. work in progress
 class Singular < Thor
   default_task :edit
 
 	desc 'edit', 'edit text file.'
-	def edit(filename)
+  def edit(filename)
 	puts "Whats a content?"
-		name = $stdin.readline
+    name = $stdin.readline
 	puts "content is " + name
-	end
+  end
 
 end
 
