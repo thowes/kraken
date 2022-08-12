@@ -4,6 +4,7 @@
 require 'thor'
 #require 'fileutils'
 
+ARGV.each do|url|; end
 # single line text editor for the command line. work in progress
 class Singular < Thor
   default_task :edit
