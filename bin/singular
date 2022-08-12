@@ -11,9 +11,9 @@ class Singular < Thor
 
 	desc 'edit', 'edit text file.'
   def edit(filename)
-	puts "Whats a content?"
+    puts "Whats a content?"
     name = $stdin.readline
-	puts "content is " + name
+    puts "#{filename}: " + name
   end
 
 end
