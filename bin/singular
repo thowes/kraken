@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-#require 'fileutils'
+# require 'fileutils'
 
 # single line text editor for the command line.
 ARGV.each do|filename|
-  puts "Whats a content?"
+  puts "Whats a content?" # add linebreak
   if File.exist? filename
     content = File.read(filename)
 	elsif
@@ -13,4 +13,3 @@ ARGV.each do|filename|
   end
   puts "#{filename}: " + content
 end
-    #
