@@ -6,15 +6,14 @@ require 'thor'
 
 # single line text editor for the command line. work in progress
 ARGV.each do|filename|
+    puts "Whats a content?"
   if File.exist? filename
     content = File.read(filename)
 	elsif
-    puts "Whats a content?"
     content = $stdin.readline
   end
-    puts "#{filename}: " + content
+  puts "#{filename}: " + content
 end
 class Singular < Thor
-  desc 'edit', 'edit text file.'
     #
 end
