@@ -8,8 +8,9 @@ require 'thor'
 ARGV.each do|file|
   if File.exist? file
     content = File.read(file)
-	puts "file: #{file}"
+    puts "file#{file}: #{content}"
 	elsif
+    puts "Whats a content?"
   end
 end
 
@@ -17,9 +18,9 @@ class Singular < Thor
 
   desc 'edit', 'edit text file.'
   def edit(filename)
-    puts "Whats a content?"
     content = $stdin.readline
     puts "#{filename}: " + content
+    #
   end
 end
 Singular.start(ARGV)
