@@ -5,21 +5,19 @@ require 'thor'
 #require 'fileutils'
 
 # single line text editor for the command line. work in progress
-ARGV.each do|file|
+ARGV.each do|filename|
   if File.exist? file
     content = File.read(file)
-    puts "file#{file}: #{content}"
 	elsif
     puts "Whats a content?"
   end
+    puts "#{filename}: " + content
 end
 
 class Singular < Thor
-
   desc 'edit', 'edit text file.'
   def edit(filename)
     content = $stdin.readline
-    puts "#{filename}: " + content
     #
   end
 end
