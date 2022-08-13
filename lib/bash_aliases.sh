@@ -1,5 +1,6 @@
 alias ..='cd ..'
 alias ...='cd ..; cd ..'
+alias 1=singular
 alias 1st='bulog -1'
 alias 2nd='bulog -2'
 alias +a='chmod a+rwx'
