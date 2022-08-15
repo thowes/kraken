@@ -12,5 +12,5 @@ ARGV.each do|filename|
     content = $stdin.readline
     # f.puts content
   end
-  puts "#{filename}:\n" + content
+  puts "#{filename}:\n#{content}"
 end
