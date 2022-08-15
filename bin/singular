@@ -7,7 +7,7 @@
 ARGV.each do|filename|
   if File.exist? filename
     content = File.read(filename)
-	elsif
+  elsif
     puts "Whats a content?\n"
     content = $stdin.readline
     # f.puts content
