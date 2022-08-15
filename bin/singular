@@ -5,12 +5,12 @@
 
 # single line text editor for the command line.
 ARGV.each do|filename|
-  puts "Whats a content?" # add linebreak
+  puts "Whats a content?\n"
   if File.exist? filename
     content = File.read(filename)
 	elsif
     content = $stdin.readline
   end
-  puts "#{filename}: " + content
+  puts "#{filename}:\n" + content
   # f.puts content
 end
