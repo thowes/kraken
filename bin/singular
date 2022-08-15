@@ -9,7 +9,7 @@ ARGV.each do|filename|
     content = File.read(filename)
   elsif
     puts "Whats a content?\n"
-    content = $stdin.readline
+    content = $stdin.readline # check
     # f.puts content
   end
   puts "#{filename}:\n#{content}"
