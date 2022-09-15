@@ -3,6 +3,7 @@
 
 require 'thor'
 # require 'fileutils'
+# require 'csv'
 
 # PROJEKTI class: list projects and their directories.
 class Projekti < Thor
@@ -28,7 +29,7 @@ class Projekti < Thor
   def status
     brach = "$(git status | \grep 'On branch')"
     status_message = "$(git status)"
-    puts branch if branch.include?('master')
+    if branch.include?('master'); puts status_message; end
   end
 
 end
