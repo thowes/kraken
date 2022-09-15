@@ -6,7 +6,7 @@ require 'thor'
 
 # PROJEKTI class: list projects and their directories.
 class Projekti < Thor
-  default_task :go
+  default_task :status
 
   desc 'go', 'go to the project directory.'
   def go
@@ -16,7 +16,7 @@ class Projekti < Thor
   private
 
   def status
-    #
+    status = "$(git status | \grep 'On branch')"
   end
 
 end
