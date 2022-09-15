@@ -7,8 +7,10 @@ require 'thor'
 # PROJEKTI class: list projects and their directories.
 class Projekti < Thor
   default_task :tila
+
   desc 'dir', 'show the project directory.'
   def dir; end
+    #
 
   desc 'go', 'go to the project directory.'
   def go
@@ -17,13 +19,13 @@ class Projekti < Thor
 
   desc 'tila', 'show the git project status message in one line.'
   def tila; status
-    #
+    status
   end
 
   private
 
   def status
-    status_message = "$(git status | \grep 'On branch')"
+    status_message = "$(git status)"
     puts status_message if status_message.include?('master')
   end
 
