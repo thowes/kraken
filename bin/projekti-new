@@ -7,6 +7,7 @@ require 'thor'
 # PROJEKTI class: list projects and their directories.
 class Projekti < Thor
   default_task :tila
+  desc 'dir', 'show the project directory.'
   def dir; end
 
   desc 'go', 'go to the project directory.'
@@ -15,8 +16,9 @@ class Projekti < Thor
   end
 
   desc 'tila', 'show the git project status message in one line.'
-  def tila; status; end
+  def tila; status
     #
+  end
 
   private
 
