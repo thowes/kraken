@@ -29,8 +29,9 @@ class Projekti < Thor
   def status
     brach = "$(git status | \grep 'On branch')"
     status_message = "$(git status)"
-    if branch.include?('master'); puts status_message; end
+    if branch.include?('master')
       # puts status_message
+    end
   end
 
 end
