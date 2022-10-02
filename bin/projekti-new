@@ -29,10 +29,10 @@ class Projekti < Thor
   def status
     branch = "$(git status | \grep 'On branch')"
     status_message = "$(git status)"
-      update = "$(git status | \grep 'On branch' | \grep origin)"
     if branch.include?('master')
+      update = "$(git status | \grep 'On branch' | \grep origin)"
       puts update
-    else puts 'Not in master branch'
+    else
       puts 'Not in master branch.'
     end
     puts "STATUS:\n#{status_message}"
