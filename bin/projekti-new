@@ -31,7 +31,9 @@ class Projekti < Thor
     status_message = "$(git status)"
     if branch.include?('master')
       update = "$(git status | \grep 'On branch' | \grep origin)"
+      if update.include?('ahead')
       puts update
+      end
     else
       puts 'Not in master branch.'
     end
