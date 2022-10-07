@@ -34,9 +34,9 @@ class Projekti < Thor
         puts 'You are ahead of master branch in commits.'
       else
         # if
-        if status_message.to_s.gsub("\n", ' ').include?('date')
+          if status_message.to_s.gsub("\n", ' ').include?('date')
             puts 'Up-to-date with origin/master.'
-        end
+          end
         # end
       end
     else
