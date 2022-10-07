@@ -33,11 +33,11 @@ class Projekti < Thor
       if status_message.to_s.gsub("\n", ' ').include?('ahead')
         puts 'You are ahead of master branch in commits.'
       else
-        # if
+        if status_message.to_s.gsub("\n", ' ').include?('date')
           if status_message.to_s.gsub("\n", ' ').include?('date')
             puts 'Up-to-date with origin/master.'
           end
-        # end
+        end
       end
     else
       puts 'Not in master branch.'
