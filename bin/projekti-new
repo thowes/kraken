@@ -8,7 +8,7 @@ require 'thor'
 # PROJEKTI class: list projects and their directories.
 class Projekti < Thor
   default_task :tila
-  # verbose
+  class_option :verbose, :type => :boolean, desc: 'print more ouput if verbose true.'
 
   desc 'dir', 'show the project directory.'
   def dir
@@ -27,28 +27,30 @@ class Projekti < Thor
 
   private
 
+  desc 'tila', 'show the git project status message in one line.'
   def status
     status_message = `git status`
     if status_message.to_s.gsub("\n", ' ').include?('On branch master')
       if status_message.to_s.gsub("\n", ' ').include?('ahead')
         puts 'You are ahead of master branch in commits.'
       else
-        if status_message.to_s.gsub("\n", ' ').include?('up to date with')
+        if status_message.to_s.gsub("\n", ' ').include?('Your branch is up to date with')
           if status_message.to_s.gsub("\n", ' ').include?('Changes not staged for commit:')
-            puts 'Up-to-date with origin/master.'
             puts 'You have changes not staged for commit.'
           else
+            puts 'Up-to-date with origin/master.'
           end
         else puts 'Not update to date with origin/master.'
-          puts 'Not update to date with origin/master.'
+          puts 'You are ahead of master branch in commits.'
         end
       end
     else
       puts 'Not in master branch.'
     end
-    puts "\nSTATUS:\n#{status_message}" # if verbose?
+    puts "\nSTATUS:\n#{status_message}" if options[:verbose]
   end
 
+  def if_git; end
 end
 
 Projekti.start(ARGV)
