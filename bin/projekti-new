@@ -34,12 +34,13 @@ class Projekti < Thor
         puts 'You are ahead of master branch in commits.'
       else
         if status_message.to_s.gsub("\n", ' ').include?('up to date with')
-          if status_message.to_s.gsub("\n", ' ').include?('commit')
+          if status_message.to_s.gsub("\n", ' ').include?('Changes not staged for commit:')
             puts 'Up-to-date with origin/master.'
-          else
             puts 'You have changes not staged for commit.'
+          else
           end
         else puts 'Not update to date with origin/master.'
+          puts 'Not update to date with origin/master.'
         end
       end
     else
