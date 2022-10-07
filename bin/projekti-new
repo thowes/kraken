@@ -30,18 +30,17 @@ class Projekti < Thor
     message = `git status`
     status_message = `git status`.to_s.gsub("\n", ' ')
     if status_message.include?('master')
-      update = "$(git status | \grep 'On branch' | \grep origin)"
       if status_message.include?('ahead')
         puts 'You are ahead of master branch in commits.'
       else
         if status_message.include?('date')
-        puts update
+          puts status_message
         end
       end
     else
       puts 'Not in master branch.'
     end
-    puts "STATUS:\n#{status_message}"
+    puts "\nSTATUS:\n#{message}"
   end
 
 end
