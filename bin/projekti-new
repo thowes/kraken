@@ -28,10 +28,10 @@ class Projekti < Thor
 
   def status
     branch = "$(git status | \grep 'On branch')"
-    status_message = "$(git status)" #.split into rows
+    status_message = `git status`.to_s.gsub("\n", ' ')
     if branch.include?('master')
       update = "$(git status | \grep 'On branch' | \grep origin)"
-      if update.include?('ahead')
+      if status_message.include?('ahead')
       else
         puts update
       end
