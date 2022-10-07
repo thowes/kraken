@@ -27,20 +27,19 @@ class Projekti < Thor
   private
 
   def status
-    message = `git status`
     status_message = `git status`.to_s.gsub("\n", ' ')
-    if status_message.include?('master')
+    if status_message.to_s.gsub("\n", ' ').include?('branch master')
       if status_message.include?('ahead')
         puts 'You are ahead of master branch in commits.'
       else
-        if status_message.include?('date')
+        if status_message.to_s.gsub("\n", ' ').include?('date')
           puts status_message
         end
       end
     else
       puts 'Not in master branch.'
     end
-    puts "\nSTATUS:\n#{message}"
+    puts "\nSTATUS:\n#{status_message}"
   end
 
 end
