@@ -27,7 +27,7 @@ class Projekti < Thor
 
   private
 
-  desc 'tila', 'show the git project status message in one line.'
+  desc 'status', 'show the git project status message in one line.'
   def status
     status_message = `git status`
     if status_message.to_s.gsub("\n", ' ').include?('On branch master')
@@ -40,7 +40,7 @@ class Projekti < Thor
           else
             puts 'Up-to-date with origin/master.'
           end
-        else puts 'Not update to date with origin/master.'
+        else
           puts 'You are ahead of master branch in commits.'
         end
       end
