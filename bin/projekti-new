@@ -19,9 +19,7 @@ class Projekti < Thor
   def go
     #
   end
-
     status
-  end
 
   desc 'status', 'show the git project status message in one line.'
   def status
@@ -46,10 +44,12 @@ class Projekti < Thor
     puts "\nSTATUS:\n#{status_message}" if options[:verbose]
   end
 
-  desc 'tila', 'show the git project status message in one line.'
+  desc 'tila', "show the git project status message in one line (same as 'status')."
   def tila
+  end
 
   private
+
   def if_git; end
 
 end
