@@ -19,7 +19,6 @@ class Projekti < Thor
   def go
     #
   end
-    status
 
   desc 'status', 'show the git project status message in one line.'
   def status
@@ -46,6 +45,7 @@ class Projekti < Thor
 
   desc 'tila', "show the git project status message in one line (same as 'status')."
   def tila
+    status
   end
 
   private
