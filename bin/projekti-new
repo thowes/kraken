@@ -17,7 +17,7 @@ class Projekti < Thor
     puts dir # csv = File.read(file)
   end
 
-  desc 'go', 'go to the project directory.'
+  desc 'now', 'gives information about the current project directory.'
   def now
     # not doable (probably)
   end
