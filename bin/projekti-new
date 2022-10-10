@@ -12,12 +12,14 @@ class Projekti < Thor
 
   desc 'dir', 'show the project directory.'
   def dir
+    dir = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
     #
+    puts dir # csv = File.read(file)
   end
 
   desc 'go', 'go to the project directory.'
   def go
-    #
+    # not doable (probably)
   end
 
   desc 'status', 'show the git project status message in one line.'
