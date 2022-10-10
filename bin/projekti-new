@@ -18,12 +18,13 @@ class Projekti < Thor
   end
 
   desc 'go', 'go to the project directory.'
-  def go
+  def now
     # not doable (probably)
   end
 
   desc 'status', 'show the git project status message in one line.'
   def status
+    # if Dir.exists=('.git')
     status_message = `git status`
     if status_message.to_s.gsub("\n", ' ').include?('On branch master')
       if status_message.to_s.gsub("\n", ' ').include?('ahead')
