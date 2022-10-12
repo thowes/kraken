@@ -13,8 +13,9 @@ class Projekti < Thor
   desc 'dir', 'show the project directory.'
   def dir
     dir = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
-    #
+    # csv = File.read(file)
     puts dir # csv = File.read(file)
+    # if line.include?(dir)
   end
 
   desc 'now', 'gives information about the current project directory.'
@@ -50,6 +51,7 @@ class Projekti < Thor
   def tila
     status
   end
+  def update; end
 
   private
 
