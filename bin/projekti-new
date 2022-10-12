@@ -12,9 +12,9 @@ class Projekti < Thor
 
   desc 'dir', 'show the project directory.'
   def dir
-    dir = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
+    file = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
     # csv = File.read(file)
-    puts dir # csv = File.read(file)
+    File.foreach(file) { |line| puts line if line.include?('krn') }
     # if line.include?(dir)
   end
 
@@ -51,7 +51,9 @@ class Projekti < Thor
   def tila
     status
   end
+  desc 'update', 'update the git project if no changes or commits locally.'
   def update; end
+    #
 
   private
 
