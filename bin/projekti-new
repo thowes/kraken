@@ -11,11 +11,9 @@ class Projekti < Thor
   class_option :verbose, :type => :boolean, desc: 'print more ouput if verbose true.'
 
   desc 'dir', 'show the project directory.'
-  def dir
+  def dir(*)
     file = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
-    # csv = File.read(file)
     File.foreach(file) { |line| puts line if line.include?('krn') }
-    # if line.include?(dir)
   end
 
   desc 'now', 'gives information about the current project directory.'
@@ -51,9 +49,11 @@ class Projekti < Thor
   def tila
     status
   end
+
   desc 'update', 'update the git project if no changes or commits locally.'
-  def update; end
+  def update(*)
     #
+  end
 
   private
 
