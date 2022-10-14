@@ -2,7 +2,7 @@
 
 # this function is a tool for keeping projects automatically updated if they use git.
 # update (pull) project if locally up to date.
-STATUS=$(projekti-status)
+STATUS="$(projekti-new status)"
 case $STATUS in
 	*Up-to-date*) if [ "$KR_NETWORK" != "NADA" ]; then kaiku "PROJ_UPD:" $STATUS; git pull; else virhe "PROJ_UPD:" "Can't update," "Internet not available"; fi;;
 	*) virhe "PROJ_UPD:" "$STATUS";;

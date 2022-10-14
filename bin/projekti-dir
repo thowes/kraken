@@ -29,7 +29,7 @@ if [ -z "$1" ]; then nada; else
 			esac
 			case $PROJ_FUNCTION in
 				dir) echo "$PROJ_DIR";;
-				st) if [ -d $PROJ_DIR ]; then cd $PROJ_DIR; projekti-status; fi;;
+				st) if [ -d $PROJ_DIR ]; then cd $PROJ_DIR; projekti-new status; fi;;
 				#*) open .;;
 			esac;;
 	esac
