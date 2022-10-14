@@ -52,7 +52,9 @@ class Projekti < Thor
 
   desc 'update', 'update the git project if no changes or commits locally.'
   def update(*)
+    if status.include?('up-to-date')
     #
+    end
   end
 
   private
