@@ -52,7 +52,7 @@ class Projekti < Thor
 
   desc 'update', 'update the git project if no changes or commits locally.'
   def update(proj)
-    if status.include?('up-to-date')
+    if status.include?('up-to-date') ## && RUBY_PLATFORM.include?('???')
       puts 'Up-to-date with origin/master.' # upd = `git pull`
     end
   end
