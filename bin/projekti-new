@@ -10,7 +10,9 @@ class Projekti < Thor
   default_task :tila
   class_option :verbose, :type => :boolean, desc: 'print more ouput if verbose true.'
 
+  desc 'default', 'the default command.'
   def default; puts 'default'; end
+
   desc 'dir', 'show the project directory.'
   def dir(proj)
     file = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
@@ -54,7 +56,7 @@ class Projekti < Thor
   desc 'update', 'update the git project if no changes or commits locally.'
   def update(proj)
     if status.include?('up-to-date') && RUBY_PLATFORM.include?('darwin')
-      puts 'Up-to-date with origin/master.' # upd = `git pull`
+      puts 'Up-to-date with origin/master.'
     else # upd = `git pull`
     end
   end
