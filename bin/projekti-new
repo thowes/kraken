@@ -12,6 +12,7 @@ class Projekti < Thor
 
   desc 'default', 'the default command.'
   def default; puts 'default'; end
+    #
 
   desc 'dir', 'show the project directory.'
   def dir(proj)
