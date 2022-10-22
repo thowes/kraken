@@ -59,11 +59,11 @@ class Projekti < Thor
   def update(proj)
     if RUBY_PLATFORM.include?('darwin')
       if status.include?('up-to-date')
-      puts 'Up-to-date with origin/master.'
+        puts 'Up-to-date with origin/master.'
       else # upd = `git pull`
-      #
+        #
       end
-    end # if RUBY_PLATFORM.include?
+    end
   end
 
   private
