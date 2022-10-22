@@ -63,7 +63,7 @@ class Projekti < Thor
       if status.include?('up-to-date')
         puts 'Up-to-date with origin/master.'
       else # upd = `git pull`
-        #
+        # upd = `git pull`
       end
     end
   end
