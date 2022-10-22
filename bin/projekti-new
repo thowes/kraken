@@ -11,8 +11,9 @@ class Projekti < Thor
   class_option :verbose, :type => :boolean, desc: 'print more ouput if verbose true.'
 
   desc 'default', 'the default command.'
-  def default; puts 'default'
+  def default
     #
+    puts 'default'
   end
 
   desc 'dir', 'show the project directory.'
