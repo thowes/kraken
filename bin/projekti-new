@@ -61,8 +61,9 @@ class Projekti < Thor
       puts 'Using this update method not possible in MacOS yet.'
     else
       tila = status
-      if status.include?('up-to-date')
+      if tila.include?('up-to-date')
         puts 'Up-to-date with origin/master.'
+        # upd = `git pull`
       else # upd = `git pull`
         puts tila
       end
