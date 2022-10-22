@@ -12,7 +12,6 @@ class Projekti < Thor
 
   desc 'default', 'the default command.'
   def default
-    #
     puts 'default'
   end
 
