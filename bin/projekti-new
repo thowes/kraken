@@ -58,6 +58,7 @@ class Projekti < Thor
   desc 'update', 'update the git project if no changes or commits locally.'
   def update(proj)
     if RUBY_PLATFORM.include?('darwin')
+      puts 'Using this update method not possible in MacOS yet.'
     else
       if status.include?('up-to-date')
         puts 'Up-to-date with origin/master.'
