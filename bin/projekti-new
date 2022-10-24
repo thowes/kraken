@@ -7,12 +7,13 @@ require 'thor'
 
 # PROJEKTI class: list projects and their directories.
 class Projekti < Thor
-  default_task :tila
+  default_task :default
   class_option :verbose, :type => :boolean, desc: 'print more ouput if verbose true.'
 
   desc 'default', 'the default command.'
-  def default
+  def default(func = nil)
     puts 'default'
+    puts 'def:dir' if func == 'dir'
   end
 
   desc 'dir', 'show the project directory.'
