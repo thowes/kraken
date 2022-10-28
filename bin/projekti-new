@@ -66,7 +66,7 @@ class Projekti < Thor
       tila = status
       if tila.include?('up-to-date')
         puts 'Up-to-date with origin/master.'
-        # upd = `git pull`
+        upd = `git pull`
       else
         puts tila
       end
