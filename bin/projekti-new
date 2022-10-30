@@ -15,6 +15,7 @@ class Projekti < Thor
   def default(func = nil)
     # puts 'default'
     puts 'def:dir' if func == 'dir'
+    puts 'def:now' if func == 'now'
     puts 'def:upd' if func == 'upd'
   end
 
@@ -65,7 +66,6 @@ class Projekti < Thor
     else
       tila = status
       if tila.include?('up-to-date')
-        # puts 'Up-to-date with origin/master.'
         upd = `git pull`
       else
         puts tila
