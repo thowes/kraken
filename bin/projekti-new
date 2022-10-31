@@ -14,10 +14,11 @@ class Projekti < Thor
   desc 'default', 'the default command.'
   def default(func = nil)
     if func == 'def'
-    puts 'def:dir' if func == 'dir'
+      puts 'def:dir' if func == 'dir'
       puts 'def:now' if func == 'now'
-    puts 'def:upd' if func == 'upd'
+      puts 'def:upd' if func == 'upd'
     else puts 'def'; end
+      puts 'def'
   end
 
   desc 'dir', 'show the project directory.'
