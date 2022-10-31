@@ -17,8 +17,9 @@ class Projekti < Thor
       puts 'def:dir' if func == 'dir'
       puts 'def:now' if func == 'now'
       puts 'def:upd' if func == 'upd'
-    else puts 'def'; end
+    else
       puts 'def'
+    end
   end
 
   desc 'dir', 'show the project directory.'
