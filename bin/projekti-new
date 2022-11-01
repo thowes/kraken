@@ -16,9 +16,10 @@ class Projekti < Thor
     if func == 'def'
       puts 'def:dir' if func == 'dir'
       puts 'def:now' if func == 'now'
+    elsif func == 'upd' || func == 'update'
       puts 'def:upd' if func == 'upd'
     else
-      puts 'def'
+      status
     end
   end
 
