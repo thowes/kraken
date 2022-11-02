@@ -14,12 +14,12 @@ class Projekti < Thor
   desc 'default', 'the default command.'
   def default(func = nil)
     if func == 'dir'
-      puts 'def:dir' if func == 'dir'
+      puts 'def:dir'
     elsif func == 'now'
-      puts 'def:now' if func == 'now'
+      puts 'def:now'
     elsif func == 'upd' || func == 'update'
       puts 'def:upd'
-    else
+    else # elsif func.nil?
       status
     end
   end
