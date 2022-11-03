@@ -17,10 +17,11 @@ class Projekti < Thor
       puts 'def:dir'
     elsif func == 'now'
       puts 'def:now'
-    elsif func == 'upd' || func == 'update'
+    elsif %w[upd update].include?(func) && !func.nil?
       puts 'def:upd'
-    else # elsif func.nil?
+    elsif func.nil?
       status
+    else
     end
   end
 
