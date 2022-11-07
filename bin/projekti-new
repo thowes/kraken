@@ -22,6 +22,7 @@ class Projekti < Thor
     elsif func.nil?
       status
     else
+      puts 'def:def'
     end
   end
 
