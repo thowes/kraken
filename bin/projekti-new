@@ -13,16 +13,16 @@ class Projekti < Thor
 
   desc 'default', 'the default command.'
   def default(func = nil)
-    if func == 'dir'
+    if %w[st status tila].include?(func) || func.nil?
       puts 'def:dir'
+      status
     elsif func == 'now'
       puts 'def:now'
-    elsif %w[upd update].include?(func) && !func.nil?
+    elsif %w[upd update].include?(func)
       puts 'def:upd'
     elsif func.nil?
-      status
     else
-      puts 'def:def'
+      puts "def:#{func}"
     end
   end
 
