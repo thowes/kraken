@@ -23,9 +23,11 @@ class Projekti < Thor
   end
 
   desc 'dir', 'show the project directory.'
-  def dir(proj)
+  def dir(proj = nil)
     file = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
+    csv_array = Array.new
     File.foreach(file) { |line| puts line if line.include?('krn') }
+    puts csv_array
   end
 
   desc 'now', 'gives information about the current project directory.'
