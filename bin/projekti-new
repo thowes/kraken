@@ -36,8 +36,9 @@ class Projekti < Thor
     File.foreach(file) { |line| csv.push line if line.include?(proj) }
     proj_line = csv[0] if csv.size > 0
     if func == 'dir' || func == 'now'
-    # not doable (probably)
+      puts proj_line.split(',').last
     else puts proj_line
+      puts proj_line
     end
   end
 
