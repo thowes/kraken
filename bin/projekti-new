@@ -24,17 +24,20 @@ class Projekti < Thor
 
   desc 'dir', 'show the project directory.'
   def dir(proj = nil)
-    proj = 'def' if proj.nil?
+    proj = 'krn' if proj.nil?
     now('dir', proj)
   end
 
   desc 'now', 'gives information about the current project directory.'
   def now(func = nil, proj = nil)
+    proj = 'def' if proj.nil?
     file = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
     csv = Array.new
-    File.foreach(file) { |line| csv_array.push line if line.include?(proj) }
+    File.foreach(file) { |line| csv.push line if line.include?(proj) }
     puts csv[0] if csv.size > 0
+    if func == 'dir' || func == 'now'
     # not doable (probably)
+    end
   end
 
   desc 'status', 'show the git project status message in one line.'
