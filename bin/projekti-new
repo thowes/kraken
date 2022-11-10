@@ -24,6 +24,7 @@ class Projekti < Thor
 
   desc 'dir', 'show the project directory.'
   def dir(proj = nil)
+  def now
     proj = 'def' if proj.nil?
     file = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
     csv_array = Array.new
@@ -32,9 +33,8 @@ class Projekti < Thor
   end
 
   desc 'now', 'gives information about the current project directory.'
-  def now
     # not doable (probably)
-  end
+  end # now
 
   desc 'status', 'show the git project status message in one line.'
   def status
