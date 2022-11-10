@@ -24,6 +24,7 @@ class Projekti < Thor
 
   desc 'dir', 'show the project directory.'
   def dir(proj = nil)
+    now('dir', proj)
   end
 
   desc 'now', 'gives information about the current project directory.'
