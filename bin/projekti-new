@@ -24,6 +24,7 @@ class Projekti < Thor
 
   desc 'dir', 'show the project directory.'
   def dir(proj = nil)
+  desc 'now', 'gives information about the current project directory.'
   def now
     proj = 'def' if proj.nil?
     file = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
@@ -32,7 +33,6 @@ class Projekti < Thor
     puts csv_array
   end
 
-  desc 'now', 'gives information about the current project directory.'
     # not doable (probably)
   end # now
 
