@@ -34,9 +34,10 @@ class Projekti < Thor
     file = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
     csv = Array.new
     File.foreach(file) { |line| csv.push line if line.include?(proj) }
-    puts csv[0] if csv.size > 0
+    proj_line = csv[0] if csv.size > 0
     if func == 'dir' || func == 'now'
     # not doable (probably)
+    else puts proj_line
     end
   end
 
