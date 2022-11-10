@@ -37,9 +37,9 @@ class Projekti < Thor
     proj_line = csv[0] if csv.size > 0
     if func == 'dir'
       dir = proj_line.split(',').last
-      puts proj_line.split(',').last
-    else
       puts "#{Dir.home()}/#{proj_line.split('~').last}"
+    else
+      puts proj_line
     end
   end
 
