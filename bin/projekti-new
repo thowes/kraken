@@ -24,15 +24,15 @@ class Projekti < Thor
 
   desc 'dir', 'show the project directory.'
   def dir(proj = nil)
+  end
+
   desc 'now', 'gives information about the current project directory.'
-  def now
+  def now(func = nil, proj = nil)
     proj = 'def' if proj.nil?
     file = "#{`asetus dir:cfg`.to_s.gsub("\n", '')}/proj.csv"
     csv_array = Array.new
     File.foreach(file) { |line| csv_array.push line if line.include?(proj) }
     puts csv_array
-  end
-
     # not doable (probably)
   end # now
 
