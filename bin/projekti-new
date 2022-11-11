@@ -16,7 +16,7 @@ class Projekti < Thor
     if %w[st status tila].include?(func) || func.nil?
       status
     elsif %w[upd update].include?(func)
-      puts 'def:upd'
+      update
     else
       puts "def:#{func}"
     end
