@@ -5,12 +5,13 @@ require 'fileutils'
 
 # single line text editor for the command line.
 ARGV.each do|filename|
+  stuff = ' '
   if File.exist? filename
-    content = File.read(filename)
+    stuff = File.read(filename)
   elsif
     puts "Whats a content?\n"
-    content = $stdin.chomp # readline # check
+    stuff = gets.chomp
     # File.open(filename, [your-option-string]) {|f| f.write(content) }
   end
-  puts "#{filename}:\n#{content}"
+  puts "#{filename}:\n'#{stuff}'"
 end
