@@ -8,10 +8,9 @@ ARGV.each do|filename|
   if File.exist? filename
     content = File.read(filename)
   elsif
-    # f = File.create(filename)
     puts "Whats a content?\n"
     content = $stdin.chomp # readline # check
-    # f.puts content
+    # File.open(filename, [your-option-string]) {|f| f.write(content) }
   end
   puts "#{filename}:\n#{content}"
 end
