@@ -3,12 +3,15 @@
 
 # require 'thor'
 require 'fileutils'
+# class SIngular < Thor # end
 
-def input(prompt)
+  def input(prompt)
   print(prompt)   # Output prompt
-  $stdout.flush   # Flush stdout buffers to ensure prompt appears
+    $stdout.flush   # Flush stdout buffers to ensure prompt appears
   gets.chomp      # Get user input, remove final newline with chomp
+  # end
 end
+
 # single line text editor for the command line.
 ARGV.each do|filename|
   stuff = ' '
@@ -16,7 +19,7 @@ ARGV.each do|filename|
     stuff = File.read(filename)
   elsif
     puts "Whats a content?\n"
-    stuff = $stdin.gets.chomp
+    stuff = input('What is the content?')
     # File.open(filename, [your-option-string]) {|f| f.write(content) }
   end
   puts "#{filename}:\n'#{stuff}'"
