@@ -1,8 +1,14 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+# require 'thor'
 require 'fileutils'
 
+def input(prompt)
+  print(prompt)   # Output prompt
+  $stdout.flush   # Flush stdout buffers to ensure prompt appears
+  gets.chomp      # Get user input, remove final newline with chomp
+end
 # single line text editor for the command line.
 ARGV.each do|filename|
   stuff = ' '
@@ -10,7 +16,7 @@ ARGV.each do|filename|
     stuff = File.read(filename)
   elsif
     puts "Whats a content?\n"
-    stuff = gets.chomp
+    stuff = $stdin.gets.chomp
     # File.open(filename, [your-option-string]) {|f| f.write(content) }
   end
   puts "#{filename}:\n'#{stuff}'"
