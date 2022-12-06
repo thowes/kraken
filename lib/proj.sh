@@ -18,7 +18,7 @@ projekti-func() {
 			*)
 				if [ -d .git/ ]; then
 					git status --short
-				else 
+				else
 					if [ -d ../.git/ ]; then
 						git status --short
 					else
