@@ -7,8 +7,9 @@ require 'fileutils'
 # single line text editor for the command line.
 class Singular < Thor
 
-  def file(filename); end
+  def file(filename)
     #
+  end
 
   private
 
