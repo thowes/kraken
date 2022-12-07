@@ -3,12 +3,15 @@
 
 require 'thor'
 require 'fileutils'
-class Singular < Thor
 
+class Singular < Thor
+  def file(filename); end
+
+  private
   def input(prompt)
     print(prompt)   # Output prompt
     $stdout.flush   # Flush stdout buffers to ensure prompt appears
-  gets.chomp      # Get user input, remove final newline with chomp
+    gets.chomp      # Get user input, remove final newline with chomp
   end
 end
 
