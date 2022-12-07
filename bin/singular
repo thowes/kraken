@@ -11,7 +11,8 @@ class Singular < Thor
     stuff = ' '
   if File.exist? filename
     stuff = File.read(filename)
-    #
+  elsif
+    # File.open(filename, [your-option-string]) {|f| f.write(content) }
     stuff = input('What is the content?')
   end
     puts "#{filename}:\n'#{stuff}'"
@@ -27,7 +28,5 @@ class Singular < Thor
 end
 
 ARGV.each do|filename|
-  elsif
     puts "Whats a content?\n"
-    # File.open(filename, [your-option-string]) {|f| f.write(content) }
 end
