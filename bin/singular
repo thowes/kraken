@@ -13,7 +13,7 @@ class Singular < Thor
       stuff = File.read(filename)
     elsif
       stuff = input('What is the content?')
-    # File.open(filename, [your-option-string]) {|f| f.write(content) }
+      # File.open(filename, [your-option-string]) {|f| f.write(content) }
     end
     puts "#{filename}:\n'#{stuff}'"
   end
