@@ -6,9 +6,10 @@ require 'fileutils'
 
 # single line text editor for the command line.
 class Singular < Thor
+  default_task :filee
 
   desc 'filee FILEPATH', 'edit or create FILEPATH.'
-  def file(filename)
+  def filee(filename)
     stuff = ' '
     if File.exist? filename
       stuff = File.read(filename)
