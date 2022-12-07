@@ -1,15 +1,15 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# require 'thor'
+require 'thor'
 require 'fileutils'
-# class SIngular < Thor # end
+class Singular < Thor
 
   def input(prompt)
-  print(prompt)   # Output prompt
+    print(prompt)   # Output prompt
     $stdout.flush   # Flush stdout buffers to ensure prompt appears
   gets.chomp      # Get user input, remove final newline with chomp
-  # end
+  end
 end
 
 # single line text editor for the command line.
