@@ -4,10 +4,14 @@
 require 'thor'
 require 'fileutils'
 
+# single line text editor for the command line.
 class Singular < Thor
+
   def file(filename); end
+    #
 
   private
+
   def input(prompt)
     print(prompt)   # Output prompt
     $stdout.flush   # Flush stdout buffers to ensure prompt appears
@@ -15,7 +19,6 @@ class Singular < Thor
   end
 end
 
-# single line text editor for the command line.
 ARGV.each do|filename|
   stuff = ' '
   if File.exist? filename
