@@ -8,7 +8,9 @@ require 'fileutils'
 class Singular < Thor
 
   def file(filename)
+  stuff = ' '
     #
+  puts "#{filename}:\n'#{stuff}'"
   end
 
   private
@@ -21,7 +23,6 @@ class Singular < Thor
 end
 
 ARGV.each do|filename|
-  stuff = ' '
   if File.exist? filename
     stuff = File.read(filename)
   elsif
@@ -29,5 +30,4 @@ ARGV.each do|filename|
     stuff = input('What is the content?')
     # File.open(filename, [your-option-string]) {|f| f.write(content) }
   end
-  puts "#{filename}:\n'#{stuff}'"
 end
