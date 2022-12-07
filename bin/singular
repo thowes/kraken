@@ -8,13 +8,13 @@ require 'fileutils'
 class Singular < Thor
 
   def file(filename)
-  stuff = ' 's
+    stuff = ' '
   if File.exist? filename
     stuff = File.read(filename)
     #
     stuff = input('What is the content?')
   end
-  puts "#{filename}:\n'#{stuff}'"
+    puts "#{filename}:\n'#{stuff}'"
   end
 
   private
