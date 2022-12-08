@@ -17,7 +17,7 @@ class Singular < Thor
       stuff = input('What is the content?')
       # File.open(filename, [your-option-string]) {|f| f.write(content) }
     end
-    puts "#{filename}:\n'#{stuff}'"
+    puts "#{filename}:\n#{stuff}"
   end
 
   private
