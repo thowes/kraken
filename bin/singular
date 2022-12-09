@@ -20,7 +20,9 @@ class Singular < Thor
     end
     puts "#{filename}:\n#{stuff}"
   end
+
   def merge; end
+    # FileUtils.touch(filename) unless File.exist? filename
 
   private
 
