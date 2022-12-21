@@ -17,10 +17,11 @@ shorts_desktop() {
 			~*) KR_DIRPO=$KR_DIRPO_HOME$(echo $KR_DIRPO_TEMP | awk -F~ '{ print$2 }');;
 		esac
 	fi
-	if [ "$KR_DIRPO" == "$(pwd)" ]; then
+	if [ "$KR_DIRPO" == "$(pwd)" ] || [ -d ".desktop_links/" ]; then
 		\cp .desktop_links/*.* $KR_DIR_DT/
 	else
 		if [ -d $KR_DIR_LNK/PROJ/$1 ]; then \cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/
+			\cp $KR_DIR_LNK/PROJ/$1/*.* $KR_DIR_DT/
 		else
       virhe "18: Directory .desktop_links not found for project" $KR_DIRPO p:$1 k:$KR_NETWORK
   	fi
