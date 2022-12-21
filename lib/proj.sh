@@ -9,7 +9,7 @@ projekti-func() {
 		-u) KRN_PROJ_FUNCTION="-u"; KRN_PROJ_INPUT=$2;;
 		*) KRN_PROJ_FUNCTION="-p"; KRN_PROJ_INPUT=$1;;
 	esac
-	KR_DIRPO=$(projekti dir $KRN_PROJ_INPUT)
+	KR_DIRPO=$(projekti now dir $KRN_PROJ_INPUT)
 	if [ -d $KR_DIRPO ]; then
 		\cd $KR_DIRPO
 		case $KRN_PROJ_FUNCTION in
