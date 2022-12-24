@@ -91,7 +91,6 @@ class Projekti < Thor
   def if_git
     #
   end
-
 end
 
 Projekti.start(ARGV)
