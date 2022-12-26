@@ -90,7 +90,6 @@ class Projekti < Thor
 
   def if_git
     true if Dir.exist('.git')
-    #
     false
   end
 end
