@@ -45,26 +45,27 @@ class Projekti < Thor
 
   desc 'status', 'show the git project status message in one line.'
   def status
-    # if Dir.exists=('.git')
+    if if_git
     status_message = `git status`
-    if status_message.to_s.gsub("\n", ' ').include?('On branch master')
+      if status_message.to_s.gsub("\n", ' ').include?('On branch master')
       if status_message.to_s.gsub("\n", ' ').include?('ahead')
         puts 'You are ahead of master branch in commits.'
-      else
+        else
         if status_message.to_s.gsub("\n", ' ').include?('Your branch is up to date with')
-          if status_message.to_s.gsub("\n", ' ').include?('Changes not staged for commit:')
+            if status_message.to_s.gsub("\n", ' ').include?('Changes not staged for commit:')
             puts 'You have changes not staged for commit.'
-          else
+            else
             puts 'Up-to-date with origin/master.'
-          end
+            end
         else
           puts 'You are ahead of master branch in commits.'
         end
-      end
+        end
     else
       puts 'Not in master branch.'
-    end
+      end
     puts "\nSTATUS:\n#{status_message}" if options[:verbose]
+    end
   end
 
   desc 'tila', "show the git project status message in one line (same as 'status')."
