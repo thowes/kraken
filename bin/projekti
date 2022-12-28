@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require 'thor'
-# require 'fileutils'
 # require 'csv'
 
 # PROJEKTI class: list projects and their directories.
@@ -45,7 +44,7 @@ class Projekti < Thor
 
   desc 'status', 'show the git project status message in one line.'
   def status
-    # if if_git
+    if if_git
       status_message = `git status`
       if status_message.to_s.gsub("\n", ' ').include?('On branch master')
         if status_message.to_s.gsub("\n", ' ').include?('ahead')
@@ -65,7 +64,7 @@ class Projekti < Thor
         puts 'Not in master branch.'
       end
       puts "\nSTATUS:\n#{status_message}" if options[:verbose]
-    # else puts "NOT GIT DIR." # if options[:verbose]; end
+    else puts "NOT GIT DIR."; end # if options[:verbose]
   end
 
   desc 'tila', "show the git project status message in one line (same as 'status')."
@@ -90,7 +89,7 @@ class Projekti < Thor
   private
 
   def if_git
-    true if FileUtils.exist('.git')
+    true if Dir.exist?('.git') || Dir.exist?('../.git') || Dir.exist?('../../.git') || Dir.exist?('../../../.git')
     false
   end
 end
