@@ -96,7 +96,7 @@ class Hakemisto < Thor
 
   def status(count, filename)
     tila = 'NA'
-    tila = 'RR' if %w[backup.log changed.lst .DS_Store duplicate.lst hakemisto.db hakemisto.lst OK.txt roina.lst Thumbs.db].include?(filename)
+    tila = 'RR' if %w[all-wcprops backup.log changed.lst .DS_Store duplicate.lst entries hakemisto.db hakemisto.lst OK.txt roina.lst Thumbs.db].include?(filename)
     # tila = 'MM' if missing(filename) && tila == 'NA'
     tila = 'D2' if count > 1 && tila == 'NA'
     tila = 'R2' if count > 1 && tila == 'RR'
