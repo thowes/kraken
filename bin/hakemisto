@@ -85,8 +85,9 @@ class Hakemisto < Thor
 
   private
 
-  def check_missing(filepath); false; end # add real check
+  def check_missing(filepath); false
     # add real check
+  end
 
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
