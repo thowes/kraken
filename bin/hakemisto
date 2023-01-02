@@ -85,7 +85,7 @@ class Hakemisto < Thor
 
   private
 
-  def check_missing(filepath); false
+  def check_missing(filepath)
     false # add real check
   end
 
