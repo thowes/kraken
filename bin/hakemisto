@@ -86,7 +86,7 @@ class Hakemisto < Thor
   private
 
   def check_missing(filepath); false
-    # add real check
+    false # add real check
   end
 
   def db_read(file)
