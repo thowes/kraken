@@ -86,6 +86,7 @@ class Hakemisto < Thor
   private
 
   def check_missing(filepath)
+    # true if db_z.execute("SELECT * FROM Documents WHERE path='#{filepath}';")
     false # add real check
   end
 
