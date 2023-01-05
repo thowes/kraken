@@ -1,20 +1,20 @@
 #!/bin/bash
 case $1 in
 	-*)
-		DIR_TEMP=$(asetus dir:temp); TYNNYRI_TTY=$(verkko tty); DIR_TTY=$DIR_TEMP #/$TYNNYRI_TTY
+		DIR_TEMP=$(asetus dir:temp); TYNNYRI=$(verkko tty); DIR_TTY=$DIR_TEMP #/$TYNNYRI_TTY
 		case $1 in
 			*0*) tynnyri -l; tynnyri -n $2;;
-			*a*) if [ -f $DIR_TTY/$TYNNYRI_TTY.tynnyri ]; then echo $2 >> $DIR_TTY/$TYNNYRI_TTY.tynnyri; else tynnyri -n $2; fi;;
+			*a*) if [ -f $DIR_TEMP/$TYNNYRI.tynnyri ]; then echo $2 >> $DIR_TEMP/$TYNNYRI.tynnyri; else tynnyri -n $2; fi;;
 			*k*) tynnyri -p; tynnyri -l;;
-			*l*) if [ -f $DIR_TTY/$TYNNYRI_TTY.tynnyri ]; then rm $DIR_TTY/$TYNNYRI_TTY.tynnyri; fi;;
+			*l*) if [ -f $DIR_TEMP/$TYNNYRI.tynnyri ]; then rm $DIR_TEMP/$TYNNYRI.tynnyri; fi;;
 			*n)
 					if [ -d $DIR_TTY/ ]; then
-						echo $2 > $DIR_TTY/$TYNNYRI_TTY.tynnyri
+						echo $2 > $DIR_TEMP/$TYNNYRI.tynnyri
 					else
 						#cd $DIR_TEMP/; pwd; mkdir tynnyri
-						echo $2 > $DIR_TTY/$TYNNYRI_TTY.tynnyri
+						echo $2 > $DIR_TEMP/$TYNNYRI.tynnyri
 					fi;;
-			*p*) echo $(cat $DIR_TTY/tynnyri.check|tr "\n" ",");;
+			*p*) echo $(cat $DIR_TEMP/$TYNNYRI.tynnyri|tr "\n" ",");;
 			*u*|*d*) echo $2 >> $DIR_TTY/tynnyri.check; tynnyri -k;;
 		esac;;
 	a|add) tynnyri -a $2;;
