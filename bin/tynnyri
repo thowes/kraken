@@ -8,11 +8,9 @@ case $1 in
 			*k*) tynnyri -p; tynnyri -l;;
 			*l*) if [ -f $DIR_TEMP/$TYNNYRI.tynnyri ]; then rm $DIR_TEMP/$TYNNYRI.tynnyri; fi;;
 			*n)
-					if [ -d $DIR_TEMP/ ]; then
 						echo $2 > $DIR_TEMP/$TYNNYRI.tynnyri
-					else
 						echo $2 > $DIR_TEMP/$TYNNYRI.tynnyri
-					fi;;
+;;
 			*p*) echo $(cat $DIR_TEMP/$TYNNYRI.tynnyri|tr "\n" ",");;
 			*u*|*d*) echo $2 >> $DIR_TEMP/$TYNNYRI.tynnyri; tynnyri -k;;
 		esac;;
