@@ -9,7 +9,6 @@ case $1 in
 			*l*) if [ -f $DIR_TEMP/$TYNNYRI.tynnyri ]; then rm $DIR_TEMP/$TYNNYRI.tynnyri; fi;;
 			*n)
 						echo $2 > $DIR_TEMP/$TYNNYRI.tynnyri
-						echo $2 > $DIR_TEMP/$TYNNYRI.tynnyri
 ;;
 			*p*) echo $(cat $DIR_TEMP/$TYNNYRI.tynnyri|tr "\n" ",");;
 			*u*|*d*) echo $2 >> $DIR_TEMP/$TYNNYRI.tynnyri; tynnyri -k;;
