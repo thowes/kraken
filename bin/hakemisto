@@ -84,7 +84,9 @@ class Hakemisto < Thor
   end
 
   private
+
   def check_locked(filepath); false; end
+    #
 
   def check_missing(filepath)
     # db_z = db_read("asetus dir:temp/z.db")
