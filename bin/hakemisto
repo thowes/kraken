@@ -52,6 +52,7 @@ class Hakemisto < Thor
 
   desc 'locked', 'look for locked files in the DB.'
   def locked(filename = nil)
+    db_file = ENV['DB'] || 'hakemisto.db'
     #
     db&.close
   end
