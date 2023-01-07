@@ -51,8 +51,9 @@ class Hakemisto < Thor
   end
 
   desc 'locked', 'look for locked files in the DB.'
-  def locked(filename = nil); db&.close
+  def locked(filename = nil)
     #
+    db&.close
   end
 
   desc 'missing', 'look for missing files in the DB.'
