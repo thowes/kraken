@@ -11,6 +11,7 @@ require 'socket'
 # HAKEMISTO class: scans contents of a dir and counts checksums.
 class Hakemisto < Thor
   default_task :default
+  # alias d = duplicate/tupla, def = default/oletus, l/lukossa = locked, m/puuttuu = missing, r = roina
 
   desc 'default', 'default function.'
   def default(dir = nil)
