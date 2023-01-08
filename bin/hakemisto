@@ -99,7 +99,7 @@ class Hakemisto < Thor
   private
 
   def check_locked(filepath)
-    # true if "ls #{filepath}".include?(" uchg ")
+    # true if `\ls -lO "#{filepath}"`.to_s.include?(' uchg ')
     false
   end
 
