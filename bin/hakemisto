@@ -55,7 +55,9 @@ class Hakemisto < Thor
     db_file = ENV['DB'] || 'hakemisto.db'
     db = db_read(db_file) # non-changing, is this line needed?
     if filename.nil?
+      db.execute("SELECT * FROM Documents WHERE status='LL';") do |l| puts l.to_s; end
     else #
+      db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
     end
     db&.close
   end
