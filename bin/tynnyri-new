@@ -2,3 +2,4 @@
 # frozen_string_literal: true
 
 class Bing < Thor; end
+#
