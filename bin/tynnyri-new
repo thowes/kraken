@@ -2,5 +2,5 @@
 # frozen_string_literal: true
 
 class Tynnyri < Thor
-#
+	def default; end
 end
