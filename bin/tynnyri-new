@@ -2,11 +2,14 @@
 # frozen_string_literal: true
 
 class Tynnyri < Thor
+	#
 
 	def add; end
+	#
 
 	def default; end
 
-	def delete; end
+	def delete
 	#
+	end
 end
