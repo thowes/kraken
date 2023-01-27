@@ -4,10 +4,12 @@
 class Tynnyri < Thor
 	#
 
-	def add; end
+	def add
 	#
+	end
 
 	def default; end
+	#
 
 	def delete
 	#
