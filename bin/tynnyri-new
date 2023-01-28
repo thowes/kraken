@@ -2,17 +2,17 @@
 # frozen_string_literal: true
 
 class Tynnyri < Thor
-	# default_task: default
+  # default_task: default
 
 	def add
-	#
+    #
 	end
 
 	def default
-	#
+    #
 	end
 
 	def delete
-	#
+    #
 	end
 end
