@@ -1,18 +1,19 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+# require 'fileutils'
 class Tynnyri < Thor
-  # default_task: default
+  default_task :default
 
-	def add
+  def add
     #
-	end
+  end
 
-	def default
+  def default
     #
-	end
+  end
 
-	def delete
+  def delete
     #
-	end
+  end
 end
