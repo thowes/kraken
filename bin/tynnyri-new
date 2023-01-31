@@ -5,15 +5,15 @@
 class Tynnyri < Thor
   default_task :default
 
-  def add
+  def add(*)
     #
   end
 
-  def default
+  def default(*)
     #
   end
 
-  def delete
+  def delete(*)
     #
   end
 end
