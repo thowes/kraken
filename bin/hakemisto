@@ -136,7 +136,7 @@ class Hakemisto < Thor
   end
 
   def tulosta(row)
-    #
+    # puts row # ?
   end
 end
 
