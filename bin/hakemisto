@@ -93,24 +93,26 @@ class Hakemisto < Thor
     line = db.execute("SELECT * FROM Documents WHERE status='DIR';")
     db&.close
     true if line.to_s.include?(Socket.gethostname)
-    false
+    false # boolean method?
   end
 
   private
 
   def check_locked(filepath)
-    false
+    false # boolean method?
   end
 
   def check_missing(filepath)
     # db_z = db_read("asetus dir:temp/z.db")
     # true if db_z.execute("SELECT * FROM Documents WHERE path='#{filepath}';")
-    false
+    false # boolean method?
   end
 
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
   end
+
+  def path_has; return true; end # boolean method?
 
   def path_new
     temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || '~/Projects/temp'
