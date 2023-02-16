@@ -98,11 +98,11 @@ class Hakemisto < Thor
 
   private
 
-  def check_locked(filepath)
+  def check_locked?(filepath)
     false # boolean method?
   end
 
-  def check_missing(filepath)
+  def check_missing?(filepath)
     # db_z = db_read("asetus dir:temp/z.db")
     # true if db_z.execute("SELECT * FROM Documents WHERE path='#{filepath}';")
     # db_z&.close
@@ -114,6 +114,7 @@ class Hakemisto < Thor
   end
 
   def path_has; return true; end # boolean method?
+    #
 
   def path_new
     temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || '~/Projects/temp'
@@ -125,7 +126,7 @@ class Hakemisto < Thor
     tila = 'NA'
     tila = 'RR' if %w[all-wcprops backup.log changed.lst .DS_Store duplicate.lst entries hakemisto.db hakemisto.lst OK.txt roina.lst Thumbs.db].include?(file)
     # tila = 'LL' if tila == 'NA' && `ls -lO "#{file}"`.to_s.include?(' uchg ')
-    tila = 'MM' if check_missing(filename) && tila == 'NA'
+    tila = 'MM' if check_missing?(filename) && tila == 'NA'
     tila = 'L2' if count > 1 && tila == 'LL'
     tila = 'D2' if count > 1 && tila == 'NA'
     tila = 'R2' if count > 1 && tila == 'RR'
