@@ -113,8 +113,9 @@ class Hakemisto < Thor
     SQLite3::Database.open file # howto do read-only?
   end
 
-  def path_has; return true
+  def path_has 
     #
+    return true
   end # boolean method?
 
   def path_new
