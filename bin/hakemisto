@@ -114,7 +114,7 @@ class Hakemisto < Thor
   end
 
   def path_has 
-    #
+    return true if %w[all-wcprops backup.log changed.lst .DS_Store duplicate.lst entries hakemisto.db hakemisto.lst OK.txt roina.lst Thumbs.db].include?(filename)
     return true
   end # boolean method?
 
