@@ -106,7 +106,7 @@ class Hakemisto < Thor
     # db_z = db_read("asetus dir:temp/z.db")
     # true if db_z.execute("SELECT * FROM Documents WHERE path='#{filepath}';")
     # db_z&.close
-    false # boolean method?
+    false
   end
 
   def db_read(file)
