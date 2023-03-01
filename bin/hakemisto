@@ -99,7 +99,6 @@ class Hakemisto < Thor
   private
 
   def db_read(file)
-  # def db_read(file); end
     SQLite3::Database.open file # howto do read-only?
   end
 
@@ -122,7 +121,7 @@ class Hakemisto < Thor
   def status(count, filename)
     tila = 'NA'
     tila = 'LL' if locked?(filename) && tila == 'NA' # && `ls -lO "#{file}"`.to_s.include?(' uchg ')
-    tila = 'RR' if trash?(filename)
+    tila = 'RR' if trash?(filename) && tila == 'NA'
     tila = 'MM' if missing?(filename) && tila == 'NA'
     tila = 'L2' if count > 1 && tila == 'LL'
     tila = 'D2' if count > 1 && tila == 'NA'
@@ -137,10 +136,12 @@ class Hakemisto < Thor
   end
 
   def trash?(filepath)
-    return true if %w[all-wcprops .DS_Store entries].include?(filepath)
+    return true if filepath.include?('all-wcprops')
     return true if filepath.include?('backup.log')
     return true if filepath.include?('changed.lst')
+    return true if filepath.include?('.DS_Store')
     return true if filepath.include?('duplicate.lst')
+    return true if filepath.include?('entries')
     return true if filepath.include?('hakemisto.db')
     return true if filepath.include?('hakemisto.lst')
     return true if filepath.include?('OK.txt')
