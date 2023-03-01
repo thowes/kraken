@@ -139,7 +139,9 @@ class Hakemisto < Thor
   def summa(filename)
     "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}".to_s
   end
+
   def trash?(filepath); end
+    #
 
   def tulosta(row)
     # puts row # ?
