@@ -136,8 +136,9 @@ class Hakemisto < Thor
   end
 
   def trash?(filepath)
-    return true if %w[all-wcprops backup.log changed.lst .DS_Store duplicate.lst entries hakemisto.db hakemisto.lst OK.txt roina.lst Thumbs.db].include?(filename)
+    return true if %w[all-wcprops backup.log changed.lst .DS_Store duplicate.lst entries hakemisto.db hakemisto.lst OK.txt roina.lst Thumbs.db].include?(filepath)
     #
+    return true if filepath.include?('backup.log')
     return false
   end
 
