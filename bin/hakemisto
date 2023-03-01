@@ -115,7 +115,6 @@ class Hakemisto < Thor
 
   def path_has?(filename)
     return true if %w[all-wcprops backup.log changed.lst .DS_Store duplicate.lst entries hakemisto.db hakemisto.lst OK.txt roina.lst Thumbs.db].include?(filename)
-    return false
   end
 
   def path_new
@@ -125,7 +124,7 @@ class Hakemisto < Thor
 
   def status(count, filename)
     tila = 'NA'
-    tila = 'RR' if path_has?(filename)
+    tila = 'RR' if trash?(filename)
     # tila = 'LL' if tila == 'NA' && `ls -lO "#{file}"`.to_s.include?(' uchg ')
     tila = 'MM' if check_missing?(filename) && tila == 'NA'
     tila = 'L2' if count > 1 && tila == 'LL'
@@ -142,6 +141,7 @@ class Hakemisto < Thor
 
   def trash?(filepath)
     #
+    return false
   end
 
   def tulosta(row)
