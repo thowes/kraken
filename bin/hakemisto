@@ -111,9 +111,7 @@ class Hakemisto < Thor
 
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
-  end
 
-  def path_has?(filename)
   end
 
   def path_new
