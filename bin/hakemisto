@@ -140,8 +140,9 @@ class Hakemisto < Thor
     "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}".to_s
   end
 
-  def trash?(filepath); end
+  def trash?(filepath)
     #
+  end
 
   def tulosta(row)
     # puts row # ?
