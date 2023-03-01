@@ -98,8 +98,10 @@ class Hakemisto < Thor
 
   private
 
+  def db_read(file)
   # def db_read(file); end
     SQLite3::Database.open file # howto do read-only?
+  end
 
   def locked?(filepath)
     false
@@ -110,8 +112,6 @@ class Hakemisto < Thor
     # true if db_z.execute("SELECT * FROM Documents WHERE path='#{filepath}';")
     # db_z&.close
     false
-  end
-  def db_read(file)
   end
 
   def path_new
@@ -137,9 +137,10 @@ class Hakemisto < Thor
   end
 
   def trash?(filepath)
-    return true if %w[all-wcprops .DS_Store duplicate.lst entries hakemisto.db].include?(filepath)
+    return true if %w[all-wcprops .DS_Store duplicate.lst entries].include?(filepath)
     return true if filepath.include?('backup.log')
     return true if filepath.include?('changed.lst')
+    return true if filepath.include?('hakemisto.db')
     return true if filepath.include?('hakemisto.lst')
     return true if filepath.include?('OK.txt')
     return true if filepath.include?('roina.lst')
