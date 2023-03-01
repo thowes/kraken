@@ -103,7 +103,7 @@ class Hakemisto < Thor
   end
 
   def locked?(filepath)
-    false
+    false # && `ls -lO "#{file}"`.to_s.include?(' uchg ')
   end
 
   def missing?(filepath)
@@ -120,7 +120,7 @@ class Hakemisto < Thor
 
   def status(count, filename)
     tila = 'NA'
-    tila = 'LL' if locked?(filename) && tila == 'NA' # && `ls -lO "#{file}"`.to_s.include?(' uchg ')
+    tila = 'LL' if locked?(filename) && tila == 'NA'
     tila = 'RR' if trash?(filename) && tila == 'NA'
     tila = 'MM' if missing?(filename) && tila == 'NA'
     tila = 'L2' if count > 1 && tila == 'LL'
