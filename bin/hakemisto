@@ -137,9 +137,10 @@ class Hakemisto < Thor
   end
 
   def trash?(filepath)
-    return true if %w[all-wcprops .DS_Store duplicate.lst entries].include?(filepath)
+    return true if %w[all-wcprops .DS_Store entries].include?(filepath)
     return true if filepath.include?('backup.log')
     return true if filepath.include?('changed.lst')
+    return true if filepath.include?('duplicate.lst')
     return true if filepath.include?('hakemisto.db')
     return true if filepath.include?('hakemisto.lst')
     return true if filepath.include?('OK.txt')
