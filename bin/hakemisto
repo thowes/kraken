@@ -111,7 +111,6 @@ class Hakemisto < Thor
 
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
-
   end
 
   def path_new
@@ -121,8 +120,8 @@ class Hakemisto < Thor
 
   def status(count, filename)
     tila = 'NA'
-    tila = 'RR' if trash?(filename)
     # tila = 'LL' if tila == 'NA' && `ls -lO "#{file}"`.to_s.include?(' uchg ')
+    tila = 'RR' if trash?(filename)
     tila = 'MM' if check_missing?(filename) && tila == 'NA'
     tila = 'L2' if count > 1 && tila == 'LL'
     tila = 'D2' if count > 1 && tila == 'NA'
