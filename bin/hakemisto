@@ -123,8 +123,8 @@ class Hakemisto < Thor
     tila = 'LL' if locked?(filename) && tila == 'NA'
     tila = 'RR' if trash?(filename) && tila == 'NA'
     tila = 'MM' if missing?(filename) && tila == 'NA'
-    tila = 'L2' if count > 1 && tila == 'LL'
     tila = 'D2' if count > 1 && tila == 'NA'
+    tila = 'L2' if count > 1 && tila == 'LL'
     tila = 'R2' if count > 1 && tila == 'RR'
     tila = 'M2' if count > 1 && tila == 'MM'
     tila = 'OK' if File.exists?('OK.txt') && tila == 'NA' # doesn't work with path
