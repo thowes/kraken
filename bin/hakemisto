@@ -114,7 +114,6 @@ class Hakemisto < Thor
   end
 
   def path_has?(filename)
-    return true if %w[all-wcprops backup.log changed.lst .DS_Store duplicate.lst entries hakemisto.db hakemisto.lst OK.txt roina.lst Thumbs.db].include?(filename)
   end
 
   def path_new
@@ -140,6 +139,7 @@ class Hakemisto < Thor
   end
 
   def trash?(filepath)
+    return true if %w[all-wcprops backup.log changed.lst .DS_Store duplicate.lst entries hakemisto.db hakemisto.lst OK.txt roina.lst Thumbs.db].include?(filename)
     #
     return false
   end
