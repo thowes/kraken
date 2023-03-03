@@ -103,6 +103,7 @@ class Hakemisto < Thor
   end
 
   def locked?(filepath)
+    true if `ls -lO '#{filepath}'`.to_s.include?(' uchg ') # strip extra spaces/tabs
     false # && `ls -lO "#{file}"`.to_s.include?(' uchg ')
   end
 
@@ -120,7 +121,7 @@ class Hakemisto < Thor
 
   def status(count, filename)
     tila = 'NA'
-    tila = 'LL' if locked?(filename) && tila == 'NA'
+    tila = 'LL' if locked?(filename) && tila == 'NA' # macos only?
     tila = 'RR' if trash?(filename) && tila == 'NA'
     tila = 'MM' if missing?(filename) && tila == 'NA'
     tila = 'D2' if count > 1 && tila == 'NA'
@@ -144,6 +145,7 @@ class Hakemisto < Thor
     return true if filepath.include?('entries')
     return true if filepath.include?('hakemisto.db')
     return true if filepath.include?('hakemisto.lst')
+    return true if filepath.include?('missing.lst')
     return true if filepath.include?('OK.txt')
     return true if filepath.include?('roina.lst')
     return true if filepath.include?('Thumbs.db')
