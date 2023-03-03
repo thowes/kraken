@@ -103,7 +103,7 @@ class Hakemisto < Thor
   end
 
   def locked?(filepath)
-    true if `ls -lO '#{filepath}'`.to_s.include?(' uchg ') # strip extra spaces/tabs
+    # true if `ls -lO '#{filepath}'`.to_s.include?(' uchg ') # strip extra spaces/tabs
     false # && `ls -lO "#{file}"`.to_s.include?(' uchg ')
   end
 
