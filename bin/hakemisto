@@ -131,7 +131,7 @@ class Hakemisto < Thor
     if count > 1
       tila = 'D2' if tila == 'NA'
       tila = 'L2' if tila == 'LL'
-    tila = 'R2' if count > 1 && tila == 'RR'
+      tila = 'R2' if tila == 'RR'
       tila = 'M2' if tila == 'MM'
     end
     tila = 'OK' if File.exists?('OK.txt') && tila == 'NA' # doesn't work with path
