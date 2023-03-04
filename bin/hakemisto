@@ -157,10 +157,6 @@ class Hakemisto < Thor
     return true if filepath.include?('Thumbs.db')
     return false
   end
-
-  def tulosta(row)
-    # puts row # ?
-  end
 end
 
 Hakemisto.start(ARGV)
