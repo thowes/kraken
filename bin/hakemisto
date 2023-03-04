@@ -104,9 +104,11 @@ class Hakemisto < Thor
   end
 
   def locked?(filepath)
+    if RUBY_PLATFORM.include?('darwin')
     line = `ls -lO #{Shellwords.escape(filepath)}`.to_s # strip extra spaces/tabs
-    # true if `ls -lO '#{filepath}'`.to_s.include?(' uchg ') # strip extra spaces/tabs
+      return true if line.include?(' uchg ')
     false
+    end
   end
 
   def missing?(filepath)
@@ -123,13 +125,15 @@ class Hakemisto < Thor
 
   def status(count, filename)
     tila = 'NA'
-    tila = 'LL' if locked?(filename) && tila == 'NA' # macos only?
+    tila = 'LL' if locked?(filename) && tila == 'NA'
     tila = 'RR' if trash?(filename) && tila == 'NA'
     tila = 'MM' if missing?(filename) && tila == 'NA'
+    if count > 1
     tila = 'D2' if count > 1 && tila == 'NA'
-    tila = 'L2' if count > 1 && tila == 'LL'
+      tila = 'L2' if tila == 'LL'
     tila = 'R2' if count > 1 && tila == 'RR'
     tila = 'M2' if count > 1 && tila == 'MM'
+    end
     tila = 'OK' if File.exists?('OK.txt') && tila == 'NA' # doesn't work with path
     return tila
   end
