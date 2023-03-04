@@ -28,7 +28,7 @@ class Hakemisto < Thor
         count = 0
         checksums = summa(f)
         count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';").count if File.exist?('hakemisto.db')
-        uusi.execute("#{insert} ('#{status(count, f)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
+        uusi.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
       end
     end
     uusi&.close
@@ -105,10 +105,10 @@ class Hakemisto < Thor
 
   def locked?(filepath)
     if RUBY_PLATFORM.include?('darwin')
-    line = `ls -lO #{Shellwords.escape(filepath)}`.to_s # strip extra spaces/tabs
+      line = `ls -lO #{Shellwords.escape(filepath)}`.to_s # strip extra spaces/tabs
       return true if line.include?(' uchg ')
-    false
     end
+    false
   end
 
   def missing?(filepath)
@@ -123,16 +123,16 @@ class Hakemisto < Thor
     "#{temp}/#{Process.pid}.db"
   end
 
-  def status(count, filename)
+  def status(filename, count)
     tila = 'NA'
     tila = 'LL' if locked?(filename) && tila == 'NA'
     tila = 'RR' if trash?(filename) && tila == 'NA'
     tila = 'MM' if missing?(filename) && tila == 'NA'
     if count > 1
-    tila = 'D2' if count > 1 && tila == 'NA'
+      tila = 'D2' if tila == 'NA'
       tila = 'L2' if tila == 'LL'
     tila = 'R2' if count > 1 && tila == 'RR'
-    tila = 'M2' if count > 1 && tila == 'MM'
+      tila = 'M2' if tila == 'MM'
     end
     tila = 'OK' if File.exists?('OK.txt') && tila == 'NA' # doesn't work with path
     return tila
