@@ -44,6 +44,7 @@ class Hakemisto < Thor
     db = db_read(db_file) # non-changing
     if filename.nil?
       db.execute("SELECT * FROM Documents WHERE status='D2';") do |l| puts l.to_s; end
+      # db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
     else
       checksums = summa(filename)
       db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';") do |l| puts l.to_s; end
@@ -57,6 +58,7 @@ class Hakemisto < Thor
     db = db_read(db_file) # non-changing, is this line needed?
     if filename.nil?
       db.execute("SELECT * FROM Documents WHERE status='LL';") do |l| puts l.to_s; end
+      # db.execute("SELECT * FROM Documents WHERE status='L2';") do |l| puts l.to_s; end
     else #
       db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
     end
@@ -69,6 +71,7 @@ class Hakemisto < Thor
     db = db_read(db_file) # non-changing, is this line needed?
     if filename.nil?
       db.execute("SELECT * FROM Documents WHERE status='MM';") do |l| puts l.to_s; end
+      # db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
     else
       db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
     end
@@ -81,6 +84,7 @@ class Hakemisto < Thor
     db = db_read(db_file) # non-changing, is this line needed?
     if filename.nil?
       db.execute("SELECT * FROM Documents WHERE status='RR';") do |l| puts l.to_s; end
+      # db.execute("SELECT * FROM Documents WHERE status='R2';") do |l| puts l.to_s; end
     else
       db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
     end
