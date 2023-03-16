@@ -148,7 +148,9 @@ class Hakemisto < Thor
     "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}".to_s
   end
 
+    # 'all-wcprops', 'backup.log', 'changed.lst', '.DS_Store', 'duplicate.lst', 'entries'
   def trash?(filepath)
+    # 'hakemisto.db', 'hakemisto.lst', 'missing.lst', 'OK.txt', 'roina.lst', 'Thumbs.db'
     return true if filepath.include?('all-wcprops')
     return true if filepath.include?('backup.log')
     return true if filepath.include?('changed.lst')
