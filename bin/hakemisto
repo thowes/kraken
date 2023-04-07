@@ -150,7 +150,7 @@ class Hakemisto < Thor
 
   def trash?(filepath)
     # files = [ 'all-wcprops', 'backup.log', 'changed.lst', '.DS_Store', 'duplicate.lst', 'entries'
-    # 'hakemisto.db', 'hakemisto.lst', 'missing.lst', 'OK.txt', 'roina.lst', 'Thumbs.db'
+    # 'hakemisto.db', 'hakemisto.lst', 'missing.lst', 'OK.txt', 'roina.lst', 'Thumbs.db' ]
     # loop each.do
     return true if filepath.include?('all-wcprops')
     return true if filepath.include?('backup.log')
