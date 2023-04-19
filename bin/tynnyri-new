@@ -3,16 +3,20 @@
 
 # require 'fileutils'
 class Tynnyri < Thor
+  # alias
   default_task :default
 
+  desc 'add', 'add to tynnyri.'
   def add(*)
     #
   end
 
+  desc 'default', 'the default tynnyri command.'
   def default(*)
     #
   end
 
+  desc 'delete', 'delete tynnyri.'
   def delete(*)
     #
   end
