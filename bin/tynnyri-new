@@ -8,7 +8,9 @@ class Tynnyri < Thor
 
   desc 'add', 'add to tynnyri.'
   def add(*)
+    if File.exists?(tynnyri_file)
     #
+    end
   end
 
   desc 'default', 'the default tynnyri command.'
@@ -20,4 +22,5 @@ class Tynnyri < Thor
   def delete(*)
     #
   end
+  def tynnyri_file; "tty.tynnyri"; end
 end
