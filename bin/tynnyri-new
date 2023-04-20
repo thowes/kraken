@@ -7,9 +7,9 @@ class Tynnyri < Thor
   default_task :default
 
   desc 'add', 'add to tynnyri.'
-  def add(*)
+  def add(tynnyri_input)
     if File.exists?(tynnyri_file)
-    #
+      # f.puts tynnyri_input
     end
   end
 
@@ -22,5 +22,9 @@ class Tynnyri < Thor
   def delete(*)
     #
   end
-  def tynnyri_file; "tty.tynnyri"; end
+
+  private
+  def tynnyri_file; "tty.tynnyri"
+  # "tty.tynnyri";
+  end
 end
