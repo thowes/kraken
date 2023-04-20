@@ -25,7 +25,7 @@ class Tynnyri < Thor
 
   private
 
-  def tynnyri_file; "tty.tynnyri"
+  def tynnyri_file
     "tty.tynnyri"
   end
 end
