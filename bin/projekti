@@ -67,9 +67,8 @@ class Projekti < Thor
   end
 
   desc 'tila', "show the git project status message in one line (same as 'status')."
-  def tila
+  def tila; status; end
     status
-  end
 
   desc 'update', 'update the git project if no changes or commits locally.'
   def update
