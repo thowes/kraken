@@ -26,6 +26,6 @@ class Tynnyri < Thor
   private
 
   def tynnyri_file
-    "tty.tynnyri"
+    "tty.tynnyri" # system("verkko tty")
   end
 end
