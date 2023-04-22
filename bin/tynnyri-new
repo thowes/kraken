@@ -22,7 +22,7 @@ class Tynnyri < Thor
   desc 'default', 'the default tynnyri command.'
   def default(*)
     if arg2.== "add" && arg3.not_nil?
-    if arg2 == "add" && arg3.nil?
+    elsif arg2 == "add" && arg3.nil?
     elsif arg2 == "kick"
       kick
     elsif arg == "new"
@@ -51,7 +51,7 @@ class Tynnyri < Thor
   private
 
   def tynnyri_file
-    `verkko tty` + ".tynnyri"
+    `verkko tty` + ".tynnyri" # /path/
   end
 end
 
