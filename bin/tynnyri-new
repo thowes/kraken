@@ -21,15 +21,18 @@ class Tynnyri < Thor
 
   desc 'default', 'the default tynnyri command.'
   def default(*)
+    if arg2 == "add" && arg3.nil?
     if arg2 == "kick"
+      kick
     elsif arg == "new"
-    #
+      # new
     elsif arg2 == "delete"
+      delete
     end
   end
 
   desc 'delete', 'delete tynnyri.'
-  def delete(*)
+  def delete
     #
   end
 
@@ -40,6 +43,7 @@ class Tynnyri < Thor
 
   desc 'new', 'new tynnyri.'
   def new; puts "new"; end
+    # puts "new"
 
   private
 
