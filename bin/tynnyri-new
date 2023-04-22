@@ -28,9 +28,12 @@ class Tynnyri < Thor
   def delete(*)
     #
   end
+
   desc 'kick', 'kick tynnyri.'
   def kick; puts kick; end
+    puts "kick"
 
+  def new; puts "new"; end
   private
 
   def tynnyri_file
