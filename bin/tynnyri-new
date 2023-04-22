@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
+
 require 'thor'
 
 # require 'fileutils'
+
 class Tynnyri < Thor
   # alias
   default_task :default
@@ -10,9 +12,10 @@ class Tynnyri < Thor
   desc 'add', 'add to tynnyri.'
   def add(tynnyri_input)
     file = tynnyri_file
-    if File.exists?(tynnyri_file)
+    if File.exists?(file)
       # f.puts tynnyri_input
     else puts file
+      puts file
     end
   end
 
@@ -32,4 +35,5 @@ class Tynnyri < Thor
     `verkko tty` + ".tynnyri"
   end
 end
+Tynnyri.start(ARGV)
 
