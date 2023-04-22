@@ -13,7 +13,7 @@ class Tynnyri < Thor
   def add(tynnyri_input)
     file = tynnyri_file
     if File.exists?(file)
-      # f.puts tynnyri_input
+      File.open(file, 'w') {|f| f.write(tynnyri_input) }
     else puts file
       puts file
     end
@@ -28,6 +28,7 @@ class Tynnyri < Thor
   def delete(*)
     #
   end
+  def kick; puts kick; end
 
   private
 
@@ -35,5 +36,6 @@ class Tynnyri < Thor
     `verkko tty` + ".tynnyri"
   end
 end
+
 Tynnyri.start(ARGV)
 
