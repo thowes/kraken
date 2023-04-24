@@ -19,16 +19,16 @@ class Tynnyri < Thor
     end
   end
 
-  desc 'default', 'the default tynnyri command.'
+  desc 'default', 'the default TYNNYRI command.'
   def default(arg2, arg3 == nil)
     if arg2.nil?
-      add arg
     elsif arg2 == "add" && arg3.not_nil?
+      add arg
     elsif arg2 == "add" && arg3.nil?
       puts "add"
     elsif arg2 == "kick"
       kick
-    elsif arg2 == "new"
+    elsif arg2 == "new" # reset
       reset
     elsif arg2 == "delete"
       delete
@@ -37,25 +37,25 @@ class Tynnyri < Thor
     end
   end
 
-  desc 'delete', 'delete tynnyri.'
+  desc 'delete', 'delete TYNNYRI.'
   def delete
-    puts "delete"
+    puts "TYNNYRI: delete"
   end
 
-  desc 'kick', 'kick tynnyri.'
+  desc 'kick', 'kick TYNNYRI.'
   def kick
-    puts "kick"
+    puts "TYNNYRI: kick"
   end
 
-  desc 'new', 'new tynnyri.'
+  desc 'reset', 'reset TYNNYRI.'
   def reset
-    puts "new"
+    puts "TYNNYRI: reset"
   end
 
   private
 
   def tynnyri_file
-    `verkko tty` + ".tynnyri" # /path/
+    `asetus dir:temp` + `verkko tty` + ".tynnyri"
   end
 end
 
