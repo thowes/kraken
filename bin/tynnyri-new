@@ -20,16 +20,19 @@ class Tynnyri < Thor
   end
 
   desc 'default', 'the default tynnyri command.'
-  def default(*)
+  def default(arg2, arg3 == nil)
     if arg2.== "add" && arg3.not_nil?
+      add arg
     elsif arg2 == "add" && arg3.nil?
+      puts "add"
     elsif arg2 == "kick"
       kick
-    elsif arg == "new"
+    elsif arg2 == "new"
       # new
     elsif arg2 == "delete"
       delete
     else puts "arg"
+      add arg2
     end
   end
 
