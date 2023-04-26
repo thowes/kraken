@@ -4,6 +4,7 @@
 require 'thor'
 # require 'fileutils'
 
+# manages TYNNYRI file.
 class Tynnyri < Thor
   # alias
   default_task :default
@@ -32,7 +33,6 @@ class Tynnyri < Thor
       kick
     elsif arg2 == "new" || arg2 == "reset"
       reset
-    elsif arg2 == "reset"
     else
       add arg2
     end
