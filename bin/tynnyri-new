@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require 'thor'
-
 # require 'fileutils'
 
 class Tynnyri < Thor
@@ -27,12 +26,13 @@ class Tynnyri < Thor
       add arg
     elsif arg2 == "add" && arg3.nil?
       puts "add"
+    elsif arg2 == "delete"
     elsif arg2 == "kick"
       kick
-    elsif arg2 == "new" # reset
+    elsif arg2 == "new"
       reset
-    elsif arg2 == "delete"
       delete
+    elsif arg2 == "reset"
     else
       add arg2
     end
