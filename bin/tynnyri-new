@@ -27,11 +27,11 @@ class Tynnyri < Thor
     elsif arg2 == "add" && arg3.nil?
       puts "add"
     elsif arg2 == "delete"
+      delete
     elsif arg2 == "kick"
       kick
-    elsif arg2 == "new"
+    elsif arg2 == "new" || arg2 == "reset"
       reset
-      delete
     elsif arg2 == "reset"
     else
       add arg2
