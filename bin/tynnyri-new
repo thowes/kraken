@@ -33,7 +33,7 @@ class Tynnyri < Thor
       kick
     elsif arg2 == "new" || arg2 == "reset"
       reset
-    elsif arg2 == "print"
+    elsif arg2 == "print" || arg2 == "show"
       puts "show"
       show
     else
@@ -52,13 +52,14 @@ class Tynnyri < Thor
   end
 
   desc 'print', 'print TYNNYRI.'; 
-  # puts "TYNNYRI: print"
 
   desc 'reset', 'reset TYNNYRI.'
   def reset
     puts "TYNNYRI: reset"
   end
+
   def print; puts "TYNNYRI: print"; end
+  # puts "TYNNYRI: print"
 
   private
 
