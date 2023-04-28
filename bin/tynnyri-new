@@ -56,7 +56,7 @@ class Tynnyri < Thor
   end
 
   desc 'show', 'show TYNNYRI.'
-  def shows
+  def show
     puts "TYNNYRI: show"
   end
 
