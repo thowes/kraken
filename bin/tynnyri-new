@@ -33,6 +33,7 @@ class Tynnyri < Thor
       kick
     elsif arg2 == "new" || arg2 == "reset"
       reset
+    elsif arg2 == "print"
     else
       add arg2
     end
@@ -47,6 +48,7 @@ class Tynnyri < Thor
   def kick
     puts "TYNNYRI: kick"
   end
+  desc 'print', 'print TYNNYRI.'; def print; puts "TYNNYRI: print"; end
 
   desc 'reset', 'reset TYNNYRI.'
   def reset
