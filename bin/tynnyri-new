@@ -35,6 +35,7 @@ class Tynnyri < Thor
       reset
     elsif arg2 == "print"
       puts "show"
+      show
     else
       add arg2
     end
@@ -50,13 +51,14 @@ class Tynnyri < Thor
     puts "TYNNYRI: kick"
   end
 
-  desc 'print', 'print TYNNYRI.'; def print; puts "TYNNYRI: print"; end
+  desc 'print', 'print TYNNYRI.'; 
   # puts "TYNNYRI: print"
 
   desc 'reset', 'reset TYNNYRI.'
   def reset
     puts "TYNNYRI: reset"
   end
+  def print; puts "TYNNYRI: print"; end
 
   private
 
