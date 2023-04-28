@@ -50,15 +50,15 @@ class Tynnyri < Thor
   def kick
     puts "TYNNYRI: kick"
   end
-  desc 'print', 'print TYNNYRI.'; 
 
   desc 'reset', 'reset TYNNYRI.'
   def reset
     puts "TYNNYRI: reset"
   end
 
+  desc 'print', 'print TYNNYRI.'; 
   def print
-  # puts "TYNNYRI: print"
+    puts "TYNNYRI: print"
   end
 
   private
