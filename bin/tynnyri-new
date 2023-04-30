@@ -13,27 +13,27 @@ class Tynnyri < Thor
   def add(tynnyri_input)
     file = tynnyri_file
     if File.exists?(file)
-      File.open(file, 'w') {|f| f.write(tynnyri_input) }
-    else puts file
+      File.open(file, 'w') { |f| f.write(tynnyri_input) }
+    else
       puts file
     end
   end
 
   desc 'default', 'the default TYNNYRI command.'
-  def default(arg2, arg3 == nil)
+  def default(arg2, arg3 = nil)
     if arg2.nil?
       puts "nil"
-    elsif arg2 == "add" && arg3.not_nil?
+    elsif arg2 == 'add' && arg3.not_nil?
       add arg
-    elsif arg2 == "add" && arg3.nil?
+    elsif arg2 == 'add' && arg3.nil?
       puts "add"
-    elsif arg2 == "delete"
+    elsif arg2 == 'delete'
       delete
-    elsif arg2 == "kick"
+    elsif arg2 == 'kick'
       kick
-    elsif arg2 == "new" || arg2 == "reset"
+    elsif arg2 == 'new' || arg2 == 'reset'
       reset
-    elsif arg2 == "print" || arg2 == "pr" || arg2 == "show"
+    elsif arg2 == 'print' || arg2 == 'pr' || arg2 == 'show'
       show
     else
       add arg2
@@ -42,30 +42,29 @@ class Tynnyri < Thor
 
   desc 'delete', 'delete TYNNYRI.'
   def delete
-    puts "TYNNYRI: delete"
+    puts 'TYNNYRI: delete'
   end
 
   desc 'kick', 'kick TYNNYRI.'
   def kick
-    puts "TYNNYRI: kick"
+    puts 'TYNNYRI: kick'
   end
 
   desc 'reset', 'reset TYNNYRI.'
   def reset
-    puts "TYNNYRI: reset"
+    puts 'TYNNYRI: reset'
   end
 
   desc 'show', 'show TYNNYRI.'
   def show
-    puts "TYNNYRI: show"
+    puts 'TYNNYRI: show'
   end
 
   private
 
   def tynnyri_file
-    `asetus dir:temp` + `verkko tty` + ".tynnyri"
+    `asetus dir:temp` + `verkko tty` + '.tynnyri'
   end
 end
 
 Tynnyri.start(ARGV)
-
