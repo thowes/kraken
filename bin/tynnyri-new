@@ -12,7 +12,7 @@ class Tynnyri < Thor
   desc 'add', 'add to tynnyri.'
   def add(tynnyri_input)
     file = tynnyri_file
-    if File.exists?(file)
+    if File.exist?(file)
       File.open(file, 'w') { |f| f.write(tynnyri_input) }
     else
       puts file
@@ -22,18 +22,18 @@ class Tynnyri < Thor
   desc 'default', 'the default TYNNYRI command.'
   def default(arg2, arg3 = nil)
     if arg2.nil?
-      puts "nil"
+      puts 'nil'
     elsif arg2 == 'add' && arg3.not_nil?
       add arg
     elsif arg2 == 'add' && arg3.nil?
-      puts "add"
+      puts 'add'
     elsif arg2 == 'delete'
       delete
     elsif arg2 == 'kick'
       kick
-    elsif arg2 == 'new' || arg2 == 'reset'
+    elsif ['new', 'reset'].include?(arg2)
       reset
-    elsif arg2 == 'print' || arg2 == 'pr' || arg2 == 'show'
+    elsif ['print', 'pr', 'show'].include?(arg2)
       show
     else
       add arg2
