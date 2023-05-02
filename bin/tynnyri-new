@@ -24,7 +24,7 @@ class Tynnyri < Thor
     if arg2.nil?
       puts 'nil'
     elsif arg2 == 'add' && arg3.not_nil?
-      add arg
+      add arg3
     elsif arg2 == 'add' && arg3.nil?
       puts 'add'
     elsif arg2 == 'delete'
