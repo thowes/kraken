@@ -50,7 +50,7 @@ class Tynnyri < Thor
   desc 'kick', 'kick TYNNYRI.'
   def kick
     show
-    puts 'TYNNYRI: kick'
+    # puts 'TYNNYRI: kick'
     delete
   end
 
