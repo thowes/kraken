@@ -60,8 +60,7 @@ class Tynnyri < Thor
 
   desc 'show', 'show TYNNYRI.'
   def show
-    puts 'TYNNYRI: show'
-    File.open(tynnyri_file, 'r') { |f| f.puts }
+    File.open(tynnyri_file, 'r') { |f| f.puts }§
   end
 
   private
