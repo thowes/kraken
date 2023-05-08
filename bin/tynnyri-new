@@ -43,7 +43,6 @@ class Tynnyri < Thor
   desc 'delete', 'delete TYNNYRI.'
   def delete
     file = tynnyri_file
-    puts 'TYNNYRI: delete'
     FileUtils.rm(file) if File.exist?(file)
   end
 
