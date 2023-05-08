@@ -49,7 +49,6 @@ class Tynnyri < Thor
 
   desc 'kick', 'kick TYNNYRI.'
   def kick
-    # puts 'TYNNYRI: kick'
     show
     delete
   end
@@ -62,7 +61,7 @@ class Tynnyri < Thor
   desc 'show', 'show TYNNYRI.'
   def show
     puts 'TYNNYRI: show'
-    # File.open(tynnyri_file, 'r') { |f| f.puts }
+    File.open(tynnyri_file, 'r') { |f| f.puts }
   end
 
   private
