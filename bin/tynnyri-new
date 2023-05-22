@@ -51,6 +51,7 @@ class Tynnyri < Thor
     show
     delete
   end
+  # desc 'new', 'new TYNNYRI.'
 
   desc 'reset', 'reset TYNNYRI.'
   def reset
