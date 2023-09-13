@@ -60,7 +60,9 @@ class Greeting < Thor
 
   desc 'goodbye NAME', 'say goodbye to NAME'
   long_desc <<-LONGDESC
+  LONGDESC
 
+    greet('Goodbye', name)
   desc 'welcome NAME', 'say welcome to NAME'
   long_desc <<-LONGDESC
     `greeting welcome` will print out welcome message to a person of your choosing.
@@ -71,9 +73,7 @@ class Greeting < Thor
 
 
     `greeting goodbye` will print out a goodbye message to a person of your choosing.
-  LONGDESC
   def goodbye(name = nil)
-    greet('Goodbye', name)
   end
 
   map chao: :ciao
