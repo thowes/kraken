@@ -57,17 +57,19 @@ class Greeting < Thor
     # language = ask("Language: ")
     greet(I18n.t(:hello), name)
   end
+
   desc 'goodbye NAME', 'say goodbye to NAME'
+  long_desc <<-LONGDESC
 
   desc 'welcome NAME', 'say welcome to NAME'
   long_desc <<-LONGDESC
     `greeting welcome` will print out welcome message to a person of your choosing.
   LONGDESC
   def welcome(name = nil)
-    greet('¡Hola', name)
+    greet(I18n.t(:welcome), name)
   end
 
-  long_desc <<-LONGDESC
+
     `greeting goodbye` will print out a goodbye message to a person of your choosing.
   LONGDESC
   def goodbye(name = nil)
@@ -76,6 +78,7 @@ class Greeting < Thor
 
   map chao: :ciao
   map chau: :ciao
+  map hola: :hello
 
   private
 
