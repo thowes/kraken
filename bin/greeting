@@ -4,6 +4,7 @@
 require 'thor'
 require 'i18n'
 
+I18n.load_path << Dir[File.expand_path("locales") + "/*.yml"]
 # I use this to test the the existance ruby and thor in a system. Based on thor's example hello command.
 class Greeting < Thor
   class_option :yell, type: :boolean
@@ -72,9 +73,11 @@ class Greeting < Thor
   def goodbye(name = nil)
     greet('Goodbye', name)
   end
+
   map chao: :ciao
 
   map chau: :ciao
+
   private
 
   def greet(greeting, name = nil, from = nil)
