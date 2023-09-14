@@ -6,7 +6,6 @@ require 'thor'
 require 'i18n'
 FileUtils.cd("Projects/kraken/")
 
-I18n.load_path += Dir[File.expand_path("config/locales") + "/*.yml"]
 # I use this to test the the existance ruby and thor in a system. Based on thor's example hello command.
 class Greeting < Thor
   class_option :yell, type: :boolean
@@ -68,10 +67,12 @@ class Greeting < Thor
     greet(I18n.t(:welcome), name)
   end
 
-  map adios: :bye
+  map adios: :bye # es
   map chao: :ciao
   map chau: :ciao
+  map hei: :hello # fi
   map hola: :hello
+  map tchau: :ciao # pt
 
   private
 
@@ -84,5 +85,6 @@ class Greeting < Thor
   end
 end
 
+I18n.load_path += Dir[File.expand_path("config/locales") + "/*.yml"]
 # puts "hello, world!", "how's it going?"
 Greeting.start(ARGV)
