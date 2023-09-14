@@ -1,13 +1,16 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'fileutils'
 require 'thor'
 require 'i18n'
+FileUtils.cd("Projects/kraken/")
 
-I18n.load_path << Dir[File.expand_path("../locales") + "/*.yml"]
+I18n.load_path += Dir[File.expand_path("config/locales") + "/*.yml"]
 # I use this to test the the existance ruby and thor in a system. Based on thor's example hello command.
 class Greeting < Thor
   class_option :yell, type: :boolean
+  default_task :hello
 
   desc 'adieu NAME', 'say adieu to NAME'
   long_desc <<-LONGDESC
@@ -15,14 +18,6 @@ class Greeting < Thor
   LONGDESC
   def adieu(name = nil)
     greet('Adieu', name)
-  end
-
-  desc 'adios NAME', 'say adios to NAME'
-  long_desc <<-LONGDESC
-    `greeting adios` will print out an adios message to a person of your choosing.
-  LONGDESC
-  def adios(name = nil)
-    greet('Adios', name)
   end
 
   desc 'bye NAME', 'say bye to NAME'
@@ -73,6 +68,7 @@ class Greeting < Thor
     greet(I18n.t(:welcome), name)
   end
 
+  map adios: :bye
   map chao: :ciao
   map chau: :ciao
   map hola: :hello
