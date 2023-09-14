@@ -68,12 +68,13 @@ class Greeting < Thor
 
   map adios: :bye # es
   map chao: :ciao # es
-  map chau: :ciao
+  map chau: :ciao # es
   map hei: :hello # fi
   map heihei: :bye # fi
-  map hola: :hello
+  map hola: :hello # es
   map tchao: :ciao # pt
   map tchau: :ciao # pt
+  map tsau: :ciao # fi
 
   private
 
@@ -86,7 +87,7 @@ class Greeting < Thor
   end
 end
 
-FileUtils.cd("Projects/kraken/")
+FileUtils.cd("Projects/kraken/") if Dir.exist?("Projects/kraken/")
 I18n.load_path += Dir[File.expand_path("config/locales") + "/*.yml"]
 # puts "hello, world!", "how's it going?"
 Greeting.start(ARGV)
