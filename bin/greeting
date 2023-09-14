@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'fileutils'
 require 'thor'
+require 'fileutils'
 require 'i18n'
-FileUtils.cd("Projects/kraken/")
 
 # I use this to test the the existance ruby and thor in a system. Based on thor's example hello command.
 class Greeting < Thor
@@ -68,10 +67,12 @@ class Greeting < Thor
   end
 
   map adios: :bye # es
-  map chao: :ciao
+  map chao: :ciao # es
   map chau: :ciao
   map hei: :hello # fi
+  map heihei: :bye # fi
   map hola: :hello
+  map tchao: :ciao # pt
   map tchau: :ciao # pt
 
   private
@@ -85,6 +86,7 @@ class Greeting < Thor
   end
 end
 
+FileUtils.cd("Projects/kraken/")
 I18n.load_path += Dir[File.expand_path("config/locales") + "/*.yml"]
 # puts "hello, world!", "how's it going?"
 Greeting.start(ARGV)
