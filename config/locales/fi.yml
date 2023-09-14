@@ -2,4 +2,6 @@ fi:
   bye: Hei hei
   goodbye: Hyvästi
   hello: Hei
+  hello_desc: Sano hei käyttäjälle
   welcome: Tervetuloa
+  name: NIMI

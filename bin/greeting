@@ -8,6 +8,7 @@ require 'i18n'
 # I use this to test the the existance ruby and thor in a system. Based on thor's example hello command.
 class Greeting < Thor
   class_option :yell, type: :boolean
+  # class_option :ruby_version, type: :boolean
   default_task :hello
 
   desc 'adieu NAME', 'say adieu to NAME'
@@ -42,7 +43,7 @@ class Greeting < Thor
     greet('Ciao', name)
   end
 
-  desc 'hello NAME', 'say hello to NAME'
+  desc 'hello NAME', 'Say hello to NAME'
   long_desc <<-LONGDESC
     `greeting hello` will print out a message to a person of your choosing.
   LONGDESC
