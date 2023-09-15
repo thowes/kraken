@@ -1,11 +1,13 @@
 fi:
-  bye: Hei hei
+  bye: Heippa
   bye_long: `greeting bye` tulostaa heippa-viestin valitulle nimelle.
+  byebye: Hei hei
   goodbye: Hyvästi
   goodbye_long: `greeting goodbye` tulostaa hyvästi-viestin valitulle nimelle.
   hello: Hei
   hello_desc: Sano hei käyttäjälle
   hello_long: `greeting hello` tulostaa viestin valitulle nimelle.
+  name: NIMI
   welcome: Tervetuloa
   welcome_long: `greeting welcome` tulostaa tervetuloa-viestin valitulle nimelle.
-  name: NIMI
+  
