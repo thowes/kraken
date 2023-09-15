@@ -27,9 +27,6 @@ class Greeting < Thor
   end
 
   desc 'ciao NAME', 'say ciao to NAME'
-  long_desc <<-LONGDESC
-    `greeting ciao` will print out a ciao message to a person of your choosing.
-  LONGDESC
   def ciao(name = nil)
     greet(I18n.t(:ciao), name)
   end
@@ -67,7 +64,7 @@ class Greeting < Thor
     output = output.upcase if options[:yell]
     output = "#{output} from #{from}!" unless from.nil?
     say "#{output}!" unless options[:version]
-    say "#{output}!" unless options[:version]
+    say "#{output}! (#{RUBY_VERSION})" if options[:version]
   end
 end
 
