@@ -1,7 +1,9 @@
 fi:
+  adieu: Hyvästi
   bye: Heippa
   bye_long: `greeting bye` tulostaa heippa-viestin valitulle nimelle.
   byebye: Hei hei
+  byebye_long: `greeting byebye` tulostaa heihei-viestin valitulle nimelle.
   goodbye: Hyvästi
   goodbye_long: `greeting goodbye` tulostaa hyvästi-viestin valitulle nimelle.
   hello: Hei

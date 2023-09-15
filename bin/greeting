@@ -25,9 +25,6 @@ class Greeting < Thor
   end
 
   desc 'byebye NAME', 'say byebye to NAME'
-  long_desc <<-LONGDESC
-    `greeting byebye` will print out a byebye message to a person of your choosing.
-  LONGDESC
   def byebye(name = nil)
     greet(I18n.t(:byebye), name)
   end
@@ -69,10 +66,10 @@ class Greeting < Thor
 
   def greet(greeting, name = nil, from = nil)
     name = name || ENV['USER'].capitalize || 'world'
-    output = "#{greeting}, #{name}" unless options[:yell]
+    output = "#{greeting}, #{name}"
     output = output.upcase if options[:yell]
     output = "#{output} from #{from}!" unless from.nil?
-    say "#{output}!" if from.nil?
+    say "#{output}!" unless options[:version]
   end
 end
 
