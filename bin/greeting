@@ -9,14 +9,11 @@ require 'i18n'
 class Greeting < Thor
   class_option :yell, type: :boolean
   class_option :version, type: :boolean # includes ruby version as part of output
-  default_task :hello
+  default_task :ciao
 
   desc 'adieu NAME', 'say adieu to NAME'
-  long_desc <<-LONGDESC
-    `greeting adieu` will print out an adieu message to a person of your choosing.
-  LONGDESC
   def adieu(name = nil)
-    greet('Adieu', name)
+    greet(I18n.t(:adieu), name)
   end
 
   desc 'bye NAME', 'say bye to NAME'
@@ -34,7 +31,7 @@ class Greeting < Thor
     `greeting ciao` will print out a ciao message to a person of your choosing.
   LONGDESC
   def ciao(name = nil)
-    greet('Ciao', name)
+    greet(I18n.t(:ciao), name)
   end
 
   desc 'hello NAME', 'Say hello to NAME'
@@ -69,6 +66,7 @@ class Greeting < Thor
     output = "#{greeting}, #{name}"
     output = output.upcase if options[:yell]
     output = "#{output} from #{from}!" unless from.nil?
+    say "#{output}!" unless options[:version]
     say "#{output}!" unless options[:version]
   end
 end
