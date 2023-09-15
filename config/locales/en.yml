@@ -1,7 +1,11 @@
 en:
   bye: Bye
+  bye_long: `greeting bye` will print out a bye message to a person of your choosing.
   goodbye: Goodbye
+  goodbye_long: `greeting goodbye` will print out a goodbye message to a person of your choosing.
   hello: Hello
   hello_desc: Say hello to
+  hello_long: `greeting hello` will print out a message to a person of your choosing.
   welcome: Welcome
+  welcome_long: `greeting welcome` will print out welcome message to a person of your choosing.
   name: NAME

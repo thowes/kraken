@@ -8,7 +8,7 @@ require 'i18n'
 # I use this to test the the existance ruby and thor in a system. Based on thor's example hello command.
 class Greeting < Thor
   class_option :yell, type: :boolean
-  # class_option :ruby_version, type: :boolean
+  class_option :version, type: :boolean # includes ruby version as part of output
   default_task :hello
 
   desc 'adieu NAME', 'say adieu to NAME'
@@ -20,9 +20,6 @@ class Greeting < Thor
   end
 
   desc 'bye NAME', 'say bye to NAME'
-  long_desc <<-LONGDESC
-    `greeting bye` will print out a bye message to a person of your choosing.
-  LONGDESC
   def bye(name = nil)
     greet(I18n.t(:bye), name)
   end
@@ -44,25 +41,16 @@ class Greeting < Thor
   end
 
   desc 'hello NAME', 'Say hello to NAME'
-  long_desc <<-LONGDESC
-    `greeting hello` will print out a message to a person of your choosing.
-  LONGDESC
   def hello(name = nil)
     greet(I18n.t(:hello), name)
   end
 
   desc 'goodbye NAME', 'say goodbye to NAME'
-  long_desc <<-LONGDESC
-    `greeting goodbye` will print out a goodbye message to a person of your choosing.
-  LONGDESC
   def goodbye(name = nil)
     greet(I18n.t(:goodbye), name)
   end
 
   desc 'welcome NAME', 'say welcome to NAME'
-  long_desc <<-LONGDESC
-    `greeting welcome` will print out welcome message to a person of your choosing.
-  LONGDESC
   def welcome(name = nil)
     greet(I18n.t(:welcome), name)
   end
@@ -72,9 +60,9 @@ class Greeting < Thor
   map chau: :ciao # es
   map hei: :hello # fi
   map heihei: :bye # fi
+  map heippa: :bye # fi
   map hola: :hello # es
   map tchao: :ciao # pt
-  map tchau: :ciao # pt
   map tsau: :ciao # fi
 
   private
@@ -82,13 +70,13 @@ class Greeting < Thor
   def greet(greeting, name = nil, from = nil)
     name = name || ENV['USER'].capitalize || 'world'
     output = "#{greeting}, #{name}" unless options[:yell]
-    output = "#{greeting.upcase}, #{name.upcase}" if options[:yell]
+    output = output.upcase if options[:yell]
     say "#{output}!" if from.nil?
-    say "#{output} from #{from}!" unless from.nil?
+    output = "#{output} from #{from}!" unless from.nil?
   end
 end
 
 FileUtils.cd("Projects/kraken/") if Dir.exist?("Projects/kraken/")
 I18n.load_path += Dir[File.expand_path("config/locales") + "/*.yml"]
-# puts "hello, world!", "how's it going?"
+# puts "hello, [NAME]!"
 Greeting.start(ARGV)

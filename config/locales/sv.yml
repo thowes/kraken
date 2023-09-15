@@ -2,5 +2,7 @@ sv:
   bye: Hejdå
   goodbye: Hejdå
   hello: Hallå
-  hello_desc: Say hello to NAME
+  hello_desc: Säg hej till
+  name: NAMN
   welcome: Välkommen
+  name: NAMN

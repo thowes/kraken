@@ -3,5 +3,6 @@ is:
   goodbye: Bless
   hello: Halló
   hello_desc: Say hello to NAME
+  name: NAFN
   welcome: Velkominn
   name: NAFN
