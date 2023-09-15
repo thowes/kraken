@@ -6,7 +6,7 @@ require 'fileutils'
 require 'i18n'
 
 # I use this to test the the existance ruby and thor in a system. Based on thor's example hello command.
-class Greeting < Thor
+class Ciao < Thor
   class_option :yell, type: :boolean
   class_option :version, type: :boolean # includes ruby version as part of output
   default_task :ciao
@@ -71,4 +71,4 @@ end
 FileUtils.cd("Projects/kraken/") if Dir.exist?("Projects/kraken/")
 I18n.load_path += Dir[File.expand_path("config/locales") + "/*.yml"]
 # puts "hello, [NAME]!"
-Greeting.start(ARGV)
+Ciao.start(ARGV)

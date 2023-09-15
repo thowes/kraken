@@ -14,5 +14,5 @@ en:
   hello_long: will print out a message to a person of your choosing.
   name: NAME
   welcome: Welcome
-  welcome_long: `greeting welcome` will print out welcome message to a person of your choosing.
+  welcome_long: will print out welcome message to a person of your choosing.
 
