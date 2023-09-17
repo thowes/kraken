@@ -46,7 +46,7 @@ class Ciao < Thor
     greet(I18n.t(:welcome), name)
   end
 
-  map adios: :bye # es
+  map adios: :adieu # es
   map chao: :ciao # es
   map chau: :ciao # es
   map hei: :hello # fi
