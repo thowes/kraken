@@ -3,9 +3,12 @@ es:
   adieu_long: va a imprimir un mensaje de adiós para el nombre elegido.
   bye: ¡Adiós
   byebye: ¡Chao chao
+  byebye_desc: va a imprimir un mensaje de chaochao para el nombre elegido.
   ciao: ¡Chao
+  ciao_desc: va a imprimir un mensaje de chao para el nombre elegido.
   goodbye: ¡Adiós
   hello: ¡Hola
   hello_desc: Di hola al
   name: NOMBRE
   welcome: ¡Bienvenido
+  welcome_desc: va a imprimir un mensaje de bienvenido para el nombre elegido.

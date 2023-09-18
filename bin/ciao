@@ -68,6 +68,7 @@ class Ciao < Thor
   end
 end
 
+home = ENV["HOME"] + "/" + "Projects/kraken/"
 FileUtils.cd("Projects/kraken/") if Dir.exist?("Projects/kraken/")
 I18n.load_path += Dir[File.expand_path("config/locales") + "/*.yml"]
 # puts "hello, [NAME]!"
