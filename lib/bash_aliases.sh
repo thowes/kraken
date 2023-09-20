@@ -50,6 +50,7 @@ alias gl='git log'
 alias glog='GIT_PAGER=cat git log --pretty=oneline'
 alias gmv='git mv'
 alias go+rwx='chmod go+rwx'
+alias greeting=ciao
 alias grep='grep --color=auto' # show differences in colour, check for darwin
 alias h1='head -1'
 alias h=heroku
