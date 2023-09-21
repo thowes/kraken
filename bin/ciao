@@ -7,6 +7,7 @@ require 'i18n'
 
 # I use this to test the the existance ruby and thor in a system. Based on thor's example hello command.
 class Ciao < Thor
+  # class_option :from, type: :string
   class_option :yell, type: :boolean
   class_option :version, type: :boolean # includes ruby version as part of output
   default_task :ciao
@@ -59,6 +60,7 @@ class Ciao < Thor
   private
 
   def greet(greeting, name = nil, from = nil)
+    # from = options[:from] || from || nil
     name = name || ENV['USER'].capitalize || 'world'
     output = "#{greeting}, #{name}"
     output = output.upcase if options[:yell]
