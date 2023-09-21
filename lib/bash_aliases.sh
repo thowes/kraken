@@ -55,9 +55,9 @@ alias grep='grep --color=auto' # show differences in colour, check for darwin
 alias h1='head -1'
 alias h=heroku
 alias h2='pwd; hakemisto; hakemisto'
-alias H2='kerain; h2; ..; h2'
+alias H2='h2; ..; h2'
 alias H3='kerain; h2; ..; h2; ..; h2'
-alias H4='kerain; h2; ..; h2; ..; h2; ..; h2'
+alias H4='h2; ..; h2; ..; h2; ..; h2'
 alias hak=hakemisto
 alias hst='cat ~/.bash_history'
 alias k=kill
