@@ -7,7 +7,6 @@ require 'thor'
 class Projekti < Thor
   default_task :default
   class_option :verbose, :type => :boolean, desc: 'print more ouput if verbose true.'
-  # alias st => status, def = default, dir => directory
 
   desc 'default', 'the default command.'
   def default(func = nil)
@@ -82,6 +81,11 @@ class Projekti < Thor
       end
     end
   end
+
+  map def: :default
+  # map dir: :directory
+  map st: :status
+  map upd: :update
 
   private
 
