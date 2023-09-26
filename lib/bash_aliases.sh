@@ -33,7 +33,7 @@ alias dox='LISTA=~/Documents/hakemisto.lst listalla'
 alias dwl='synkronoi dwl'
 alias e=echo
 alias ed=muokkaa
-alias egrep='egrep --color=auto'              # show differences in colour
+alias egrep='egrep --color=auto' # show differences in colour
 alias fgrep='fgrep --color=auto' # show differences in colour
 alias +g='chmod g+rwx'
 alias g=grep
@@ -64,16 +64,17 @@ alias k=kill
 alias k80=kaiku80
 alias k9='kill -9'
 alias ker=kerain
-alias l='ls -A' # ls -CF
 alias la='ls -olA'
 #alias levy='df -h'
 alias l3='ls -la|less'
 alias llg='ls -la|grep'
 alias lll='ls -la|less'
+alias logs='git log --pretty=oneline'
 alias m=less
 alias md=mkdir
 alias merge='git merge'
 alias mig='rails db:migrate'
+alias migr='rails db:migrate'
 alias migrate='rails db:migrate'
 alias more=less
 alias n=nano
@@ -106,17 +107,21 @@ alias +r='chmod +r'
 alias r=rails
 alias "r-"='chmod a-r'
 alias "r+"='chmod a+r'
+alias rb=rbenv
 alias rd=rmdir
 alias remote='git remote'
 alias reset='rails db:migrate:reset'
 alias rollback='rails db:rollback'
 alias routes='rails routes'
 alias rl='screen -list'
+alias rs='rails server'
 alias ru=screen
 alias rv='git remote -v'
 alias s3=sqlite3
+alias sans='bundle install --without'
 alias seed='rails db:seed'
 alias show='git show'
+alias server='rails server'
 alias srv='rails server'
 alias st='if [ -d .git ]; then git status; else if [ -d ../.git ]; then git status; else if [ -d ../../.git ]; then git status; fi; fi; fi'
 alias sy=synkronoi
@@ -147,3 +152,4 @@ alias +x='chmod +x'
 alias x=exit
 alias "x-"='chmod a-x'
 alias "x+"='chmod a+x'
+alias y='synkronoi ssh'
