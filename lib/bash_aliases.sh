@@ -36,6 +36,7 @@ alias dwl='synkronoi dwl'
 alias e=echo
 alias ed=muok
 alias egrep='egrep --color=auto' # show differences in colour
+alias f='git diff'
 alias fgrep='fgrep --color=auto' # show differences in colour
 alias +g='chmod g+rwx'
 alias g=grep
@@ -126,6 +127,7 @@ alias rt='rails test'
 alias ru=screen
 alias ruu=screen
 alias rv='git remote -v'
+alias ry=ruby
 alias s3=sqlite3
 alias sans='bundle install --without'
 alias seed='rails db:seed'
