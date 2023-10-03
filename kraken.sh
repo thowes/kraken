@@ -15,16 +15,16 @@ if [ -f "$2" ]; then
 
 	#KIRJASTOT
 	if [ -f "$KR_DIR_LIB/kr_network.sh" ]; then . $KR_DIR_LIB/kr_network.sh; fi
-	if [ -f $KR_DIR_LIB/proj.sh ]; then . $KR_DIR_LIB/proj.sh; fi
+	if [ -f "$KR_DIR_LIB/proj.sh" ]; then . $KR_DIR_LIB/proj.sh; fi
 
 	#OTHER FUNCTIONS
-	if [ $KR_DEBUG == "true" ]; then tynnyri new "KRAKEN/FUNK /w"; fi
+	if [ "$KR_DEBUG" == "true" ]; then tynnyri new "KRAKEN/FUNK /w"; fi
 	if [ -f "$KR_DIR_LIB/func.sh" ]; then . $KR_DIR_LIB/func.sh; fi
-	if [ $KR_DEBUG == "true" ]; then tynnyri kick; fi
+	if [ "$KR_DEBUG" == "true" ]; then tynnyri kick; fi
 
 	#TOIMENPITEET
 	if [ "$KR_BACKUPS" == "true" ]; then
-		case $CONTEXT in
+		case "$CONTEXT" in
 			b_app) compu_app $APPNAME; exit;;
 			b_start) compu_start $CONTEXT;;
 			*) debug KONTEXT $1 $CONTEXT;;
