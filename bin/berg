@@ -1,0 +1,16 @@
+#!/bin/sh
+
+#sudo mount -t drvfs C: /mnt/c -o metadata,uid=1001,gid=1001,umask=22,fmask=111
+case $(uname -a) in
+	*Microsoft*)
+			MNT_DIR=/mnt/$1/
+			if [ -d $MNT_DIR ]; then
+				if [ "$(ls -A $MNT_DIR)" ]; then
+     			nada; #virhe $MNT_DIR not Empty
+				else
+    			sudo mount -t drvfs $1: /mnt/$1
+				fi
+			else
+				virhe NF DIR /mnt/$1/
+			fi;;
+esac
