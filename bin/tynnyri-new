@@ -13,7 +13,7 @@ class Tynnyri < Thor
   def add(tynnyri_input)
     file = tynnyri_file
     uusi(file)
-      File.open(file, 'w') { |f| f.write(tynnyri_input) }
+    File.open(file, 'w') { |f| f.write(tynnyri_input) }
       puts file
   end
 
@@ -50,9 +50,9 @@ class Tynnyri < Thor
     delete
   end
 
-  # desc 'new', 'new TYNNYRI.'
+  desc 'uusi', 'uusi TYNNYRI.'
   def uusi(file = nil)
-    file = tynnyri_file if file = nil
+    file = tynnyri_file if file == nil
     FileUtils.touch(file)
   end
 
@@ -69,7 +69,7 @@ class Tynnyri < Thor
   private
 
   def tynnyri_file
-    "#{%x|asetus dir:temp|.to_s.strip}/#{%x|verkko tty|.to_s.strip}.tynnyri"
+    "#{%x|asetus dir:temp|.strip}/#{%x|verkko tty|.to_s.strip}.tynnyri"
   end
 end
 
