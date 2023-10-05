@@ -6,7 +6,6 @@ require 'fileutils'
 
 # manages TYNNYRI file.
 class Tynnyri < Thor
-  # alias
   default_task :default
 
   desc 'add', 'add to tynnyri.'
