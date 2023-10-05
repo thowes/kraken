@@ -14,7 +14,6 @@ class Tynnyri < Thor
     file = tynnyri_file
     uusi(file)
     File.open(file, 'w') { |f| f.write(tynnyri_input) }
-      puts file
   end
 
   desc 'default', 'the default TYNNYRI command.'
