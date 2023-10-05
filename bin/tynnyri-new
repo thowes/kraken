@@ -12,11 +12,9 @@ class Tynnyri < Thor
   desc 'add', 'add to tynnyri.'
   def add(tynnyri_input)
     file = tynnyri_file
-    if File.exist?(file)
+    uusi(file)
       File.open(file, 'w') { |f| f.write(tynnyri_input) }
-    else
       puts file
-    end
   end
 
   desc 'default', 'the default TYNNYRI command.'
@@ -51,7 +49,12 @@ class Tynnyri < Thor
     show
     delete
   end
+
   # desc 'new', 'new TYNNYRI.'
+  def uusi(file = nil)
+    file = tynnyri_file if file = nil
+    FileUtils.touch(file)
+  end
 
   desc 'reset', 'reset TYNNYRI.'
   def reset
@@ -66,7 +69,7 @@ class Tynnyri < Thor
   private
 
   def tynnyri_file
-    `asetus dir:temp` + `verkko tty` + '.tynnyri'
+    "#{%x|asetus dir:temp|.to_s.strip}/#{%x|verkko tty|.to_s.strip}.tynnyri"
   end
 end
 
