@@ -12,11 +12,13 @@ case $1 in
 	ab) $EDITOR ~/.addressbook;;
 	al) $EDITOR $CFG/alias.sh;;
 	bl*) $EDITOR ~/.bash_logout;;
-	brc|bashrc) $EDITOR ~/.bashrc;;
+	br*|bashrc) $EDITOR ~/.bashrc;;
 	bp*) $EDITOR ~/.bash_profile;;
 	c*f*) $EDITOR $CFG/kraken.cfg;;
 	gc|git) $EDITOR ~/.gitconfig;;
+	gem|gr*) $EDITOR ~/.gitconfig;;
 	gpg) $EDITOR ~/.gnupg/gpg.conf;;
+	irb*) $EDITOR ~/.irbrc;;
 	ker*) $EDITOR $CFG/kerain.sh;;
 	p|prof*) $EDITOR ~/.profile;;
 	proj) $EDITOR $CFG/proj.csv;;
