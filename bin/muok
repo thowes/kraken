@@ -15,10 +15,12 @@ case $1 in
 	brc|bashrc) $EDITOR ~/.bashrc;;
 	bp*) $EDITOR ~/.bash_profile;;
 	c*f*) $EDITOR $CFG/kraken.cfg;;
+	gc|git) $EDITOR ~/.gitconfig;;
 	gpg) $EDITOR ~/.gnupg/gpg.conf;;
 	ker*) $EDITOR $CFG/kerain.sh;;
 	p|prof*) $EDITOR ~/.profile;;
 	proj) $EDITOR $CFG/proj.csv;;
 	vk*) $EDITOR $CFG/vker.sh;;
+	zrc|zshrc) $EDITOR ~/.zshrc;;
 	*) printf "[[ MUOK err: argument not known. ]]\n";;
 esac
