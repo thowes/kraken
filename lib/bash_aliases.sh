@@ -32,7 +32,7 @@ alias co='git checkout'
 alias cob='git checkout -b'
 alias commit="git commit -m"
 alias cop=rubocop
-#alias d=diff
+alias d='DB=hakemisto.db hakemisto duplicate'
 alias dc=cd
 alias dcd=cd
 alias dwl='synkronoi dwl'
@@ -52,7 +52,7 @@ alias "g+"='chmod g+rwx'
 alias g+r='chmod g+r'
 alias g+w='chmod g+w'
 alias g+x='chmod g+x'
-alias gdf='git df'
+alias gdf='git diff'
 alias gl='git log'
 alias glog='git log --pretty=oneline'
 alias gmv='git mv'
@@ -76,6 +76,7 @@ alias ker=kerain
 alias l3='ls -la|less'
 alias llg='ls -la|grep'
 alias lll='ls -la|less'
+alias locked='DB=hakemisto.db hakemisto locked'
 alias logs='git log --pretty=oneline'
 alias m=less
 alias md=mkdir
@@ -86,7 +87,6 @@ alias migrate='rails db:migrate'
 alias more=less
 alias n=nano
 alias n2='nano -w -T 2'
-alias o=open
 alias +o='chmod o+rwx'
 alias "o-"='chmod o-rwx'
 alias o-r='chmod o-r'
@@ -107,7 +107,6 @@ alias og+w='chmod og+w'
 alias og+x='chmod og+x'
 alias origin='git remote -v|grep origin'
 alias ole=olemassa
-alias op=open
 alias P=projekti-func
 alias p=projekti-func
 alias psf='ps fu'
