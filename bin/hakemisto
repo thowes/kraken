@@ -6,7 +6,7 @@ require 'sqlite3'
 require 'digest'
 require 'time'
 require 'fileutils'
-require 'socket'
+# require 'socket'
 require 'shellwords'
 
 # HAKEMISTO class: scans contents of a dir and counts checksums.
@@ -19,8 +19,8 @@ class Hakemisto < Thor
     polku = path_new
     FileUtils.cd(dir) unless dir.nil?
     db = db_read('hakemisto.db') if File.exist?('hakemisto.db')
-    uusi = db_read(polku) # new db
-    uusi.execute("CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT);")
+    uusi = db_read(polku) if File.exist?(polku) # new db
+    uusi.exec("CREATE TABLE IF NOT EXISTS Documents (status TEXT, ls_time DATETIME, summa TEXT, path TEXT);")
     insert = 'INSERT INTO Documents (status, ls_time, summa, path) values'
     uusi.execute("#{insert} ('DIR', '#{Time.now}', '0,0', 'hostname:#{polku}')")
     Dir.glob("**/*.*").each do |f|
@@ -99,7 +99,7 @@ class Hakemisto < Thor
     db = db_read(db_file) # non-changing?
     line = db.execute("SELECT * FROM Documents WHERE status='DIR';")
     db&.close
-    true if line.to_s.include?(Socket.gethostname)
+    # true if line.to_s.include?(Socket.gethostname)
     false # boolean method?
   end
 
@@ -126,7 +126,7 @@ class Hakemisto < Thor
 
   def path_new
     temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || '~/Projects/temp'
-    "#{temp}/#{Process.pid}.db"
+    path = "#{temp}/#{Process.pid}.db"
   end
 
   def status(filename, count)

@@ -18,4 +18,4 @@ else
 fi
 LINE=$(cat $CFG/proj.csv|\grep $PROJECT)
 DIRPO=$(echo $LINE|awk -F, '{print $4}')
-printf "PROJECT=$PROJECT \nLINE=$LINE \nDIRPO=$DIRPO" > $(asetus dir:temp)/$TTY/tty_proj.check
+printf "PROJECT=$PROJECT \nLINE=$LINE \nDIRPO=$DIRPO" >> "$(asetus dir:temp)/$TTY.check"
