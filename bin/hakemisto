@@ -128,6 +128,7 @@ class Hakemisto < Thor
     temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || '~/Projects/temp'
     path = "#{temp}/#{Process.pid}.db"
     FileUtils.touch(path)
+    return path
   end
 
   def status(filename, count)
