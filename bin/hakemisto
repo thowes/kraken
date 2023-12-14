@@ -29,7 +29,7 @@ class Hakemisto < Thor
         db.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
       end
     end
-    db&.close if File.exist?('hakemisto.db')
+    db&.close
     FileUtils.mv(polku, './hakemisto.db')
     File.delete(polku) if File.exist?(polku)
     puts polku
