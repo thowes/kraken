@@ -16,10 +16,11 @@ class Hakemisto < Thor
   desc 'default', 'default function.'
   def default(dir = nil)
     polku = path_new
+    foo = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
     FileUtils.cd(dir) unless dir.nil?
-    db = db_read(polku) if File.exist?(polku)
+    db = SQLite3::Database.new(polku) if File.exist?(polku)
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
-    db.execute(insert, ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"])
+    db.execute(insert, foo)
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         count = 0
