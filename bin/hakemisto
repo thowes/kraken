@@ -18,16 +18,13 @@ class Hakemisto < Thor
     polku = path_new
     FileUtils.cd(dir) unless dir.nil?
     db = db_read(polku) if File.exist?(polku)
-    uusi = db_read(polku) if File.exist?(polku) # new db
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
-    u.execute "#{insert} ('DIR', '#{Time.now}', '0.0', 'hostname:#{polku}')"
     db.execute(insert, ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"])
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         count = 0
         checksums = summa(f)
         count = db_summa(checksums) if File.exist?('hakemisto.db')
-        u.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
         db.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
       end
     end
