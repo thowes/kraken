@@ -17,19 +17,20 @@ class Hakemisto < Thor
   def default(dir = nil)
     polku = path_new
     FileUtils.cd(dir) unless dir.nil?
-    db = db_read('hakemisto.db') if File.exist?('hakemisto.db')
+    db = db_read(polku) if File.exist?(polku)
     uusi = db_read(polku) if File.exist?(polku) # new db
-    insert = 'INSERT INTO Documents (status, ls_time, summa, path) values'
+    insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
     u.execute "#{insert} ('DIR', '#{Time.now}', '0.0', 'hostname:#{polku}')"
+    db.execute(insert, ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"])
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         count = 0
         checksums = summa(f)
-        count = db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';").count if File.exist?('hakemisto.db')
+        count = db_summa(checksums) if File.exist?('hakemisto.db')
         u.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
+        db.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
       end
     end
-    u&.close
     db&.close if File.exist?('hakemisto.db')
     FileUtils.mv(polku, './hakemisto.db')
     File.delete(polku) if File.exist?(polku)
@@ -105,6 +106,11 @@ class Hakemisto < Thor
 
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
+  end
+
+  def db_summa(sums)
+    from = "SELECT * FROM Documents WHERE summa='#{sums}';"
+    SQLite3::Database.open('hakemisto.db').execute(from).count
   end
 
   def locked?(filepath)
