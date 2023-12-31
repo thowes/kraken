@@ -4,7 +4,6 @@ alias 1=singular
 alias 1st='bulog -1'
 alias 2nd='bulog -2'
 alias +a='chmod a+rwx'
-# alias a="git add -A; git commit -m" # removing from my use
 alias "a-"='chmod a-rwx'
 alias a-r='chmod a-r'
 alias a-w='chmod a-w'
@@ -64,7 +63,7 @@ alias greeting=ciao
 alias grep='grep --color=auto' # show differences in colour, check for darwin
 alias h1='head -1'
 alias h=heroku
-alias h2='pwd; hakemisto; hakemisto'
+alias h2='pwd; hakemisto double'
 alias H2='h2; ..; h2'
 alias H3='h2; ..; h2; ..; h2'
 alias H4='h2; ..; h2; ..; h2; ..; h2'
