@@ -17,7 +17,7 @@ class Hakemisto < Thor
   def double(dir = nil); long_default(dir); long_default(dir); end
 
   desc 'duplicate', 'look for duplicates in the DB (based on the checksums).'
-  def duplicate(filename = nil)
+  def duplicates(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db'
     if filename.nil?
       db_list_status(db_file, 'R2')
@@ -41,7 +41,7 @@ class Hakemisto < Thor
   end
 
   desc 'locked', 'look for locked files in the DB.'
-  def locked(filename = nil)
+  def lukossa(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db'
     if filename.nil?
       db_list_status(db_file, 'LL')
@@ -80,10 +80,14 @@ class Hakemisto < Thor
     true if db_list_status(db_file, 'DIR').to_s.include?(host)
     false
   end
+  map 'duplicate' => :duplicates
 
+  map 'dup'    =>    :duplicates
   map 'this' => :this_machine
 
+  map 'locked' =>    :lukossa
   map 'trash' => :roina
+  map 'tupla'  =>    :duplicates
 
 private
 
