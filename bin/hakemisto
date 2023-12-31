@@ -13,7 +13,7 @@ require 'shellwords'
 class Hakemisto < Thor
   default_task :long_default
 
-  desc 'double', 'double scan method.'
+  desc 'tuplaskannaus', 'double scan method.'
   def tuplaskannaus(dir = nil); long_default(dir); long_default(dir); end
 
   desc 'duplikaatit', 'look for duplicates in the DB (based on the checksums).'
@@ -82,14 +82,16 @@ class Hakemisto < Thor
   end
 
   map 'def'       => :long_default
+  map 'doublescan' => :tuplaskannaus
   map 'dup'       => :duplikaatit
-  map 'duplicate' => :duplicates
+  map 'duplicate'  => :duplicates
   map 'this'      => :this_machine
   map 'locked'    => :lukossa
-  map 'missing'   => :puuttuu
+  map 'missing'    => :puuttuu
   map 'scan'      => :long_default
+  map 'skannaa'    => :long_default
   map 'trash'     => :roina
-  map 'tupla'     => :tuplaskannaus
+  map 'tupla'      => :tuplaskannaus
 
 private
 
