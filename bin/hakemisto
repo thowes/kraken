@@ -15,14 +15,12 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
-    Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         count = 0
         checksums = summa(f)
         count = db_summa(checksums) if File.exist?('hakemisto.db')
         db.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
       end
-    end
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
@@ -118,7 +116,9 @@ class Hakemisto < Thor
     db.execute("CREATE TABLE IF NOT EXISTS Documents (#{cols});")
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
     db.execute(insert, foo)
+    Dir.glob("**/*.*").each do |f|
   ensure
+    end
     db&.close
   end
 
@@ -135,7 +135,7 @@ class Hakemisto < Thor
 
   def path_new
     temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || '~/Projects/temp'
-    path = "#{temp}/#{Process.pid}.db"
+    "#{temp}/#{Process.pid}.db"
   end
 
   def status(filename, count)
