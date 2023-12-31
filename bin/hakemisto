@@ -28,9 +28,7 @@ class Hakemisto < Thor
         db.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
       end
     end
-    db&.close
     FileUtils.mv(polku, './hakemisto.db')
-    puts polku
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
@@ -119,8 +117,8 @@ class Hakemisto < Thor
   end
 
   def dir_scan_darwin(polku)
-    polku = path_new
     SQLite3::Database.new polku
+  ensure db&.close
   end
 
   def locked?(filepath)
