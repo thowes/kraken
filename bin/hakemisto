@@ -53,8 +53,11 @@ class Hakemisto < Thor
 
   desc 'long_default', 'long default method.'
   def long_default(dir = nil); dir_scan_darwin
+    FileUtils.cd(dir) unless dir.nil?
     #
+    dir_scan_darwin if RUBY_PLATFORM.include?('darwin')
   end
+
   desc 'locked', 'look for locked files in the DB.'
   def locked(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db'
@@ -116,7 +119,7 @@ class Hakemisto < Thor
   end
 
   def dir_scan_darwin
-  # polku = path_new
+    polku = path_new
   end
 
   def locked?(filepath)
@@ -136,9 +139,7 @@ class Hakemisto < Thor
 
   def path_new
     temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || '~/Projects/temp'
-    template = "#{`asetus dir:tmpl`.gsub("\n", "")}/hak.db"
     path = "#{temp}/#{Process.pid}.db"
-    FileUtils.cp(template, "#{Process.pid}.db")
     return path
   end
 
@@ -162,7 +163,6 @@ class Hakemisto < Thor
   end
 
   def trash?(filepath)
-    # 'hakemisto.db', 'hakemisto.lst', 'missing.lst', 'OK.txt', 'roina.lst', 'Thumbs.db' ]
     return true if filepath.include?('all-wcprops')
     return true if filepath.include?('backup.log')
     return true if filepath.include?('changed.lst')
