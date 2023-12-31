@@ -92,8 +92,11 @@ class Hakemisto < Thor
   end
 
 private
+
   def db_duplicate(polku)
+    if filename.nil?
     #
+    end
   end
 
   def db_read(file)
