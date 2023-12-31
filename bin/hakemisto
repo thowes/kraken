@@ -98,10 +98,12 @@ private
   end
 
   def db_list_sum(db_file, sum)
+    db = SQLite3::Database.new polku
     #
   end
-  def db_list_path(polku, sum); end
+  def db_list_path(db_file, sum)
     #
+    db = SQLite3::Database.new polku
   end
   def db_scan(polku)
     first = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
