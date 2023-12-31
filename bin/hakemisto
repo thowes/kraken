@@ -13,8 +13,9 @@ require 'shellwords'
 class Hakemisto < Thor
   default_task :long_default
 
-  desc 'default', 'default function.'
+  desc 'double', 'double scan method (no functionality yet).'
   def default(dir = nil)
+    #
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
@@ -113,8 +114,9 @@ class Hakemisto < Thor
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         count = 0
-        checksums = summa(f)
+        sums = summa(f)
         count = db_summa(checksums) if File.exist?('hakemisto.db')
+        st = status(f, count)
         db.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
       end
     end
