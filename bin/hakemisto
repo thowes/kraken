@@ -27,7 +27,6 @@ class Hakemisto < Thor
         db.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
       end
     end
-    FileUtils.mv(polku, './hakemisto.db')
   end
 
   desc 'duplicate', 'look for duplicates in the DB.'
@@ -51,6 +50,7 @@ class Hakemisto < Thor
     FileUtils.cd(dir) unless dir.nil?
     polku = path_new
     dir_scan_darwin(polku) if RUBY_PLATFORM.include?('darwin')
+    FileUtils.mv(polku, './hakemisto.db')
     File.delete(polku) if File.exist?(polku)
     puts "EMPTY: #{polku}"
   end
@@ -116,7 +116,7 @@ class Hakemisto < Thor
   end
 
   def dir_scan_darwin(polku)
-    SQLite3::Database.new polku
+    db = SQLite3::Database.new polku
   ensure
     db&.close
   end
@@ -129,8 +129,9 @@ class Hakemisto < Thor
     false
   end
 
+  # currently not doing anything
   def missing?(filepath)
-    false
+    # false
   end
 
   def path_new
