@@ -102,7 +102,7 @@ private
   end
 
   def db_scan(db_file)
-    first = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
+    first = ["DIR", "#{Time.now}", "0.0", "hostname:#{db_file}"]
     cols = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
     db = SQLite3::Database.new db_file
