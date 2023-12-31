@@ -14,9 +14,8 @@ class Hakemisto < Thor
   default_task :long_default
 
   desc 'double', 'double scan method (no functionality yet).'
-  def default(dir = nil)
+  def double(dir = nil); end
     #
-  end
 
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
@@ -41,7 +40,7 @@ class Hakemisto < Thor
     dir_scan_darwin(polku) if RUBY_PLATFORM.include?('darwin')
     FileUtils.mv(polku, './hakemisto.db')
     File.delete(polku) if File.exist?(polku)
-    puts "EMPTY: #{polku}"
+    puts "#{polku}"
   end
 
   desc 'locked', 'look for locked files in the DB.'
@@ -115,9 +114,9 @@ class Hakemisto < Thor
       if !File.directory?(f)
         count = 0
         sums = summa(f)
-        count = db_summa(checksums) if File.exist?('hakemisto.db')
+        count = db_summa(sums) if File.exist?('hakemisto.db')
         st = status(f, count)
-        db.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
+        db.execute("#{insert} ('#{st}', '#{File.stat(f).mtime}', '#{sums}', \"#{f}\");")
       end
     end
   # rec from fail?
