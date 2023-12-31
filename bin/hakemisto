@@ -6,7 +6,7 @@ require 'sqlite3'
 require 'digest'
 require 'time'
 require 'fileutils'
-# require 'socket'
+require 'socket'
 require 'shellwords'
 
 # HAKEMISTO class: scans contents of a dir and counts checksums.
@@ -14,7 +14,7 @@ class Hakemisto < Thor
   default_task :long_default
 
   desc 'double', 'double scan method (no functionality yet).'
-  def double(dir = nil); end
+  def double(dir = nil); long_default(dir); long_default(dir); end
 
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
@@ -75,12 +75,15 @@ class Hakemisto < Thor
 
   desc 'this_machine', 'checks if given DB was created on this machine (NOTE: work in progress).'
   def this_machine(filename = nil)
+    host = ENV['HOSTNAME'] || Socket.gethostname || `hostname`.strip
     db_file = filename || ENV['DB'] || 'hakemisto.db'
     line = db_list_status(db_file, 'DIR')
-    # true if line.to_s.include?(Socket.gethostname)
+    true if db_list_status(db_file, 'DIR').to_s.include?(host)
     false
   end
+  map 'this' => :this_machine
 
+  map 'trash' => :roina
 private
 
   def db_list_status(db_file, argu)
@@ -126,6 +129,7 @@ private
     from = "SELECT * FROM Documents WHERE summa='#{sums}';"
     SQLite3::Database.open('hakemisto.db').execute(from).count
   end
+  def dir_if_ex(); end
 
   def locked?(filepath)
     if RUBY_PLATFORM.include?('darwin')
