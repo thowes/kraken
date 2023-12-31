@@ -93,15 +93,14 @@ class Hakemisto < Thor
 
 private
 
-  def db_list(polku, status_type = nil)
+  def db_list(polku, status_type = nil, filename = nil)
     db = SQLite3::Database.new polku
     if filename.nil?
-    # else
+      db.execute("SELECT * FROM Documents WHERE status='D2';") do |l| puts l.to_s; end
     end
+  ensure db&.close
   end
-  def db_read(file)
     #
-  end
 
   def db_scan(polku)
     first = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
