@@ -98,16 +98,15 @@ private
     SQLite3::Database.open file # howto do read-only?
   end
     from = "SELECT * FROM Documents WHERE summa='#{sums}';"
-    SQLite3::Database.open('hakemisto.db').execute(from).count
   end
 
   def db_scan(polku)
-    foo = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
+    first = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
     cols = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
     db = SQLite3::Database.new polku
     db.execute("CREATE TABLE IF NOT EXISTS Documents (#{cols});")
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
-    db.execute(insert, foo)
+    db.execute(insert, first)
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         count = 0
@@ -121,10 +120,11 @@ private
   ensure db&.close
   end
   # returns the count of rows in DB with same checksum.
-
   def db_summa(sums)
   # def db_summa(sums)
+    SQLite3::Database.open('hakemisto.db').execute(from).count
   end
+
   def locked?(filepath)
     if RUBY_PLATFORM.include?('darwin')
       line = `ls -lO #{Shellwords.escape(filepath)}`.to_s # strip extra spaces/tabs
