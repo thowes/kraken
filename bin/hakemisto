@@ -76,22 +76,21 @@ class Hakemisto < Thor
   desc 'this_machine', 'checks if given DB was created on this machine (NOTE: work in progress).'
   def this_machine(filename = nil)
     db_file = filename || ENV['DB'] || 'hakemisto.db'
-    db = SQLite3::Database.new db_file
     line = db_list_status(db_file, 'DIR')
-    db&.close
     # true if line.to_s.include?(Socket.gethostname)
-    false # boolean method?
+    false
   end
 
 private
 
-  def db_list_status(polku, st)
+  def db_list_status(polku, argu)
     db = SQLite3::Database.new polku
-    db.execute("SELECT * FROM Documents WHERE status='#{st}';") do |l| puts l.to_s; end
+    db.execute("SELECT * FROM Documents WHERE status='#{argu}';") do |l| puts l.to_s; end
   ensure db&.close
   end
 
   def db_list_sum(polku, sum); end
+  def db_list_path(polku, sum); end
   def db_scan(polku)
     first = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
     cols = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
