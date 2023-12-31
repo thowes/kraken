@@ -19,17 +19,15 @@ class Hakemisto < Thor
   desc 'duplicate', 'look for duplicates in the DB.'
   def duplicate(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db'
-    db = SQLite3::Database.new db_file
     if filename.nil?
-      # db.execute("SELECT * FROM Documents WHERE status='R2';") do |l| puts l.to_s; end
+      db_list_status(db_file, 'R2')
       db_list_status(db_file, 'D2')
-      db.execute("SELECT * FROM Documents WHERE status='L2';") do |l| puts l.to_s; end
+      db_list_status(db_file, 'L2')
       db_list_status(db_file, 'M2')
     else
       checksums = summa(filename)
       db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';") do |l| puts l.to_s; end
     end
-    db&.close
   end
 
   desc 'long_default', 'long default method.'
@@ -45,40 +43,34 @@ class Hakemisto < Thor
   desc 'locked', 'look for locked files in the DB.'
   def locked(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db'
-    db = SQLite3::Database.new db_file
     if filename.nil?
-      db.execute("SELECT * FROM Documents WHERE status='LL';") do |l| puts l.to_s; end
+      db_list_status(db_file, 'LL')
       db_list_status(db_file, 'L2')
     else #
       db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
     end
-    db&.close
   end
 
   desc 'missing', 'look for missing files in the DB.'
   def missing(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
-    db = SQLite3::Database.new db_file
     if filename.nil?
       db_list_status(db_file, 'MM')
-      db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
+      db_list_status(db_file, 'M2')
     else
       db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
     end
-    db&.close
   end
 
   desc 'roina', 'look for roina files in the DB.'
   def roina(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db'
-    db = SQLite3::Database.new db_file
     if filename.nil?
-      # db.execute("SELECT * FROM Documents WHERE status='R2';") do |l| puts l.to_s; end
+      db_list_status(db_file, 'R2')
       db_list_status(db_file, 'RR')
     else
       db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
     end
-    db&.close
   end
 
   desc 'this_machine', 'checks if given DB was created on this machine (NOTE: work in progress).'
