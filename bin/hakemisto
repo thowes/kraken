@@ -84,10 +84,11 @@ class Hakemisto < Thor
   map 'def'        => :long_default
   map 'doublescan' => :tuplaskannaus
   map 'dup'        => :duplikaatit
-  map 'duplicate'  => :duplicates
+  map 'duplicate'  => :duplikaatit
   map 'this'       => :this_machine
   map 'locked'     => :lukossa
   map 'missing'    => :puuttuu
+  map 'roskat'     => :roina
   map 'scan'       => :long_default
   map 'skannaa'    => :long_default
   map 'trash'      => :roina
@@ -147,7 +148,7 @@ private
   def lukossa?(tiedosto)
     if RUBY_PLATFORM.include?('darwin')
       rivi = `ls -lO #{Shellwords.escape(tiedosto)}`.to_s # strip extra spaces/tabs
-      return true if line.include?(' uchg ')
+      return true if rivi.include?(' uchg ')
     end
     false
   end
@@ -160,12 +161,12 @@ private
     "#{temp}/#{Process.pid}.db"
   end
 
-  def status(tiedosto, count)
+  def status(tiedosto, laskuri)
     tila = 'NA'
     tila = 'LL' if lukossa?(tiedosto) && tila == 'NA'
     tila = 'RR' if roska?(tiedosto) && tila == 'NA'
     tila = 'MM' if puuttuu?(tiedosto) && tila == 'NA'
-    if count > 1
+    if laskuri > 1
       tila = 'D2' if tila == 'NA'
       tila = 'L2' if tila == 'LL'
       tila = 'R2' if tila == 'RR'
@@ -176,7 +177,7 @@ private
   end
 
   def summa(tiedosto)
-    "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}".to_s
+    "#{Digest::MD5.file tiedosto},#{Digest::SHA256.file tiedosto}".to_s
   end
 
   def roska?(tiedosto)
