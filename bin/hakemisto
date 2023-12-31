@@ -97,7 +97,6 @@ private
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
   end
-  def db_summa(sums)
     from = "SELECT * FROM Documents WHERE summa='#{sums}';"
     SQLite3::Database.open('hakemisto.db').execute(from).count
   end
@@ -123,7 +122,9 @@ private
   end
   # returns the count of rows in DB with same checksum.
 
+  def db_summa(sums)
   # def db_summa(sums)
+  end
   def locked?(filepath)
     if RUBY_PLATFORM.include?('darwin')
       line = `ls -lO #{Shellwords.escape(filepath)}`.to_s # strip extra spaces/tabs
