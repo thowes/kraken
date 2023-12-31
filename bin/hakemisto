@@ -27,7 +27,7 @@ class Hakemisto < Thor
     else
       checksums = summa(filename)
       db = SQLite3::Database.new db_file
-      db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';") do |l| puts l.to_s; end
+      db_list_sum(db_file, checksums)
       db&.close
     end
   end
@@ -50,7 +50,7 @@ class Hakemisto < Thor
       db_list_status(db_file, 'L2')
     else #
       db = SQLite3::Database.new db_file
-      db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
+      db_list_status(db_file, filename)
       db&.close
     end
   end
@@ -63,7 +63,7 @@ class Hakemisto < Thor
       db_list_status(db_file, 'M2')
     else
       db = SQLite3::Database.new db_file
-      db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
+      db_list_status(db_file, filename)
       db&.close
     end
   end
@@ -76,7 +76,7 @@ class Hakemisto < Thor
       db_list_status(db_file, 'RR')
     else
       db = SQLite3::Database.new db_file
-      db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
+      db_list_status(db_file, filename)
       db&.close
     end
   end
@@ -92,19 +92,21 @@ class Hakemisto < Thor
 private
 
   def db_list_status(polku, argu)
-    db = SQLite3::Database.new polku
+    db = SQLite3::Database.new db_file
     db.execute("SELECT * FROM Documents WHERE status='#{argu}';") do |l| puts l.to_s; end
   ensure db&.close
   end
 
-  def db_list_sum(db_file, sum)
+  def db_list_sum(db_file, argu)
     db = SQLite3::Database.new polku
-    #
+    db.execute("SELECT * FROM Documents WHERE summa='#{argu}';") do |l| puts l.to_s; end
   end
+
   def db_list_path(db_file, sum)
-    #
     db = SQLite3::Database.new polku
+    db.execute("SELECT * FROM Documents WHERE path='#{argu}';") do |l| puts l.to_s; end
   end
+
   def db_scan(polku)
     first = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
     cols = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
