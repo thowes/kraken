@@ -93,11 +93,11 @@ class Hakemisto < Thor
 
 private
   def db_duplicate; end
+    #
 
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
   end
-    from = "SELECT * FROM Documents WHERE summa='#{sums}';"
   end
 
   def db_scan(polku)
@@ -119,8 +119,10 @@ private
   # rec from fail?
   ensure db&.close
   end
+
   # returns the count of rows in DB with same checksum.
   def db_summa(sums)
+    from = "SELECT * FROM Documents WHERE summa='#{sums}';"
   # def db_summa(sums)
     SQLite3::Database.open('hakemisto.db').execute(from).count
   end
