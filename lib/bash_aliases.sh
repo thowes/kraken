@@ -13,7 +13,9 @@ alias a+r='chmod a+r'
 alias a+w='chmod a+w'
 alias a+x='chmod a+x'
 alias ac="git add -A; git commit -m"
+alias adieu='ciao adieu'
 alias add='git add'
+alias adios='ciao adios'
 alias al=alias
 alias b=bundle
 alias bi='bundle install'
@@ -34,7 +36,9 @@ alias cop=rubocop
 alias d='DB=hakemisto.db hakemisto duplicate'
 alias dc=cd
 alias dcd=cd
+alias dup='DB=hakemisto.db hakemisto duplicate'
 alias duplicate='DB=hakemisto.db hakemisto duplicate'
+alias duplicates='DB=hakemisto.db hakemisto duplicate'
 alias dwl='synkronoi dwl'
 alias e=echo
 alias e80='echo "--------------------------------------------------------------------------------"'
@@ -70,6 +74,7 @@ alias H2='h2; ..; h2'
 alias H3='h2; ..; h2; ..; h2'
 alias H4='h2; ..; h2; ..; h2; ..; h2'
 alias hak=hakemisto
+alias hello='ciao hello'
 alias hst='cat ~/.bash_history'
 alias k=kill
 alias k80=kaiku80
@@ -89,8 +94,10 @@ alias mig='rails db:migrate'
 alias migr='rails db:migrate'
 alias migrate='rails db:migrate'
 alias more=less
+alias moro='ciao moro'
 alias n=nano
 alias n2='nano -w -T 2'
+alias nihao='ciao nihao'
 alias '+o'='chmod +o'
 alias 'o-'='chmod o-rwx'
 alias o-r='chmod o-r'
@@ -110,6 +117,7 @@ alias og+rwx='chmod og+rwx'
 alias og+w='chmod og+w'
 alias og+x='chmod og+x'
 alias origin='git remote -v|grep origin'
+alias ol=olemassa
 alias ole=olemassa
 alias P=projekti-func
 alias p=projekti-func
