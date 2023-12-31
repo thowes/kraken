@@ -117,7 +117,7 @@ class Hakemisto < Thor
 
   def dir_scan_darwin(polku)
     SQLite3::Database.new polku
-  ensure db&.close
+  ensure
     db&.close
   end
 
@@ -130,7 +130,6 @@ class Hakemisto < Thor
   end
 
   def missing?(filepath)
-    # true if db_z.execute("SELECT * FROM Documents WHERE path='#{filepath}';")
     false
   end
 
