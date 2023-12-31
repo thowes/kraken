@@ -25,7 +25,7 @@ class Hakemisto < Thor
       db_list_status(db_tiedosto, 'L2')
       db_list_status(db_tiedosto, 'M2')
     else
-      checksums = summa(tiedosto)
+      tarkistussummat = summa(tiedosto)
       db_list_sum(db_tiedosto, tarkistussummat)
     end
   end
@@ -53,7 +53,7 @@ class Hakemisto < Thor
 
   desc 'puuttuu', 'look for missing files in the DB.'
   def puuttuu(tiedosto = nil)
-    db_tiedosto = ENV['DB'] || 'hakemisto.db' # pwd
+    db_tiedosto = ENV['DB'] || 'hakemisto.db'
     if tiedosto.nil?
       db_list_status(db_tiedosto, 'MM')
       db_list_status(db_tiedosto, 'M2')
@@ -96,37 +96,37 @@ class Hakemisto < Thor
 private
 
   def db_list_status(db_tiedosto, argu)
-    db = SQLite3::Database.new db_file
+    db = SQLite3::Database.new db_tiedosto
     db.execute("SELECT * FROM Documents WHERE status='#{argu}';") do |l| puts l.to_s; end
   ensure db&.close
   end
 
   def db_list_sum(db_tiedosto, argu)
-    db = SQLite3::Database.new db_file
+    db = SQLite3::Database.new db_tiedosto
     db.execute("SELECT * FROM Documents WHERE summa='#{argu}';") do |l| puts l.to_s; end
   ensure db&.close
   end
 
   def db_list_path(db_tiedosto, argu)
-    db = SQLite3::Database.new db_file
+    db = SQLite3::Database.new db_tiedosto
     db.execute("SELECT * FROM Documents WHERE path='#{argu}';") do |l| puts l.to_s; end
   ensure db&.close
   end
 
   def db_skannaa(db_tiedosto)
-    first = ["DIR", "#{Time.now}", "0.0", "hostname:#{db_file}"]
+    eka = ["DIR", "#{Time.now}", "0.0", "hostname:#{db_tiedosto}"]
     kolumnit = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
-    db = SQLite3::Database.new db_file
+    db = SQLite3::Database.new db_tiedosto
     db.execute("CREATE TABLE IF NOT EXISTS Documents (#{kolumnit});")
-    db.execute(insert, first)
+    db.execute(insert, eka)
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
-        count = 0
+        laskuri = 0
         summat = summa(f)
-        count = db_summa(sums) if File.exist?('hakemisto.db')
+        laskuri = db_summa(summat) if File.exist?('hakemisto.db')
         arvot = ["#{status(f, laskuri)}", "#{File.stat(f).mtime}", "#{summat}", "#{f}"]
-        db.execute(insert, values)
+        db.execute(insert, arvot)
       end
     end
   # rec from fail?
@@ -134,9 +134,9 @@ private
   end
 
   # returns the count of rows in DB with same checksum.
-  def db_summa(sums)
+  def db_summa(summat)
     rivi = "SELECT * FROM Documents WHERE summa='#{summat}';"
-    SQLite3::Database.open('hakemisto.db').execute(from).count
+    SQLite3::Database.open('hakemisto.db').execute(rivi).count
   end
 
   def jos_olemassa(dir)
@@ -144,27 +144,27 @@ private
     return nil
   end
 
-  def locked?(tiedosto)
+  def lukossa?(tiedosto)
     if RUBY_PLATFORM.include?('darwin')
-      line = `ls -lO #{Shellwords.escape(tiedosto)}`.to_s # strip extra spaces/tabs
+      rivi = `ls -lO #{Shellwords.escape(tiedosto)}`.to_s # strip extra spaces/tabs
       return true if line.include?(' uchg ')
     end
     false
   end
 
   # currently not doing anything
-  def missing?(filepath); false; end
+  def puuttuu?(tiedosto); false; end
 
-  def path_new
+  def polku_uusi
     temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || jos_olemassa('~/Projects/temp')
     "#{temp}/#{Process.pid}.db"
   end
 
   def status(tiedosto, count)
     tila = 'NA'
-    tila = 'LL' if locked?(filename) && tila == 'NA'
+    tila = 'LL' if lukossa?(tiedosto) && tila == 'NA'
     tila = 'RR' if roska?(tiedosto) && tila == 'NA'
-    tila = 'MM' if missing?(filename) && tila == 'NA'
+    tila = 'MM' if puuttuu?(tiedosto) && tila == 'NA'
     if count > 1
       tila = 'D2' if tila == 'NA'
       tila = 'L2' if tila == 'LL'
@@ -175,24 +175,24 @@ private
     return tila
   end
 
-  def summa(filename)
+  def summa(tiedosto)
     "#{Digest::MD5.file filename},#{Digest::SHA256.file filename}".to_s
   end
 
   def roska?(tiedosto)
-    return true if filepath.include?('all-wcprops')
+    return true if tiedosto.include?('all-wcprops')
     return true if tiedosto.include?('backup.log')
-    return true if filepath.include?('changed.lst')
+    return true if tiedosto.include?('changed.lst')
     return true if tiedosto.include?('.DS_Store')
-    return true if filepath.include?('duplicate.lst')
+    return true if tiedosto.include?('duplicate.lst')
     return true if tiedosto.include?('entries')
-    return true if filepath.include?('.git/')
+    return true if tiedosto.include?('.git/')
     return true if tiedosto.include?('hakemisto.db')
-    return true if filepath.include?('hakemisto.lst')
+    return true if tiedosto.include?('hakemisto.lst')
     return true if tiedosto.include?('missing.lst')
-    return true if filepath.include?('OK.txt')
+    return true if tiedosto.include?('OK.txt')
     return true if tiedosto.include?('roina.lst')
-    return true if filepath.include?('Thumbs.db')
+    return true if tiedosto.include?('Thumbs.db')
     return false
   end
 end
