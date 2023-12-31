@@ -77,7 +77,7 @@ class Hakemisto < Thor
   def this_machine(filename = nil)
     db_file = filename || ENV['DB'] || 'hakemisto.db'
     db = SQLite3::Database.new db_file
-    line = db.execute("SELECT * FROM Documents WHERE status='DIR';")
+    line = db_list_status(db_file, 'DIR')
     db&.close
     # true if line.to_s.include?(Socket.gethostname)
     false # boolean method?
@@ -85,12 +85,13 @@ class Hakemisto < Thor
 
 private
 
-  def db_list_status(polku, st = nil)
+  def db_list_status(polku, st)
     db = SQLite3::Database.new polku
     db.execute("SELECT * FROM Documents WHERE status='#{st}';") do |l| puts l.to_s; end
   ensure db&.close
   end
 
+  def db_list_sum(polku, sum); end
   def db_scan(polku)
     first = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
     cols = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
