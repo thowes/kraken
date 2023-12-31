@@ -83,7 +83,7 @@ class Hakemisto < Thor
 
 private
 
-  def db_list_status(polku, argu)
+  def db_list_status(db_file, argu)
     db = SQLite3::Database.new db_file
     db.execute("SELECT * FROM Documents WHERE status='#{argu}';") do |l| puts l.to_s; end
   ensure db&.close
@@ -95,17 +95,17 @@ private
   ensure db&.close
   end
 
-  def db_list_path(db_file, sum)
+  def db_list_path(db_file, argu)
     db = SQLite3::Database.new db_file
     db.execute("SELECT * FROM Documents WHERE path='#{argu}';") do |l| puts l.to_s; end
   ensure db&.close
   end
 
-  def db_scan(polku)
+  def db_scan(db_file)
     first = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
     cols = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
-    db = SQLite3::Database.new polku
+    db = SQLite3::Database.new db_file
     db.execute("CREATE TABLE IF NOT EXISTS Documents (#{cols});")
     db.execute(insert, first)
     Dir.glob("**/*.*").each do |f|
