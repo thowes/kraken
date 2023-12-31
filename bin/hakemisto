@@ -91,7 +91,7 @@ class Hakemisto < Thor
     false # boolean method?
   end
 
-  private
+private
 
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
@@ -115,7 +115,7 @@ class Hakemisto < Thor
         sums = summa(f)
         count = db_summa(sums) if File.exist?('hakemisto.db')
         st = status(f, count)
-        puts "#{insert}", "('#{st}', '#{File.stat(f).mtime}', '#{sums}', \"#{f}\");"
+        db.execute "#{insert}", ["#{st}", "#{File.stat(f).mtime}", "#{sums}", "#{f}"]
       end
     end
   # rec from fail?
