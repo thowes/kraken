@@ -26,9 +26,7 @@ class Hakemisto < Thor
       db_list_status(db_file, 'M2')
     else
       checksums = summa(filename)
-      db = SQLite3::Database.new db_file
       db_list_sum(db_file, checksums)
-      db&.close
     end
   end
 
@@ -49,9 +47,7 @@ class Hakemisto < Thor
       db_list_status(db_file, 'LL')
       db_list_status(db_file, 'L2')
     else #
-      db = SQLite3::Database.new db_file
       db_list_status(db_file, filename)
-      db&.close
     end
   end
 
@@ -62,9 +58,7 @@ class Hakemisto < Thor
       db_list_status(db_file, 'MM')
       db_list_status(db_file, 'M2')
     else
-      db = SQLite3::Database.new db_file
       db_list_status(db_file, filename)
-      db&.close
     end
   end
 
@@ -75,9 +69,7 @@ class Hakemisto < Thor
       db_list_status(db_file, 'R2')
       db_list_status(db_file, 'RR')
     else
-      db = SQLite3::Database.new db_file
       db_list_status(db_file, filename)
-      db&.close
     end
   end
 
@@ -98,21 +90,23 @@ private
   end
 
   def db_list_sum(db_file, argu)
-    db = SQLite3::Database.new polku
+    db = SQLite3::Database.new db_file
     db.execute("SELECT * FROM Documents WHERE summa='#{argu}';") do |l| puts l.to_s; end
+  ensure db&.close
   end
 
   def db_list_path(db_file, sum)
-    db = SQLite3::Database.new polku
+    db = SQLite3::Database.new db_file
     db.execute("SELECT * FROM Documents WHERE path='#{argu}';") do |l| puts l.to_s; end
+  ensure db&.close
   end
 
   def db_scan(polku)
     first = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
     cols = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
+    insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
     db = SQLite3::Database.new polku
     db.execute("CREATE TABLE IF NOT EXISTS Documents (#{cols});")
-    insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
     db.execute(insert, first)
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
