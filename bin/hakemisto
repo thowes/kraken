@@ -16,7 +16,6 @@ class Hakemisto < Thor
   desc 'default', 'default function.'
   def default(dir = nil)
     foo = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
-    db = SQLite3::Database.new(polku) if File.exist?(polku)
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
     db.execute(insert, foo)
     Dir.glob("**/*.*").each do |f|
@@ -116,7 +115,9 @@ class Hakemisto < Thor
   end
 
   def dir_scan_darwin(polku)
+    cols = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
     db = SQLite3::Database.new polku
+    db.execute("CREATE TABLE IF NOT EXISTS Documents (#{cols});")
   ensure
     db&.close
   end
