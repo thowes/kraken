@@ -15,7 +15,6 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
-    insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
         count = 0
@@ -117,6 +116,7 @@ class Hakemisto < Thor
     cols = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
     db = SQLite3::Database.new polku
     db.execute("CREATE TABLE IF NOT EXISTS Documents (#{cols});")
+    insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
     db.execute(insert, foo)
   ensure
     db&.close
@@ -132,12 +132,10 @@ class Hakemisto < Thor
 
   # currently not doing anything
   def missing?(filepath); false; end
-    # false
 
   def path_new
     temp =  ENV['TEMP'] || `asetus dir:temp`.gsub("\n", "") || '~/Projects/temp'
     path = "#{temp}/#{Process.pid}.db"
-    return path
   end
 
   def status(filename, count)
