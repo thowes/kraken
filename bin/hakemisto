@@ -94,8 +94,9 @@ class Hakemisto < Thor
 private
 
   def db_duplicate(polku)
+    db = SQLite3::Database.new polku
     if filename.nil?
-    #
+    # else
     end
   end
 
