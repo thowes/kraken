@@ -22,9 +22,9 @@ class Hakemisto < Thor
     db = SQLite3::Database.new db_file
     if filename.nil?
       # db.execute("SELECT * FROM Documents WHERE status='R2';") do |l| puts l.to_s; end
-      db.execute("SELECT * FROM Documents WHERE status='D2';") do |l| puts l.to_s; end
+      db_list_status(db_file, 'D2')
       db.execute("SELECT * FROM Documents WHERE status='L2';") do |l| puts l.to_s; end
-      db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
+      db_list_status(db_file, 'M2')
     else
       checksums = summa(filename)
       db.execute("SELECT * FROM Documents WHERE summa='#{checksums}';") do |l| puts l.to_s; end
@@ -48,7 +48,7 @@ class Hakemisto < Thor
     db = SQLite3::Database.new db_file
     if filename.nil?
       db.execute("SELECT * FROM Documents WHERE status='LL';") do |l| puts l.to_s; end
-      db.execute("SELECT * FROM Documents WHERE status='L2';") do |l| puts l.to_s; end
+      db_list_status(db_file, 'L2')
     else #
       db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
     end
@@ -60,7 +60,7 @@ class Hakemisto < Thor
     db_file = ENV['DB'] || 'hakemisto.db' # pwd
     db = SQLite3::Database.new db_file
     if filename.nil?
-      db.execute("SELECT * FROM Documents WHERE status='MM';") do |l| puts l.to_s; end
+      db_list_status(db_file, 'MM')
       db.execute("SELECT * FROM Documents WHERE status='M2';") do |l| puts l.to_s; end
     else
       db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
@@ -74,7 +74,7 @@ class Hakemisto < Thor
     db = SQLite3::Database.new db_file
     if filename.nil?
       # db.execute("SELECT * FROM Documents WHERE status='R2';") do |l| puts l.to_s; end
-      db.execute("SELECT * FROM Documents WHERE status='RR';") do |l| puts l.to_s; end
+      db_list_status(db_file, 'RR')
     else
       db.execute("SELECT * FROM Documents WHERE path='#{filename}';") do |l| puts l.to_s; end
     end
@@ -93,9 +93,9 @@ class Hakemisto < Thor
 
 private
 
-  def db_list(polku, status_type = nil)
+  def db_list_status(polku, st = nil)
     db = SQLite3::Database.new polku
-      db.execute("SELECT * FROM Documents WHERE status='D2';") do |l| puts l.to_s; end
+    db.execute("SELECT * FROM Documents WHERE status='#{st}';") do |l| puts l.to_s; end
   ensure db&.close
   end
 
