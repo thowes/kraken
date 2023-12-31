@@ -36,7 +36,7 @@ class Hakemisto < Thor
   def long_default(dir = nil)
     FileUtils.cd(dir) unless dir.nil?
     polku = path_new
-    dir_scan_darwin(polku) if RUBY_PLATFORM.include?('darwin')
+    db_scan(polku) if RUBY_PLATFORM.include?('darwin')
     FileUtils.mv(polku, './hakemisto.db')
     File.delete(polku) if File.exist?(polku)
     puts "#{polku}"
@@ -92,17 +92,17 @@ class Hakemisto < Thor
   end
 
 private
+  def db_duplicate; end
 
   def db_read(file)
     SQLite3::Database.open file # howto do read-only?
   end
-
   def db_summa(sums)
     from = "SELECT * FROM Documents WHERE summa='#{sums}';"
     SQLite3::Database.open('hakemisto.db').execute(from).count
   end
 
-  def dir_scan_darwin(polku)
+  def db_scan(polku)
     foo = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
     cols = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
     db = SQLite3::Database.new polku
@@ -114,15 +114,16 @@ private
         count = 0
         sums = summa(f)
         count = db_summa(sums) if File.exist?('hakemisto.db')
-        st = status(f, count)
         values = ["#{status(f, count)}", "#{File.stat(f).mtime}", "#{sums}", "#{f}"]
-        db.execute "#{insert}", ["#{st}", "#{File.stat(f).mtime}", "#{sums}", "#{f}"]
+        db.execute(insert, values)
       end
     end
   # rec from fail?
   ensure db&.close
   end
+  # returns the count of rows in DB with same checksum.
 
+  # def db_summa(sums)
   def locked?(filepath)
     if RUBY_PLATFORM.include?('darwin')
       line = `ls -lO #{Shellwords.escape(filepath)}`.to_s # strip extra spaces/tabs
