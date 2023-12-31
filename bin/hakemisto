@@ -15,7 +15,6 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
-    polku = path_new
     foo = ["DIR", "#{Time.now}", "0.0", "hostname:#{polku}"]
     FileUtils.cd(dir) unless dir.nil?
     db = SQLite3::Database.new(polku) if File.exist?(polku)
@@ -31,7 +30,6 @@ class Hakemisto < Thor
     end
     db&.close
     FileUtils.mv(polku, './hakemisto.db')
-    File.delete(polku) if File.exist?(polku)
     puts polku
   end
 
@@ -54,7 +52,9 @@ class Hakemisto < Thor
   desc 'long_default', 'long default method.'
   def long_default(dir = nil)
     FileUtils.cd(dir) unless dir.nil?
+    polku = path_new
     dir_scan_darwin if RUBY_PLATFORM.include?('darwin')
+    File.delete(polku) if File.exist?(polku)
     puts "EMPTY: #{polku}"
   end
 
@@ -120,6 +120,7 @@ class Hakemisto < Thor
 
   def dir_scan_darwin(polku)
     polku = path_new
+    SQLite3::Database.new polku
   end
 
   def locked?(filepath)
