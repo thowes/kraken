@@ -115,7 +115,7 @@ class Hakemisto < Thor
         sums = summa(f)
         count = db_summa(sums) if File.exist?('hakemisto.db')
         st = status(f, count)
-        puts "#{insert} ('#{st}', '#{File.stat(f).mtime}', '#{sums}', \"#{f}\");"
+        puts "#{insert}", "('#{st}', '#{File.stat(f).mtime}', '#{sums}', \"#{f}\");"
       end
     end
   # rec from fail?
