@@ -52,8 +52,9 @@ class Hakemisto < Thor
   end
 
   desc 'long_default', 'long default method.'
-  def long_default(dir = nil); hak_darwin; end
+  def long_default(dir = nil); dir_scan_darwin
     #
+  end
   desc 'locked', 'look for locked files in the DB.'
   def locked(filename = nil)
     db_file = ENV['DB'] || 'hakemisto.db'
@@ -114,8 +115,9 @@ class Hakemisto < Thor
     SQLite3::Database.open('hakemisto.db').execute(from).count
   end
 
-  def hak_darwin; end
+  def dir_scan_darwin
   # polku = path_new
+  end
 
   def locked?(filepath)
     if RUBY_PLATFORM.include?('darwin')
