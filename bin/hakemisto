@@ -15,7 +15,6 @@ class Hakemisto < Thor
 
   desc 'default', 'default function.'
   def default(dir = nil)
-        count = db_summa(checksums) if File.exist?('hakemisto.db')
         db.execute("#{insert} ('#{status(f, count)}', '#{File.stat(f).mtime}', '#{checksums}', \"#{f}\");")
   end
 
@@ -114,10 +113,12 @@ class Hakemisto < Thor
     db.execute(insert, foo)
     Dir.glob("**/*.*").each do |f|
       if !File.directory?(f)
-        checksums = summa(f)
-      end
         count = 0
+        checksums = summa(f)
+        count = db_summa(checksums) if File.exist?('hakemisto.db')
+      end
     end
+  # rec from fail?
   ensure db&.close
   end
 
