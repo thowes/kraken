@@ -55,6 +55,7 @@ class Hakemisto < Thor
   def long_default(dir = nil)
     FileUtils.cd(dir) unless dir.nil?
     dir_scan_darwin if RUBY_PLATFORM.include?('darwin')
+    puts "EMPTY: #{polku}"
   end
 
   desc 'locked', 'look for locked files in the DB.'
@@ -117,9 +118,8 @@ class Hakemisto < Thor
     SQLite3::Database.open('hakemisto.db').execute(from).count
   end
 
-  def dir_scan_darwin
+  def dir_scan_darwin(polku)
     polku = path_new
-    puts "EMPTY: #{polku}"
   end
 
   def locked?(filepath)
