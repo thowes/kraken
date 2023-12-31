@@ -117,9 +117,8 @@ class Hakemisto < Thor
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
     db.execute(insert, foo)
     Dir.glob("**/*.*").each do |f|
-  ensure
+  ensure db&.close
     end
-    db&.close
   end
 
   def locked?(filepath)
