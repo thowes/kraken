@@ -34,8 +34,9 @@ class Hakemisto < Thor
   def long_default(dir = nil)
     FileUtils.cd(dir) unless dir.nil?
     polku = polku_uusi
+    db_skannaa_wsl(polku) unless RUBY_PLATFORM.include?('darwin')
     db_skannaa_darwin(polku) if RUBY_PLATFORM.include?('darwin')
-    FileUtils.mv(polku, './hakemisto.db')
+    FileUtils.mv(polku, './hakemisto.db') if File.exist?(polku)
     File.delete(polku) if File.exist?(polku)
     puts "#{polku}"
   end
@@ -133,6 +134,7 @@ private
   # rec from fail?
   ensure db&.close
   end
+  def db_skannaa_darwin(db_tiedosto); end
 
   # returns the count of rows in DB with same checksum.
   def db_summa(summat)
