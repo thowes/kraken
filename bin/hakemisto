@@ -134,7 +134,6 @@ private
   ensure db&.close
   end
 
-  ensure db&.close
   # returns the count of rows in DB with same checksum.
   def db_summa(summat)
     rivi = "SELECT * FROM Documents WHERE summa='#{summat}';"
