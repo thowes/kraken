@@ -134,9 +134,7 @@ private
   ensure db&.close
   end
 
-  def db_skannaa_wsl(db_tiedosto)
   ensure db&.close
-  end
   # returns the count of rows in DB with same checksum.
   def db_summa(summat)
     rivi = "SELECT * FROM Documents WHERE summa='#{summat}';"
