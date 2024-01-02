@@ -135,8 +135,9 @@ private
   ensure db&.close
   end
 
-  def db_skannaa_wsl(db_tiedosto); end
+  def db_skannaa_wsl(db_tiedosto)
     # db = SQLite3::Database.new db_tiedosto
+  end
 
   # returns the count of rows in DB with same checksum.
   def db_summa(summat)
