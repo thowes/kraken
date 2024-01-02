@@ -34,7 +34,7 @@ class Hakemisto < Thor
   def long_default(dir = nil)
     FileUtils.cd(dir) unless dir.nil?
     polku = polku_uusi
-    db_skannaa_darwin(polku) # if RUBY_PLATFORM.include?('darwin')
+    db_skannaa(polku)
     FileUtils.cp(polku, './hakemisto.db') # mv vs. cp?
     File.delete(polku) if File.exist?(polku)
     puts "#{polku}"
@@ -114,7 +114,7 @@ private
   ensure db&.close
   end
 
-  def db_skannaa_darwin(db_tiedosto)
+  def db_skannaa(db_tiedosto)
     eka = ["DIR", "#{Time.now}", "0.0", "hostname:#{db_tiedosto}"]
     kolumnit = "status TEXT, ls_time DATETIME, summa TEXT, path TEXT"
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
@@ -135,7 +135,6 @@ private
   end
 
   def db_skannaa_wsl(db_tiedosto)
-    insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
   ensure db&.close
   end
   # returns the count of rows in DB with same checksum.
