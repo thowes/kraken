@@ -34,9 +34,9 @@ class Hakemisto < Thor
   def long_default(dir = nil)
     FileUtils.cd(dir) unless dir.nil?
     polku = polku_uusi
-    db_skannaa_wsl(polku) unless RUBY_PLATFORM.include?('darwin')
+    # db_skannaa_wsl(polku) unless RUBY_PLATFORM.include?('darwin')
     db_skannaa_darwin(polku) if RUBY_PLATFORM.include?('darwin')
-    FileUtils.mv(polku, './hakemisto.db')
+    FileUtils.cp(polku, './hakemisto.db') # mv vs. cp?
     File.delete(polku) if File.exist?(polku)
     puts "#{polku}"
   end
@@ -142,7 +142,7 @@ private
     insert = "INSERT INTO Documents (status, ls_time, summa, path) VALUES (?, ?, ?, ?)"
     db = SQLite3::Database.new db_tiedosto
     db.execute("CREATE TABLE IF NOT EXISTS Documents (#{kolumnit});")
-    # db.execute(insert, eka)
+    db.execute(insert, eka)
   ensure db&.close
   end
 
