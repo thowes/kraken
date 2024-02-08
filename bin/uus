@@ -1,4 +1,5 @@
 #!/bin/sh
+# 22.7.2010
 DIR_LIB=$(asetus dir:lib)
 case "$1" in
 	dir) cp $DIR_LIB/../tmpl/dir.makefile makefile;;
